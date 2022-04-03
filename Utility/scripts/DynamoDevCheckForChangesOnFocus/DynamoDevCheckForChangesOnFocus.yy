@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "(System)",
-    "path": "folders/Dynamo/(System).yy",
+    "name": "Dynamo",
+    "path": "folders/Dynamo.yy",
   },
   "resourceVersion": "1.0",
-  "name": "__DynamoRunningFromIDE",
+  "name": "DynamoDevCheckForChangesOnFocus",
   "tags": [],
   "resourceType": "GMScript",
 }

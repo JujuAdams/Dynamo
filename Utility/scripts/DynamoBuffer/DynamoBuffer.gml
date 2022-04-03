@@ -3,7 +3,7 @@ function DynamoBuffer(_name)
     var _path = DynamoPath(_name);
     var _buffer = buffer_load(_path);
     
-    if (global.__dynamoRunningFromIDE && !DYNAMO_FORCE_LOAD_FROM_BINARY)
+    if (__DYNAMO_DEV_MODE)
     {
         //
     }

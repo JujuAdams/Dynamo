@@ -1,18 +1,13 @@
 {
   "resources": [
-    {"id":{"name":"__DynamoSystem","path":"scripts/__DynamoSystem/__DynamoSystem.yy",},"order":2,},
-    {"id":{"name":"__DynamoCompile","path":"scripts/__DynamoCompile/__DynamoCompile.yy",},"order":4,},
+    {"id":{"name":"__DynamoSystem","path":"scripts/__DynamoSystem/__DynamoSystem.yy",},"order":6,},
     {"id":{"name":"DynamoPath","path":"scripts/DynamoPath/DynamoPath.yy",},"order":1,},
     {"id":{"name":"sprPug","path":"sprites/sprPug/sprPug.yy",},"order":4,},
     {"id":{"name":"DynamoString","path":"scripts/DynamoString/DynamoString.yy",},"order":3,},
-    {"id":{"name":"DynamoDevStep","path":"scripts/DynamoDevStep/DynamoDevStep.yy",},"order":4,},
-    {"id":{"name":"__DynamoUtilityBehaviour","path":"scripts/__DynamoUtilityBehaviour/__DynamoUtilityBehaviour.yy",},"order":5,},
+    {"id":{"name":"DynamoDevCheckForChangesOnFocus","path":"scripts/DynamoDevCheckForChangesOnFocus/DynamoDevCheckForChangesOnFocus.yy",},"order":4,},
     {"id":{"name":"DynamoDevCheckForChanges","path":"scripts/DynamoDevCheckForChanges/DynamoDevCheckForChanges.yy",},"order":5,},
     {"id":{"name":"__DynamoConfig","path":"scripts/__DynamoConfig/__DynamoConfig.yy",},"order":0,},
-    {"id":{"name":"__DynamoRunningFromIDE","path":"scripts/__DynamoRunningFromIDE/__DynamoRunningFromIDE.yy",},"order":0,},
     {"id":{"name":"DynamoBuffer","path":"scripts/DynamoBuffer/DynamoBuffer.yy",},"order":2,},
-    {"id":{"name":"__DynamoInstall","path":"scripts/__DynamoInstall/__DynamoInstall.yy",},"order":3,},
-    {"id":{"name":"__DynamoMainProjectJSON","path":"scripts/__DynamoMainProjectJSON/__DynamoMainProjectJSON.yy",},"order":1,},
     {"id":{"name":"oUtility","path":"objects/oUtility/oUtility.yy",},"order":5,},
     {"id":{"name":"rmMain","path":"rooms/rmMain/rmMain.yy",},"order":6,},
   ],
@@ -43,7 +38,6 @@
   ],
   "Folders": [
     {"folderPath":"folders/Dynamo.yy","order":3,"resourceVersion":"1.0","name":"Dynamo","tags":[],"resourceType":"GMFolder",},
-    {"folderPath":"folders/Dynamo/(System).yy","order":6,"resourceVersion":"1.0","name":"(System)","tags":[],"resourceType":"GMFolder",},
   ],
   "AudioGroups": [
     {"targets":-1,"resourceVersion":"1.3","name":"audiogroup_default","resourceType":"GMAudioGroup",},

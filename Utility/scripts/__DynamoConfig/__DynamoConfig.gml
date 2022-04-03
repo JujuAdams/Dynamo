@@ -1,3 +1,1 @@
-#macro DYNAMO_COMPRESS  false
-
-#macro DYNAMO_FORCE_LOAD_FROM_BINARY  false
+#macro DYNAMO_DEv_MODE  false
