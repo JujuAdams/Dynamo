@@ -31,7 +31,7 @@ __Install = function(_directory)
     _commandString += "\"%YYprojectDir%\\dynamo.exe\" -export\n";
     _commandString += "\n";
     _commandString += "echo Creating project directory link file...\n";
-    _commandString += "@echo %YYprojectDir%\ > \"%YYoutputFolder%\projectDirectory.dynamo\"\n";
+    _commandString += "@echo %YYprojectDir%\\> \"%YYoutputFolder%\\projectDirectory.dynamo\"\n";
     _commandString += "\n";
     _commandString += ":: Ensure complied assets are always copied into the temporary directory since GM checks datafiles *before* the pre-build step\n";
     _commandString += "echo Copying *.dynamo files to temporary directory...\n";
@@ -142,14 +142,14 @@ if (global.__dynamoRunningFromIDE)
 {
     __DynamoTrace("Running from IDE");
     
-    if (true)
+    if (false) //Change this to <true> to run in test mode
     {
-        __DynamoLoud("Welcome to Dynamo by @jujuadams!\n\nThis is version ", __DYNAMO_VERSION, ", ", __DYNAMO_DATE, "\n\nRunning in test mode...");
+        __DynamoLoud("Welcome to Dynamo by @jujuadams! This is version ", __DYNAMO_VERSION, ", ", __DYNAMO_DATE, "\n\nRunning in test mode...");
         __Install("A:\\GitHub repos\\Mine\\Dynamo\\Library\\");
     }
     else
     {
-        __DynamoLoud("Welcome to Dynamo by @jujuadams!\n\nThis is version ", __DYNAMO_VERSION, ", ", __DYNAMO_DATE, "\n\nThis project must be compiled using the \"Package as Installer\" option before use.");
+        __DynamoLoud("Welcome to Dynamo by @jujuadams! This is version ", __DYNAMO_VERSION, ", ", __DYNAMO_DATE, "\n\nPlease compile this project and place it into the root directory of a project before executing.");
     }
 }
 else
