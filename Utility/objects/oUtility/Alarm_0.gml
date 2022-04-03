@@ -35,7 +35,7 @@ __Install = function(_directory)
     _commandString += "\n";
     _commandString += ":: Ensure complied assets are always copied into the temporary directory since GM checks datafiles *before* the pre-build step\n";
     _commandString += "echo Copying *.dynamo files to temporary directory...\n";
-    _commandString += "for /R \"%YYprojectDir%\datafiles\" %%f in (*.dynamo) do copy \"%%f\" \"%YYoutputFolder%\"\n";
+    _commandString += "for /R \"%YYprojectDir%\\datafiles\" %%f in (*.dynamo) do copy \"%%f\" \"%YYoutputFolder%\\\"\n";
     _commandString += "\n";
     _commandString += "echo Dynamo pre-build complete\n";
     
