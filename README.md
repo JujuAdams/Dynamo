@@ -46,4 +46,4 @@
 
 - MacOS and Linux IDE support
 - Live reloading of all assets in `datafilesDynamo\`
-- Server broadcast system to allow live reloading on any device
+- Server broadcast system to allow live reloading on any device connected to the local network
