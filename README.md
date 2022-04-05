@@ -29,7 +29,20 @@
 
 &nbsp;
 
-## Planned
+## Suggestions For Use
+
+- Note assets can store any plaintext data, such as JSON or YAML, and so can be decoded by your game easily
+- Dynamo benefits any data-driven game, such as strategy titles or sims, but can also be useful for adjusting simple properties in any sort of game
+- Scripting for RPG quests
+- Cutscene or dialogue editing
+- UI layout fine adjustment
+- Audio mixing
+
+&nbsp;
+
+&nbsp;
+
+## Planned Features
 
 - MacOS and Linux IDE support
 - Live reloading of all assets in `datafilesDynamo\`
