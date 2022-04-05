@@ -416,8 +416,31 @@ function __DynamoClassNote(_name, _sourcePath, _nameHash) constructor
     
     static __CheckForChange = function()
     {
-        var _newHash = md5_file(__sourcePath);
-        __DynamoTrace("\"", __name, "\" new hash = \"", _newHash, "\" vs. old hash = \"", __dataHash, "\" (", __sourcePath, ")");
+        if (!file_exists(__sourcePath))
+        {
+            if (__dataHash == undefined)
+            {
+                
+            }
+            else
+            {
+                var _newHash = "";
+                __DynamoTrace("\"", __name, "\" doesn't exist, new hash = \"", _newHash, "\" vs. old hash = \"", __dataHash, "\" (", __sourcePath, ")");
+            }
+        }
+        else
+        {
+            var _newHash = md5_file(__sourcePath);
+            
+            if (__dataHash == undefined)
+            {
+                __DynamoTrace("\"", __name, "\" newly found, hash = \"", _newHash, "\" (", __sourcePath, ")");
+            }
+            else
+            {
+                __DynamoTrace("\"", __name, "\" new hash = \"", _newHash, "\" vs. old hash = \"", __dataHash, "\" (", __sourcePath, ")");
+            }
+        }
         
         if (_newHash != __dataHash)
         {

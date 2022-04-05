@@ -4,7 +4,7 @@ if (keyboard_check_pressed(vk_f5))
 }
 else
 {
-    var _array = DynamoDevCheckForChangesOnFocus();
+    var _array = DynamoDevCheckForChangesOnRefocus();
 }
 
 if (is_array(_array))

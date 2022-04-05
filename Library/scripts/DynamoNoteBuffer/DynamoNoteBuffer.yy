@@ -6,7 +6,7 @@
     "path": "folders/Dynamo.yy",
   },
   "resourceVersion": "1.0",
-  "name": "DynamoString",
+  "name": "DynamoNoteBuffer",
   "tags": [],
   "resourceType": "GMScript",
 }

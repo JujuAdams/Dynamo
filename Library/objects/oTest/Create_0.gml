@@ -1,1 +1,1 @@
-show_message(DynamoString("TestNote"));
+show_message(DynamoNoteString("TestNote"));

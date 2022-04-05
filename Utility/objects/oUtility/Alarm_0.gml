@@ -36,7 +36,6 @@ __Setup = function(_directory)
     _preBuildString += ":: Copy Dynamo datafiles into the temporary directory\n";
     _preBuildString += "echo Copying all files in \\datafilesDynamo\\ to temporary directory...\n";
     _preBuildString += "xcopy \"%YYprojectDir%\\datafilesDynamo\\*\" \"%YYoutputFolder%\" /c /f /s /r /y\n";
-    _preBuildString += ":: for /R \"%YYprojectDir%\\datafiles\" %%f in (*.dynamo) do copy \"%%f\" \"%YYoutputFolder%\\\"\n";
     _preBuildString += "\n";
     _preBuildString += "echo Dynamo pre_build_step.bat complete\n";
     
@@ -65,7 +64,7 @@ __Setup = function(_directory)
         
         __DynamoTrace("Loaded \"", _preBuildScriptPath, "\"");
         
-        if (string_count("dynamo.exe", _buildScriptString) > 0)
+        if (string_count(":: Dynamo", _buildScriptString) > 0)
         {
             _preBuildScriptAlreadyExists = true;
         }
@@ -120,7 +119,7 @@ __Setup = function(_directory)
         
         __DynamoTrace("Loaded \"", _preRunPath, "\"");
         
-        if (string_count("dynamo.exe", _runScriptString) > 0)
+        if (string_count(":: Dynamo", _runScriptString) > 0)
         {
             _preRunAlreadyExists = true;
         }

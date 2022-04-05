@@ -1,14 +1,13 @@
 {
   "resources": [
-    {"id":{"name":"__DynamoSystem","path":"scripts/__DynamoSystem/__DynamoSystem.yy",},"order":6,},
-    {"id":{"name":"DynamoPath","path":"scripts/DynamoPath/DynamoPath.yy",},"order":1,},
+    {"id":{"name":"DynamoDevCheckForChanges","path":"scripts/DynamoDevCheckForChanges/DynamoDevCheckForChanges.yy",},"order":2,},
+    {"id":{"name":"DynamoDevCheckForChangesOnRefocus","path":"scripts/DynamoDevCheckForChangesOnRefocus/DynamoDevCheckForChangesOnRefocus.yy",},"order":3,},
     {"id":{"name":"sprPug","path":"sprites/sprPug/sprPug.yy",},"order":4,},
-    {"id":{"name":"DynamoString","path":"scripts/DynamoString/DynamoString.yy",},"order":3,},
-    {"id":{"name":"DynamoDevCheckForChangesOnFocus","path":"scripts/DynamoDevCheckForChangesOnFocus/DynamoDevCheckForChangesOnFocus.yy",},"order":4,},
-    {"id":{"name":"DynamoDevCheckForChanges","path":"scripts/DynamoDevCheckForChanges/DynamoDevCheckForChanges.yy",},"order":5,},
-    {"id":{"name":"__DynamoConfig","path":"scripts/__DynamoConfig/__DynamoConfig.yy",},"order":0,},
-    {"id":{"name":"DynamoBuffer","path":"scripts/DynamoBuffer/DynamoBuffer.yy",},"order":2,},
+    {"id":{"name":"DynamoNoteString","path":"scripts/DynamoNoteString/DynamoNoteString.yy",},"order":5,},
     {"id":{"name":"oUtility","path":"objects/oUtility/oUtility.yy",},"order":5,},
+    {"id":{"name":"__DynamoConfig","path":"scripts/__DynamoConfig/__DynamoConfig.yy",},"order":0,},
+    {"id":{"name":"DynamoNoteBuffer","path":"scripts/DynamoNoteBuffer/DynamoNoteBuffer.yy",},"order":4,},
+    {"id":{"name":"__DynamoSystem","path":"scripts/__DynamoSystem/__DynamoSystem.yy",},"order":1,},
     {"id":{"name":"rmMain","path":"rooms/rmMain/rmMain.yy",},"order":6,},
   ],
   "Options": [
@@ -37,7 +36,7 @@
     {"roomId":{"name":"rmMain","path":"rooms/rmMain/rmMain.yy",},},
   ],
   "Folders": [
-    {"folderPath":"folders/Dynamo.yy","order":3,"resourceVersion":"1.0","name":"Dynamo","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/Dynamo.yy","order":7,"resourceVersion":"1.0","name":"Dynamo","tags":[],"resourceType":"GMFolder",},
   ],
   "AudioGroups": [
     {"targets":-1,"resourceVersion":"1.3","name":"audiogroup_default","resourceType":"GMAudioGroup",},
