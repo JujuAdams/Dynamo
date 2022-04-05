@@ -10,7 +10,7 @@
 
 &nbsp;
 
-- ### [Download the .yymps](https://github.com/JujuAdams/Dynamo/releases/)
+- ### [Download the .yymps](https://github.com/JujuAdams/Dynamo/releases/) (setup instructions included)
 - ### Talk about Dynamo on the [Discord server](https://discord.gg/8krYCqr)
 
 &nbsp;
