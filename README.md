@@ -19,7 +19,7 @@
 
 ## Features
 
-- Automatic setup utility to set up Dynamo in the `pre_build_step.bat` and `pre_run_step.bat` batch files
+- Automatic setup utility to plug Dynamo into the `pre_build_step.bat` and `pre_run_step.bat` batch files (creating them if needed, inserting commands into existing files otherwise)
 - Files in Dynamo's own datafiles folder `datafilesDynamo\` are packaged with your game even if those files are open in another program. **This means you can have a CSV file open and run the game from IDE and GameMaker won't fail to compile!**
 - Note assets in your project directory can be accessed in-game. Note assets can be edited in your project file during gameplay and live reloaded (either using `DynamoDevCheckForChanges()` or `DynamoDevCheckForChangesOnRefocus()`)
 - Note assets can be exempted from Dynamo by adding `dynamo ignore` as a tag for that Note asset
