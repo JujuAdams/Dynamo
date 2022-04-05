@@ -1,8 +1,8 @@
 //Not exposed yet but will be eventually
 #macro DYNAMO_COMPRESS  false
 
-#macro __DYNAMO_VERSION    "0.0.1"
-#macro __DYNAMO_DATE       "2022-04-02"
+#macro __DYNAMO_VERSION    "0.0.3"
+#macro __DYNAMO_DATE       "2022-04-05"
 #macro __DYNAMO_DEV_MODE   (DYNAMO_DEV_MODE && global.__dynamoRunningFromIDE)
 
 __DynamoTrace("Welcome to Dynamo by @jujuadams! This is version ", __DYNAMO_VERSION, ", ", __DYNAMO_DATE);
