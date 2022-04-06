@@ -65,7 +65,7 @@ SilentInstall silent
 Section "${PRODUCT_NAME}"
     SetOutPath `$TEMP\${PRODUCT_NAME}`
     File /r "${SOURCE_DIR}\*.*"
-    ExecWait `$TEMP\${PRODUCT_NAME}\${EXE_NAME}.exe "$CMDLINE"`
+    ExecWait `$TEMP\${PRODUCT_NAME}\${EXE_NAME}.exe -selfextracting "$CMDLINE"`
     RMDir /r `$TEMP\${PRODUCT_NAME}`
 SectionEnd
 */
