@@ -215,16 +215,33 @@ if (global.__dynamoRunningFromIDE)
 }
 else
 {
-    __DynamoTrace("Running from from executable");
-    
-    //Clean up the weird broken parameter string that we might get passed
-    var _i = 1;
-    var _parameterString = "";
-    repeat(parameter_count() - 1)
+    if (parameter_string(1) == "-selfextracting")
     {
-        _parameterString += parameter_string(_i) + " ";
-        ++_i;
+        __DynamoTrace("Running from self-extracting installer");
+        
+        //Clean up the weird broken parameter string that we might get passed
+        var _i = 2;
+        var _parameterString = "";
+        repeat(parameter_count() - _i)
+        {
+            _parameterString += parameter_string(_i) + " ";
+            ++_i;
+        }
     }
+    else
+    {
+        __DynamoTrace("Running from executable");
+        
+        var _i = 0;
+        var _parameterString = "";
+        repeat(parameter_count() - _i)
+        {
+            _parameterString += parameter_string(_i) + " ";
+            ++_i;
+        }
+    }
+    
+    __DynamoTrace("Parameter string is \"", _parameterString, "\"");
     
     var _pos = string_pos("-export", _parameterString);
     if (_pos <= 0)
