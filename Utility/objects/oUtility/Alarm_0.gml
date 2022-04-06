@@ -4,6 +4,31 @@ __Setup = function(_directory)
     
     __DynamoTrace("Setting up Dynamo in ", _directory);
     
+    __DynamoTrace("Checking for erroneous data in game_save_id (", game_save_id, ")...");
+    if (directory_exists(game_save_id))
+    {
+        __DynamoTrace(game_save_id, " exists...");
+        
+        if (file_exists(game_save_id + "pre_build_step.bat"))
+        {
+            __DynamoTrace(game_save_id + "pre_build_step.bat", " exists, deleting");
+            file_delete(game_save_id + "pre_build_step.bat");
+        }
+        
+        if (file_exists(game_save_id + "pre_run_step.bat"))
+        {
+            __DynamoTrace(game_save_id + "pre_run_step.bat", " exists, deleting");
+            file_delete(game_save_id + "pre_run_step.bat");
+        }
+        
+        if (directory_exists(game_save_id + "datafilesDynamo\\"))
+        {
+            __DynamoTrace(game_save_id + "datafilesDynamo\\", " exists, deleting");
+            directory_destroy(game_save_id + "datafilesDynamo\\");
+        }
+    }
+    __DynamoTrace("...check ended");
+    
     var _projectJSON = __DynamoParseMainProjectJSON(_directory);
     if (_projectJSON == undefined)
     {
