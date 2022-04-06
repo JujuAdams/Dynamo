@@ -12,7 +12,7 @@ __Setup = function(_directory)
     }
     
     __DynamoTrace("Main project file verified");
-    __DynamoTrace("Seting up Dynamo pre-build script");
+    __DynamoTrace("Seting up Dynamo in pre_build_step.bat");
     
     var _preBuildScriptAlreadyExists = false;
     var _preBuildScriptPath = _directory + "pre_build_step.bat";
@@ -41,14 +41,14 @@ __Setup = function(_directory)
     
     if (!file_exists(_preBuildScriptPath))
     {
-        __DynamoTrace("Pre-build batch file not found \"", _preBuildScriptPath, "\", creating one");
+        __DynamoTrace("\"", _preBuildScriptPath, "\" not found, creating pre_build_step.bat");
         var _preBuildScriptBuffer = buffer_create(1024, buffer_grow, 1);
         
         buffer_write(_preBuildScriptBuffer, buffer_text, _preBuildString);
     }
     else
     {
-        __DynamoTrace("Pre-build batch file found \"", _preBuildScriptPath, "\"");
+        __DynamoTrace("Found \"", _preBuildScriptPath, "\"");
         
         try
         {
@@ -58,7 +58,7 @@ __Setup = function(_directory)
         }
         catch(_error)
         {
-            __DynamoError("Failed to load pre-build batch file \"", _preBuildScriptPath, "\"");
+            __DynamoError("Failed to load \"", _preBuildScriptPath, "\"");
             return;
         }
         
@@ -80,7 +80,7 @@ __Setup = function(_directory)
     
     
     
-    __DynamoTrace("Setting up Dynamo pre-run script");
+    __DynamoTrace("Setting up Dynamo in pre_run_step.bat");
     
     var _preRunAlreadyExists = false;
     var _preRunPath = _directory + "pre_run_step.bat";
@@ -96,14 +96,14 @@ __Setup = function(_directory)
     
     if (!file_exists(_preRunPath))
     {
-        __DynamoTrace("Pre-run batch file not found \"", _preRunPath, "\", creating one");
+        __DynamoTrace("\"", _preRunPath, "\" not found, creating pre_run_step.bat");
         var _preRunBuffer = buffer_create(1024, buffer_grow, 1);
         
         buffer_write(_preRunBuffer, buffer_text, _preRunString);
     }
     else
     {
-        __DynamoTrace("Pre-run batch file found \"", _preRunPath, "\"");
+        __DynamoTrace("Found \"", _preRunPath, "\"");
         
         try
         {
@@ -113,7 +113,7 @@ __Setup = function(_directory)
         }
         catch(_error)
         {
-            __DynamoError("Failed to load pre-run batch file \"", _preRunPath, "\"");
+            __DynamoError("Failed to load \"", _preRunPath, "\"");
             return;
         }
         
