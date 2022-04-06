@@ -12,7 +12,7 @@ __Setup = function(_directory)
     }
     
     __DynamoTrace("Main project file verified");
-    __DynamoTrace("Seting up Dynamo in pre_build_step.bat");
+    __DynamoTrace("Setting up Dynamo in pre_build_step.bat");
     
     var _preBuildScriptAlreadyExists = false;
     var _preBuildScriptPath = _directory + "pre_build_step.bat";
@@ -63,6 +63,7 @@ __Setup = function(_directory)
         }
         
         __DynamoTrace("Loaded \"", _preBuildScriptPath, "\"");
+        __DynamoTrace(_buildScriptString);
         
         if (string_count(":: Dynamo", _buildScriptString) > 0)
         {
@@ -118,6 +119,7 @@ __Setup = function(_directory)
         }
         
         __DynamoTrace("Loaded \"", _preRunPath, "\"");
+        __DynamoTrace(_runScriptString);
         
         if (string_count(":: Dynamo", _runScriptString) > 0)
         {
