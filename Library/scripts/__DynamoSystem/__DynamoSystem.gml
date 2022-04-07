@@ -9,122 +9,6 @@ __DynamoTrace("Welcome to Dynamo by @jujuadams! This is version ", __DYNAMO_VERS
 
 
 
-global.__dynamoInFocus = true;
-
-global.__dynamoNoteDictionaryBuilt = false;
-global.__dynamoNoteDictionary = {};
-
-global.__dynamoFileDictionary = {};
-
-global.__dynamoProjectDirectory = undefined;
-global.__dynamoWorkingDirectory = undefined;
-
-
-
-global.__dynamoRunningFromIDE = false;
-
-if (code_is_compiled() && (parameter_count() == 1))
-{
-    var _path = filename_dir(parameter_string(0));
-    
-    var _last_folder = _path;
-    do
-    {
-        var _pos = string_pos("\\", _last_folder);
-        if (_pos > 0) _last_folder = string_delete(_last_folder, 1, _pos);
-    }
-    until (_pos <= 0);
-    
-    var _last_four = string_copy(_last_folder, string_length(_last_folder) - 3, 4);
-    var _filename = filename_change_ext(filename_name(parameter_string(0)), "");
-    
-    if ((_last_four == "_YYC")
-    &&  (string_length(_last_folder) - string_length(_filename) == 13))
-    {
-        global.__dynamoRunningFromIDE = true;
-    }
-}
-else
-{
-    if ((parameter_count() == 3)
-    &&  (filename_name(parameter_string(0)) == "Runner.exe")
-    &&  (parameter_string(1) == "-game")
-    &&  (filename_ext(parameter_string(2)) == ".win"))
-    {
-        global.__dynamoRunningFromIDE = true;
-    }
-}
-
-
-
-if (DYNAMO_LOAD_MANIFEST_ON_BOOT) __DynamoEnsureManifest();
-
-
-
-if (__DYNAMO_DEV_MODE)
-{
-    __DynamoEnsureProjectDirectory();
-    global.__dynamoFileDictionary = __DynamoRecursiveFileSearch(global.__dynamoProjectDirectory + "datafilesDynamo\\", {});
-    global.__dynamoWorkingDirectory = global.__dynamoProjectDirectory + "datafilesDynamo\\linkToWorkingDirectory.dynamo\\"
-}
-
-
-
-function __DynamoRecursiveFileSearch(_directory, _result)
-{
-    var _directories = [];
-    
-    //Search through this directory
-    var _file = undefined;
-    while(true)
-    {
-        //On Linux the attribute argument is ignored, and everything that we can read is returned (even directories with a proper pattern).
-        //This doesn't affect this library in particular but good to keep that in mind.
-        _file = (_file == undefined)? file_find_first(_directory + "*.*", fa_directory) : file_find_next();
-        if (_file == "") break;
-        
-        //Anything that ends in .dynamo doesn't need to be indexed
-        if (filename_ext(_file) != ".dynamo")
-        {
-            if (directory_exists(_directory + _file))
-            {
-                //Process this directory
-                var _path = _directory + _file + "\\";
-                
-                if (variable_struct_exists(_result, _path))
-                {
-                    __DynamoTrace("Warning! Already seen directory \"", _path, "\", skipping this instance to avoid a loop");
-                }
-                else
-                {
-                    array_push(_directories, _path);
-                    _result[$ _path] = new __DynamoClassFile(_path, true);
-                }
-            }
-            else
-            {
-                //Add this matching file to the output dictionary
-                var _path = _directory + _file;
-                _result[$ _path] = new __DynamoClassFile(_path, false);
-            }
-        }
-    }
-    
-    file_find_close();
-    
-    //Now handle the directories
-    var _i = 0;
-    repeat(array_length(_directories))
-    {
-        __DynamoRecursiveFileSearch(_directories[_i], _result);
-        ++_i;
-    }
-    
-    return _result;
-}
-
-
-
 /*
 Icon "${ICON_FILE}"
 RequestExecutionLevel user
@@ -137,6 +21,81 @@ Section "${PRODUCT_NAME}"
     RMDir /r `$TEMP\${PRODUCT_NAME}`
 SectionEnd
 */
+
+
+
+__DynamoInit();
+
+if (DYNAMO_LOAD_MANIFEST_ON_BOOT)
+{
+    __DynamoTrace("Loading manifest on boot");
+    __DynamoEnsureManifest();
+}
+
+
+
+function __DynamoInit()
+{
+    if (variable_global_exists("__dynamoInFocus")) return;
+    
+    global.__dynamoInFocus = true;
+    
+    global.__dynamoNoteDictionaryBuilt = false;
+    global.__dynamoNoteDictionary = {};
+    
+    global.__dynamoFileDictionary = {};
+    
+    global.__dynamoProjectDirectory = undefined;
+    global.__dynamoWorkingDirectory = undefined;
+    
+    
+    
+    global.__dynamoRunningFromIDE = false;
+    
+    if (code_is_compiled() && (parameter_count() == 1))
+    {
+        var _path = filename_dir(parameter_string(0));
+        
+        var _last_folder = _path;
+        do
+        {
+            var _pos = string_pos("\\", _last_folder);
+            if (_pos > 0) _last_folder = string_delete(_last_folder, 1, _pos);
+        }
+        until (_pos <= 0);
+        
+        var _last_four = string_copy(_last_folder, string_length(_last_folder) - 3, 4);
+        var _filename = filename_change_ext(filename_name(parameter_string(0)), "");
+        
+        if ((_last_four == "_YYC")
+        &&  (string_length(_last_folder) - string_length(_filename) == 13))
+        {
+            global.__dynamoRunningFromIDE = true;
+        }
+    }
+    else
+    {
+        if ((parameter_count() == 3)
+        &&  (filename_name(parameter_string(0)) == "Runner.exe")
+        &&  (parameter_string(1) == "-game")
+        &&  (filename_ext(parameter_string(2)) == ".win"))
+        {
+            global.__dynamoRunningFromIDE = true;
+        }
+    }
+    
+    
+    
+    if (__DYNAMO_DEV_MODE)
+    {
+        __DynamoEnsureProjectDirectory();
+        
+        global.__dynamoWorkingDirectory = global.__dynamoProjectDirectory + "datafilesDynamo\\linkToWorkingDirectory.dynamo\\";
+        __DynamoTrace("Working directory = \"", global.__dynamoWorkingDirectory, "\"");
+        
+        global.__dynamoFileDictionary = __DynamoRecursiveFileSearch(global.__dynamoProjectDirectory + "datafilesDynamo\\", {});
+    }
+}
 
 
 
@@ -183,413 +142,4 @@ function __DynamoBufferSave(_buffer, _filename, _tell = buffer_get_size(_buffer)
 function __DynamoNameHash(_name)
 {
     return md5_string_utf8(_name);
-}
-
-function __DynamoEnsureManifest()
-{
-    if (global.__dynamoNoteDictionaryBuilt) return;
-    global.__dynamoNoteDictionaryBuilt = true;
-    
-    if (__DYNAMO_DEV_MODE)
-    {
-        __DynamoEnsureProjectDirectory();
-        
-        var _json = __DynamoParseMainProjectJSON(global.__dynamoProjectDirectory);
-        var _noteArray = __DynamoMainProjectNotesArray(_json, global.__dynamoProjectDirectory);
-    }
-    else
-    {
-        var _noteArray = __DynamoManifestNotesArray("manifest.dynamo");
-    }
-    
-    //And initialize hashes for each asset
-    var _i = 0;
-    repeat(array_length(_noteArray))
-    {
-        _noteArray[_i].__HashInitialize();
-        ++_i;
-    }
-}
-
-function __DynamoEnsureProjectDirectory()
-{
-    if (__DYNAMO_DEV_MODE && (global.__dynamoProjectDirectory == undefined))
-    {
-        if (!file_exists("projectDirectory.dynamo"))
-        {
-            __DynamoError("Could not find project directory link file\nPlease ensure Dynamo has been set up by running dynamo.exe in the project's root directory");
-            return;
-        }
-        else
-        {
-            try
-            {
-                var _buffer = buffer_load("projectDirectory.dynamo");
-            }
-            catch(_error)
-            {
-                __DynamoError("Caught an exception whilst loading project directory link file");
-            }
-            
-            if (_buffer < 0)
-            {
-                __DynamoError("Failed to load project directory link file");
-            }
-            
-            global.__dynamoProjectDirectory = buffer_read(_buffer, buffer_text);
-            buffer_delete(_buffer);
-            
-            //Trim off any invalid characters at the end of the project directory string
-            var _i = string_length(global.__dynamoProjectDirectory);
-            repeat(_i)
-            {
-                if (ord(string_char_at(global.__dynamoProjectDirectory, _i)) >= 32) break;
-                --_i;
-            }
-            
-            global.__dynamoProjectDirectory = string_copy(global.__dynamoProjectDirectory, 1, _i);
-        }
-    }
-}
-
-function __DynamoParseMainProjectJSON(_directory)
-{
-    //Try to find a project file in this directory
-    var _count = 0;
-    var _file = file_find_first(_directory + "*.yyp", 0);
-    var _projectPath = _directory + _file;
-    
-    while(_file != "")
-    {
-        ++_count;
-        _file = file_find_next();
-    }
-    
-    file_find_close();
-    
-    //Report errors if we cannot find 
-    if (_count <= 0)
-    {
-        __DynamoError("No main project file (.yyp) found in \"", _directory, "\"\nPlease check that \"Disable file system sandbox\" is enabled in Game Options");
-        return;
-    }
-    else if (_count > 1)
-    {
-        __DynamoError("More than .yyp file found in \"", _directory, "\"");
-        return;
-    }
-    
-    try
-    {
-        var _projectBuffer = buffer_load(_projectPath);
-        var _string = buffer_read(_projectBuffer, buffer_text);
-        buffer_delete(_projectBuffer);
-    }
-    catch(_error)
-    {
-        __DynamoError("Failed to load main project file \"", _projectPath, "\"");
-        return;
-    }
-    
-    __DynamoTrace("Loaded \"", _projectPath, "\"");
-    
-    try
-    {
-        var _json = json_parse(_string);
-    }
-    catch(_error)
-    {
-        __DynamoError("Failed to parse JSON in main project file \"", _projectPath, "\"");
-        return;
-    }
-    
-    __DynamoTrace("Parsed main project file");
-    
-    var _resourceType = _json[$ "resourceType"];
-    if (_resourceType != "GMProject")
-    {
-        __DynamoError(".yyp file \"", _projectPath, "\" not recognised as a main project JSON\nResource type was \"", _resourceType, "\"");
-        return;
-    }
-    
-    return _json;
-}
-
-function __DynamoMainProjectNotesArray(_projectJSON, _directory)
-{
-    __DynamoTrace("Searching for notes in main project JSON");
-    
-    global.__dynamoNoteDictionary = {};
-    var _array = [];
-    
-    var _resourcesArray = _projectJSON[$ "resources"];
-    if (_resourcesArray != undefined)
-    {
-        var _i = 0;
-        repeat(array_length(_resourcesArray))
-        {
-            var _resourceStruct = _resourcesArray[_i].id;
-            var _path = _resourceStruct.path;
-            var _name = _resourceStruct.name;
-            
-            if (string_copy(_path, 1, 6) == "notes/")
-            {
-                if (variable_struct_exists(global.__dynamoNoteDictionary, _name))
-                {
-                    __DynamoTrace("Warning! Already found \"", _name, "\"");
-                }
-                else
-                {
-                    _path = _directory + _path;
-                    
-                    //Discover if this asset has a "dynamo ignore" tag
-                    var _yyPath = filename_change_ext(_path, ".yy");
-                    var _yyBuffer = buffer_load(_yyPath);
-                    var _yyString = buffer_read(_yyBuffer, buffer_string);
-                    buffer_delete(_yyBuffer);
-                    
-                    var _ignore = false;
-                    var _yyJSON = json_parse(_yyString);
-                    var _tagsArray = _yyJSON[$ "tags"];
-                    if (is_array(_tagsArray))
-                    {
-                        var _j = 0;
-                        repeat(array_length(_tagsArray))
-                        {
-                            var _tag = string_lower(_tagsArray[_j]);
-                            if (_tag == "dynamo ignore")
-                            {
-                                _ignore = true;
-                                break;
-                            }
-                            
-                            ++_j;
-                        }
-                    }
-                    
-                    if (_ignore)
-                    {
-                        __DynamoTrace("Found note asset \"", _name, "\", but it has been set to ignored");
-                    }
-                    else
-                    {
-                        __DynamoTrace("Found note asset \"", _name, "\"");
-                        array_push(_array, new __DynamoClassNote(_name, filename_change_ext(_path, ".txt"), undefined));
-                    }
-                }
-            }
-            
-            ++_i;
-        }
-    }
-    
-    __DynamoTrace("Found ", array_length(_array), " note(s)");
-    
-    return _array;
-}
-
-function __DynamoManifestNotesArray(_path)
-{
-    global.__dynamoNoteDictionary = {};
-    var _array = [];
-    
-    if (!file_exists(_path))
-    {
-        __DynamoError("Could not find manifest at \"", _path, "\"\nPlease ensure Dynamo has been set up by running dynamo.exe in the project's root directory");
-        return;
-    }
-    
-    __DynamoTrace("Loading manifest at \"", _path, "\"");
-    
-    var _directory = filename_dir(_path) + "\\";
-    __DynamoTrace("Chose directory as \"", _directory, "\"");
-    
-    try
-    {
-        var _manifestBuffer = buffer_load(_path);
-    }
-    catch(_error)
-    {
-        __DynamoError("Failed to load manifest \"", _manifestBuffer, "\"");
-        return;
-    }
-    
-    var _header = buffer_read(_manifestBuffer, buffer_string);
-    if (_header != "Dynamo")
-    {
-        __DynamoError("Header string incorrect, manifest may be corrupted\nFound \"", _header, "\"\nExpecting \"Dynamo\"");
-        return;
-    }
-    
-    var _version = buffer_read(_manifestBuffer, buffer_string);
-    if (_version != __DYNAMO_VERSION)
-    {
-        __DynamoError("Version mismatch. Please re-export binaries\nFound \"", _version, "\"\nExpecting \"", __DYNAMO_VERSION, "\"");
-        return;
-    }
-    
-    var _count = buffer_read(_manifestBuffer, buffer_u64);
-    __DynamoTrace("Manifest has ", _count, " note(s)");
-    
-    repeat(_count)
-    {
-        var _nameHash = buffer_read(_manifestBuffer, buffer_string);
-        __DynamoTrace("Found name hash \"", _nameHash, "\"");
-        
-        var _note = new __DynamoClassNote(undefined, _directory + _nameHash + ".dynamo", _nameHash);
-        array_push(_array, _note);
-    }
-    
-    __DynamoTrace("Parsed manifest");
-    
-    return _array;
-}
-
-function __DynamoClassNote(_name, _sourcePath, _nameHash) constructor
-{
-    __name       = _name;
-    __nameHash   = (_nameHash == undefined)? __DynamoNameHash(__name) : _nameHash;
-    __sourcePath = _sourcePath;
-    __dataHash   = undefined;
-    
-    global.__dynamoNoteDictionary[$ __nameHash] = self;
-    
-    static __HashInitialize = function()
-    {
-        if (__dataHash == undefined)
-        {
-            __dataHash = md5_file(__sourcePath);
-            __DynamoTrace("\"", __name, "\" hash = \"", __dataHash, "\" (", __sourcePath, ")");
-        }
-    }
-    
-    static __CheckForChange = function()
-    {
-        if (!file_exists(__sourcePath))
-        {
-            var _newHash = "";
-            __DynamoTrace("\"", __name, "\" doesn't exist, new hash = \"", _newHash, "\" vs. old hash = \"", __dataHash, "\" (", __sourcePath, ")");
-        }
-        else
-        {
-            var _newHash = md5_file(__sourcePath);
-            
-            if (__dataHash == undefined)
-            {
-                __DynamoTrace("\"", __name, "\" newly found, hash = \"", _newHash, "\" (", __sourcePath, ")");
-            }
-            else
-            {
-                __DynamoTrace("\"", __name, "\" new hash = \"", _newHash, "\" vs. old hash = \"", __dataHash, "\" (", __sourcePath, ")");
-            }
-        }
-        
-        if (_newHash != __dataHash)
-        {
-            __DynamoTrace("\"", __name, "\" changed");
-            __dataHash = _newHash;
-            
-            return true;
-        }
-        else
-        {
-            __DynamoTrace("\"", __name, "\" did not change");
-        }
-        
-        return false;
-    }
-    
-    static __Export = function(_outputDirectory)
-    {
-        //Save out this asset to the target datafiles folder
-        if (file_exists(__sourcePath))
-        {
-            var _txtBuffer = buffer_load(__sourcePath);
-        }
-        else
-        {
-            var _txtBuffer = buffer_create(1, buffer_fixed, 1);
-        }
-        
-        var _outputPath = _outputDirectory + __nameHash + ".dynamo";
-        __DynamoBufferSave(_txtBuffer, _outputPath);
-        __DynamoTrace("Saved \"", __name, "\" to \"", _outputPath + "\"");
-    }
-}
-
-function __DynamoClassFile(_sourcePath, _isDirectory) constructor
-{
-    __isDirectory = _isDirectory;
-    __sourcePath  = _sourcePath;
-    __dataHash    = undefined;
-    
-    __HashInitialize();
-    
-    static __HashInitialize = function()
-    {
-        if (__dataHash == undefined)
-        {
-            if (__isDirectory)
-            {
-                __dataHash = "<directory>";
-            }
-            else
-            {
-                __dataHash = md5_file(__sourcePath);
-            }
-            
-            __DynamoTrace("\"", __sourcePath, "\" hash = \"", __dataHash, "\"");
-        }
-    }
-    
-    static __CheckForChange = function()
-    {
-        if (__isDirectory)
-        {
-            if (directory_exists(__sourcePath))
-            {
-                var _newHash = "<directory>";
-            }
-            else
-            {
-                var _newHash = "";
-                __DynamoTrace("\"", __sourcePath, "\" doesn't exist");
-            }
-        }
-        else
-        {
-            if (!file_exists(__sourcePath))
-            {
-                var _newHash = "";
-                __DynamoTrace("\"", __sourcePath, "\" doesn't exist, new hash = \"", _newHash, "\" vs. old hash = \"", __dataHash, "\"");
-            }
-            else
-            {
-                var _newHash = md5_file(__sourcePath);
-                
-                if (__dataHash == undefined)
-                {
-                    __DynamoTrace("\"", __sourcePath, "\" newly found, hash = \"", _newHash, "\"");
-                }
-                else
-                {
-                    __DynamoTrace("\"", __sourcePath, "\" new hash = \"", _newHash, "\" vs. old hash = \"", __dataHash, "\"");
-                }
-            }
-        }
-        
-        if (_newHash != __dataHash)
-        {
-            __DynamoTrace("\"", __sourcePath, "\" changed");
-            __dataHash = _newHash;
-            
-            return true;
-        }
-        else
-        {
-            __DynamoTrace("\"", __sourcePath, "\" did not change");
-        }
-        
-        return false;
-    }
 }

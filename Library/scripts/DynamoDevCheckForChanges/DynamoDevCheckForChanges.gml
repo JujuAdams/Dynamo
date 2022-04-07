@@ -11,6 +11,11 @@
 
 function DynamoDevCheckForChanges()
 {
+    //Guarantee we're initialized
+    __DynamoInit();
+    
+    //Though if we're not in dev mode then ignore this function
+    //(This macro is set to <false> if we're not running from the IDE as well)
     if (!__DYNAMO_DEV_MODE) return undefined;
     
     __DynamoEnsureManifest();
