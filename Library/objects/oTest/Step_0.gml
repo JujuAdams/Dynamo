@@ -9,5 +9,5 @@ else
 
 if (is_array(_array))
 {
-    show_message(DynamoString("TestNote"));
+    show_message(DynamoNoteString("TestNote"));
 }
