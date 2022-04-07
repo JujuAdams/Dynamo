@@ -1,6 +1,6 @@
 __Setup = function(_directory)
 {
-    if (!__DynamoQuestion("Would you like to set up Dynamo for use with the project in this directory?\n\n", _directory)) return;
+    if (!__showQuestion("Would you like to set up Dynamo for use with the project in this directory?\n\n", _directory)) return;
     
     __DynamoTrace("Setting up Dynamo in ", _directory);
     
@@ -174,10 +174,10 @@ __Setup = function(_directory)
     
     
     
-    if (_preBuildScriptAlreadyExists) __DynamoLoud("Dyanmo has already been added to pre-build batch file.\n\nIf you're having issues, please try removing references to Dynamo from the pre-build batch file and then re-run this utility.");
-    if (_preRunAlreadyExists) __DynamoLoud("Dyanmo has already been added to pre-run batch file.\n\nIf you're having issues, please try removing references to Dynamo from the pre-run batch file and then re-run this utility.");
+    if (_preBuildScriptAlreadyExists) __showMessage("Dyanmo has already been added to pre-build batch file.\n\nIf you're having issues, please try removing references to Dynamo from the pre-build batch file and then re-run this utility.");
+    if (_preRunAlreadyExists) __showMessage("Dyanmo has already been added to pre-run batch file.\n\nIf you're having issues, please try removing references to Dynamo from the pre-run batch file and then re-run this utility.");
     
-    __DynamoLoud("Setup complete.\n\nI hope you enjoy using Dynamo!");
+    __showMessage("Setup complete.\n\nI hope you enjoy using Dynamo!");
 }
 
 
@@ -238,12 +238,12 @@ if (global.__dynamoRunningFromIDE)
     
     if (true) //Change this to <true> to run in test mode
     {
-        __DynamoLoud("Welcome to Dynamo by @jujuadams! This is version ", __DYNAMO_VERSION, ", ", __DYNAMO_DATE, "\n\nRunning in test mode...");
+        __showMessage("Welcome to Dynamo by @jujuadams! This is version ", __DYNAMO_VERSION, ", ", __DYNAMO_DATE, "\n\nRunning in test mode...");
         __Setup("A:\\GitHub repos\\Mine\\Dynamo\\Library\\");
     }
     else
     {
-        __DynamoLoud("Welcome to Dynamo by @jujuadams! This is version ", __DYNAMO_VERSION, ", ", __DYNAMO_DATE, "\n\nPlease compile this project and place it into the root directory of a project before executing.");
+        __showMessage("Welcome to Dynamo by @jujuadams! This is version ", __DYNAMO_VERSION, ", ", __DYNAMO_DATE, "\n\nPlease compile this project and place it into the root directory of a project before executing.");
     }
 }
 else
@@ -280,7 +280,7 @@ else
     if (_pos <= 0)
     {
         //No -export, let's try to setup!
-        __DynamoLoud("Welcome to Dynamo by @jujuadams!\n\nThis is version ", __DYNAMO_VERSION, ", ", __DYNAMO_DATE);
+        __showMessage("Welcome to Dynamo by @jujuadams!\n\nThis is version ", __DYNAMO_VERSION, ", ", __DYNAMO_DATE);
         __Setup(filename_dir(_parameterString) + "\\");
     }
     else
