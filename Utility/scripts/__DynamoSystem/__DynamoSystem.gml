@@ -82,7 +82,7 @@ function __DynamoTrace()
         ++_i;
     }
     
-    show_message("Dynamo: " + _string);
+    show_debug_message("Dynamo: " + _string);
 }
 
 function __DynamoLoud()
