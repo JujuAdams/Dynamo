@@ -55,7 +55,7 @@ function DynamoDevCheckForChanges()
     repeat(array_length(_newNameHashes))
     {
         var _nameHash = _newNameHashes[_i];
-        var _newNote = _oldDictionary[$ _nameHash];
+        var _newNote = _newDictionary[$ _nameHash];
         
         if (!variable_struct_exists(_oldDictionary, _nameHash))
         {
