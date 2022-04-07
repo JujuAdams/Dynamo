@@ -6,7 +6,7 @@
     "path": "folders/Dynamo/(System).yy",
   },
   "resourceVersion": "1.0",
-  "name": "__DynamoSystem",
+  "name": "__DynamoRecursiveFileSearch",
   "tags": [],
   "resourceType": "GMScript",
 }

@@ -6,7 +6,7 @@
     "path": "folders/Dynamo/(System).yy",
   },
   "resourceVersion": "1.0",
-  "name": "__DynamoSystem",
+  "name": "__DynamoParseMainProjectJSON",
   "tags": [],
   "resourceType": "GMScript",
 }
