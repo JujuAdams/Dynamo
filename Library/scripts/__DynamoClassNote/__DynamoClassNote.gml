@@ -3,54 +3,11 @@ function __DynamoClassNote(_name, _sourcePath, _nameHash) constructor
     __name       = _name;
     __nameHash   = (_nameHash == undefined)? __DynamoNameHash(__name) : _nameHash;
     __sourcePath = _sourcePath;
-    __dataHash   = undefined;
+    __dataHash   = md5_file(__sourcePath);
     
-    global.__dynamoNoteDictionary[$ __nameHash] = self;
+    __DynamoTrace("Note instance for \"", __name, "\" created, hash = \"", __dataHash, "\" (", __sourcePath, ")");
     
-    static __HashInitialize = function()
-    {
-        if (__dataHash == undefined)
-        {
-            __dataHash = md5_file(__sourcePath);
-            __DynamoTrace("\"", __name, "\" hash = \"", __dataHash, "\" (", __sourcePath, ")");
-        }
-    }
     
-    static __CheckForChange = function()
-    {
-        if (!file_exists(__sourcePath))
-        {
-            var _newHash = "";
-            __DynamoTrace("\"", __name, "\" doesn't exist, new hash = \"", _newHash, "\" vs. old hash = \"", __dataHash, "\" (", __sourcePath, ")");
-        }
-        else
-        {
-            var _newHash = md5_file(__sourcePath);
-            
-            if (__dataHash == undefined)
-            {
-                __DynamoTrace("\"", __name, "\" newly found, hash = \"", _newHash, "\" (", __sourcePath, ")");
-            }
-            else
-            {
-                __DynamoTrace("\"", __name, "\" new hash = \"", _newHash, "\" vs. old hash = \"", __dataHash, "\" (", __sourcePath, ")");
-            }
-        }
-        
-        if (_newHash != __dataHash)
-        {
-            __DynamoTrace("\"", __name, "\" changed");
-            __dataHash = _newHash;
-            
-            return true;
-        }
-        else
-        {
-            __DynamoTrace("\"", __name, "\" did not change");
-        }
-        
-        return false;
-    }
     
     static __Export = function(_outputDirectory)
     {

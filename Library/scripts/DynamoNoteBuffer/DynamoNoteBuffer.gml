@@ -9,7 +9,7 @@ function DynamoNoteBuffer(_name)
     __DynamoInit();
     
     //And guarantee we have a manifest too
-    __DynamoEnsureManifest();
+    __DynamoEnsureNoteDictionary();
     
     //Hash this note's name and check if we've seen a .dynamo file with that name
     var _nameHash = __DynamoNameHash(_name);

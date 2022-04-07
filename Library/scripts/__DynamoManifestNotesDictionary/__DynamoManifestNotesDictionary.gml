@@ -1,7 +1,6 @@
-function __DynamoManifestNotesArray(_path)
+function __DynamoManifestNotesDictionary(_path)
 {
-    global.__dynamoNoteDictionary = {};
-    var _array = [];
+    var _dictionary = {};
     
     if (!file_exists(_path))
     {
@@ -47,10 +46,10 @@ function __DynamoManifestNotesArray(_path)
         __DynamoTrace("Found name hash \"", _nameHash, "\"");
         
         var _note = new __DynamoClassNote(undefined, _directory + _nameHash + ".dynamo", _nameHash);
-        array_push(_array, _note);
+        _dictionary[$ _note.__nameHash] = _note;
     }
     
     __DynamoTrace("Parsed manifest");
     
-    return _array;
+    return _dictionary;
 }

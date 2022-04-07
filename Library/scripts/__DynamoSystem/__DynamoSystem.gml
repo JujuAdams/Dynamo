@@ -11,7 +11,7 @@ __DynamoInit();
 if (DYNAMO_LOAD_MANIFEST_ON_BOOT)
 {
     __DynamoTrace("Loading manifest on boot");
-    __DynamoEnsureManifest();
+    __DynamoEnsureNoteDictionary();
 }
 
 

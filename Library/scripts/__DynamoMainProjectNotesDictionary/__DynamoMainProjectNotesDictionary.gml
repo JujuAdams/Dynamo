@@ -1,9 +1,8 @@
-function __DynamoMainProjectNotesArray(_projectJSON, _directory)
+function __DynamoMainProjectNotesDictionary(_projectJSON, _directory)
 {
     __DynamoTrace("Searching for notes in main project JSON");
     
-    global.__dynamoNoteDictionary = {};
-    var _array = [];
+    var _dictionary = {};
     
     var _resourcesArray = _projectJSON[$ "resources"];
     if (_resourcesArray != undefined)
@@ -17,7 +16,7 @@ function __DynamoMainProjectNotesArray(_projectJSON, _directory)
             
             if (string_copy(_path, 1, 6) == "notes/")
             {
-                if (variable_struct_exists(global.__dynamoNoteDictionary, _name))
+                if (variable_struct_exists(_dictionary, _name))
                 {
                     __DynamoTrace("Warning! Already found \"", _name, "\"");
                 }
@@ -57,7 +56,8 @@ function __DynamoMainProjectNotesArray(_projectJSON, _directory)
                     else
                     {
                         __DynamoTrace("Found note asset \"", _name, "\"");
-                        array_push(_array, new __DynamoClassNote(_name, filename_change_ext(_path, ".txt"), undefined));
+                        var _note = new __DynamoClassNote(_name, filename_change_ext(_path, ".txt"), undefined);
+                        _dictionary[$ _note.__nameHash] = _note;
                     }
                 }
             }
@@ -66,7 +66,7 @@ function __DynamoMainProjectNotesArray(_projectJSON, _directory)
         }
     }
     
-    __DynamoTrace("Found ", array_length(_array), " note(s)");
+    __DynamoTrace("Found ", variable_struct_names_count(_dictionary), " note(s)");
     
-    return _array;
+    return _dictionary;
 }

@@ -18,25 +18,76 @@ function DynamoDevCheckForChanges()
     //(This macro is set to <false> if we're not running from the IDE as well)
     if (!__DYNAMO_DEV_MODE) return undefined;
     
-    __DynamoEnsureManifest();
-    
     var _output = undefined;
     
-    var _nameHashArray = variable_struct_get_names(global.__dynamoNoteDictionary);
+    
+    
+    #region Check note assets
+    
+    __DynamoEnsureNoteDictionary();
+    
+    var _oldDictionary = global.__dynamoNoteDictionary;
+    var _oldNameHashes = variable_struct_get_names(_oldDictionary);
+    
+    var _newDictionary = __DynamoNoteDictionary();
+    var _newNameHashes = variable_struct_get_names(_newDictionary);
+    
+    global.__dynamoNoteDictionary = _newDictionary;
+    
     var _i = 0;
-    repeat(array_length(_nameHashArray))
+    repeat(array_length(_oldNameHashes))
     {
-        var _note = global.__dynamoNoteDictionary[$ _nameHashArray[_i]];
-        if (_note.__CheckForChange())
+        var _nameHash = _oldNameHashes[_i];
+        
+        if (!variable_struct_exists(_newDictionary, _nameHash))
         {
+            var _oldNote = _oldDictionary[$ _nameHash];
+            __DynamoTrace("\"", _oldNote.__name, "\" has been deleted (name hash = ", _nameHash, ")");
+            
             if (!is_array(_output)) _output = [];
-            array_push(_output, _note.__name);
+            array_push(_output, _oldNote.__name);
         }
         
         ++_i;
     }
     
+    var _i = 0;
+    repeat(array_length(_newNameHashes))
+    {
+        var _nameHash = _newNameHashes[_i];
+        var _newNote = _oldDictionary[$ _nameHash];
+        
+        if (!variable_struct_exists(_oldDictionary, _nameHash))
+        {
+            __DynamoTrace("\"", _newNote.__name, "\" has been created (name hash = ", _nameHash, ")");
+            
+            if (!is_array(_output)) _output = [];
+            array_push(_output, _newNote.__name);
+        }
+        else
+        {
+            var _oldNote = _oldDictionary[$ _nameHash];
+            
+            var _oldNameHash = _oldNote.__dataHash;
+            var _newNameHash = _newNote.__dataHash;
+            
+            if (_oldNameHash != _newNameHash)
+            {
+                __DynamoTrace("Hash for \"", _oldNote.__name, "\" (name hash = ", _nameHash, ") has changed (old = \"", _oldNameHash, "\" vs. new = \"", _newNameHash, "\"");
+                
+                if (!is_array(_output)) _output = [];
+                array_push(_output, _oldNote.__name);
+            }
+        }
+        
+        ++_i;
+    }
     
+    #endregion
+    
+    
+    
+    #region Check datafiles
     
     var _datafilesDynamoPath       = global.__dynamoProjectDirectory + "datafilesDynamo\\";
     var _datafilesDynamoPathLength = string_length(_datafilesDynamoPath);
@@ -44,7 +95,7 @@ function DynamoDevCheckForChanges()
     var _oldDictionary = global.__dynamoFileDictionary;
     var _oldPaths = variable_struct_get_names(_oldDictionary);
     
-    var _newDictionary = __DynamoRecursiveFileSearch(_datafilesDynamoPath, {});
+    var _newDictionary = __DynamoDatafilesDictionary(_datafilesDynamoPath, {});
     var _newPaths = variable_struct_get_names(_newDictionary);
     
     global.__dynamoFileDictionary = _newDictionary;
@@ -159,6 +210,8 @@ function DynamoDevCheckForChanges()
         
         ++_i;
     }
+    
+    #endregion
     
     
     

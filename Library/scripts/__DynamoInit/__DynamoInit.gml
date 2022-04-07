@@ -6,7 +6,6 @@ function __DynamoInit()
     
     global.__dynamoNoteDictionaryBuilt = false;
     global.__dynamoNoteDictionary = {};
-    
     global.__dynamoFileDictionary = {};
     
     global.__dynamoProjectDirectory = undefined;
@@ -57,6 +56,6 @@ function __DynamoInit()
         global.__dynamoWorkingDirectory = global.__dynamoProjectDirectory + "datafilesDynamo\\linkToWorkingDirectory.dynamo\\";
         __DynamoTrace("Working directory = \"", global.__dynamoWorkingDirectory, "\"");
         
-        global.__dynamoFileDictionary = __DynamoRecursiveFileSearch(global.__dynamoProjectDirectory + "datafilesDynamo\\", {});
+        global.__dynamoFileDictionary = __DynamoDatafilesDictionary(global.__dynamoProjectDirectory + "datafilesDynamo\\", {});
     }
 }
