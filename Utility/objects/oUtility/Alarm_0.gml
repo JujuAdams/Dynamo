@@ -223,7 +223,7 @@ __Export = function(_directory)
     }
     
     var _outputPath = _datafilesDirectory + "manifest.dynamo";
-    __DynamoBufferSave(_manifestBuffer, _outputPath, buffer_tell(_manifestBuffer));
+    buffer_save_ext(_manifestBuffer, _outputPath, 0, buffer_tell(_manifestBuffer));
     __DynamoTrace("Saved manifest to \"", _outputPath + "\"");
     
     //Done!
