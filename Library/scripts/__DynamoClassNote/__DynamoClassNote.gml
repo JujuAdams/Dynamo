@@ -65,7 +65,7 @@ function __DynamoClassNote(_name, _sourcePath, _nameHash) constructor
         }
         
         var _outputPath = _outputDirectory + __nameHash + ".dynamo";
-        __DynamoBufferSave(_txtBuffer, _outputPath);
+        buffer_save(_txtBuffer, _outputPath);
         __DynamoTrace("Saved \"", __name, "\" to \"", _outputPath + "\"");
     }
 }
