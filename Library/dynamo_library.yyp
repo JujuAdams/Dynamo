@@ -3,6 +3,7 @@
     {"id":{"name":"DynamoNoteString","path":"scripts/DynamoNoteString/DynamoNoteString.yy",},"order":5,},
     {"id":{"name":"DynamoDevCheckForChanges","path":"scripts/DynamoDevCheckForChanges/DynamoDevCheckForChanges.yy",},"order":2,},
     {"id":{"name":"oTest","path":"objects/oTest/oTest.yy",},"order":3,},
+    {"id":{"name":"__DynamoExportNote","path":"scripts/__DynamoExportNote/__DynamoExportNote.yy",},"order":12,},
     {"id":{"name":"__DynamoClassNote","path":"scripts/__DynamoClassNote/__DynamoClassNote.yy",},"order":6,},
     {"id":{"name":"__DynamoMainProjectNotesDictionary","path":"scripts/__DynamoMainProjectNotesDictionary/__DynamoMainProjectNotesDictionary.yy",},"order":9,},
     {"id":{"name":"IgnoreNote","path":"notes/IgnoreNote/IgnoreNote.yy",},"order":2,},
