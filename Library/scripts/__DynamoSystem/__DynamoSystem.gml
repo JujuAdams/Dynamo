@@ -1,8 +1,8 @@
 //Not exposed yet but will be eventually
 #macro DYNAMO_COMPRESS  false
 
-#macro __DYNAMO_VERSION    "0.0.3"
-#macro __DYNAMO_DATE       "2022-04-05"
+#macro __DYNAMO_VERSION    "0.1.0"
+#macro __DYNAMO_DATE       "2022-04-07"
 #macro __DYNAMO_DEV_MODE   (DYNAMO_DEV_MODE && global.__dynamoRunningFromIDE)
 
 __DynamoTrace("Welcome to Dynamo by @jujuadams! This is version ", __DYNAMO_VERSION, ", ", __DYNAMO_DATE);
@@ -151,33 +151,6 @@ function __DynamoTrace()
     }
     
     show_debug_message("Dynamo: " + _string);
-}
-
-function __DynamoLoud()
-{
-    var _string = "";
-    var _i = 0;
-    repeat(argument_count)
-    {
-        _string += string(argument[_i]);
-        ++_i;
-    }
-    
-    show_debug_message("Dynamo: " + _string);
-    show_message(_string);
-}
-
-function __DynamoQuestion()
-{
-    var _string = "";
-    var _i = 0;
-    repeat(argument_count)
-    {
-        _string += string(argument[_i]);
-        ++_i;
-    }
-    
-    return show_question(_string);
 }
 
 function __DynamoError()
