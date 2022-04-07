@@ -118,6 +118,9 @@ __Setup = function(_directory)
     _preRunString += "echo Dynamo creating project directory link file...\n";
     _preRunString += "@echo %YYprojectDir%\\> \"%YYoutputFolder%\\projectDirectory.dynamo\"\n";
     _preRunString += "\n";
+    _preRunString += "echo Creating symlink to working directory...\n";
+    _preRunString += "mklink /d \"%~dp0datafilesDynamo\\linkToWorkingDirectory.dynamo\" \"%YYoutputFolder%\\\"\n";
+    _preRunString += "\n";
     _preRunString += "echo Dynamo pre_run_step.bat complete\n";
     
     if (!file_exists(_preRunPath))
