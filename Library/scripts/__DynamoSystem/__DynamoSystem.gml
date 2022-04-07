@@ -17,6 +17,7 @@ global.__dynamoNoteDictionary = {};
 global.__dynamoFileDictionary = {};
 
 global.__dynamoProjectDirectory = undefined;
+global.__dynamoWorkingDirectory = undefined;
 
 
 
@@ -63,7 +64,8 @@ if (DYNAMO_LOAD_MANIFEST_ON_BOOT) __DynamoEnsureManifest();
 if (__DYNAMO_DEV_MODE)
 {
     __DynamoEnsureProjectDirectory();
-   global.__dynamoFileDictionary = __DynamoRecursiveFileSearch(global.__dynamoProjectDirectory + "datafilesDynamo\\", {});
+    global.__dynamoFileDictionary = __DynamoRecursiveFileSearch(global.__dynamoProjectDirectory + "datafilesDynamo\\", {});
+    global.__dynamoWorkingDirectory = global.__dynamoProjectDirectory + "datafilesDynamo\\linkToWorkingDirectory.dynamo\\"
 }
 
 

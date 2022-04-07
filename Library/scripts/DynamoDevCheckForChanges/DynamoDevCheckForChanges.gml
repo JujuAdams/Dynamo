@@ -33,8 +33,6 @@ function DynamoDevCheckForChanges()
     
     
     
-    var _destinationDirectory = working_directory;
-    
     var _datafilesDynamoPath       = global.__dynamoProjectDirectory + "datafilesDynamo\\";
     var _datafilesDynamoPathLength = string_length(_datafilesDynamoPath);
     
@@ -106,7 +104,7 @@ function DynamoDevCheckForChanges()
         if (!is_array(_output)) _output = [];
         array_push(_output, _localPath);
         
-        var _destinationPath = _destinationDirectory + _localPath;
+        var _destinationPath = global.__dynamoWorkingDirectory + _localPath;
         __DynamoTrace("Deleting \"", _destinationPath, "\"");
         
         if (_oldDictionary[$ _sourcePath].__isDirectory)
@@ -132,7 +130,7 @@ function DynamoDevCheckForChanges()
         if (!is_array(_output)) _output = [];
         array_push(_output, _localPath);
         
-        var _destinationPath = _destinationDirectory + _localPath;
+        var _destinationPath = global.__dynamoWorkingDirectory + _localPath;
         __DynamoTrace("Creating \"", _destinationPath, "\"");
         
         directory_create(_destinationPath);
@@ -149,7 +147,7 @@ function DynamoDevCheckForChanges()
         if (!is_array(_output)) _output = [];
         array_push(_output, _localPath);
         
-        var _destinationPath = _destinationDirectory + _localPath;
+        var _destinationPath = global.__dynamoWorkingDirectory + _localPath;
         __DynamoTrace("Copying \"", _sourcePath, "\" to \"", _destinationPath, "\"");
         
         file_copy(_sourcePath, _destinationPath);

@@ -58,9 +58,15 @@ __Setup = function(_directory)
     _preBuildString += "echo Running pre-build Dynamo utility in export mode...\n";
     _preBuildString += "\"%YYprojectDir%\\dynamo.exe\" -export\n";
     _preBuildString += "\n";
+    _preBuildString += ":: Make sure we don't have a symlink left over from the last run\n";
+    _preBuildString += "del \"%~dp0datafilesDynamo\\linkToWorkingDirectory.dynamo\" /f /q\n";
+    _preBuildString += "\n";
     _preBuildString += ":: Copy Dynamo datafiles into the temporary directory\n";
     _preBuildString += "echo Copying all files in \\datafilesDynamo\\ to temporary directory...\n";
     _preBuildString += "xcopy \"%YYprojectDir%\\datafilesDynamo\\*\" \"%YYoutputFolder%\" /c /f /s /r /y\n";
+    _preBuildString += "\n";
+    _preBuildString += "echo Creating symlink to working directory...\n";
+    _preBuildString += "mklink /d \"%~dp0datafilesDynamo\\linkToWorkingDirectory.dynamo\" \"%YYoutputFolder%\\\"\n";
     _preBuildString += "\n";
     _preBuildString += "echo Dynamo pre_build_step.bat complete\n";
     
@@ -117,9 +123,6 @@ __Setup = function(_directory)
     _preRunString += "\n";
     _preRunString += "echo Dynamo creating project directory link file...\n";
     _preRunString += "@echo %YYprojectDir%\\> \"%YYoutputFolder%\\projectDirectory.dynamo\"\n";
-    _preRunString += "\n";
-    _preRunString += "echo Creating symlink to working directory...\n";
-    _preRunString += "mklink /d \"%~dp0datafilesDynamo\\linkToWorkingDirectory.dynamo\" \"%YYoutputFolder%\\\"\n";
     _preRunString += "\n";
     _preRunString += "echo Dynamo pre_run_step.bat complete\n";
     
