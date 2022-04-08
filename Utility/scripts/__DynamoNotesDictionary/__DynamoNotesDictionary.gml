@@ -1,8 +1,15 @@
-function __DynamoMainProjectNotesDictionary(_projectJSON, _directory)
+function __DynamoNotesDictionary(_directory)
 {
-    __DynamoTrace("Searching for notes in main project JSON");
-    
     var _dictionary = {};
+    
+    var _projectJSON = __DynamoParseMainProjectJSON(_directory);
+    if (_projectJSON == undefined)
+    {
+        __DynamoTrace("Failed to verify main project file");
+        return _dictionary;
+    }
+    
+    __DynamoTrace("Searching for notes in main project JSON");
     
     var _resourcesArray = _projectJSON[$ "resources"];
     if (_resourcesArray != undefined)

@@ -102,8 +102,8 @@ function __DynamoCheckForDatafilesChanges(_output, _projectDirectory, _targetDir
         array_push(_output, _localPath);
         
         var _destinationPath = _targetDirectory + _localPath;
-        __DynamoTrace("Creating \"", _destinationPath, "\"");
         
+        __DynamoTrace("Creating \"", _destinationPath, "\"");
         directory_create(_destinationPath);
         
         ++_i;
@@ -119,8 +119,8 @@ function __DynamoCheckForDatafilesChanges(_output, _projectDirectory, _targetDir
         array_push(_output, _localPath);
         
         var _destinationPath = _targetDirectory + _localPath;
-        __DynamoTrace("Copying \"", _sourcePath, "\" to \"", _destinationPath, "\"");
         
+        __DynamoTrace("Copying \"", _sourcePath, "\" to \"", _destinationPath, "\"");
         file_copy(_sourcePath, _destinationPath);
         
         ++_i;

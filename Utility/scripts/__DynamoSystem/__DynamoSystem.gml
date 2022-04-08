@@ -101,8 +101,3 @@ function __DynamoError()
     
     show_error("Dynamo:\n\n" + _string + "\n ", true);
 }
-
-function __DynamoNameHash(_name)
-{
-    return md5_string_utf8(_name);
-}
