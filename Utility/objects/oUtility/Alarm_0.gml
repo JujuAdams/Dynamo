@@ -116,13 +116,13 @@ __Setup = function(_directory)
     _preRunString += "echo Dynamo pre_run_step.bat version " + __DYNAMO_VERSION + ", " + __DYNAMO_DATE + "\n";
     _preRunString += "\n";
     _preRunString += "echo Dynamo creating project directory link file...\n";
-    _preRunString += "@echo %YYprojectDir%\\> \"%YYoutputFolder%\\pathToProjectDirectory\"\n";
+    _preRunString += "@echo %YYprojectDir%\\> \"%YYoutputFolder%\\" + __DYNAMO_PROJECT_DIRECTORY_PATH_NAME + "\"\n";
     _preRunString += "\n";
     _preRunString += ":: Make sure we don't have a symlink left over from the last run\n";
-    _preRunString += "del \"%~dp0\symlinkToWorkingDirectory\" /f /q\n";
+    _preRunString += "del \"%~dp0" + __DYNAMO_SYMLINK_TO_WORKING_DIRECTORY_NAME + "\" /f /q\n";
     _preRunString += "\n";
     _preRunString += "echo Creating symlink to working directory...\n";
-    _preRunString += "mklink /d \"%~dp0\symlinkToWorkingDirectory\" \"%YYoutputFolder%\\\"\n";
+    _preRunString += "mklink /d \"%~dp0" + __DYNAMO_SYMLINK_TO_WORKING_DIRECTORY_NAME + "\" \"%YYoutputFolder%\\\"\n";
     _preRunString += "\n";
     _preRunString += "echo Dynamo pre_run_step.bat complete\n";
     

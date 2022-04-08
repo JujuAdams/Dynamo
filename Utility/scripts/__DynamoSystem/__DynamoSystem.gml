@@ -2,6 +2,9 @@
 #macro __DYNAMO_DATE       "2022-04-08"
 #macro __DYNAMO_DEV_MODE   (DYNAMO_DEV_MODE && global.__dynamoRunningFromIDE)
 
+#macro __DYNAMO_PROJECT_DIRECTORY_PATH_NAME  "projectDirectoryPath.dynamo"
+#macro __DYNAMO_SYMLINK_TO_WORKING_DIRECTORY_NAME  "symlinkToWorkingDirectory.dynamo"
+
 __DynamoTrace("Welcome to Dynamo by @jujuadams! This is version ", __DYNAMO_VERSION, ", ", __DYNAMO_DATE);
 
 
@@ -64,7 +67,7 @@ function __DynamoInit()
         __DynamoEnsureProjectDirectory();
         __DynamoEnsureNoteDictionary();
         
-        global.__dynamoWorkingDirectory = global.__dynamoProjectDirectory + "symlinkToWorkingDirectory\\";
+        global.__dynamoWorkingDirectory = global.__dynamoProjectDirectory + __DYNAMO_SYMLINK_TO_WORKING_DIRECTORY_NAME + "\\";
         __DynamoTrace("Working directory = \"", global.__dynamoWorkingDirectory, "\"");
         
         global.__dynamoFileDictionary = __DynamoDatafilesDictionary(global.__dynamoProjectDirectory + "datafilesDynamo\\", {});
