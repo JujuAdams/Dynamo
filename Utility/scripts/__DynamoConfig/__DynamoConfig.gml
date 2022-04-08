@@ -12,14 +12,3 @@
 // your Note assets. This is how Dynamo will behave in production and you should
 // test under those conditions before release!
 #macro DYNAMO_DEV_MODE  true
-
-
-
-// Whether to force loading of Dynamo's manifest (either from the generated
-// manifest.dynamo or from the main project file) when the game boots
-// 
-// Leaving this set to <false> will cause Dynamo to read its manifest only
-// when required to by a call to DynamoNoteBuffer() or DynamoNoteString().
-// This can cause hitching if you call those functions in an awkward place so
-// loading on boot can sometimes be benefitial.
-#macro DYNAMO_LOAD_MANIFEST_ON_BOOT  false

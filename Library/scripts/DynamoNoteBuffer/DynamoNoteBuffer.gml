@@ -1,57 +1,31 @@
 /// Returns a buffer containing Note asset data
-/// If loading failed, this function will either throw an exception (for fatal errors) or it will return -1
+/// If loading failed, this function will either throw an exception (for fatal errors) or it will return <undefined>
 /// 
 /// @param name    Name of the Note asset to target
 
 function DynamoNoteBuffer(_name)
 {
-    __DynamoEnsureManifest();
+    //Hash this note's name and check if we've seen a .dynamo file with that name
+    var _nameHash = md5_string_utf8(_name);
     
-    var _nameHash = __DynamoNameHash(_name);
-    
-    if (!variable_struct_exists(global.__dynamoNoteDictionary, _nameHash))
-    {
-        __DynamoError("Could not find Note \"", _name, "\" in manifest (via hash as \"", _nameHash, "\")");
-        return -1;
-    }
-    
-    var _path = global.__dynamoNoteDictionary[$ _nameHash].__sourcePath;
-    
+    //We know that the note exists so let's read it!
+    var _path = working_directory + _nameHash + ".dynamo";
     if (!file_exists(_path))
     {
-        if (__DYNAMO_DEV_MODE)
-        {
-            __DynamoTrace("Warning! \"", _path, "\" could not be found\nThis may indicate that \"Disable file system sandbox\" needs to be enabled in Game Options, or the Note asset has been deleted whilst this application has been running");
-        }
-        else
-        {
-            __DynamoError("\"", _path, "\" could not be found");
-        }
-        
-        return -1;
-    }
-    else
-    {
-        try
-        {
-            var _buffer = buffer_load(_path);
-        }
-        catch(_error)
-        {
-            __DynamoError("Failed to load \"", _path, "\"");
-            return -1;
-        }
+        //Oh dear, we don't have a .dynamo file for this note for some reason
+        __DynamoTrace("Warning! .dynamo file for Note asset \"", _name, "\" could not be found (path=", _path, ")");
+        return undefined;
     }
     
-    if (__DYNAMO_DEV_MODE)
+    //Try to load the .dynamo file and return an ID if we're successful
+    try
     {
-        //Do nothing!
+        var _buffer = buffer_load(_path);
     }
-    else if (DYNAMO_COMPRESS)
+    catch(_error)
     {
-        var _compressedBuffer = _buffer;
-        var _buffer = buffer_decompress(_compressedBuffer);
-        buffer_delete(_compressedBuffer);
+        __DynamoTrace("Error! Failed to load \"", _path, "\" (error=", _error, ")");
+        return undefined;
     }
     
     return _buffer;

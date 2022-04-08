@@ -8,14 +8,21 @@
 
 function DynamoDevCheckForChangesOnRefocus()
 {
-    if (__DYNAMO_DEV_MODE)
+    //Guarantee we're initialized
+    __DynamoInit();
+    
+    //Though if we're not in dev mode then ignore this function
+    //(This macro is set to <false> if we're not running from the IDE as well)
+    if (!__DYNAMO_DEV_MODE) return undefined;
+    
+    //Track whether the window focus has changed
+    var _focus = window_has_focus();
+    if (global.__dynamoInFocus != _focus)
     {
-        var _focus = window_has_focus();
-        if (global.__dynamoInFocus != _focus)
-        {
-            global.__dynamoInFocus = _focus;
-            if (_focus) return DynamoDevCheckForChanges();
-        }
+        global.__dynamoInFocus = _focus;
+        
+        //If the focus *has* changed and we're now in focus then check for changes
+        if (_focus) return DynamoDevCheckForChanges();
     }
     
     return undefined;

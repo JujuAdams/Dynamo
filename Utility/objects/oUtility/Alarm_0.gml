@@ -1,8 +1,33 @@
 __Setup = function(_directory)
 {
-    if (!__DynamoQuestion("Would you like to set up Dynamo for use with the project in this directory?\n\n", _directory)) return;
+    if (!__showQuestion("Would you like to set up Dynamo for use with the project in this directory?\n\n", _directory)) return;
     
     __DynamoTrace("Setting up Dynamo in ", _directory);
+    
+    __DynamoTrace("Checking for erroneous data in game_save_id (", game_save_id, ")...");
+    if (directory_exists(game_save_id))
+    {
+        __DynamoTrace(game_save_id, " exists...");
+        
+        if (file_exists(game_save_id + "pre_build_step.bat"))
+        {
+            __DynamoTrace(game_save_id + "pre_build_step.bat", " exists, deleting");
+            file_delete(game_save_id + "pre_build_step.bat");
+        }
+        
+        if (file_exists(game_save_id + "pre_run_step.bat"))
+        {
+            __DynamoTrace(game_save_id + "pre_run_step.bat", " exists, deleting");
+            file_delete(game_save_id + "pre_run_step.bat");
+        }
+        
+        if (directory_exists(game_save_id + "datafilesDynamo\\"))
+        {
+            __DynamoTrace(game_save_id + "datafilesDynamo\\", " exists, deleting");
+            directory_destroy(game_save_id + "datafilesDynamo\\");
+        }
+    }
+    __DynamoTrace("...check ended");
     
     var _projectJSON = __DynamoParseMainProjectJSON(_directory);
     if (_projectJSON == undefined)
@@ -12,7 +37,7 @@ __Setup = function(_directory)
     }
     
     __DynamoTrace("Main project file verified");
-    __DynamoTrace("Seting up Dynamo pre-build script");
+    __DynamoTrace("Setting up Dynamo in pre_build_step.bat");
     
     var _preBuildScriptAlreadyExists = false;
     var _preBuildScriptPath = _directory + "pre_build_step.bat";
@@ -31,7 +56,7 @@ __Setup = function(_directory)
     _preBuildString += ")\n";
     _preBuildString += "\n";
     _preBuildString += "echo Running pre-build Dynamo utility in export mode...\n";
-    _preBuildString += "\"%YYprojectDir%\\dynamo.exe\" -export\n";
+    _preBuildString += "\"%YYprojectDir%\\dynamo.exe\" -export \"%YYoutputFolder%\\\"\n";
     _preBuildString += "\n";
     _preBuildString += ":: Copy Dynamo datafiles into the temporary directory\n";
     _preBuildString += "echo Copying all files in \\datafilesDynamo\\ to temporary directory...\n";
@@ -41,14 +66,14 @@ __Setup = function(_directory)
     
     if (!file_exists(_preBuildScriptPath))
     {
-        __DynamoTrace("Pre-build batch file not found \"", _preBuildScriptPath, "\", creating one");
+        __DynamoTrace("\"", _preBuildScriptPath, "\" not found, creating pre_build_step.bat");
         var _preBuildScriptBuffer = buffer_create(1024, buffer_grow, 1);
         
         buffer_write(_preBuildScriptBuffer, buffer_text, _preBuildString);
     }
     else
     {
-        __DynamoTrace("Pre-build batch file found \"", _preBuildScriptPath, "\"");
+        __DynamoTrace("Found \"", _preBuildScriptPath, "\"");
         
         try
         {
@@ -58,11 +83,12 @@ __Setup = function(_directory)
         }
         catch(_error)
         {
-            __DynamoError("Failed to load pre-build batch file \"", _preBuildScriptPath, "\"");
+            __DynamoError("Failed to load \"", _preBuildScriptPath, "\"");
             return;
         }
         
         __DynamoTrace("Loaded \"", _preBuildScriptPath, "\"");
+        __DynamoTrace(_buildScriptString);
         
         if (string_count(":: Dynamo", _buildScriptString) > 0)
         {
@@ -80,7 +106,7 @@ __Setup = function(_directory)
     
     
     
-    __DynamoTrace("Setting up Dynamo pre-run script");
+    __DynamoTrace("Setting up Dynamo in pre_run_step.bat");
     
     var _preRunAlreadyExists = false;
     var _preRunPath = _directory + "pre_run_step.bat";
@@ -90,36 +116,43 @@ __Setup = function(_directory)
     _preRunString += "echo Dynamo pre_run_step.bat version " + __DYNAMO_VERSION + ", " + __DYNAMO_DATE + "\n";
     _preRunString += "\n";
     _preRunString += "echo Dynamo creating project directory link file...\n";
-    _preRunString += "@echo %YYprojectDir%\\> \"%YYoutputFolder%\\projectDirectory.dynamo\"\n";
+    _preRunString += "@echo %YYprojectDir%\\> \"%YYoutputFolder%\\" + __DYNAMO_PROJECT_DIRECTORY_PATH_NAME + "\"\n";
+    _preRunString += "\n";
+    _preRunString += ":: Make sure we don't have a symlink left over from the last run\n";
+    _preRunString += "del \"%~dp0\\" + __DYNAMO_SYMLINK_TO_WORKING_DIRECTORY_NAME + "\" /f /q\n";
+    _preRunString += "\n";
+    _preRunString += "echo Creating symlink to working directory...\n";
+    _preRunString += "mklink /d \"%~dp0\\" + __DYNAMO_SYMLINK_TO_WORKING_DIRECTORY_NAME + "\" \"%YYoutputFolder%\\\"\n";
     _preRunString += "\n";
     _preRunString += "echo Dynamo pre_run_step.bat complete\n";
     
     if (!file_exists(_preRunPath))
     {
-        __DynamoTrace("Pre-run batch file not found \"", _preRunPath, "\", creating one");
+        __DynamoTrace("\"", _preRunPath, "\" not found, creating pre_run_step.bat");
         var _preRunBuffer = buffer_create(1024, buffer_grow, 1);
         
         buffer_write(_preRunBuffer, buffer_text, _preRunString);
     }
     else
     {
-        __DynamoTrace("Pre-run batch file found \"", _preRunPath, "\"");
+        __DynamoTrace("Found \"", _preRunPath, "\"");
         
         try
         {
             var _preRunBuffer = buffer_load(_preRunPath);
-            var _runScriptString = buffer_read(_preRunBuffer, buffer_text);
+            var _preRunScriptString = buffer_read(_preRunBuffer, buffer_text);
             buffer_seek(_preRunBuffer, buffer_seek_start, buffer_get_size(_preRunBuffer));
         }
         catch(_error)
         {
-            __DynamoError("Failed to load pre-run batch file \"", _preRunPath, "\"");
+            __DynamoError("Failed to load \"", _preRunPath, "\"");
             return;
         }
         
         __DynamoTrace("Loaded \"", _preRunPath, "\"");
+        __DynamoTrace(_preRunScriptString);
         
-        if (string_count(":: Dynamo", _runScriptString) > 0)
+        if (string_count(":: Dynamo", _preRunScriptString) > 0)
         {
             _preRunAlreadyExists = true;
         }
@@ -141,60 +174,10 @@ __Setup = function(_directory)
     
     
     
-    if (_preBuildScriptAlreadyExists) __DynamoLoud("Dyanmo has already been added to pre-build batch file.\n\nIf you're having issues, please try removing references to Dynamo from the pre-build batch file and then re-run this utility.");
-    if (_preRunAlreadyExists) __DynamoLoud("Dyanmo has already been added to pre-run batch file.\n\nIf you're having issues, please try removing references to Dynamo from the pre-run batch file and then re-run this utility.");
+    if (_preBuildScriptAlreadyExists) __showMessage("Dyanmo has already been added to pre_build_step.bat\n\nIf you're having issues, please try removing references to Dynamo from pre_build_step.bat and then re-run this utility.");
+    if (_preRunAlreadyExists) __showMessage("Dyanmo has already been added to pre_run_step.bat\n\nIf you're having issues, please try removing references to Dynamo from pre_run_step.bat and then re-run this utility.");
     
-    __DynamoLoud("Setup complete.\n\nI hope you enjoy using Dynamo!");
-}
-
-
-
-__Export = function(_directory)
-{
-    __DynamoTrace("Exporting Notes from project in \"", _directory, "\"");
-    
-    var _projectJSON = __DynamoParseMainProjectJSON(_directory);
-    if (_projectJSON == undefined)
-    {
-        __DynamoTrace("Failed to verify main project file");
-        return;
-    }
-    
-    var _notesArray = __DynamoMainProjectNotesArray(_projectJSON, _directory);
-    
-    var _datafilesDirectory = _directory + "datafilesDynamo\\";
-    __DynamoTrace("Chose \"", _datafilesDirectory, "\" as export directory");
-    
-    var _i = 0;
-    repeat(array_length(_notesArray))
-    {
-        _notesArray[_i].__Export(_datafilesDirectory);
-        ++_i;
-    }
-    
-    //Output manifest
-    var _count = array_length(_notesArray);
-    
-    var _manifestBuffer = buffer_create(1024, buffer_grow, 1);
-    buffer_write(_manifestBuffer, buffer_string, "Dynamo");
-    buffer_write(_manifestBuffer, buffer_string, __DYNAMO_VERSION);
-    buffer_write(_manifestBuffer, buffer_string, __DYNAMO_DATE);
-    buffer_write(_manifestBuffer, buffer_u64, _count);
-    
-    var _i = 0;
-    repeat(_count)
-    {
-        var _note = _notesArray[_i];
-        buffer_write(_manifestBuffer, buffer_string, _note.__nameHash);
-        ++_i;
-    }
-    
-    var _outputPath = _datafilesDirectory + "manifest.dynamo";
-    __DynamoBufferSave(_manifestBuffer, _outputPath, buffer_tell(_manifestBuffer));
-    __DynamoTrace("Saved manifest to \"", _outputPath + "\"");
-    
-    //Done!
-    __DynamoTrace("Export for project in \"", _directory, "\" complete");
+    __showMessage("Setup complete.\n\nI hope you enjoy using Dynamo!");
 }
 
 
@@ -205,37 +188,71 @@ if (global.__dynamoRunningFromIDE)
     
     if (true) //Change this to <true> to run in test mode
     {
-        __DynamoLoud("Welcome to Dynamo by @jujuadams! This is version ", __DYNAMO_VERSION, ", ", __DYNAMO_DATE, "\n\nRunning in test mode...");
+        __showMessage("Welcome to Dynamo by @jujuadams! This is version ", __DYNAMO_VERSION, ", ", __DYNAMO_DATE, "\n\nRunning in test mode...");
         __Setup("A:\\GitHub repos\\Mine\\Dynamo\\Library\\");
     }
     else
     {
-        __DynamoLoud("Welcome to Dynamo by @jujuadams! This is version ", __DYNAMO_VERSION, ", ", __DYNAMO_DATE, "\n\nPlease compile this project and place it into the root directory of a project before executing.");
+        __showMessage("Welcome to Dynamo by @jujuadams! This is version ", __DYNAMO_VERSION, ", ", __DYNAMO_DATE, "\n\nPlease compile this project and place it into the root directory of a project before executing.");
     }
 }
 else
 {
-    __DynamoTrace("Running from from executable");
-    
-    //Clean up the weird broken parameter string that we might get passed
-    var _i = 1;
-    var _parameterString = "";
-    repeat(parameter_count() - 1)
+    if (parameter_string(1) == "-selfextracting")
     {
-        _parameterString += parameter_string(_i) + " ";
-        ++_i;
+        __DynamoTrace("Running from self-extracting installer");
+        
+        //Clean up the weird broken parameter string that we might get passed
+        var _i = 2;
+        var _parameterString = "";
+        repeat(parameter_count() - _i)
+        {
+            _parameterString += parameter_string(_i) + " ";
+            ++_i;
+        }
+        
+        if (parameter_count() > 2)
+        {
+            _parameterString = string_copy(_parameterString, 1, string_length(_parameterString)-1);
+        }
     }
+    else
+    {
+        __DynamoTrace("Running from executable");
+        
+        var _i = 0;
+        var _parameterString = "";
+        repeat(parameter_count() - _i)
+        {
+            _parameterString += parameter_string(_i) + " ";
+            ++_i;
+        }
+        
+        if (parameter_count() > 0)
+        {
+            _parameterString = string_copy(_parameterString, 1, string_length(_parameterString)-1);
+        }
+    }
+    
+    __DynamoTrace("Parameter string is \"", _parameterString, "\"");
     
     var _pos = string_pos("-export", _parameterString);
     if (_pos <= 0)
     {
         //No -export, let's try to setup!
-        __DynamoLoud("Welcome to Dynamo by @jujuadams!\n\nThis is version ", __DYNAMO_VERSION, ", ", __DYNAMO_DATE);
+        __showMessage("Welcome to Dynamo by @jujuadams!\n\nThis is version ", __DYNAMO_VERSION, ", ", __DYNAMO_DATE);
         __Setup(filename_dir(_parameterString) + "\\");
     }
     else
     {
-        __Export(filename_dir(string_copy(_parameterString, 1, _pos-1)) + "\\");
+        var _projectDirectory = filename_dir(string_copy(_parameterString, 1, _pos-1)) + "\\";
+        var _exportDirectory  = string_delete(_parameterString, 1, _pos + string_length("-export"));
+        
+        __DynamoTrace("Exporting Notes from project in \"", _projectDirectory, "\" to \"", _exportDirectory, "\"");
+        __DynamoCheckForNoteChanges(undefined, _projectDirectory, _exportDirectory);
+        
+        //Done!
+        __DynamoTrace("Export complete");
     }
 }
 
