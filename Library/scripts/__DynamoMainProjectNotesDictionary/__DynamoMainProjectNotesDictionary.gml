@@ -55,8 +55,7 @@ function __DynamoMainProjectNotesDictionary(_projectJSON, _directory)
                     }
                     else
                     {
-                        __DynamoTrace("Found note asset \"", _name, "\"");
-                        var _note = new __DynamoClassNote(_name, filename_change_ext(_path, ".txt"), undefined);
+                        var _note = new __DynamoClassNote(_name, filename_change_ext(_path, ".txt"));
                         _dictionary[$ _note.__nameHash] = _note;
                     }
                 }

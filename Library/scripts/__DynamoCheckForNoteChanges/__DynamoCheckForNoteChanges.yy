@@ -6,7 +6,7 @@
     "path": "folders/Dynamo/(System).yy",
   },
   "resourceVersion": "1.0",
-  "name": "__DynamoExportNote",
+  "name": "__DynamoCheckForNoteChanges",
   "tags": [],
   "resourceType": "GMScript",
 }
