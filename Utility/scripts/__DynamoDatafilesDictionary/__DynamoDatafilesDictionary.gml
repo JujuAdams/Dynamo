@@ -1,4 +1,4 @@
-function __DynamoRecursiveFileSearch(_directory, _result)
+function __DynamoDatafilesDictionary(_directory, _result)
 {
     var _directories = [];
     
@@ -44,7 +44,7 @@ function __DynamoRecursiveFileSearch(_directory, _result)
     var _i = 0;
     repeat(array_length(_directories))
     {
-        __DynamoRecursiveFileSearch(_directories[_i], _result);
+        __DynamoDatafilesDictionary(_directories[_i], _result);
         ++_i;
     }
     

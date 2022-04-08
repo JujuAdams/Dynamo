@@ -8,6 +8,7 @@
 
 function DynamoDevCheckForChangesOnRefocus()
 {
+    //Guarantee we're initialized
     __DynamoInit();
     
     //Though if we're not in dev mode then ignore this function

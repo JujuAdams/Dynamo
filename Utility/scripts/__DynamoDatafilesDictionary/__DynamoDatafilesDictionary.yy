@@ -6,7 +6,7 @@
     "path": "folders/Dynamo/(System).yy",
   },
   "resourceVersion": "1.0",
-  "name": "__DynamoInit",
+  "name": "__DynamoDatafilesDictionary",
   "tags": [],
   "resourceType": "GMScript",
 }
