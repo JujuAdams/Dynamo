@@ -2,7 +2,7 @@ function __DynamoEnsureProjectDirectory()
 {
     if (__DYNAMO_DEV_MODE && (global.__dynamoProjectDirectory == undefined))
     {
-        if (!file_exists("pathToProjectDirectory"))
+        if (!file_exists(working_directory + __DYNAMO_PROJECT_DIRECTORY_PATH_NAME))
         {
             __DynamoError("Could not find path to project directory\nPlease ensure Dynamo has been set up by running dynamo.exe in the project's root directory");
             return;
@@ -11,7 +11,7 @@ function __DynamoEnsureProjectDirectory()
         {
             try
             {
-                var _buffer = buffer_load(working_directory + "pathToProjectDirectory");
+                var _buffer = buffer_load(working_directory + __DYNAMO_PROJECT_DIRECTORY_PATH_NAME);
             }
             catch(_error)
             {
