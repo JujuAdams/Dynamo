@@ -210,6 +210,8 @@ else
             _parameterString += parameter_string(_i) + " ";
             ++_i;
         }
+        
+        if (parameter_count() - _i > 0) _parameterString = string_copy(_parameterString, 1, string_length(_parameterString)-1);
     }
     else
     {
@@ -222,6 +224,8 @@ else
             _parameterString += parameter_string(_i) + " ";
             ++_i;
         }
+        
+        if (parameter_count() - _i > 0) _parameterString = string_copy(_parameterString, 1, string_length(_parameterString)-1);
     }
     
     __DynamoTrace("Parameter string is \"", _parameterString, "\"");
@@ -236,12 +240,7 @@ else
     else
     {
         var _projectDirectory = filename_dir(string_copy(_parameterString, 1, _pos-1)) + "\\";
-        var _exportDirectory  = string_delete(_parameterString, _pos, string_length(_parameterString) - _pos);
-        
-        __showMessage("_projectDirectory = ", _projectDirectory, "\n_exportDirectory = ", _exportDirectory);
-        
-        game_end();
-        return;
+        var _exportDirectory  = string_delete(_parameterString, 1, _pos + string_length("-export"));
         
         __DynamoTrace("Welcome to Dynamo by @jujuadams! This is version ", __DYNAMO_VERSION, ", ", __DYNAMO_DATE);
         __DynamoTrace("Exporting Notes from project in \"", _projectDirectory, "\" to \"", _exportDirectory, "\"");
