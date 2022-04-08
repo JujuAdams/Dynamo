@@ -119,10 +119,10 @@ __Setup = function(_directory)
     _preRunString += "@echo %YYprojectDir%\\> \"%YYoutputFolder%\\" + __DYNAMO_PROJECT_DIRECTORY_PATH_NAME + "\"\n";
     _preRunString += "\n";
     _preRunString += ":: Make sure we don't have a symlink left over from the last run\n";
-    _preRunString += "del \"%~dp0" + __DYNAMO_SYMLINK_TO_WORKING_DIRECTORY_NAME + "\" /f /q\n";
+    _preRunString += "del \"%~dp0\\" + __DYNAMO_SYMLINK_TO_WORKING_DIRECTORY_NAME + "\" /f /q\n";
     _preRunString += "\n";
     _preRunString += "echo Creating symlink to working directory...\n";
-    _preRunString += "mklink /d \"%~dp0" + __DYNAMO_SYMLINK_TO_WORKING_DIRECTORY_NAME + "\" \"%YYoutputFolder%\\\"\n";
+    _preRunString += "mklink /d \"%~dp0\\" + __DYNAMO_SYMLINK_TO_WORKING_DIRECTORY_NAME + "\" \"%YYoutputFolder%\\\"\n";
     _preRunString += "\n";
     _preRunString += "echo Dynamo pre_run_step.bat complete\n";
     
@@ -140,7 +140,7 @@ __Setup = function(_directory)
         try
         {
             var _preRunBuffer = buffer_load(_preRunPath);
-            var _runScriptString = buffer_read(_preRunBuffer, buffer_text);
+            var _preRunScriptString = buffer_read(_preRunBuffer, buffer_text);
             buffer_seek(_preRunBuffer, buffer_seek_start, buffer_get_size(_preRunBuffer));
         }
         catch(_error)
@@ -150,9 +150,9 @@ __Setup = function(_directory)
         }
         
         __DynamoTrace("Loaded \"", _preRunPath, "\"");
-        __DynamoTrace(_runScriptString);
+        __DynamoTrace(_preRunScriptString);
         
-        if (string_count(":: Dynamo", _runScriptString) > 0)
+        if (string_count(":: Dynamo", _preRunScriptString) > 0)
         {
             _preRunAlreadyExists = true;
         }
@@ -168,14 +168,71 @@ __Setup = function(_directory)
     
     
     
+    __DynamoTrace("Setting up Dynamo in post_run_step.bat");
+    
+    var _postRunAlreadyExists = false;
+    var _postRunPath = _directory + "post_run_step.bat";
+    var _postRunString = "";
+    _postRunString += ":: Dynamo " + __DYNAMO_VERSION + ", " + __DYNAMO_DATE + "    https://www.github.com/jujuadams/dynamo/\n";
+    _postRunString += "@echo off\n";
+    _postRunString += "echo Dynamo post_run_step.bat version " + __DYNAMO_VERSION + ", " + __DYNAMO_DATE + "\n";
+    _postRunString += "\n";
+    _postRunString += ":: Clear up the symlink from this run\n";
+    _postRunString += "del \"%~dp0\\" + __DYNAMO_SYMLINK_TO_WORKING_DIRECTORY_NAME + "\" /f /q\n";
+    _postRunString += "\n";
+    _postRunString += "echo Dynamo post_run_step.bat complete\n";
+    
+    if (!file_exists(_postRunPath))
+    {
+        __DynamoTrace("\"", _postRunPath, "\" not found, creating post_run_step.bat");
+        var _postRunBuffer = buffer_create(1024, buffer_grow, 1);
+        
+        buffer_write(_postRunBuffer, buffer_text, _postRunString);
+    }
+    else
+    {
+        __DynamoTrace("Found \"", _postRunPath, "\"");
+        
+        try
+        {
+            var _postRunBuffer = buffer_load(_postRunPath);
+            var _postRunScriptString = buffer_read(_postRunBuffer, buffer_text);
+            buffer_seek(_postRunBuffer, buffer_seek_start, buffer_get_size(_postRunBuffer));
+        }
+        catch(_error)
+        {
+            __DynamoError("Failed to load \"", _postRunPath, "\"");
+            return;
+        }
+        
+        __DynamoTrace("Loaded \"", _postRunPath, "\"");
+        __DynamoTrace(_postRunScriptString);
+        
+        if (string_count(":: Dynamo", _postRunScriptString) > 0)
+        {
+            _postRunAlreadyExists = true;
+        }
+        else
+        {
+            buffer_write(_postRunBuffer, buffer_text, "\n\n");
+            buffer_write(_postRunBuffer, buffer_text, _postRunString);
+        }
+    }
+    
+    buffer_save(_postRunBuffer, _postRunPath);
+    buffer_delete(_postRunBuffer);
+    
+    
+    
     var _fileDirectory = _directory + "datafilesDynamo";
     __DynamoTrace("Creating \"datafilesDynamo\" file directory at \"", _fileDirectory, "\"");
     directory_create(_fileDirectory);
     
     
     
-    if (_preBuildScriptAlreadyExists) __showMessage("Dyanmo has already been added to pre-build batch file.\n\nIf you're having issues, please try removing references to Dynamo from the pre-build batch file and then re-run this utility.");
-    if (_preRunAlreadyExists) __showMessage("Dyanmo has already been added to pre-run batch file.\n\nIf you're having issues, please try removing references to Dynamo from the pre-run batch file and then re-run this utility.");
+    if (_preBuildScriptAlreadyExists) __showMessage("Dyanmo has already been added to pre_build_step.bat\n\nIf you're having issues, please try removing references to Dynamo from pre_build_step.bat and then re-run this utility.");
+    if (_preRunAlreadyExists) __showMessage("Dyanmo has already been added to pre_run_step.bat\n\nIf you're having issues, please try removing references to Dynamo from pre_run_step.bat and then re-run this utility.");
+    if (_postRunAlreadyExists) __showMessage("Dyanmo has already been added to post_run_step.bat\n\nIf you're having issues, please try removing references to Dynamo from post_run_step.bat and then re-run this utility.");
     
     __showMessage("Setup complete.\n\nI hope you enjoy using Dynamo!");
 }

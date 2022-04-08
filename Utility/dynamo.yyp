@@ -17,7 +17,7 @@
     {"id":{"name":"__DynamoParseMainProjectJSON","path":"scripts/__DynamoParseMainProjectJSON/__DynamoParseMainProjectJSON.yy",},"order":8,},
     {"id":{"name":"__DynamoClassNote","path":"scripts/__DynamoClassNote/__DynamoClassNote.yy",},"order":3,},
     {"id":{"name":"rmMain","path":"rooms/rmMain/rmMain.yy",},"order":3,},
-	{"id":{"name":"__DynamoNotesDictionary","path":"scripts/__DynamoNotesDictionary/__DynamoNotesDictionary.yy",},"order":3,},
+    {"id":{"name":"__DynamoNotesDictionary","path":"scripts/__DynamoNotesDictionary/__DynamoNotesDictionary.yy",},"order":3,},
   ],
   "Options": [
     {"name":"Amazon Fire","path":"options/amazonfire/options_amazonfire.yy",},
