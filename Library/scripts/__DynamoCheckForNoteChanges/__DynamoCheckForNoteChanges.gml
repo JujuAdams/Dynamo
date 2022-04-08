@@ -7,14 +7,7 @@ function __DynamoCheckForNoteChanges(_output, _projectDirectory, _targetDirector
     var _oldDictionary = global.__dynamoNoteDictionary;
     var _oldNameHashes = variable_struct_get_names(_oldDictionary);
     
-    var _projectJSON = __DynamoParseMainProjectJSON(_projectDirectory);
-    if (_projectJSON == undefined)
-    {
-        __DynamoTrace("Failed to verify main project file");
-        return _output;
-    }
-    
-    var _newDictionary = __DynamoMainProjectNotesDictionary(_projectJSON, _projectDirectory);
+    var _newDictionary = __DynamoNotesDictionary(_projectDirectory);
     var _newNameHashes = variable_struct_get_names(_newDictionary);
     
     global.__dynamoNoteDictionaryBuilt = true;
@@ -46,6 +39,8 @@ function __DynamoCheckForNoteChanges(_output, _projectDirectory, _targetDirector
         var _nameHash = _newNameHashes[_i];
         var _newNote = _newDictionary[$ _nameHash];
         
+        var _copy = false;
+        
         if (!variable_struct_exists(_oldDictionary, _nameHash))
         {
             __DynamoTrace("\"", _newNote.__name, "\" has been created (name hash = ", _nameHash, ")");
@@ -53,8 +48,7 @@ function __DynamoCheckForNoteChanges(_output, _projectDirectory, _targetDirector
             if (!is_array(_output)) _output = [];
             array_push(_output, _newNote.__name);
             
-            file_copy(_newNote.__sourcePath, _targetDirectory + _nameHash + ".dynamo");
-            __DynamoTrace("Copied \"", _newNote.__sourcePath, "\" to \"", _targetDirectory + _nameHash + ".dynamo", "\"");
+            _copy = true;
         }
         else
         {
@@ -70,8 +64,24 @@ function __DynamoCheckForNoteChanges(_output, _projectDirectory, _targetDirector
                 if (!is_array(_output)) _output = [];
                 array_push(_output, _oldNote.__name);
                 
+                _copy = true;
+            }
+        }
+        
+        if (_copy)
+        {
+            if (_newNote.__dataHash == "")
+            {
+                var _buffer = buffer_create(1, buffer_fixed, 1);
+                buffer_save(_buffer, _targetDirectory + _nameHash + ".dynamo");
+                buffer_delete(_buffer);
+                
+                __DynamoTrace("\"", _newNote.__sourcePath, "\" is empty, saving an empty buffer to \"", _targetDirectory + _nameHash + ".dynamo", "\"");
+            }
+            else
+            {
                 file_copy(_newNote.__sourcePath, _targetDirectory + _nameHash + ".dynamo");
-                __DynamoTrace("Copied \"", _newNote.__sourcePath, "\" to \"", _targetDirectory + _nameHash + ".dynamo", "\" (overwrite)");
+                __DynamoTrace("Copied \"", _newNote.__sourcePath, "\" to \"", _targetDirectory + _nameHash + ".dynamo", "\"");
             }
         }
         

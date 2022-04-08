@@ -6,7 +6,7 @@
 function DynamoNoteBuffer(_name)
 {
     //Hash this note's name and check if we've seen a .dynamo file with that name
-    var _nameHash = __DynamoNameHash(_name);
+    var _nameHash = md5_string_utf8(_name);
     
     //We know that the note exists so let's read it!
     var _path = working_directory + _nameHash + ".dynamo";

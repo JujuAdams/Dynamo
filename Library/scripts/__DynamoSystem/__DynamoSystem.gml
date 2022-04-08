@@ -1,4 +1,4 @@
-#macro __DYNAMO_VERSION    "0.3.0"
+#macro __DYNAMO_VERSION    "0.4.0"
 #macro __DYNAMO_DATE       "2022-04-08"
 #macro __DYNAMO_DEV_MODE   (DYNAMO_DEV_MODE && global.__dynamoRunningFromIDE)
 
@@ -100,9 +100,4 @@ function __DynamoError()
     }
     
     show_error("Dynamo:\n\n" + _string + "\n ", true);
-}
-
-function __DynamoNameHash(_name)
-{
-    return md5_string_utf8(_name);
 }
