@@ -1,5 +1,5 @@
-#macro __DYNAMO_VERSION    "0.1.0"
-#macro __DYNAMO_DATE       "2022-04-07"
+#macro __DYNAMO_VERSION    "0.2.0"
+#macro __DYNAMO_DATE       "2022-04-08"
 #macro __DYNAMO_DEV_MODE   (DYNAMO_DEV_MODE && global.__dynamoRunningFromIDE)
 
 __DynamoTrace("Welcome to Dynamo by @jujuadams! This is version ", __DYNAMO_VERSION, ", ", __DYNAMO_DATE);
