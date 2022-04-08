@@ -211,7 +211,10 @@ else
             ++_i;
         }
         
-        if (parameter_count() - _i > 0) _parameterString = string_copy(_parameterString, 1, string_length(_parameterString)-1);
+        if (parameter_count() > 2)
+        {
+            _parameterString = string_copy(_parameterString, 1, string_length(_parameterString)-1);
+        }
     }
     else
     {
@@ -225,7 +228,10 @@ else
             ++_i;
         }
         
-        if (parameter_count() - _i > 0) _parameterString = string_copy(_parameterString, 1, string_length(_parameterString)-1);
+        if (parameter_count() > 0)
+        {
+            _parameterString = string_copy(_parameterString, 1, string_length(_parameterString)-1);
+        }
     }
     
     __DynamoTrace("Parameter string is \"", _parameterString, "\"");
@@ -242,7 +248,6 @@ else
         var _projectDirectory = filename_dir(string_copy(_parameterString, 1, _pos-1)) + "\\";
         var _exportDirectory  = string_delete(_parameterString, 1, _pos + string_length("-export"));
         
-        __DynamoTrace("Welcome to Dynamo by @jujuadams! This is version ", __DYNAMO_VERSION, ", ", __DYNAMO_DATE);
         __DynamoTrace("Exporting Notes from project in \"", _projectDirectory, "\" to \"", _exportDirectory, "\"");
         __DynamoCheckForNoteChanges(undefined, _projectDirectory, _exportDirectory);
         
