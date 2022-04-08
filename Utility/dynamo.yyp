@@ -16,7 +16,6 @@
     {"id":{"name":"__DynamoSystem","path":"scripts/__DynamoSystem/__DynamoSystem.yy",},"order":9,},
     {"id":{"name":"__DynamoParseMainProjectJSON","path":"scripts/__DynamoParseMainProjectJSON/__DynamoParseMainProjectJSON.yy",},"order":8,},
     {"id":{"name":"__DynamoClassNote","path":"scripts/__DynamoClassNote/__DynamoClassNote.yy",},"order":3,},
-    {"id":{"name":"__DynamoMainProjectNotesDictionary","path":"scripts/__DynamoMainProjectNotesDictionary/__DynamoMainProjectNotesDictionary.yy",},"order":7,},
     {"id":{"name":"rmMain","path":"rooms/rmMain/rmMain.yy",},"order":3,},
   ],
   "Options": [
