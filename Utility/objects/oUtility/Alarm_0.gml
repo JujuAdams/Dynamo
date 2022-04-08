@@ -56,7 +56,7 @@ __Setup = function(_directory)
     _preBuildString += ")\n";
     _preBuildString += "\n";
     _preBuildString += "echo Running pre-build Dynamo utility in export mode...\n";
-    _preBuildString += "\"%YYprojectDir%\\dynamo.exe\" -export\n";
+    _preBuildString += "\"%YYprojectDir%\\dynamo.exe\" -export \"%YYoutputFolder%\\\"\n";
     _preBuildString += "\n";
     _preBuildString += ":: Copy Dynamo datafiles into the temporary directory\n";
     _preBuildString += "echo Copying all files in \\datafilesDynamo\\ to temporary directory...\n";
@@ -182,56 +182,6 @@ __Setup = function(_directory)
 
 
 
-__Export = function(_directory)
-{
-    __DynamoTrace("Exporting Notes from project in \"", _directory, "\"");
-    
-    var _projectJSON = __DynamoParseMainProjectJSON(_directory);
-    if (_projectJSON == undefined)
-    {
-        __DynamoTrace("Failed to verify main project file");
-        return;
-    }
-    
-    var _notesArray = __DynamoMainProjectNotesArray(_projectJSON, _directory);
-    
-    var _datafilesDirectory = _directory + "datafilesDynamo\\";
-    __DynamoTrace("Chose \"", _datafilesDirectory, "\" as export directory");
-    
-    var _i = 0;
-    repeat(array_length(_notesArray))
-    {
-        _notesArray[_i].__Export(_datafilesDirectory);
-        ++_i;
-    }
-    
-    //Output manifest
-    var _count = array_length(_notesArray);
-    
-    var _manifestBuffer = buffer_create(1024, buffer_grow, 1);
-    buffer_write(_manifestBuffer, buffer_string, "Dynamo");
-    buffer_write(_manifestBuffer, buffer_string, __DYNAMO_VERSION);
-    buffer_write(_manifestBuffer, buffer_string, __DYNAMO_DATE);
-    buffer_write(_manifestBuffer, buffer_u64, _count);
-    
-    var _i = 0;
-    repeat(_count)
-    {
-        var _note = _notesArray[_i];
-        buffer_write(_manifestBuffer, buffer_string, _note.__nameHash);
-        ++_i;
-    }
-    
-    var _outputPath = _datafilesDirectory + "manifest.dynamo";
-    buffer_save_ext(_manifestBuffer, _outputPath, 0, buffer_tell(_manifestBuffer));
-    __DynamoTrace("Saved manifest to \"", _outputPath + "\"");
-    
-    //Done!
-    __DynamoTrace("Export for project in \"", _directory, "\" complete");
-}
-
-
-
 if (global.__dynamoRunningFromIDE)
 {
     __DynamoTrace("Running from IDE");
@@ -285,7 +235,20 @@ else
     }
     else
     {
-        __Export(filename_dir(string_copy(_parameterString, 1, _pos-1)) + "\\");
+        var _projectDirectory = filename_dir(string_copy(_parameterString, 1, _pos-1)) + "\\";
+        var _exportDirectory  = string_delete(_parameterString, _pos, string_length(_parameterString) - _pos);
+        
+        __showMessage("_projectDirectory = ", _projectDirectory, "\n_exportDirectory = ", _exportDirectory);
+        
+        game_end();
+        return;
+        
+        __DynamoTrace("Welcome to Dynamo by @jujuadams! This is version ", __DYNAMO_VERSION, ", ", __DYNAMO_DATE);
+        __DynamoTrace("Exporting Notes from project in \"", _projectDirectory, "\" to \"", _exportDirectory, "\"");
+        __DynamoCheckForNoteChanges(undefined, _projectDirectory, _exportDirectory);
+        
+        //Done!
+        __DynamoTrace("Export complete");
     }
 }
 
