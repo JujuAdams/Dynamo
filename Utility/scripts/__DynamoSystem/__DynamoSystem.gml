@@ -1,8 +1,8 @@
-#macro __DYNAMO_VERSION    "0.2.0"
+#macro __DYNAMO_VERSION    "0.3.0"
 #macro __DYNAMO_DATE       "2022-04-08"
 #macro __DYNAMO_DEV_MODE   (DYNAMO_DEV_MODE && global.__dynamoRunningFromIDE)
 
-#macro __DYNAMO_PROJECT_DIRECTORY_PATH_NAME  "projectDirectoryPath.dynamo"
+#macro __DYNAMO_PROJECT_DIRECTORY_PATH_NAME        "projectDirectoryPath.dynamo"
 #macro __DYNAMO_SYMLINK_TO_WORKING_DIRECTORY_NAME  "symlinkToWorkingDirectory.dynamo"
 
 __DynamoTrace("Welcome to Dynamo by @jujuadams! This is version ", __DYNAMO_VERSION, ", ", __DYNAMO_DATE);
