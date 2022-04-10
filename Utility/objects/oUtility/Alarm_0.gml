@@ -187,7 +187,11 @@ if (global.__dynamoRunningFromIDE)
 {
     __DynamoTrace("Running from IDE");
     
-    if (true) //Change this to <true> to run in test mode
+    if (os_type != os_windows)
+    {
+        __showMessage("Dynamo is not currently supported on this OS.");
+    }
+    else if (true) //Change this to <true> to run in test mode
     {
         __showMessage("Welcome to Dynamo by @jujuadams! This is version ", __DYNAMO_VERSION, ", ", __DYNAMO_DATE, "\n\nRunning in test mode...");
         __Setup("A:\\GitHub repos\\Mine\\Dynamo\\Library\\");
@@ -240,20 +244,35 @@ else
     var _pos = string_pos("-export", _parameterString);
     if (_pos <= 0)
     {
-        //No -export, let's try to setup!
         __showMessage("Welcome to Dynamo by @jujuadams!\n\nThis is version ", __DYNAMO_VERSION, ", ", __DYNAMO_DATE);
-        __Setup(filename_dir(_parameterString) + "\\");
+        
+        if (os_type != os_windows)
+        {
+            __showMessage("Dynamo is not currently supported on this OS.");
+        }
+        else
+        {
+            //No -export, let's try to setup!
+            __Setup(filename_dir(_parameterString) + "\\");
+        }
     }
     else
     {
-        var _projectDirectory = filename_dir(string_copy(_parameterString, 1, _pos-1)) + "\\";
-        var _exportDirectory  = string_delete(_parameterString, 1, _pos + string_length("-export"));
-        
-        __DynamoTrace("Exporting Notes from project in \"", _projectDirectory, "\" to \"", _exportDirectory, "\"");
-        __DynamoCheckForNoteChanges(undefined, _projectDirectory, _exportDirectory);
-        
-        //Done!
-        __DynamoTrace("Export complete");
+        if (os_type != os_windows)
+        {
+            __showMessage("Dynamo is not currently supported on this OS.");
+        }
+        else
+        {
+            var _projectDirectory = filename_dir(string_copy(_parameterString, 1, _pos-1)) + "\\";
+            var _exportDirectory  = string_delete(_parameterString, 1, _pos + string_length("-export"));
+            
+            __DynamoTrace("Exporting Notes from project in \"", _projectDirectory, "\" to \"", _exportDirectory, "\"");
+            __DynamoCheckForNoteChanges(undefined, _projectDirectory, _exportDirectory);
+            
+            //Done!
+            __DynamoTrace("Export complete");
+        }
     }
 }
 
