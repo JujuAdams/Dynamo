@@ -41,7 +41,7 @@
 
 &nbsp;
 
-### `DynamoDevCheckForChanges()`
+### `DynamoDevCheckForChangesOnRefocus()`
 
 **Returns:** An array of strings that contains the name of assets that have changed, or `undefined` if no changes were found
 
