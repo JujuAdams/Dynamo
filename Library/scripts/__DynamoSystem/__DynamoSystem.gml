@@ -1,5 +1,5 @@
-#macro __DYNAMO_VERSION    "0.5.0"
-#macro __DYNAMO_DATE       "2022-04-08"
+#macro __DYNAMO_VERSION    "1.0.0"
+#macro __DYNAMO_DATE       "2022-04-10"
 #macro __DYNAMO_DEV_MODE   (DYNAMO_DEV_MODE && global.__dynamoRunningFromIDE)
 
 #macro __DYNAMO_PROJECT_DIRECTORY_PATH_NAME        "projectDirectoryPath.dynamo"
