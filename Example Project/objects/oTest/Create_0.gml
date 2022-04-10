@@ -26,3 +26,20 @@ funcImportSoundSettings = function(_string)
 //Start with a blank settings struct, then fill it from ExampleSoundSettings
 soundSettings = {};
 funcImportSoundSettings(DynamoNoteString("ExampleSoundSettings"));
+
+//Function to read some text from ..\datafilesDynamo\
+funcImportExternalTextFile = function()
+{
+    try
+    {
+        var _buffer = buffer_load("external text file.txt");
+        externalTextFileContent = buffer_read(_buffer, buffer_text);
+        buffer_delete(_buffer);
+    }
+    catch(_error)
+    {
+        show_debug_message(_error);
+    }
+}
+
+funcImportExternalTextFile();

@@ -16,6 +16,7 @@ if (is_array(_changes))
     //Normally you'd check to see what's changed but we can be lazy here
     simpleNoteContent = DynamoNoteString("ExampleSimpleNote");
     funcImportSoundSettings(DynamoNoteString("ExampleSoundSettings"));
+    funcImportExternalTextFile();
 }
 
 //sndOw

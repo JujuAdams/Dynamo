@@ -10,5 +10,8 @@ _string += "\n";
 _string += "\n";
 _string += "Contents of ExampleSimpleNote are \"" + simpleNoteContent + "\"\n";
 _string += "Notice how GM appends a newline to Note assets. Kinda weird!\n";
+_string += "\n";
+_string += "\n";
+_string += "Contents of \"external text file.txt\" are \"" + externalTextFileContent + "\"\n";
 
 draw_text(10, 10, _string);
