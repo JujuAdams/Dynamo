@@ -32,4 +32,4 @@ This library will never truly be finished because contributions and suggestions 
 
 ## License
 
-iota is licensed under the [MIT License](https://github.com/JujuAdams/dynamo/blob/master/LICENSE).
+Dynamo is licensed under the [MIT License](https://github.com/JujuAdams/dynamo/blob/master/LICENSE).
