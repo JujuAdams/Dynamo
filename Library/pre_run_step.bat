@@ -7,6 +7,7 @@ echo Dynamo creating project directory link file...
 
 :: Make sure we don't have a symlink left over from the last run
 del "%~dp0\symlinkToWorkingDirectory.dynamo" /f /q
+rmdir "%~dp0\symlinkToWorkingDirectory.dynamo" /s /q
 
 echo Creating symlink to working directory...
 mklink /d "%~dp0\symlinkToWorkingDirectory.dynamo" "%YYoutputFolder%\"

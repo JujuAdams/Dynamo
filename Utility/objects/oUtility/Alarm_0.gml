@@ -120,6 +120,7 @@ __Setup = function(_directory)
     _preRunString += "\n";
     _preRunString += ":: Make sure we don't have a symlink left over from the last run\n";
     _preRunString += "del \"%~dp0\\" + __DYNAMO_SYMLINK_TO_WORKING_DIRECTORY_NAME + "\" /f /q\n";
+    _preRunString += "rmdir \"%~dp0\\" + __DYNAMO_SYMLINK_TO_WORKING_DIRECTORY_NAME + "\" /s /q\n";
     _preRunString += "\n";
     _preRunString += "echo Creating symlink to working directory...\n";
     _preRunString += "mklink /d \"%~dp0\\" + __DYNAMO_SYMLINK_TO_WORKING_DIRECTORY_NAME + "\" \"%YYoutputFolder%\\\"\n";
