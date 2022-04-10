@@ -1,7 +1,7 @@
 {
   "option_windows_display_name": "Dynamo Utility",
   "option_windows_executable_name": "${project_name}.exe",
-  "option_windows_version": "1.0.0.0",
+  "option_windows_version": "1.0.1.0",
   "option_windows_company_info": "@jujuadams",
   "option_windows_product_info": "Dynamo",
   "option_windows_copyright_info": "@jujuadams (c) 2022",

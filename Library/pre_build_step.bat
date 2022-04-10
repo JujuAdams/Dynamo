@@ -1,6 +1,6 @@
-:: Dynamo 0.4.0, 2022-04-08    https://www.github.com/jujuadams/dynamo/
+:: Dynamo 1.0.1, 2022-04-10    https://www.github.com/jujuadams/dynamo/
 @echo off
-echo Dynamo pre_build_step.bat version 0.4.0, 2022-04-08
+echo Dynamo pre_build_step.bat version 1.0.1, 2022-04-10
 
 if not exist "%YYprojectDir%\dynamo.exe" (
     echo
