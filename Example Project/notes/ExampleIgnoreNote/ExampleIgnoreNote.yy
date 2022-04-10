@@ -4,7 +4,9 @@
     "path": "dynamo_library.yyp",
   },
   "resourceVersion": "1.1",
-  "name": "TestNote",
-  "tags": [],
+  "name": "ExampleIgnoreNote",
+  "tags": [
+    "dynamo ignore",
+  ],
   "resourceType": "GMNotes",
 }

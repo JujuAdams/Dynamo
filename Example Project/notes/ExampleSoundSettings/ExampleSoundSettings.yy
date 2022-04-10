@@ -4,9 +4,7 @@
     "path": "dynamo_library.yyp",
   },
   "resourceVersion": "1.1",
-  "name": "IgnoreNote",
-  "tags": [
-    "dynamo ignore",
-  ],
+  "name": "ExampleSoundSettings",
+  "tags": [],
   "resourceType": "GMNotes",
 }

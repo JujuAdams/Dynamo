@@ -1,0 +1,1 @@
+This example holds a small amount of text.

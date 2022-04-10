@@ -4,7 +4,7 @@
     "path": "dynamo_library.yyp",
   },
   "resourceVersion": "1.1",
-  "name": "EmptyNote",
+  "name": "ExampleEmptyNote",
   "tags": [],
   "resourceType": "GMNotes",
 }
