@@ -2,7 +2,7 @@
 
 &nbsp;
 
-`__DynamoConfig()` holds a single macros that customises the behaviour of Dynamo. This script never needs to be directly called in code, but the script and the macro it contains must be present in a project for Dynamo to work.
+`__DynamoConfig()` holds a single macro that controls the behaviour of Dynamo. This script never needs to be directly called in code, but the script and the macro it contains must be present in a project for Dynamo to work.
 
 ?> You should edit `__DynamoConfig()` to customise iota for your own purposes.**
 
