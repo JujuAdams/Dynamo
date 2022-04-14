@@ -6,7 +6,7 @@
     "path": "folders/Dynamo/Dev Mode Functions.yy",
   },
   "resourceVersion": "1.0",
-  "name": "DynamoDevCheckForChangesOnRefocus",
+  "name": "DynamoDevSaveBuffer",
   "tags": [],
   "resourceType": "GMScript",
 }

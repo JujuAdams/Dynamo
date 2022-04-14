@@ -62,3 +62,13 @@ if (keyboard_check_pressed(ord("2")))
     audio_sound_gain(_instance, _gain, 0);
     audio_sound_pitch(_instance, _pitch);
 }
+
+if (keyboard_check_pressed(ord("Q")))
+{
+    DynamoDevSaveString("hello!", "datafileSaveTest.txt");
+}
+
+if (keyboard_check_pressed(ord("W")))
+{
+    DynamoDevSaveNoteString("editing a note, shocking!", "ExampleEmptyNote");
+}

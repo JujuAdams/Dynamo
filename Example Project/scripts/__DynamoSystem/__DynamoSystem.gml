@@ -71,10 +71,9 @@ function __DynamoInit()
     
     if (__DYNAMO_DEV_MODE)
     {
-        __DynamoEnsureProjectDirectory();
         __DynamoEnsureNoteDictionary();
         
-        global.__dynamoWorkingDirectory = global.__dynamoProjectDirectory + __DYNAMO_SYMLINK_TO_WORKING_DIRECTORY_NAME + "\\";
+        global.__dynamoWorkingDirectory = DynamoDevProjectDirectory() + __DYNAMO_SYMLINK_TO_WORKING_DIRECTORY_NAME + "\\";
         __DynamoTrace("Working directory = \"", global.__dynamoWorkingDirectory, "\"");
         
         var _file = file_find_first(global.__dynamoWorkingDirectory + "*.win", 0);
@@ -89,7 +88,7 @@ function __DynamoInit()
             __DynamoTrace("Verified .win file is located in working directory");
         }
         
-        global.__dynamoFileDictionary = __DynamoDatafilesDictionary(global.__dynamoProjectDirectory + "datafilesDynamo\\", {});
+        global.__dynamoFileDictionary = __DynamoDatafilesDictionary(DynamoDevProjectDirectory() + "datafilesDynamo\\", {});
     }
 }
 
