@@ -58,3 +58,81 @@
 ?> Can only be used in "dev mode" - when your game is being run from the IDE and when [`DYNAMO_DEV_MODE`](configuration) is set to `true`.
 
 !> This function needs to be called every frame and should be placed in the Step event of a controller instance.
+
+&nbsp;
+
+&nbsp;
+
+### `DynamoDevSaveBuffer()`
+
+**Returns:** N/A (`undefined`)
+
+|Name    |Datatype|Purpose                                                                                       |
+|--------|--------|----------------------------------------------------------------------------------------------|
+|`buffer`|integer |Index of the buffer to save                                                                   |
+|`path`  |string  |Path of the file location to save to, relative to `datafilesDynamo\` in your project directory|
+
+?> Can only be used in "dev mode" - when your game is being run from the IDE and when [`DYNAMO_DEV_MODE`](configuration) is set to `true`.
+
+&nbsp;
+
+&nbsp;
+
+### `DynamoDevSaveNoteString()`
+
+**Returns:** N/A (`undefined`)
+
+|Name    |Datatype|Purpose                                                                                       |
+|--------|--------|----------------------------------------------------------------------------------------------|
+|`string`|string  |String to save to the file                                                                    |
+|`path`  |string  |Path of the file location to save to, relative to `datafilesDynamo\` in your project directory|
+
+?> Can only be used in "dev mode" - when your game is being run from the IDE and when [`DYNAMO_DEV_MODE`](configuration) is set to `true`.
+
+&nbsp;
+
+&nbsp;
+
+### `DynamoDevSaveNoteBuffer()`
+
+**Returns:** N/A (`undefined`)
+
+|Name       |Datatype|Purpose                                       |
+|-----------|--------|----------------------------------------------|
+|`buffer`   |integer |Index of the buffer to save                   |
+|`noteAsset`|string  |Name of the pre-existing Note asset to save to|
+
+If the Note asset provided does not exist then this function will fail.
+
+?> Can only be used in "dev mode" - when your game is being run from the IDE and when [`DYNAMO_DEV_MODE`](configuration) is set to `true`.
+
+&nbsp;
+
+&nbsp;
+
+### `DynamoDevSaveNoteString()`
+
+**Returns:** N/A (`undefined`)
+
+|Name       |Datatype|Purpose                                       |
+|-----------|--------|----------------------------------------------|
+|`string`   |string  |String to save to the file                    |
+|`noteAsset`|string  |Name of the pre-existing Note asset to save to|
+
+If the Note asset provided does not exist then this function will fail.
+
+?> Can only be used in "dev mode" - when your game is being run from the IDE and when [`DYNAMO_DEV_MODE`](configuration) is set to `true`.
+
+&nbsp;
+
+&nbsp;
+
+### `DynamoDevProjectDirectory()`
+
+**Returns:** String, the path to the project directory
+
+|Name|Datatype|Purpose|
+|----|--------|-------|
+|None|        |       |
+
+?> Can only be used in "dev mode" - when your game is being run from the IDE and when [`DYNAMO_DEV_MODE`](configuration) is set to `true`.
