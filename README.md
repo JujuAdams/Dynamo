@@ -1,4 +1,4 @@
-<h1 align="center">Dynamo 1.0.1</h1>
+<h1 align="center">Dynamo 1.1.0</h1>
 
 <p align="center">Dynamic data loader for GameMaker 2022 by <b>@jujuadams</b></p>
 
@@ -23,6 +23,7 @@
 - Files in Dynamo's own datafiles folder `datafilesDynamo\` are packaged with your game even if those files are open in another program. **This means you can have a CSV file open and run the game from IDE and GameMaker won't fail to compile!**
 - Note assets in your project directory can be accessed in-game. Note assets can be edited in your project file during gameplay and live reloaded (either using `DynamoDevCheckForChanges()` or `DynamoDevCheckForChangesOnRefocus()`)
 - Note assets can be exempted from Dynamo by adding `dynamo ignore` as a tag for that Note asset
+- Buffers (and strings) can be saved from the game back into `datafilesDynamo\` or existing Note assets
 - Only supported for the Windows IDE and using the Windows target platform
 
 &nbsp;
