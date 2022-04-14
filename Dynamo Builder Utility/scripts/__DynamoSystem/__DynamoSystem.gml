@@ -1,5 +1,5 @@
-#macro __DYNAMO_VERSION    "1.0.1"
-#macro __DYNAMO_DATE       "2022-04-10"
+#macro __DYNAMO_VERSION    "1.1.0"
+#macro __DYNAMO_DATE       "2022-04-14"
 #macro __DYNAMO_DEV_MODE   (DYNAMO_DEV_MODE && global.__dynamoRunningFromIDE)
 
 #macro __DYNAMO_PROJECT_DIRECTORY_PATH_NAME        "projectDirectoryPath"
@@ -71,10 +71,9 @@ function __DynamoInit()
     
     if (__DYNAMO_DEV_MODE)
     {
-        __DynamoEnsureProjectDirectory();
         __DynamoEnsureNoteDictionary();
         
-        global.__dynamoWorkingDirectory = global.__dynamoProjectDirectory + __DYNAMO_SYMLINK_TO_WORKING_DIRECTORY_NAME + "\\";
+        global.__dynamoWorkingDirectory = DynamoDevProjectDirectory() + __DYNAMO_SYMLINK_TO_WORKING_DIRECTORY_NAME + "\\";
         __DynamoTrace("Working directory = \"", global.__dynamoWorkingDirectory, "\"");
         
         var _file = file_find_first(global.__dynamoWorkingDirectory + "*.win", 0);
@@ -89,7 +88,7 @@ function __DynamoInit()
             __DynamoTrace("Verified .win file is located in working directory");
         }
         
-        global.__dynamoFileDictionary = __DynamoDatafilesDictionary(global.__dynamoProjectDirectory + "datafilesDynamo\\", {});
+        global.__dynamoFileDictionary = __DynamoDatafilesDictionary(DynamoDevProjectDirectory() + "datafilesDynamo\\", {});
     }
 }
 
