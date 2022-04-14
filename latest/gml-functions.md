@@ -78,7 +78,7 @@
 
 &nbsp;
 
-### `DynamoDevSaveNoteString()`
+### `DynamoDevSaveString()`
 
 **Returns:** N/A (`undefined`)
 
