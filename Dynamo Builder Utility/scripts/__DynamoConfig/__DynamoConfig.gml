@@ -11,4 +11,4 @@
 // to <false> to force Dynamo to use the exported .dynamo files that represent
 // your Note assets. This is how Dynamo will behave in production and you should
 // test under those conditions before release!
-#macro DYNAMO_DEV_MODE  true
+#macro DYNAMO_DEV_MODE  false

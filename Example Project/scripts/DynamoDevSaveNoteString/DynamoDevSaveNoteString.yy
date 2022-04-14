@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "(System)",
-    "path": "folders/Dynamo/(System).yy",
+    "name": "Dev Mode Functions",
+    "path": "folders/Dynamo/Dev Mode Functions.yy",
   },
   "resourceVersion": "1.0",
-  "name": "__DynamoEnsureProjectDirectory",
+  "name": "DynamoDevSaveNoteString",
   "tags": [],
   "resourceType": "GMScript",
 }

@@ -1,5 +1,7 @@
 function __DynamoNotesDictionary(_directory)
 {
+    if (_directory == undefined) return;
+    
     var _dictionary = {};
     
     var _projectJSON = __DynamoParseMainProjectJSON(_directory);
