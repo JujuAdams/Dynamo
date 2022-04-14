@@ -63,7 +63,7 @@
 
 &nbsp;
 
-### `DynamoDevSaveBuffer()`
+### `DynamoDevSaveBuffer(buffer, path)`
 
 **Returns:** N/A (`undefined`)
 
@@ -78,7 +78,7 @@
 
 &nbsp;
 
-### `DynamoDevSaveString()`
+### `DynamoDevSaveString(string, path)`
 
 **Returns:** N/A (`undefined`)
 
@@ -93,7 +93,7 @@
 
 &nbsp;
 
-### `DynamoDevSaveNoteBuffer()`
+### `DynamoDevSaveNoteBuffer(buffer, noteAsset)`
 
 **Returns:** N/A (`undefined`)
 
@@ -110,7 +110,7 @@ If the Note asset provided does not exist then this function will fail.
 
 &nbsp;
 
-### `DynamoDevSaveNoteString()`
+### `DynamoDevSaveNoteString(string, noteAsset)`
 
 **Returns:** N/A (`undefined`)
 
