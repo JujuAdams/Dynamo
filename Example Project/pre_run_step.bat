@@ -1,6 +1,4 @@
-:: !!
-
-:: Dynamo Block Start
+:::: Dynamo Block Start ::::
 :: 2.0.0 alpha 2, 2022-04-18
 :: https://www.github.com/jujuadams/dynamo/
 @echo off
@@ -36,9 +34,7 @@ echo Generated server ident as %DynamoRandom%
 @echo %DynamoRandom%> "%YYoutputFolder%\dynamoServerIdent"
 
 :: Use Powershell to spin up the server without the batch file waiting for it to complete execution
-powershell Start-Process -FilePath \"%YYprojectDir%\dynamo_server.exe\" -ArgumentList \"-server %DynamoRandom% %YYoutputFolder%\"
+powershell Start-Process -FilePath \"%YYprojectDir%\dynamo_server.exe\" -ArgumentList \"-server %DynamoRandom%\"
 
 echo Dynamo pre_run_step.bat complete
-:: Dynamo Block End
-
-:: !!
+:::: Dynamo Block End ::::

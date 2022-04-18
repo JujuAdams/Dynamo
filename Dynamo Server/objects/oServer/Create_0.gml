@@ -1,7 +1,7 @@
 //Make sure the existing local handler has been destroyed
 if (global.__dynamoCommLocal != undefined) global.__dynamoCommLocal.__Destroy();
 
-global.__dynamoCommLocal = new __DynamoCommLocalClass(true);
+global.__dynamoCommLocal = new __DynamoCommLocalClass(true, global.__dynamoCommExpectedServerIdent);
 
 if (!global.__dynamoCommLocal.__alive)
 {

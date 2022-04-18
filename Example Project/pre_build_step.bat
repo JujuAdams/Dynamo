@@ -1,6 +1,4 @@
-:: !!
-
-:: Dynamo Block Start
+:::: Dynamo Block Start ::::
 :: 2.0.0 alpha 2, 2022-04-18
 :: https://www.github.com/jujuadams/dynamo/
 @echo off
@@ -23,6 +21,4 @@ echo Copying all files in \datafilesDynamo\ to temporary directory...
 xcopy "%YYprojectDir%\datafilesDynamo\*" "%YYoutputFolder%" /c /f /s /r /y
 
 echo Dynamo pre_build_step.bat complete
-:: Dynamo Block End
-
-:: !!
+:::: Dynamo Block End ::::

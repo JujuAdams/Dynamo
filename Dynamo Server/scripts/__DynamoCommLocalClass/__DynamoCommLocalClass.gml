@@ -17,7 +17,11 @@ function __DynamoCommLocalClass(_serverMode, _ident = undefined) constructor
     if (__ident == undefined)
     {
         __ident = __DynamoGenerateIdent();
-        __DynamoTrace("Chose new random device ident \"", __ident, "\"");
+        __DynamoTrace("Chose new random ident \"", __ident, "\"");
+    }
+    else
+    {
+        __DynamoTrace("Using ident \"", __ident, "\"");
     }
     
     __defaultDestination = "all";
@@ -221,7 +225,7 @@ function __DynamoCommLocalClass(_serverMode, _ident = undefined) constructor
                 {
                     if (!__clientHasFoundServer)
                     {
-                        throw "Device ident \"" + string(_deviceIdent) + "\" doesn't match expected server ident (" + global.__dynamoCommExpectedServerIdent + ")";
+                        throw "Ident \"" + string(_deviceIdent) + "\" doesn't match expected server ident (" + global.__dynamoCommExpectedServerIdent + ")";
                     }
                     else
                     {
@@ -239,7 +243,7 @@ function __DynamoCommLocalClass(_serverMode, _ident = undefined) constructor
             {
                 if (variable_struct_exists(global.__dynamoCommRemoteDictionary, _deviceIdent))
                 {
-                    throw "Device ident \"" + string(_deviceIdent) + "\" not recognised (waiting for either \"IAmClient\" or \"IAmServer\" message)";
+                    throw "Ident \"" + string(_deviceIdent) + "\" not recognised (waiting for either \"IAmClient\" or \"IAmServer\" message)";
                 }
             }
             

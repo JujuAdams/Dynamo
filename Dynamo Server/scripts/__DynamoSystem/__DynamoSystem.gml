@@ -12,7 +12,7 @@
 
 __DynamoTrace("Welcome to Dynamo by @jujuadams! This is version ", __DYNAMO_VERSION, ", ", __DYNAMO_DATE);
 
-global.__dynamoCommExpectedServerIdent         = undefined;
+global.__dynamoCommExpectedServerIdent = undefined;
 global.__dynamoCommServerPort          = 102110;
 global.__dynamoCommClientPort          = 102111;
 global.__dynamoCommServerTempDirectory = temp_directory + "dynamo_coordination\\";

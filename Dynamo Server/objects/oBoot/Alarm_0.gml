@@ -77,10 +77,12 @@ else
     var _pos = string_pos("-server", _parameterString);
     if (_pos > 0)
     {
-        show_message(_parameterString);
+        var _expectedServerIdent = string_delete(_parameterString, 1, _pos + string_length("-server"));
+        var _spacePos = string_pos(" ", _expectedServerIdent);
+        _expectedServerIdent = string_copy(_expectedServerIdent, 1, _spacePos - 1);
         
-        
-        
+        global.__dynamoCommExpectedServerIdent = _expectedServerIdent;
+        __DynamoTrace("Extracted server ident from executable parameters (", global.__dynamoCommExpectedServerIdent, ")");
         
         instance_create_layer(0, 0, layer, oServer);
         exit;
