@@ -168,7 +168,7 @@ function __DynamoCommLocalClass(_serverMode, _ident = undefined) constructor
             
             switch(_parametersArray[0])
             {
-                case "ServerDuplicate": _callback = __ReceiveServerDuplicate;                             break;
+                case "ServerDuplicate": _callback = __ReceiveServerDuplicate; _verifyDeviceIdent = false; break;
                 case "IAmClient":       _callback = __ReceiveIAmClient;       _verifyDeviceIdent = false; break;
                 case "IAmServer":       _callback = __ReceiveIAmServer;       _verifyDeviceIdent = false; break;
                 
@@ -191,7 +191,7 @@ function __DynamoCommLocalClass(_serverMode, _ident = undefined) constructor
         }
         catch(_error)
         {
-            __DynamoTrace("Warning! Error encountered whilst decoding buffer");
+            __DynamoTrace("Warning! Error encountered whilst decoding buffer follows");
             __DynamoTrace(_error);
             __warningTime = current_time;
             return;
@@ -258,7 +258,7 @@ function __DynamoCommLocalClass(_serverMode, _ident = undefined) constructor
         var _i = 0;
         repeat(array_length(_parametersArray))
         {
-            buffer_write(_buffer, buffer_string, _parametersArray[_i]);
+            buffer_write(_buffer, buffer_string, string(_parametersArray[_i]));
             ++_i;
         }
         

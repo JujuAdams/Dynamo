@@ -1,11 +1,25 @@
-#macro __DYNAMO_VERSION    "1.1.0"
-#macro __DYNAMO_DATE       "2022-04-14"
-#macro __DYNAMO_DEV_MODE   (DYNAMO_DEV_MODE && global.__dynamoRunningFromIDE)
+#macro __DYNAMO_VERSION       "2.0.0 alpha"
+#macro __DYNAMO_DATE          "2022-04-18"
+#macro __DYNAMO_DEV_MODE      (DYNAMO_DEV_MODE && global.__dynamoRunningFromIDE)
+
+#macro __DYNAMO_COMM_VERBOSE_SEND     true
+#macro __DYNAMO_COMM_VERBOSE_RECEIVE  true
+#macro __DYNAMO_DEBUG_CLIENT          true
 
 #macro __DYNAMO_PROJECT_DIRECTORY_PATH_NAME        "projectDirectoryPath"
 #macro __DYNAMO_SYMLINK_TO_WORKING_DIRECTORY_NAME  "symlinkToWorkingDirectory"
 
 __DynamoTrace("Welcome to Dynamo by @jujuadams! This is version ", __DYNAMO_VERSION, ", ", __DYNAMO_DATE);
+
+global.__dynamoCommServerIdent         = undefined;
+global.__dynamoCommServerPort          = 102110;
+global.__dynamoCommClientPort          = 102111;
+global.__dynamoCommServerTempDirectory = temp_directory + "dynamo_coordination\\";
+global.__dynamoCommLocal               = undefined;
+global.__dynamoCommRemoteArray         = [];
+global.__dynamoCommRemoteDictionary    = {};
+global.__dynamoCommTimeout             = 10000;
+global.__dynamoCommServerAliases       = {};
 
 
 
@@ -89,6 +103,21 @@ function __DynamoInit()
         }
         
         global.__dynamoFileDictionary = __DynamoDatafilesDictionary(DynamoDevProjectDirectory() + "datafilesDynamo\\", {});
+        
+        if (!file_exists("dynamoServerIdent"))
+        {
+            __DynamoError("Could not find \"dynamoServerIdent\" file in working directory\nPlease report this error");
+        }
+        
+        var _buffer = buffer_load("dynamoServerIdent");
+        var _string = buffer_read(_buffer, buffer_text);
+        buffer_delete(_buffer);
+        
+        _string = string_replace_all(_string, "\n", "");
+        _string = string_replace_all(_string, "\r", "");
+        
+        global.__dynamoCommServerIdent = _string;
+        __DynamoTrace("Found server ident as \"", global.__dynamoCommServerIdent, "\"");
     }
 }
 
@@ -105,6 +134,20 @@ function __DynamoTrace()
     }
     
     show_debug_message("Dynamo: " + _string);
+}
+
+function __DynamoLoud()
+{
+    var _string = "";
+    var _i = 0;
+    repeat(argument_count)
+    {
+        _string += string(argument[_i]);
+        ++_i;
+    }
+    
+    show_message(_string);
+    show_debug_message("Dynamo: Loud: " + _string);
 }
 
 function __DynamoError()

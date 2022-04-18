@@ -30,6 +30,8 @@ funcImportSoundSettings(DynamoNoteString("ExampleSoundSettings"));
 //Function to read some text from ..\datafilesDynamo\
 funcImportExternalTextFile = function()
 {
+    externalTextFileContent = "<empty>";
+    
     try
     {
         var _buffer = buffer_load("external text file.txt");

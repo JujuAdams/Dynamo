@@ -4,20 +4,16 @@
 
 #macro __DYNAMO_COMM_VERBOSE_SEND     true
 #macro __DYNAMO_COMM_VERBOSE_RECEIVE  true
-#macro __DYNAMO_DEBUG_CLIENT          true
+#macro __DYNAMO_DEBUG_CLIENT          (true && global.__dynamoRunningFromIDE)
 
 #macro __DYNAMO_PROJECT_DIRECTORY_PATH_NAME        "projectDirectoryPath"
 #macro __DYNAMO_SYMLINK_TO_WORKING_DIRECTORY_NAME  "symlinkToWorkingDirectory"
 
 __DynamoTrace("Welcome to Dynamo by @jujuadams! This is version ", __DYNAMO_VERSION, ", ", __DYNAMO_DATE);
 
-global.__dynamoCommSocket              = -1;
+global.__dynamoCommServerIdent         = undefined;
 global.__dynamoCommServerPort          = 102110;
 global.__dynamoCommClientPort          = 102111;
-global.__dynamoCommServerFilter        = undefined;
-global.__dynamoCommLocalIdent          = undefined;
-global.__dynamoCommIsServer            = false;
-global.__dynamoCommDefaultDestination  = "all";
 global.__dynamoCommServerTempDirectory = temp_directory + "dynamo_coordination\\";
 global.__dynamoCommLocal               = undefined;
 global.__dynamoCommRemoteArray         = [];
@@ -107,6 +103,21 @@ function __DynamoInit()
         }
         
         global.__dynamoFileDictionary = __DynamoDatafilesDictionary(DynamoDevProjectDirectory() + "datafilesDynamo\\", {});
+        
+        if (!file_exists("dynamoServerIdent"))
+        {
+            __DynamoError("Could not find \"dynamoServerIdent\" file in working directory\nPlease report this error");
+        }
+        
+        var _buffer = buffer_load("dynamoServerIdent");
+        var _string = buffer_read(_buffer, buffer_text);
+        buffer_delete(_buffer);
+        
+        _string = string_replace_all(_string, "\n", "");
+        _string = string_replace_all(_string, "\r", "");
+        
+        global.__dynamoCommServerIdent = _string;
+        __DynamoTrace("Found server ident as \"", global.__dynamoCommServerIdent, "\"");
     }
 }
 
