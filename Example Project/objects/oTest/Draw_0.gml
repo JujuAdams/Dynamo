@@ -15,3 +15,5 @@ _string += "\n";
 _string += "Contents of \"external text file.txt\" are \"" + externalTextFileContent + "\"\n";
 
 draw_text(10, 10, _string);
+
+__DynamoCommDraw(10, 368);

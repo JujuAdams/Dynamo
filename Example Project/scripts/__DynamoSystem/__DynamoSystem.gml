@@ -1,17 +1,18 @@
-#macro __DYNAMO_VERSION       "2.0.0 alpha"
+#macro __DYNAMO_VERSION       "2.0.0 alpha 2"
 #macro __DYNAMO_DATE          "2022-04-18"
 #macro __DYNAMO_DEV_MODE      (DYNAMO_DEV_MODE && global.__dynamoRunningFromIDE)
 
-#macro __DYNAMO_COMM_VERBOSE_SEND     true
-#macro __DYNAMO_COMM_VERBOSE_RECEIVE  true
-#macro __DYNAMO_DEBUG_CLIENT          true
+#macro __DYNAMO_COMM_VERBOSE_SEND         true
+#macro __DYNAMO_COMM_VERBOSE_RECEIVE      true
+#macro __DYNAMO_DEBUG_CLIENT              (false && global.__dynamoRunningFromIDE)
+#macro __DYNAMO_ALLOW_NONMATCHING_SERVER  true
 
 #macro __DYNAMO_PROJECT_DIRECTORY_PATH_NAME        "projectDirectoryPath"
 #macro __DYNAMO_SYMLINK_TO_WORKING_DIRECTORY_NAME  "symlinkToWorkingDirectory"
 
 __DynamoTrace("Welcome to Dynamo by @jujuadams! This is version ", __DYNAMO_VERSION, ", ", __DYNAMO_DATE);
 
-global.__dynamoCommServerIdent         = undefined;
+global.__dynamoCommExpectedServerIdent = undefined;
 global.__dynamoCommServerPort          = 102110;
 global.__dynamoCommClientPort          = 102111;
 global.__dynamoCommServerTempDirectory = temp_directory + "dynamo_coordination\\";
@@ -116,8 +117,11 @@ function __DynamoInit()
         _string = string_replace_all(_string, "\n", "");
         _string = string_replace_all(_string, "\r", "");
         
-        global.__dynamoCommServerIdent = _string;
-        __DynamoTrace("Found server ident as \"", global.__dynamoCommServerIdent, "\"");
+        global.__dynamoCommExpectedServerIdent = _string;
+        __DynamoTrace("Found server ident as \"", global.__dynamoCommExpectedServerIdent, "\"");
+        if (__DYNAMO_ALLOW_NONMATCHING_SERVER) __DynamoTrace("Allowing servers with any ident to connect to this client");
+        
+        global.__dynamoCommLocal = new __DynamoCommLocalClass(false);
     }
 }
 
@@ -161,4 +165,35 @@ function __DynamoError()
     }
     
     show_error("Dynamo:\n\n" + _string + "\n ", true);
+}
+
+function __DynamoGenerateIdent()
+{
+    randomize();
+    
+    var _string = "";
+    repeat(20)
+    {
+        switch(irandom(15)) //TODO - Do this without GM's native PRNG
+        {
+            case  0: _string += "0"; break;
+            case  1: _string += "1"; break;
+            case  2: _string += "2"; break;
+            case  3: _string += "3"; break;
+            case  4: _string += "4"; break;
+            case  5: _string += "5"; break;
+            case  6: _string += "6"; break;
+            case  7: _string += "7"; break;
+            case  8: _string += "8"; break;
+            case  9: _string += "9"; break;
+            case 10: _string += "a"; break;
+            case 11: _string += "b"; break;
+            case 12: _string += "c"; break;
+            case 13: _string += "d"; break;
+            case 14: _string += "e"; break;
+            case 15: _string += "f"; break;
+        }
+    }
+    
+    return _string;
 }
