@@ -43,13 +43,13 @@ if (_projectJSON == undefined)
 __DynamoTrace("Main project file verified");
 __DynamoTrace("Setting up Dynamo in pre_build_step.bat");
 
-var _blockStart = ":::: Dynamo Block Start ::::";
-var _blockEnd   = ":::: Dynamo Block End ::::";
+var _dynamoBlockStart = ":::: Dynamo Block Start ::::";
+var _dynamoBlockEnd   = ":::: Dynamo Block End ::::";
 
 var _preBuildError = false;
 var _preBuildBatPath = _directory + "pre_build_step.bat";
 var _preBuildString = "";
-_preBuildString += ":: Dynamo Block Start\n";
+_preBuildString += _dynamoBlockStart + "\n";
 _preBuildString += ":: " + __DYNAMO_VERSION + ", " + __DYNAMO_DATE + "\n";
 _preBuildString += ":: https://www.github.com/jujuadams/dynamo/\n";
 _preBuildString += "@echo off\n";
@@ -72,7 +72,7 @@ _preBuildString += "echo Copying all files in \\datafilesDynamo\\ to temporary d
 _preBuildString += "xcopy \"%YYprojectDir%\\datafilesDynamo\\*\" \"%YYoutputFolder%\" /c /f /s /r /y\n";
 _preBuildString += "\n";
 _preBuildString += "echo Dynamo pre_build_step.bat complete\n";
-_preBuildString += ":: Dynamo Block End\n";
+_preBuildString += _dynamoBlockEnd + "\n";
 
 if (string_char_at(_preBuildString, string_length(_preBuildString)) == "\n") _preBuildString = string_delete(_preBuildString, string_length(_preBuildString), 1);
 
@@ -102,10 +102,10 @@ else
     __DynamoTrace("Loaded \"", _preBuildBatPath, "\"");
     
     var _countLegacy     = string_count("echo Dynamo", _preBuildBatString);
-    var _countBlockStart = string_count(":: Dynamo Block Start", _preBuildBatString);
-    var _countBlockEnd   = string_count(":: Dynamo Block End",   _preBuildBatString);
-    var _posBlockStart   = string_pos(  ":: Dynamo Block Start", _preBuildBatString);
-    var _posBlockEnd     = string_pos(  ":: Dynamo Block End",   _preBuildBatString);
+    var _countBlockStart = string_count(_dynamoBlockStart, _preBuildBatString);
+    var _countBlockEnd   = string_count(_dynamoBlockEnd,   _preBuildBatString);
+    var _posBlockStart   = string_pos(  _dynamoBlockStart, _preBuildBatString);
+    var _posBlockEnd     = string_pos(  _dynamoBlockEnd,   _preBuildBatString);
     
     if ((_countBlockStart == 0) && (_countBlockEnd == 0))
     {
@@ -121,7 +121,7 @@ else
     {
         _preBuildBatString = string_copy(_preBuildBatString, 1, _posBlockStart - 1)
                            + _preBuildString
-                           + string_copy(_preBuildBatString, _posBlockEnd + string_length(":: Dynamo Block End"), 1 + string_length(_preBuildBatString) - (_posBlockEnd + string_length(":: Dynamo Block End")));
+                           + string_copy(_preBuildBatString, _posBlockEnd + string_length(_dynamoBlockEnd), 1 + string_length(_preBuildBatString) - (_posBlockEnd + string_length(_dynamoBlockEnd)));
         
         buffer_resize(_preBuildBatBuffer, string_byte_length(_preBuildBatString));
         buffer_seek(_preBuildBatBuffer, buffer_seek_start, 0);
@@ -143,7 +143,7 @@ __DynamoTrace("Setting up Dynamo in pre_run_step.bat");
 var _preRunError = false;
 var _preRunPath = _directory + "pre_run_step.bat";
 var _preRunString = "";
-_preRunString += ":: Dynamo Block Start\n";
+_preRunString += _dynamoBlockStart + "\n";
 _preRunString += ":: " + __DYNAMO_VERSION + ", " + __DYNAMO_DATE + "\n";
 _preRunString += ":: https://www.github.com/jujuadams/dynamo/\n";
 _preRunString += "@echo off\n";
@@ -182,7 +182,7 @@ _preRunString += ":: Use Powershell to spin up the server without the batch file
 _preRunString += "powershell Start-Process -FilePath \\\"%YYprojectDir%\\dynamo_server.exe\\\" -ArgumentList \\\"-server %DynamoRandom% %YYoutputFolder%\\\"\n";
 _preRunString += "\n";
 _preRunString += "echo Dynamo pre_run_step.bat complete\n";
-_preRunString += ":: Dynamo Block End\n";
+_preRunString += _dynamoBlockEnd + "\n";
 
 if (string_char_at(_preRunString, string_length(_preRunString)) == "\n") _preRunString = string_delete(_preRunString, string_length(_preRunString), 1);
 
@@ -212,10 +212,10 @@ else
     __DynamoTrace("Loaded \"", _preRunPath, "\"");
     
     var _countLegacy     = string_count("echo Dynamo", _preRunBatString);
-    var _countBlockStart = string_count(":: Dynamo Block Start", _preRunBatString);
-    var _countBlockEnd   = string_count(":: Dynamo Block End",   _preRunBatString);
-    var _posBlockStart   = string_pos(  ":: Dynamo Block Start", _preRunBatString);
-    var _posBlockEnd     = string_pos(  ":: Dynamo Block End",   _preRunBatString);
+    var _countBlockStart = string_count(_dynamoBlockStart, _preRunBatString);
+    var _countBlockEnd   = string_count(_dynamoBlockEnd,   _preRunBatString);
+    var _posBlockStart   = string_pos(  _dynamoBlockStart, _preRunBatString);
+    var _posBlockEnd     = string_pos(  _dynamoBlockEnd,   _preRunBatString);
     
     if ((_countBlockStart == 0) && (_countBlockEnd == 0))
     {
@@ -231,7 +231,7 @@ else
     {
         _preRunBatString = string_copy(_preRunBatString, 1, _posBlockStart - 1)
                          + _preRunString
-                         + string_copy(_preRunBatString, _posBlockEnd + string_length(":: Dynamo Block End"), 1 + string_length(_preRunBatString) - (_posBlockEnd + string_length(":: Dynamo Block End")));
+                         + string_copy(_preRunBatString, _posBlockEnd + string_length(_dynamoBlockEnd), 1 + string_length(_preRunBatString) - (_posBlockEnd + string_length(_dynamoBlockEnd)));
         
         buffer_resize(_preRunBatBuffer, string_byte_length(_preRunBatString));
         buffer_seek(_preRunBatBuffer, buffer_seek_start, 0);
