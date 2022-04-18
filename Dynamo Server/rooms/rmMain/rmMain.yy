@@ -46,8 +46,8 @@
     "PhysicsWorldPixToMetres": 0.1,
   },
   "parent": {
-    "name": "dynamo",
-    "path": "dynamo.yyp",
+    "name": "dynamo_server",
+    "path": "dynamo_server.yyp",
   },
   "resourceVersion": "1.0",
   "name": "rmMain",
