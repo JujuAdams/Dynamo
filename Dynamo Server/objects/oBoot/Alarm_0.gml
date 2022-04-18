@@ -12,10 +12,10 @@ if (global.__dynamoRunningFromIDE)
     
     if (true)
     {
-        var _instance = instance_create_layer(0, 0, layer, oInstall);
-        _instance.directory = "A:\\GitHub repos\\Mine\\Dynamo\\Example Project\\";
+        //var _instance = instance_create_layer(0, 0, layer, oInstall);
+        //_instance.directory = "A:\\GitHub repos\\Mine\\Dynamo\\Example Project\\";
         
-        //instance_create_layer(0, 0, layer, oServer);
+        instance_create_layer(0, 0, layer, oServer);
     }
 }
 else
@@ -73,6 +73,9 @@ else
         game_end();
         exit;
     }
+    
+    instance_create_layer(0, 0, layer, oServer);
+    exit;
     
     var _pos = string_pos("-server", _parameterString);
     if (_pos > 0)

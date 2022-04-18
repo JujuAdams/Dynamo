@@ -36,11 +36,7 @@ function __DynamoCommLocalClass(_serverMode, _ident = undefined) constructor
     
     
     
-    if (!__DYNAMO_DEV_MODE)
-    {
-        __Destroy();
-    }
-    else if (__serverMode)
+    if (__serverMode)
     {
         __port = global.__dynamoCommServerPort;
         __DynamoTrace("Port = ", __port);
@@ -49,7 +45,7 @@ function __DynamoCommLocalClass(_serverMode, _ident = undefined) constructor
         directory_create(global.__dynamoCommServerTempDirectory);
         __DynamoTrace("Server temporary directory = ", global.__dynamoCommServerTempDirectory);
         
-        __socket = network_create_socket_ext(network_socket_udp, __port);
+        __socket = network_create_server_raw(network_socket_udp, __port, 100);
         __DynamoTrace("Opened a new socket ", __socket, " on port ", __port);
         
         if (__socket < 0)
@@ -66,7 +62,7 @@ function __DynamoCommLocalClass(_serverMode, _ident = undefined) constructor
         __port = global.__dynamoCommClientPort;
         __DynamoTrace("Port = ", __port);
         
-        __socket = network_create_socket_ext(network_socket_udp, __port);
+        __socket = network_create_server_raw(network_socket_udp, __port, 100);
         __DynamoTrace("Opened a new socket ", __socket, " on port ", __port);
         
         if (__socket < 0)
@@ -85,7 +81,7 @@ function __DynamoCommLocalClass(_serverMode, _ident = undefined) constructor
     {
         if (!__alive) return;
         
-        __alive = true;
+        __alive = false;
         
         if (__socket > 0)
         {
@@ -143,9 +139,9 @@ function __DynamoCommLocalClass(_serverMode, _ident = undefined) constructor
         draw_set_font(__DynamoDebugFont);
         
         draw_text(0, 0, self);
-        if (current_time - __messageSendTime    <  500) draw_text(   0, 10, "Send"    );
-        if (current_time - __messageReceiveTime <  500) draw_text(  50, 10, "Receive" );
-        if (current_time - __warningTime        < 1000) draw_text( 100, 10, "Warning!");
+        if (current_time - __messageSendTime    <  500) draw_text( 200, 0, "Send"    );
+        if (current_time - __messageReceiveTime <  500) draw_text( 250, 0, "Receive" );
+        if (current_time - __warningTime        < 1000) draw_text( 300, 0, "Warning!");
         
         draw_set_font(_oldFont);
         
@@ -232,10 +228,19 @@ function __DynamoCommLocalClass(_serverMode, _ident = undefined) constructor
                         return;
                     }
                 }
-                else if (!__clientHasFoundServer && (_deviceIdent == global.__dynamoCommExpectedServerIdent))
+                else if (!__clientHasFoundServer)
                 {
-                    __clientHasFoundServer = true;
-                    __DynamoTrace("Found server with ident \"", global.__dynamoCommExpectedServerIdent, "\"");
+                    if (_deviceIdent == global.__dynamoCommExpectedServerIdent)
+                    {
+                        __clientHasFoundServer = true;
+                        __DynamoTrace("Found server with ident \"", global.__dynamoCommExpectedServerIdent, "\"");
+                    }
+                    else if (__DYNAMO_ALLOW_NONMATCHING_SERVER && (__firstConnectionTimeElapsed > 1000))
+                    {
+                        __clientHasFoundServer = true;
+                        global.__dynamoCommExpectedServerIdent = _deviceIdent;
+                        __DynamoTrace("Found server with ident \"", global.__dynamoCommExpectedServerIdent, "\"");
+                    }
                 }
             }
             
@@ -267,7 +272,11 @@ function __DynamoCommLocalClass(_serverMode, _ident = undefined) constructor
             __DynamoTrace("Received message from \"", _deviceIdent, "\" to \"", _deviceDestination, "\" said ", _parametersArray);
         }
         
-        __DynamoTrace("A duplicate server instance was created");
+        if (__serverMode)
+        {
+            __DynamoTrace("A duplicate server instance was created, adding \"", _deviceIdent, "\" as an alias");
+            global.__dynamoCommServerAliases[$ _deviceIdent] = current_time;
+        }
     }
     
     static __ReceiveIAmClient = function(_deviceIdent, _deviceDestination, _parametersArray)
@@ -304,18 +313,13 @@ function __DynamoCommLocalClass(_serverMode, _ident = undefined) constructor
         }
     }
     
-    static __Send = function(_parametersArray, _deviceDestination = __defaultDestination, _suffixBuffer = undefined, _suffixSize = undefined)
+    static __SendFormatBuffer = function(_parametersArray, _deviceDestination = __defaultDestination, _suffixBuffer = undefined, _suffixSize = undefined)
     {
         var _buffer = buffer_create(1024, buffer_grow, 1);
         buffer_write(_buffer, buffer_string, "Dynamo");
         buffer_write(_buffer, buffer_string, __ident);
         buffer_write(_buffer, buffer_string, _deviceDestination);
         buffer_write(_buffer, buffer_u64, array_length(_parametersArray));
-        
-        if (__DYNAMO_COMM_VERBOSE_SEND)
-        {
-            __DynamoTrace("Sent message from \"", __ident, "\" to \"", _deviceDestination, "\" saying ", _parametersArray);
-        }
         
         var _i = 0;
         repeat(array_length(_parametersArray))
@@ -334,10 +338,26 @@ function __DynamoCommLocalClass(_serverMode, _ident = undefined) constructor
             }
         }
         
+        return _buffer;
+    }
+    
+    static __Send = function(_parametersArray, _deviceDestination = __defaultDestination, _suffixBuffer = undefined, _suffixSize = undefined)
+    {
+        var _buffer = __SendFormatBuffer(_parametersArray, _deviceDestination, _suffixBuffer, _suffixSize);
         network_send_broadcast(__socket, __serverMode? global.__dynamoCommClientPort : global.__dynamoCommServerPort, _buffer, buffer_tell(_buffer));
-        
         buffer_delete(_buffer);
         
+        if (__DYNAMO_COMM_VERBOSE_SEND) __DynamoTrace("Broadcast message to \"", _deviceDestination, "\" saying ", _parametersArray);
+        __messageSendTime = current_time;
+    }
+    
+    static __SendDirect = function(_ip, _parametersArray, _suffixBuffer = undefined, _suffixSize = undefined)
+    {
+        var _buffer = __SendFormatBuffer(_parametersArray, "all", _suffixBuffer, _suffixSize);
+        network_send_udp_raw(__socket, _ip, __serverMode? global.__dynamoCommClientPort : global.__dynamoCommServerPort, _buffer, buffer_tell(_buffer));
+        buffer_delete(_buffer);
+        
+        if (__DYNAMO_COMM_VERBOSE_SEND) __DynamoTrace("Sent message to specific IP \"", _ip, "\" saying ", _parametersArray);
         __messageSendTime = current_time;
     }
 }

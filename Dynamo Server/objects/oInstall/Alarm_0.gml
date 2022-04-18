@@ -2,7 +2,7 @@ var _directory = directory;
 
 if (!__showQuestion("Would you like to set up Dynamo for use with the project in this directory?\n\n", _directory))
 {
-    //game_end();
+    game_end();
     return;
 }
     

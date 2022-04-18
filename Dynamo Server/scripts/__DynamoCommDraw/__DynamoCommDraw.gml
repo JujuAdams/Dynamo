@@ -6,7 +6,7 @@ function __DynamoCommDraw(_x, _y)
     repeat(array_length(global.__dynamoCommRemoteArray))
     {
         var _ident = global.__dynamoCommRemoteArray[_i];
-        global.__dynamoCommRemoteDictionary[$ _ident].__Draw(_x, _y + 25 + 15*_i);
+        global.__dynamoCommRemoteDictionary[$ _ident].__Draw(_x, _y + 20 + 15*_i);
         ++_i;
     }
 }

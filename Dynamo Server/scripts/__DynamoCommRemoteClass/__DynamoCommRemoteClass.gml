@@ -40,8 +40,8 @@ function __DynamoCommRemoteClass(_serverMode, _ident) constructor
         draw_set_font(__DynamoDebugFont);
         draw_text(0, 0, self);
         
-        draw_rectangle(70, 2, lerp(70, 100, (current_time - __lastReceive) / global.__dynamoCommTimeout), 9, false);
-        draw_rectangle(70, 2, 100, 9, true);
+        draw_rectangle(150, 4, lerp(150, 170, (current_time - __lastReceive) / global.__dynamoCommTimeout), 8, false);
+        draw_rectangle(150, 4, 170, 8, true);
         
         draw_set_font(_oldFont);
         

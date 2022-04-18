@@ -4,7 +4,7 @@
 
 #macro __DYNAMO_COMM_VERBOSE_SEND         true
 #macro __DYNAMO_COMM_VERBOSE_RECEIVE      true
-#macro __DYNAMO_DEBUG_CLIENT              (true && global.__dynamoRunningFromIDE)
+#macro __DYNAMO_DEBUG_CLIENT              (false && global.__dynamoRunningFromIDE)
 #macro __DYNAMO_ALLOW_NONMATCHING_SERVER  true
 
 #macro __DYNAMO_PROJECT_DIRECTORY_PATH_NAME        "projectDirectoryPath"
