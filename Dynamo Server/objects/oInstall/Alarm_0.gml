@@ -1,6 +1,10 @@
 var _directory = directory;
 
-if (!__showQuestion("Would you like to set up Dynamo for use with the project in this directory?\n\n", _directory)) return;
+if (!__showQuestion("Would you like to set up Dynamo for use with the project in this directory?\n\n", _directory))
+{
+    //game_end();
+    return;
+}
     
 __DynamoTrace("Setting up Dynamo in ", _directory);
     
@@ -38,9 +42,12 @@ if (_projectJSON == undefined)
     
 __DynamoTrace("Main project file verified");
 __DynamoTrace("Setting up Dynamo in pre_build_step.bat");
-    
-var _preBuildScriptAlreadyExists = false;
-var _preBuildScriptPath = _directory + "pre_build_step.bat";
+
+var _blockStart = ":::: Dynamo Block Start ::::";
+var _blockEnd   = ":::: Dynamo Block End ::::";
+
+var _preBuildError = false;
+var _preBuildBatPath = _directory + "pre_build_step.bat";
 var _preBuildString = "";
 _preBuildString += ":: Dynamo Block Start\n";
 _preBuildString += ":: " + __DYNAMO_VERSION + ", " + __DYNAMO_DATE + "\n";
@@ -66,52 +73,74 @@ _preBuildString += "xcopy \"%YYprojectDir%\\datafilesDynamo\\*\" \"%YYoutputFold
 _preBuildString += "\n";
 _preBuildString += "echo Dynamo pre_build_step.bat complete\n";
 _preBuildString += ":: Dynamo Block End\n";
-    
-if (!file_exists(_preBuildScriptPath))
+
+if (string_char_at(_preBuildString, string_length(_preBuildString)) == "\n") _preBuildString = string_delete(_preBuildString, string_length(_preBuildString), 1);
+
+if (!file_exists(_preBuildBatPath))
 {
-    __DynamoTrace("\"", _preBuildScriptPath, "\" not found, creating pre_build_step.bat");
-    var _preBuildScriptBuffer = buffer_create(1024, buffer_grow, 1);
-        
-    buffer_write(_preBuildScriptBuffer, buffer_text, _preBuildString);
+    __DynamoTrace("\"", _preBuildBatPath, "\" not found, creating pre_build_step.bat");
+    var _preBuildBatBuffer = buffer_create(1024, buffer_grow, 1);
+    
+    buffer_write(_preBuildBatBuffer, buffer_text, _preBuildString);
 }
 else
 {
-    __DynamoTrace("Found \"", _preBuildScriptPath, "\"");
+    __DynamoTrace("Found \"", _preBuildBatPath, "\"");
         
     try
     {
-        var _preBuildScriptBuffer = buffer_load(_preBuildScriptPath);
-        var _buildScriptString = buffer_read(_preBuildScriptBuffer, buffer_text);
-        buffer_seek(_preBuildScriptBuffer, buffer_seek_start, buffer_get_size(_preBuildScriptBuffer));
+        var _preBuildBatBuffer = buffer_load(_preBuildBatPath);
+        var _preBuildBatString = buffer_read(_preBuildBatBuffer, buffer_text);
+        buffer_seek(_preBuildBatBuffer, buffer_seek_start, buffer_get_size(_preBuildBatBuffer));
     }
     catch(_error)
     {
-        __DynamoError("Failed to load \"", _preBuildScriptPath, "\"");
+        __DynamoError("Failed to load \"", _preBuildBatPath, "\"");
         return;
     }
         
-    __DynamoTrace("Loaded \"", _preBuildScriptPath, "\"");
-    __DynamoTrace(_buildScriptString);
+    __DynamoTrace("Loaded \"", _preBuildBatPath, "\"");
     
-    if (string_count(":: Dynamo Block Start", _buildScriptString) > 0)
+    var _countLegacy     = string_count("echo Dynamo", _preBuildBatString);
+    var _countBlockStart = string_count(":: Dynamo Block Start", _preBuildBatString);
+    var _countBlockEnd   = string_count(":: Dynamo Block End",   _preBuildBatString);
+    var _posBlockStart   = string_pos(  ":: Dynamo Block Start", _preBuildBatString);
+    var _posBlockEnd     = string_pos(  ":: Dynamo Block End",   _preBuildBatString);
+    
+    if ((_countBlockStart == 0) && (_countBlockEnd == 0))
     {
-        _preBuildScriptAlreadyExists = true;
+        //Append the build script to the batch file
+        buffer_write(_preBuildBatBuffer, buffer_text, "\n\n");
+        buffer_write(_preBuildBatBuffer, buffer_text, _preBuildString);
+    }
+    else if (_countLegacy > 0)
+    {
+        _preBuildError = true;
+    }
+    else if ((_countBlockStart == 1) && (_countBlockEnd == 1))
+    {
+        _preBuildBatString = string_copy(_preBuildBatString, 1, _posBlockStart - 1)
+                           + _preBuildString
+                           + string_copy(_preBuildBatString, _posBlockEnd + string_length(":: Dynamo Block End"), 1 + string_length(_preBuildBatString) - (_posBlockEnd + string_length(":: Dynamo Block End")));
+        
+        buffer_resize(_preBuildBatBuffer, string_byte_length(_preBuildBatString));
+        buffer_seek(_preBuildBatBuffer, buffer_seek_start, 0);
+        buffer_write(_preBuildBatBuffer, buffer_text, _preBuildBatString);
     }
     else
     {
-        buffer_write(_preBuildScriptBuffer, buffer_text, "\n\n");
-        buffer_write(_preBuildScriptBuffer, buffer_text, _preBuildString);
+        _preBuildError = true;
     }
 }
 
-buffer_save(_preBuildScriptBuffer, _preBuildScriptPath);
-buffer_delete(_preBuildScriptBuffer);
+buffer_save(_preBuildBatBuffer, _preBuildBatPath);
+buffer_delete(_preBuildBatBuffer);
 
 
 
 __DynamoTrace("Setting up Dynamo in pre_run_step.bat");
 
-var _preRunAlreadyExists = false;
+var _preRunError = false;
 var _preRunPath = _directory + "pre_run_step.bat";
 var _preRunString = "";
 _preRunString += ":: Dynamo Block Start\n";
@@ -149,17 +178,20 @@ _preRunString += "echo Generated server ident as %DynamoRandom%\n";
 _preRunString += "@echo %DynamoRandom%> \"%YYtempFolder%\\dynamoServerIdent\"\n";
 _preRunString += "@echo %DynamoRandom%> \"%YYoutputFolder%\\dynamoServerIdent\"\n";
 _preRunString += "\n";
-_preRunString += "powershell Start-Process -FilePath \\\"%YYprojectDir%\\dynamo_server.exe\\\" -ArgumentList \\\"-serverOnly %YYoutputFolder%\\\"\n";
+_preRunString += ":: Use Powershell to spin up the server without the batch file waiting for it to complete execution\n";
+_preRunString += "powershell Start-Process -FilePath \\\"%YYprojectDir%\\dynamo_server.exe\\\" -ArgumentList \\\"-server %DynamoRandom% %YYoutputFolder%\\\"\n";
 _preRunString += "\n";
 _preRunString += "echo Dynamo pre_run_step.bat complete\n";
 _preRunString += ":: Dynamo Block End\n";
 
+if (string_char_at(_preRunString, string_length(_preRunString)) == "\n") _preRunString = string_delete(_preRunString, string_length(_preRunString), 1);
+
 if (!file_exists(_preRunPath))
 {
     __DynamoTrace("\"", _preRunPath, "\" not found, creating pre_run_step.bat");
-    var _preRunBuffer = buffer_create(1024, buffer_grow, 1);
+    var _preRunBatBuffer = buffer_create(1024, buffer_grow, 1);
     
-    buffer_write(_preRunBuffer, buffer_text, _preRunString);
+    buffer_write(_preRunBatBuffer, buffer_text, _preRunString);
 }
 else
 {
@@ -167,9 +199,9 @@ else
     
     try
     {
-        var _preRunBuffer = buffer_load(_preRunPath);
-        var _preRunScriptString = buffer_read(_preRunBuffer, buffer_text);
-        buffer_seek(_preRunBuffer, buffer_seek_start, buffer_get_size(_preRunBuffer));
+        var _preRunBatBuffer = buffer_load(_preRunPath);
+        var _preRunBatString = buffer_read(_preRunBatBuffer, buffer_text);
+        buffer_seek(_preRunBatBuffer, buffer_seek_start, buffer_get_size(_preRunBatBuffer));
     }
     catch(_error)
     {
@@ -178,21 +210,41 @@ else
     }
     
     __DynamoTrace("Loaded \"", _preRunPath, "\"");
-    __DynamoTrace(_preRunScriptString);
     
-    if (string_count(":: Dynamo Block Start", _buildScriptString) > 0)
+    var _countLegacy     = string_count("echo Dynamo", _preRunBatString);
+    var _countBlockStart = string_count(":: Dynamo Block Start", _preRunBatString);
+    var _countBlockEnd   = string_count(":: Dynamo Block End",   _preRunBatString);
+    var _posBlockStart   = string_pos(  ":: Dynamo Block Start", _preRunBatString);
+    var _posBlockEnd     = string_pos(  ":: Dynamo Block End",   _preRunBatString);
+    
+    if ((_countBlockStart == 0) && (_countBlockEnd == 0))
     {
-        _preRunAlreadyExists = true;
+        //Append the build script to the batch file
+        buffer_write(_preRunBatBuffer, buffer_text, "\n\n");
+        buffer_write(_preRunBatBuffer, buffer_text, _preRunString);
+    }
+    else if (_countLegacy > 0)
+    {
+        _preBuildError = true;
+    }
+    else if ((_countBlockStart == 1) && (_countBlockEnd == 1))
+    {
+        _preRunBatString = string_copy(_preRunBatString, 1, _posBlockStart - 1)
+                         + _preRunString
+                         + string_copy(_preRunBatString, _posBlockEnd + string_length(":: Dynamo Block End"), 1 + string_length(_preRunBatString) - (_posBlockEnd + string_length(":: Dynamo Block End")));
+        
+        buffer_resize(_preRunBatBuffer, string_byte_length(_preRunBatString));
+        buffer_seek(_preRunBatBuffer, buffer_seek_start, 0);
+        buffer_write(_preRunBatBuffer, buffer_text, _preRunBatString);
     }
     else
     {
-        buffer_write(_preRunBuffer, buffer_text, "\n\n");
-        buffer_write(_preRunBuffer, buffer_text, _preRunString);
+        _preRunError = true;
     }
 }
 
-buffer_save(_preRunBuffer, _preRunPath);
-buffer_delete(_preRunBuffer);
+buffer_save(_preRunBatBuffer, _preRunPath);
+buffer_delete(_preRunBatBuffer);
 
 
 
@@ -202,8 +254,8 @@ directory_create(_fileDirectory);
 
 
 
-if (_preBuildScriptAlreadyExists) __DynamoLoud("Dyanmo has already been added to pre_build_step.bat\n\nIf you're having issues, please try removing references to Dynamo from pre_build_step.bat and then re-run this utility.");
-if (_preRunAlreadyExists) __DynamoLoud("Dyanmo has already been added to pre_run_step.bat\n\nIf you're having issues, please try removing references to Dynamo from pre_run_step.bat and then re-run this utility.");
+if (_preBuildError) __DynamoLoud("Dynamo pre-build script was found in pre_build_step.bat but it appears to be corrupted\n\nPlease remove any references to Dynamo from pre_build_step.bat and then re-run this utility.");
+if (_preRunError) __DynamoLoud("Dynamo pre-run script was found in pre_run_step.bat but it appears to be corrupted\n\nPlease remove any references to Dynamo from pre_run_step.bat and then re-run this utility.");
 
 __DynamoLoud("Setup complete.\n\nI hope you enjoy using Dynamo!");
 

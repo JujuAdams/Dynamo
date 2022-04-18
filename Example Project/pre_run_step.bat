@@ -1,9 +1,11 @@
+:: !!
+
 :: Dynamo Block Start
-:: 2.0.0 alpha, 2022-04-18
+:: 2.0.0 alpha 2, 2022-04-18
 :: https://www.github.com/jujuadams/dynamo/
 @echo off
 setlocal enabledelayedexpansion
-echo Dynamo pre_run_step.bat version 2.0.0 alpha, 2022-04-18
+echo Dynamo pre_run_step.bat version 2.0.0 alpha 2, 2022-04-18
 
 echo Dynamo creating project directory link file...
 @echo %YYprojectDir%\> "%YYoutputFolder%\projectDirectoryPath"
@@ -33,7 +35,10 @@ echo Generated server ident as %DynamoRandom%
 @echo %DynamoRandom%> "%YYtempFolder%\dynamoServerIdent"
 @echo %DynamoRandom%> "%YYoutputFolder%\dynamoServerIdent"
 
-powershell Start-Process -FilePath \"%YYprojectDir%\dynamo_server.exe\" -ArgumentList \"-serverOnly %YYoutputFolder%\"
+:: Use Powershell to spin up the server without the batch file waiting for it to complete execution
+powershell Start-Process -FilePath \"%YYprojectDir%\dynamo_server.exe\" -ArgumentList \"-server %DynamoRandom% %YYoutputFolder%\"
 
 echo Dynamo pre_run_step.bat complete
 :: Dynamo Block End
+
+:: !!

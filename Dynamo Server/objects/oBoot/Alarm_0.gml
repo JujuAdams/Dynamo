@@ -9,7 +9,14 @@ if (os_type != os_windows)
 if (global.__dynamoRunningFromIDE)
 {
     __DynamoTrace("Running from IDE");
-    instance_create_layer(0, 0, layer, oServer);
+    
+    if (true)
+    {
+        var _instance = instance_create_layer(0, 0, layer, oInstall);
+        _instance.directory = "A:\\GitHub repos\\Mine\\Dynamo\\Example Project\\";
+        
+        //instance_create_layer(0, 0, layer, oServer);
+    }
 }
 else
 {
@@ -70,6 +77,11 @@ else
     var _pos = string_pos("-server", _parameterString);
     if (_pos > 0)
     {
+        show_message(_parameterString);
+        
+        
+        
+        
         instance_create_layer(0, 0, layer, oServer);
         exit;
     }

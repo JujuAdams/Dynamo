@@ -1,16 +1,23 @@
 function __DynamoCommLocalClass(_serverMode, _ident = undefined) constructor
 {
     __serverMode = _serverMode;
+    if (__serverMode)
+    {
+        __DynamoTrace("Created new local server handler");
+    }
+    else
+    {
+        __DynamoTrace("Created new local client handler");
+    }
     
-    __initializeSuccess = false;
+    __alive = true;
     
+    __socket = -1;
     __ident = _ident;
     if (__ident == undefined)
     {
-        //Generate an ident for this device
-        randomize(); //FIXME - Do this without native PRNG
-        __ident = string(irandom(999999));
-        __DynamoTrace("Chose new device ident \"", __ident, "\"");
+        __ident = __DynamoGenerateIdent();
+        __DynamoTrace("Chose new random device ident \"", __ident, "\"");
     }
     
     __defaultDestination = "all";
@@ -20,12 +27,17 @@ function __DynamoCommLocalClass(_serverMode, _ident = undefined) constructor
     __messageSendTime    = -infinity;
     __warningTime        = -infinity;
     
+    __firstConnectionTimeElapsed = 0; //Counts up in __EndStep()
+    __clientHasFoundServer       = false;
     
     
-    if (__serverMode)
+    
+    if (!__DYNAMO_DEV_MODE)
     {
-        __DynamoTrace("Running in server mode");
-        
+        __Destroy();
+    }
+    else if (__serverMode)
+    {
         __port = global.__dynamoCommServerPort;
         __DynamoTrace("Port = ", __port);
         
@@ -39,15 +51,14 @@ function __DynamoCommLocalClass(_serverMode, _ident = undefined) constructor
         if (__socket < 0)
         {
             __DynamoTrace("Warning! Failed to open server socket");
+            __Destroy();
             return;
         }
         
-        __DynamoTrace("Server successfully started");
+        __DynamoTrace("Local server successfully started");
     }
     else
     {
-        __DynamoTrace("Running in client mode");
-        
         __port = global.__dynamoCommClientPort;
         __DynamoTrace("Port = ", __port);
         
@@ -57,21 +68,31 @@ function __DynamoCommLocalClass(_serverMode, _ident = undefined) constructor
         if (__socket < 0)
         {
             __DynamoTrace("Warning! Failed to open client socket");
+            __Destroy();
             return;
         }
         
-        __DynamoTrace("Client successfully started");
+        __DynamoTrace("Local client successfully started");
     }
     
-    __initializeSuccess = true;
     
     
-    
-    
+    static __Destroy = function()
+    {
+        if (!__alive) return;
+        
+        __alive = true;
+        
+        if (__socket > 0)
+        {
+            __DynamoTrace("Destroying socket ", __socket);
+            network_destroy(__socket);
+        }
+    }
     
     static __EndStep = function()
     {
-        if (!__initializeSuccess) return;
+        if (!__alive) return;
         
         if (current_time - __announceLocalTime > 2000)
         {
@@ -86,11 +107,30 @@ function __DynamoCommLocalClass(_serverMode, _ident = undefined) constructor
                 __Send(["IAmClient"]);
             }
         }
+        
+        if (!__serverMode && !__clientHasFoundServer)
+        {
+            //Only count the time this function is actually being executed
+            //This prevents really long load times from causing Dynamo to erroneously report errors
+            __firstConnectionTimeElapsed += delta_time/1000;
+            
+            if (__firstConnectionTimeElapsed > 15000)
+            {
+                if (__DYNAMO_ALLOW_NONMATCHING_SERVER)
+                {
+                    __DynamoError("Failed to connect to a Dynamo server");
+                }
+                else
+                {
+                    __DynamoError("Failed to connect to Dynamo server with ident of \"", global.__dynamoCommExpectedServerIdent, "\"");
+                }
+            }
+        }
     }
     
     static __Draw = function(_x, _y)
     {
-        if (!__initializeSuccess) return;
+        if (!__alive) return;
         
         matrix_stack_push(matrix_build(_x, _y, 0,    0, 0, 0,    1, 1, 1));
         matrix_set(matrix_world, matrix_stack_top());
@@ -98,17 +138,10 @@ function __DynamoCommLocalClass(_serverMode, _ident = undefined) constructor
         var _oldFont = draw_get_font();
         draw_set_font(__DynamoDebugFont);
         
-        if (current_time - __messageSendTime    <  500) draw_text(   0, 0, "Send"    );
-        if (current_time - __messageReceiveTime <  500) draw_text(  50, 0, "Receive" );
-        if (current_time - __warningTime    < 1000) draw_text( 100, 0, "Warning!");
-        
-        var _i = 0;
-        repeat(array_length(global.__dynamoCommRemoteArray))
-        {
-            var _ident = global.__dynamoCommRemoteArray[_i];
-            global.__dynamoCommRemoteDictionary[$ _ident].__Draw(0, 15 + 15*_i);
-            ++_i;
-        }
+        draw_text(0, 0, self);
+        if (current_time - __messageSendTime    <  500) draw_text(   0, 10, "Send"    );
+        if (current_time - __messageReceiveTime <  500) draw_text(  50, 10, "Receive" );
+        if (current_time - __warningTime        < 1000) draw_text( 100, 10, "Warning!");
         
         draw_set_font(_oldFont);
         
@@ -116,9 +149,14 @@ function __DynamoCommLocalClass(_serverMode, _ident = undefined) constructor
         matrix_set(matrix_world, matrix_stack_top());
     }
     
+    static toString = function()
+    {
+        return (__serverMode? "Local server " : "Local client ") + __ident;
+    }
+    
     static __AsyncNetworking = function()
     {
-        if (!__initializeSuccess) return;
+        if (!__alive) return;
         
         //Ignore anything that's not data
         if (async_load[? "type"] != 3) exit;
@@ -175,6 +213,26 @@ function __DynamoCommLocalClass(_serverMode, _ident = undefined) constructor
                 default:
                     throw "Command " + string(_parametersArray[0]) + " not supported";
                 break;
+            }
+            
+            if (!__serverMode)
+            {
+                if (!__DYNAMO_ALLOW_NONMATCHING_SERVER && (_deviceIdent != global.__dynamoCommExpectedServerIdent))
+                {
+                    if (!__clientHasFoundServer)
+                    {
+                        throw "Device ident \"" + string(_deviceIdent) + "\" doesn't match expected server ident (" + global.__dynamoCommExpectedServerIdent + ")";
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+                else if (!__clientHasFoundServer && (_deviceIdent == global.__dynamoCommExpectedServerIdent))
+                {
+                    __clientHasFoundServer = true;
+                    __DynamoTrace("Found server with ident \"", global.__dynamoCommExpectedServerIdent, "\"");
+                }
             }
             
             if (_verifyDeviceIdent)

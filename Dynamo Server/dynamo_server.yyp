@@ -2,6 +2,7 @@
   "resources": [
     {"id":{"name":"__DynamoClassFile","path":"scripts/__DynamoClassFile/__DynamoClassFile.yy",},"order":2,},
     {"id":{"name":"__DynamoParseMainProjectJSON","path":"scripts/__DynamoParseMainProjectJSON/__DynamoParseMainProjectJSON.yy",},"order":7,},
+    {"id":{"name":"__DynamoCommTransferClass","path":"scripts/__DynamoCommTransferClass/__DynamoCommTransferClass.yy",},"order":2,},
     {"id":{"name":"DynamoDevSaveBuffer","path":"scripts/DynamoDevSaveBuffer/DynamoDevSaveBuffer.yy",},"order":3,},
     {"id":{"name":"__DynamoCommAsyncNetworking","path":"scripts/__DynamoCommAsyncNetworking/__DynamoCommAsyncNetworking.yy",},"order":5,},
     {"id":{"name":"__DynamoCommDraw","path":"scripts/__DynamoCommDraw/__DynamoCommDraw.yy",},"order":4,},
@@ -13,7 +14,7 @@
     {"id":{"name":"DynamoDevSaveString","path":"scripts/DynamoDevSaveString/DynamoDevSaveString.yy",},"order":6,},
     {"id":{"name":"__DynamoDatafilesDictionary","path":"scripts/__DynamoDatafilesDictionary/__DynamoDatafilesDictionary.yy",},"order":4,},
     {"id":{"name":"DynamoNoteBuffer","path":"scripts/DynamoNoteBuffer/DynamoNoteBuffer.yy",},"order":3,},
-    {"id":{"name":"__DynamoCommEndStep","path":"scripts/__DynamoCommEndStep/__DynamoCommEndStep.yy",},"order":2,},
+    {"id":{"name":"__DynamoCommEndStep","path":"scripts/__DynamoCommEndStep/__DynamoCommEndStep.yy",},"order":3,},
     {"id":{"name":"__DynamoCheckForNoteChanges","path":"scripts/__DynamoCheckForNoteChanges/__DynamoCheckForNoteChanges.yy",},"order":1,},
     {"id":{"name":"__DynamoSystem","path":"scripts/__DynamoSystem/__DynamoSystem.yy",},"order":8,},
     {"id":{"name":"DynamoDevSaveNoteBuffer","path":"scripts/DynamoDevSaveNoteBuffer/DynamoDevSaveNoteBuffer.yy",},"order":4,},

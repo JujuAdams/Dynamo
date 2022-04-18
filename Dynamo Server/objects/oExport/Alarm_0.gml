@@ -40,7 +40,7 @@ __Setup = function(_directory)
     __DynamoTrace("Setting up Dynamo in pre_build_step.bat");
     
     var _preBuildScriptAlreadyExists = false;
-    var _preBuildScriptPath = _directory + "pre_build_step.bat";
+    var _preBuildBatPath = _directory + "pre_build_step.bat";
     var _preBuildString = "";
     _preBuildString += ":: Dynamo " + __DYNAMO_VERSION + ", " + __DYNAMO_DATE + "    https://www.github.com/jujuadams/dynamo/\n";
     _preBuildString += "@echo off\n";
@@ -64,45 +64,45 @@ __Setup = function(_directory)
     _preBuildString += "\n";
     _preBuildString += "echo Dynamo pre_build_step.bat complete\n";
     
-    if (!file_exists(_preBuildScriptPath))
+    if (!file_exists(_preBuildBatPath))
     {
-        __DynamoTrace("\"", _preBuildScriptPath, "\" not found, creating pre_build_step.bat");
-        var _preBuildScriptBuffer = buffer_create(1024, buffer_grow, 1);
+        __DynamoTrace("\"", _preBuildBatPath, "\" not found, creating pre_build_step.bat");
+        var _preBuildBatBuffer = buffer_create(1024, buffer_grow, 1);
         
-        buffer_write(_preBuildScriptBuffer, buffer_text, _preBuildString);
+        buffer_write(_preBuildBatBuffer, buffer_text, _preBuildString);
     }
     else
     {
-        __DynamoTrace("Found \"", _preBuildScriptPath, "\"");
+        __DynamoTrace("Found \"", _preBuildBatPath, "\"");
         
         try
         {
-            var _preBuildScriptBuffer = buffer_load(_preBuildScriptPath);
-            var _buildScriptString = buffer_read(_preBuildScriptBuffer, buffer_text);
-            buffer_seek(_preBuildScriptBuffer, buffer_seek_start, buffer_get_size(_preBuildScriptBuffer));
+            var _preBuildBatBuffer = buffer_load(_preBuildBatPath);
+            var _preBuildBatString = buffer_read(_preBuildBatBuffer, buffer_text);
+            buffer_seek(_preBuildBatBuffer, buffer_seek_start, buffer_get_size(_preBuildBatBuffer));
         }
         catch(_error)
         {
-            __DynamoError("Failed to load \"", _preBuildScriptPath, "\"");
+            __DynamoError("Failed to load \"", _preBuildBatPath, "\"");
             return;
         }
         
-        __DynamoTrace("Loaded \"", _preBuildScriptPath, "\"");
-        __DynamoTrace(_buildScriptString);
+        __DynamoTrace("Loaded \"", _preBuildBatPath, "\"");
+        __DynamoTrace(_preBuildBatString);
         
-        if (string_count(":: Dynamo", _buildScriptString) > 0)
+        if (string_count(":: Dynamo", _preBuildBatString) > 0)
         {
             _preBuildScriptAlreadyExists = true;
         }
         else
         {
-            buffer_write(_preBuildScriptBuffer, buffer_text, "\n\n");
-            buffer_write(_preBuildScriptBuffer, buffer_text, _preBuildString);
+            buffer_write(_preBuildBatBuffer, buffer_text, "\n\n");
+            buffer_write(_preBuildBatBuffer, buffer_text, _preBuildString);
         }
     }
     
-    buffer_save(_preBuildScriptBuffer, _preBuildScriptPath);
-    buffer_delete(_preBuildScriptBuffer);
+    buffer_save(_preBuildBatBuffer, _preBuildBatPath);
+    buffer_delete(_preBuildBatBuffer);
     
     
     
@@ -130,9 +130,9 @@ __Setup = function(_directory)
     if (!file_exists(_preRunPath))
     {
         __DynamoTrace("\"", _preRunPath, "\" not found, creating pre_run_step.bat");
-        var _preRunBuffer = buffer_create(1024, buffer_grow, 1);
+        var _preRunBatBuffer = buffer_create(1024, buffer_grow, 1);
         
-        buffer_write(_preRunBuffer, buffer_text, _preRunString);
+        buffer_write(_preRunBatBuffer, buffer_text, _preRunString);
     }
     else
     {
@@ -140,9 +140,9 @@ __Setup = function(_directory)
         
         try
         {
-            var _preRunBuffer = buffer_load(_preRunPath);
-            var _preRunScriptString = buffer_read(_preRunBuffer, buffer_text);
-            buffer_seek(_preRunBuffer, buffer_seek_start, buffer_get_size(_preRunBuffer));
+            var _preRunBatBuffer = buffer_load(_preRunPath);
+            var _preRunBatString = buffer_read(_preRunBatBuffer, buffer_text);
+            buffer_seek(_preRunBatBuffer, buffer_seek_start, buffer_get_size(_preRunBatBuffer));
         }
         catch(_error)
         {
@@ -151,21 +151,21 @@ __Setup = function(_directory)
         }
         
         __DynamoTrace("Loaded \"", _preRunPath, "\"");
-        __DynamoTrace(_preRunScriptString);
+        __DynamoTrace(_preRunBatString);
         
-        if (string_count(":: Dynamo", _preRunScriptString) > 0)
+        if (string_count(":: Dynamo", _preRunBatString) > 0)
         {
             _preRunAlreadyExists = true;
         }
         else
         {
-            buffer_write(_preRunBuffer, buffer_text, "\n\n");
-            buffer_write(_preRunBuffer, buffer_text, _preRunString);
+            buffer_write(_preRunBatBuffer, buffer_text, "\n\n");
+            buffer_write(_preRunBatBuffer, buffer_text, _preRunString);
         }
     }
     
-    buffer_save(_preRunBuffer, _preRunPath);
-    buffer_delete(_preRunBuffer);
+    buffer_save(_preRunBatBuffer, _preRunPath);
+    buffer_delete(_preRunBatBuffer);
     
     
     

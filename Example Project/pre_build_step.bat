@@ -1,8 +1,10 @@
+:: !!
+
 :: Dynamo Block Start
-:: 2.0.0 alpha, 2022-04-18
+:: 2.0.0 alpha 2, 2022-04-18
 :: https://www.github.com/jujuadams/dynamo/
 @echo off
-echo Dynamo pre_build_step.bat version 2.0.0 alpha, 2022-04-18
+echo Dynamo pre_build_step.bat version 2.0.0 alpha 2, 2022-04-18
 
 if not exist "%YYprojectDir%\dynamo_server.exe" (
     echo
@@ -22,3 +24,5 @@ xcopy "%YYprojectDir%\datafilesDynamo\*" "%YYoutputFolder%" /c /f /s /r /y
 
 echo Dynamo pre_build_step.bat complete
 :: Dynamo Block End
+
+:: !!
