@@ -46,6 +46,8 @@ function __DynamoInit()
     if (os_type != os_windows)
     {
         if (DYNAMO_DEV_MODE) __DynamoTrace("Warning! Dynamo can only run in dev mode on Windows. Live reloading is not available on this platform");
+        
+        global.__dynamoRunningFromIDE = false;
     }
     else
     {
@@ -104,21 +106,30 @@ function __DynamoInit()
         }
         
         global.__dynamoFileDictionary = __DynamoDatafilesDictionary(DynamoDevProjectDirectory() + "datafilesDynamo\\", {});
+    }
+    
+    if (DYNAMO_DEV_MODE)
+    {
+        var _path = "dynamoServerIdent";
+        if (os_type == os_android) _path = string_lower(_path);
         
-        if (!file_exists("dynamoServerIdent"))
+        if (!file_exists(_path))
         {
-            __DynamoError("Could not find \"dynamoServerIdent\" file in working directory\nPlease report this error");
+            __DynamoTrace("Warning! Could not find \"", _path, "\" file in working directory. Please report this error");
+        }
+        else
+        {
+            var _buffer = buffer_load(_path);
+            var _string = buffer_read(_buffer, buffer_text);
+            buffer_delete(_buffer);
+            
+            _string = string_replace_all(_string, "\n", "");
+            _string = string_replace_all(_string, "\r", "");
+            
+            global.__dynamoCommExpectedServerIdent = _string;
+            __DynamoTrace("Found server ident as \"", global.__dynamoCommExpectedServerIdent, "\"");
         }
         
-        var _buffer = buffer_load("dynamoServerIdent");
-        var _string = buffer_read(_buffer, buffer_text);
-        buffer_delete(_buffer);
-        
-        _string = string_replace_all(_string, "\n", "");
-        _string = string_replace_all(_string, "\r", "");
-        
-        global.__dynamoCommExpectedServerIdent = _string;
-        __DynamoTrace("Found server ident as \"", global.__dynamoCommExpectedServerIdent, "\"");
         if (__DYNAMO_ALLOW_NONMATCHING_SERVER) __DynamoTrace("Allowing servers with any ident to connect to this client");
         
         global.__dynamoCommLocal = new __DynamoCommLocalClass(false);
