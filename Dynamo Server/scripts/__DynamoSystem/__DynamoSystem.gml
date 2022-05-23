@@ -2,13 +2,14 @@
 #macro __DYNAMO_DATE          "2022-04-18"
 #macro __DYNAMO_DEV_MODE      (DYNAMO_DEV_MODE && global.__dynamoRunningFromIDE)
 
-#macro __DYNAMO_COMM_VERBOSE_SEND         true
-#macro __DYNAMO_COMM_VERBOSE_RECEIVE      true
-#macro __DYNAMO_DEBUG_CLIENT              (false && global.__dynamoRunningFromIDE)
-#macro __DYNAMO_ALLOW_NONMATCHING_SERVER  true
+#macro __DYNAMO_COMM_VERBOSE_SEND     true
+#macro __DYNAMO_COMM_VERBOSE_RECEIVE  true
+#macro __DYNAMO_DEBUG_CLIENT          (false && global.__dynamoRunningFromIDE)
 
 #macro __DYNAMO_PROJECT_DIRECTORY_PATH_NAME        "projectDirectoryPath"
 #macro __DYNAMO_SYMLINK_TO_WORKING_DIRECTORY_NAME  "symlinkToWorkingDirectory"
+
+#macro __DYNAMO_LAN_PACKET_SIZE  1000
 
 __DynamoTrace("Welcome to Dynamo by @jujuadams! This is version ", __DYNAMO_VERSION, ", ", __DYNAMO_DATE);
 
@@ -118,8 +119,7 @@ function __DynamoInit()
         _string = string_replace_all(_string, "\r", "");
         
         global.__dynamoCommExpectedServerIdent = _string;
-        __DynamoTrace("Found server ident as \"", global.__dynamoCommExpectedServerIdent, "\"");
-        if (__DYNAMO_ALLOW_NONMATCHING_SERVER) __DynamoTrace("Allowing servers with any ident to connect to this client");
+        __DynamoTrace("Found expected server ident as \"", global.__dynamoCommExpectedServerIdent, "\"");
         
         global.__dynamoCommLocal = new __DynamoCommLocalClass(false);
     }

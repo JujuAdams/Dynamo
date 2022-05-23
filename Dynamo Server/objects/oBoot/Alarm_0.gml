@@ -2,8 +2,7 @@ if (os_type != os_windows)
 {
     __DynamoLoud("Dynamo is not currently supported on this OS.");
     game_end();
-    
-    exit;
+    return;
 }
 
 if (global.__dynamoRunningFromIDE)
@@ -71,11 +70,11 @@ else
         __DynamoTrace("Export complete");
         
         game_end();
-        exit;
+        return;
     }
     
     instance_create_layer(0, 0, layer, oServer);
-    exit;
+    return;
     
     var _pos = string_pos("-server", _parameterString);
     if (_pos > 0)
@@ -88,7 +87,7 @@ else
         __DynamoTrace("Extracted server ident from executable parameters (", global.__dynamoCommExpectedServerIdent, ")");
         
         instance_create_layer(0, 0, layer, oServer);
-        exit;
+        return;
     }
     
     //No -export, let's try to setup!

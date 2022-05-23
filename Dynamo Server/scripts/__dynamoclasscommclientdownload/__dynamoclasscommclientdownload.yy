@@ -6,7 +6,7 @@
     "path": "folders/Dynamo/(System)/Communication.yy",
   },
   "resourceVersion": "1.0",
-  "name": "__DynamoCommTransferClass",
+  "name": "__DynamoClassCommClientDownload",
   "tags": [],
   "resourceType": "GMScript",
 }

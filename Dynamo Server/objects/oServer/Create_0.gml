@@ -11,12 +11,12 @@ if (!global.__dynamoCommLocal.__alive)
     {
         __DynamoError("Failed to open both server and client sockets");
         instance_destroy();
-        exit;
+        return;
     }
     
     if (!__DYNAMO_DEBUG_CLIENT)
     {
         instance_create_layer(0, 0, layer, oServerFailed);
-        exit;
+        return;
     }
 }
