@@ -1,13 +1,11 @@
 {
-  "name": "oTest",
   "spriteId": null,
-  "spriteMaskId": null,
-  "visible": true,
   "solid": false,
+  "visible": true,
+  "spriteMaskId": null,
   "persistent": false,
-  "physicsObject": false,
-  "managed": true,
   "parentObjectId": null,
+  "physicsObject": false,
   "physicsSensor": false,
   "physicsShape": 1,
   "physicsGroup": 1,
@@ -22,6 +20,7 @@
   "eventList": [
     {"isDnD":false,"eventNum":0,"eventType":8,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
     {"isDnD":false,"eventNum":0,"eventType":0,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
+    {"isDnD":false,"eventNum":1,"eventType":3,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
   ],
   "properties": [],
   "overriddenProperties": [],
@@ -30,6 +29,7 @@
     "path": "Dynamo Example.yyp",
   },
   "resourceVersion": "1.0",
+  "name": "oTest",
   "tags": [],
   "resourceType": "GMObject",
 }

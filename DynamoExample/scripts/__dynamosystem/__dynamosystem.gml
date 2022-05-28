@@ -8,7 +8,7 @@
 #macro __DYNAMO_TYPE_FILE    "included file"
 
 __DynamoTrace("Welcome to Dynamo by @jujuadams! This is version ", __DYNAMO_VERSION, ", ", __DYNAMO_DATE);
-
+global.__dynamoRunningFromIDE = undefined;
 
 
 __DynamoInit();
@@ -138,7 +138,7 @@ function __DynamoLoud()
         ++_i;
     }
     
-    if (__DYNAMO_DEV_MODE) show_message(_string);
+    if ((global.__dynamoRunningFromIDE == undefined) || __DYNAMO_DEV_MODE) show_message(_string);
     show_debug_message("Dynamo: Loud: " + _string);
 }
 
