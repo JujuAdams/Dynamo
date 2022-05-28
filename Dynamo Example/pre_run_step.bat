@@ -1,0 +1,1 @@
+@echo %YYprojectDir%> "%YYoutputFolder%\projectDirectory.txt"

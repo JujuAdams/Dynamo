@@ -1,0 +1,1 @@
+global.separateScript = "Any *simple* script tagged with \"dynamo\" can be live updated";

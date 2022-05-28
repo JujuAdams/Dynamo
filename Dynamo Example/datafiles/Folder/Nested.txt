@@ -1,0 +1,1 @@
+This is data in a file nested inside a folder.
