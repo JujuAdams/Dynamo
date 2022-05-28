@@ -1,1 +1,0 @@
-Dynamo also supports live updates of external files stored in ..\datafilesDynamo\
