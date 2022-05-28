@@ -23,7 +23,7 @@ function __DynamoInit()
         //GMS2022.500.58 runtime
         global.__dynamoTimeSource = time_source_create(time_source_game, 1, time_source_units_frames, function()
         {
-            __DynamoTick();
+            __DynamoAutoUpdate();
         }, [], -1);
         
         time_source_start(global.__dynamoTimeSource);
@@ -35,14 +35,16 @@ function __DynamoInit()
             //Early GMS2022.500.xx runtimes
             global.__dynamoTimeSource = time_source_create(time_source_game, 1, time_source_units_frames, function()
             {
-                __DynamoTick();
+                __DynamoAutoUpdate();
             }, -1);
             
             time_source_start(global.__dynamoTimeSource);
         }
         catch(_error)
         {
-            __DynamoError("Dynamo is only supported on version 2022.5 and above");
+            //If the above fails then fall back on needing to call DynamoAutoUpdate()
+            global.__dynamoTimeSource = undefined;
+            __DynamoTrace("Warning! Running on a GM runtime earlier than 2022.5");
         }
     }
     

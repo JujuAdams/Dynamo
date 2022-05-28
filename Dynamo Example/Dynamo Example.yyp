@@ -1,6 +1,6 @@
 {
   "resources": [
-    {"id":{"name":"__DynamoTick","path":"scripts/__DynamoTick/__DynamoTick.yy",},"order":15,},
+    {"id":{"name":"DynamoAutoUpdate","path":"scripts/DynamoAutoUpdate/DynamoAutoUpdate.yy",},"order":2,},
     {"id":{"name":"__DynamoAssetArrayFilterByTag","path":"scripts/__DynamoAssetArrayFilterByTag/__DynamoAssetArrayFilterByTag.yy",},"order":3,},
     {"id":{"name":"__DynamoRunningFromIDE","path":"scripts/__DynamoRunningFromIDE/__DynamoRunningFromIDE.yy",},"order":2,},
     {"id":{"name":"DynamoFileLoadString","path":"scripts/DynamoFileLoadString/DynamoFileLoadString.yy",},"order":4,},
@@ -24,13 +24,14 @@
     {"id":{"name":"DynamoAssetChanged","path":"scripts/DynamoAssetChanged/DynamoAssetChanged.yy",},"order":1,},
     {"id":{"name":"DynamoFileSaveString","path":"scripts/DynamoFileSaveString/DynamoFileSaveString.yy",},"order":6,},
     {"id":{"name":"oTest","path":"objects/oTest/oTest.yy",},"order":4,},
-    {"id":{"name":"DynamoFileAutoGet","path":"scripts/DynamoFileAutoGet/DynamoFileAutoGet.yy",},"order":5,},
+    {"id":{"name":"DynamoFileAutoGet","path":"scripts/DynamoFileAutoGet/DynamoFileAutoGet.yy",},"order":6,},
     {"id":{"name":"__DynamoGMLToJSON","path":"scripts/__DynamoGMLToJSON/__DynamoGMLToJSON.yy",},"order":7,},
-    {"id":{"name":"DynamoScriptAutoGet","path":"scripts/DynamoScriptAutoGet/DynamoScriptAutoGet.yy",},"order":3,},
-    {"id":{"name":"DynamoScriptAutoSet","path":"scripts/DynamoScriptAutoSet/DynamoScriptAutoSet.yy",},"order":2,},
+    {"id":{"name":"DynamoScriptAutoGet","path":"scripts/DynamoScriptAutoGet/DynamoScriptAutoGet.yy",},"order":4,},
+    {"id":{"name":"DynamoScriptAutoSet","path":"scripts/DynamoScriptAutoSet/DynamoScriptAutoSet.yy",},"order":3,},
     {"id":{"name":"__DynamoConfigGMLConstants","path":"scripts/__DynamoConfigGMLConstants/__DynamoConfigGMLConstants.yy",},"order":1,},
     {"id":{"name":"__DynamoProjectFindFiles","path":"scripts/__DynamoProjectFindFiles/__DynamoProjectFindFiles.yy",},"order":13,},
-    {"id":{"name":"DynamoFileAutoSet","path":"scripts/DynamoFileAutoSet/DynamoFileAutoSet.yy",},"order":4,},
+    {"id":{"name":"__DynamoAutoUpdate","path":"scripts/__DynamoAutoUpdate/__DynamoAutoUpdate.yy",},"order":15,},
+    {"id":{"name":"DynamoFileAutoSet","path":"scripts/DynamoFileAutoSet/DynamoFileAutoSet.yy",},"order":5,},
     {"id":{"name":"DynamoAssetType","path":"scripts/DynamoAssetType/DynamoAssetType.yy",},"order":0,},
     {"id":{"name":"rmMain","path":"rooms/rmMain/rmMain.yy",},"order":1,},
   ],
@@ -62,9 +63,9 @@
   ],
   "Folders": [
     {"folderPath":"folders/Dynamo.yy","order":0,"resourceVersion":"1.0","name":"Dynamo","tags":[],"resourceType":"GMFolder",},
-    {"folderPath":"folders/Dynamo/(System).yy","order":15,"resourceVersion":"1.0","name":"(System)","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/Dynamo/(System).yy","order":8,"resourceVersion":"1.0","name":"(System)","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Dynamo/(System)/Classes.yy","order":1,"resourceVersion":"1.0","name":"Classes","tags":[],"resourceType":"GMFolder",},
-    {"folderPath":"folders/Dynamo/Manual Mode.yy","order":6,"resourceVersion":"1.0","name":"Manual Mode","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/Dynamo/Manual Mode.yy","order":7,"resourceVersion":"1.0","name":"Manual Mode","tags":[],"resourceType":"GMFolder",},
   ],
   "AudioGroups": [
     {"targets":-1,"resourceVersion":"1.3","name":"audiogroup_default","resourceType":"GMAudioGroup",},

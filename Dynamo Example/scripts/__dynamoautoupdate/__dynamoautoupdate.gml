@@ -1,6 +1,5 @@
-function __DynamoTick()
+function __DynamoAutoUpdate()
 {
-    __DynamoInit();
     if (!__DYNAMO_DEV_MODE) return undefined;
     
     if (os_type == os_windows)
@@ -13,7 +12,7 @@ function __DynamoTick()
             global.__dynamoInFocus = _focus;
         
             //If the focus *has* changed and we're now in focus then check for changes
-            if (_focus) return __DynamoTickCheck();
+            if (_focus) return __DynamoDoUpdate();
         }
     }
     else if (os_type == os_macosx)
@@ -32,14 +31,14 @@ function __DynamoTick()
         if (global.__dynamoTrackingArray[global.__dynamoCheckIndex].__ContentCheckForChanges())
         {
             if (DYNAMO_VERBOSE) __DynamoTrace("Change found in \"", global.__dynamoTrackingArray[global.__dynamoCheckIndex].__GetName(), "\"");
-            return __DynamoTickCheck();
+            return __DynamoDoUpdate();
         }
     }
     
     return undefined;
 }
 
-function __DynamoTickCheck()
+function __DynamoDoUpdate()
 {
     if (!__DYNAMO_DEV_MODE) return undefined;
     
