@@ -28,9 +28,10 @@ function __DynamoAutoUpdate()
         if (_count <= 0) return;
         global.__dynamoCheckIndex = (global.__dynamoCheckIndex + 1) mod _count;
         
-        if (global.__dynamoTrackingArray[global.__dynamoCheckIndex].__ContentCheckForChanges())
+		var _assetName = global.__dynamoTrackingArray[global.__dynamoCheckIndex];
+        if (global.__dynamoTrackingStruct[$ _assetName].__ContentCheckForChanges())
         {
-            if (DYNAMO_VERBOSE) __DynamoTrace("Change found in \"", global.__dynamoTrackingArray[global.__dynamoCheckIndex].__GetName(), "\"");
+            if (DYNAMO_VERBOSE) __DynamoTrace("Change found in \"", _assetName, "\"");
             return __DynamoDoUpdate();
         }
     }
