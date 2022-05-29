@@ -10,6 +10,12 @@ DynamoScriptAutoSet(true, true, function(_changesArray)
     show_debug_message("The following scripts have changed: " + string(_changesArray));
 });
 
+//Set up script auto-loading with a callback
+DynamoSoundAutoSet(true, function(_changesArray)
+{
+    show_debug_message("The following sounds have changed: " + string(_changesArray));
+});
+
 //Set up file auto-loading with a callback
 DynamoFileAutoSet(true, function(_changesArray)
 {

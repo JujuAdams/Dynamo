@@ -52,8 +52,11 @@ function __DynamoInit()
     global.__dynamoRunningFromIDE   = __DynamoRunningFromIDE();
     global.__dynamoProjectDirectory = "";
     
-    global.__dynamoScriptAuto         = 0;
+    global.__dynamoScriptAuto         = false;
+    global.__dynamoScriptAutoApply    = false;
     global.__dynamoScriptAutoCallback = undefined;
+    global.__dynamoSoundAuto          = false;
+    global.__dynamoSoundAutoCallback  = undefined;
     global.__dynamoFileAuto           = false;
     global.__dynamoFileAutoCallback   = undefined;
     
@@ -93,13 +96,25 @@ function __DynamoInit()
         //Load up the project
         global.__dynamoProjectJSON = __DynamoProjectLoad(global.__dynamoProjectDirectory);
         
-        global.__dynamoScriptArray = __DynamoProjectFindAssetsByPath(global.__dynamoProjectJSON, global.__dynamoProjectDirectory, "scripts");
+        global.__dynamoScriptArray = __DynamoProjectFindAssetsByPath(global.__dynamoProjectJSON, global.__dynamoProjectDirectory, "scripts", __DynamoClassScript);
         __DynamoAssetArrayFilterByTag(global.__dynamoScriptArray, DYNAMO_TRACK_TAG);
+        __DynamoAssetArrayFilterRejectByTag(global.__dynamoScriptArray, DYNAMO_REJECT_TAG);
         
         var _i = 0;
         repeat(array_length(global.__dynamoScriptArray))
         {
             global.__dynamoScriptArray[_i].__Track();
+            ++_i;
+        }
+        
+        global.__dynamoSoundArray = __DynamoProjectFindAssetsByPath(global.__dynamoProjectJSON, global.__dynamoProjectDirectory, "sounds", __DynamoClassSound);
+        if (DYNAMO_OPT_IN_SOUNDS) __DynamoAssetArrayFilterByTag(global.__dynamoSoundArray, DYNAMO_TRACK_TAG);
+        __DynamoAssetArrayFilterRejectByTag(global.__dynamoSoundArray, DYNAMO_REJECT_TAG);
+        
+        var _i = 0;
+        repeat(array_length(global.__dynamoSoundArray))
+        {
+            global.__dynamoSoundArray[_i].__Track();
             ++_i;
         }
         

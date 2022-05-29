@@ -1,7 +1,7 @@
 /// @param array
 /// @param tag
 
-function __DynamoAssetArrayFilterByTag(_array, _tag)
+function __DynamoAssetArrayFilterRejectByTag(_array, _tag)
 {
     if (!__DYNAMO_DEV_MODE) return;
     
@@ -17,14 +17,14 @@ function __DynamoAssetArrayFilterByTag(_array, _tag)
             if (__TagAnyMatches(_tag))
             {
                 ++_count;
-                ++_i;
+                array_delete(_array, _i, 1);
             }
             else
             {
-                array_delete(_array, _i, 1);
+                ++_i;
             }
         }
     }
     
-    if (DYNAMO_VERBOSE) __DynamoTrace("Found ", _count, " assets with tag \"", _tag, "\"");
+    if (DYNAMO_VERBOSE) __DynamoTrace("Removed ", _count, " assets with tag \"", _tag, "\"");
 }

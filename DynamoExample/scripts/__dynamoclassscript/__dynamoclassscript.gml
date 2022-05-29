@@ -75,10 +75,10 @@ function __DynamoClassScript(_path) constructor
     
     static __Check = function()
     {
-        return __ContentApply();
+        return __Apply();
     }
     
-    static __ContentApply = function()
+    static __Apply = function()
     {
         if (!__MetadataEnsure(false)) return false;
         if (!__ContentCheckForChanges()) return false;

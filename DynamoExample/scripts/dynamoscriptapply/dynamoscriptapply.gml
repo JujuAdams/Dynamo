@@ -13,5 +13,5 @@ function DynamoScriptApply(_assetName)
     var _assetStruct = global.__dynamoTrackingStruct[$ _assetName];
     if (_assetStruct == undefined) __DynamoError("Asset \"", _assetName, "\" doesn't exist or is not being tracked");
     if (_assetStruct.__type != __DYNAMO_TYPE_SCRIPT) __DynamoError("Asset \"", _assetName, "\" is not a script");
-    return _assetStruct.__ContentApply();
+    return _assetStruct.__Apply();
 }
