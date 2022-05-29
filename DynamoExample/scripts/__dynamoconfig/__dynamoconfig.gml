@@ -16,6 +16,8 @@
 //You can opt out by adding the "dynamo skip" tag to sound assets you don't wish to track
 #macro DYNAMO_OPT_IN_SOUNDS  false
 
+#macro DYNAMO_DYNAMIC_VARIABLES  true
+
 //The name of the tag that Dynamo will look for in your project to identify assets to live update
 //Change this name if you'd like to tag your assets in some other way
 #macro DYNAMO_TRACK_TAG  "dynamo"
