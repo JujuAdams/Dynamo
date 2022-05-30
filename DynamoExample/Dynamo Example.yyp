@@ -6,6 +6,7 @@
     {"id":{"name":"DynamoFileLoadString","path":"scripts/DynamoFileLoadString/DynamoFileLoadString.yy",},"order":4,},
     {"id":{"name":"TestScript2","path":"scripts/TestScript2/TestScript2.yy",},"order":3,},
     {"id":{"name":"DynamoFileSaveBuffer","path":"scripts/DynamoFileSaveBuffer/DynamoFileSaveBuffer.yy",},"order":7,},
+    {"id":{"name":"oTestLive","path":"objects/oTestLive/oTestLive.yy",},"order":6,},
     {"id":{"name":"DynamoAssetTracked","path":"scripts/DynamoAssetTracked/DynamoAssetTracked.yy",},"order":2,},
     {"id":{"name":"__DynamoLoadString","path":"scripts/__DynamoLoadString/__DynamoLoadString.yy",},"order":8,},
     {"id":{"name":"__DynamoProjectLoad","path":"scripts/__DynamoProjectLoad/__DynamoProjectLoad.yy",},"order":10,},
