@@ -22,19 +22,20 @@ function __DynamoParseGMLInner(_buffer, _bufferSize) constructor
     var _tokenArray       = [];
     var _bufferStartArray = [];
     
+    var _time = get_timer();
+    
     //TODO - Also handle #hexcodes $hexcodes 0xhexcodes int64
     while(buffer_tell(buffer) < _bufferSize)
     {
         token           = undefined;
-        token_is_real   = false;
         token_is_string = false;
         token_is_symbol = false;
         
-        _bufferStartArray[array_length(_tokenArray)] = buffer_tell(buffer);
+        _bufferStartArray[array_length(_bufferStartArray)] = buffer_tell(buffer);
         read_token();
         
         //If we failed to read a token, continue
-        if (!is_string(token)) continue;
+        if (token == undefined) continue;
         
         if (token_is_symbol)
         {
@@ -69,7 +70,9 @@ function __DynamoParseGMLInner(_buffer, _bufferSize) constructor
         var _prevToken = token;
     }
     
-    array_push(_tokenArray, buffer_tell(buffer)-1);
+    array_push(_bufferStartArray, buffer_tell(buffer)-1);
+    
+    __DynamoTrace("time = ", get_timer() - _time);
     
     show_debug_message(_tokenArray);
     show_debug_message(_bufferStartArray);
@@ -102,7 +105,6 @@ function __DynamoParseGMLInner(_buffer, _bufferSize) constructor
                     buffer_poke(buffer, buffer_tell(buffer) - 1, buffer_u8, _value);
                     
                     token_is_string = true;
-                    token_is_symbol = false;
                     break;
                 }
             }
@@ -119,7 +121,7 @@ function __DynamoParseGMLInner(_buffer, _bufferSize) constructor
             }
             else
             {
-                if (_token_start == undefined)
+                if (_token_start == undefined) //TODO - Move this outside the loop
                 {
                     if (_value > 32)
                     {
@@ -160,7 +162,6 @@ function __DynamoParseGMLInner(_buffer, _bufferSize) constructor
                             ||  (_value == 126)) // ~
                             {
                                 token = chr(_value);
-                                token_is_string = false;
                                 token_is_symbol = true;
                                 break;
                             }
@@ -194,25 +195,8 @@ function __DynamoParseGMLInner(_buffer, _bufferSize) constructor
                     token = buffer_read(buffer, buffer_string);
                     buffer_seek(buffer, buffer_seek_relative, -1);
                     buffer_poke(buffer, buffer_tell(buffer), buffer_u8, _value);
-                    
-                    token_is_string = false;
-                    token_is_symbol = false;
                     break;
                 }
-            }
-        }
-        
-        //Figure out if the token is a real value or not
-        if (!token_is_string && !token_is_symbol)
-        {
-            try
-            {
-                token = real(token);
-                token_is_real = true;
-            }
-            catch(_error)
-            {
-                token_is_real = false;
             }
         }
     }
