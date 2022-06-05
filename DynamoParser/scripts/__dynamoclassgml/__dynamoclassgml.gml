@@ -1,4 +1,4 @@
-function __DynamoClassGML(_path, _object, _eventType, _eventNum) constructor
+function __DynamoClassGML(_absolutePath, _relativePath, _object, _eventType, _eventNum) constructor
 {
     static __type = __DYNAMO_TYPE_GML;
     
@@ -7,20 +7,22 @@ function __DynamoClassGML(_path, _object, _eventType, _eventNum) constructor
     __eventNum       = _eventNum;
     __eventSignature = string(__object) + "_t" + string(__eventType) + "_n" + string(__eventNum);
     
-    __contentStub = true;
-    __contentPath = _path;
-    __contentHash = undefined;
+    __contentStub         = true;
+    __contentAbsolutePath = _absolutePath;
+    __contentRelativePath = _relativePath;
+    __contentHash         = undefined;
     
     __contentParserData = undefined;
     
     static __Apply = function()
     {
         __contentStub = false;
-        __contentHash = __DynamoFileHash(__contentPath);
+        __contentHash = __DynamoFileHash(__contentAbsolutePath);
         
         //Load the base content and immediately save a backup
-        var _inBuffer = buffer_load(__contentPath);
-        buffer_save(_inBuffer, __eventSignature + ".gml");
+        var _inBuffer = buffer_load(__contentAbsolutePath);
+        __DynamoTrace("Saving backup of \"", __contentRelativePath, "\"");
+        buffer_save(_inBuffer, global.__dynamoProjectFileSystemName + "/" + __contentRelativePath);
         
         //Parse the content into variable targets
         __contentParserData = __DynamoParseGML(_inBuffer);
@@ -49,8 +51,13 @@ function __DynamoClassGML(_path, _object, _eventType, _eventNum) constructor
         }
         
         //Commit the batch operation and return a buffer, then immediately save it out to disk
-        buffer_save(_batchOp.GetBuffer(), __contentPath);
+        buffer_save(_batchOp.GetBuffer(), __contentAbsolutePath);
         
         _batchOp.Destroy();
+    }
+    
+    static __Restore = function()
+    {
+        
     }
 }

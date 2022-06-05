@@ -17,7 +17,7 @@ function __DynamoProjectFindAssetsByPath(_projectJSON, _directory, _pathSearchPr
     {
         var _resourceStruct = _resourcesArray[_i].id;
         var _path = _resourceStruct.path;
-        if (string_copy(_path, 1, _length) == _pathSearchPrefix) array_push(_outputArray, new _classConstructor(_directory + _path));
+        if (string_copy(_path, 1, _length) == _pathSearchPrefix) array_push(_outputArray, new _classConstructor(_directory + _path, filename_dir(_path) + "/"));
         ++_i;
     }
     

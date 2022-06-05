@@ -52,9 +52,10 @@ function __DynamoInit()
         }
     }
     
-    global.__dynamoProjectJSON      = {};
-    global.__dynamoRunningFromIDE   = __DynamoRunningFromIDE();
-    global.__dynamoProjectDirectory = "";
+    global.__dynamoProjectJSON           = {};
+    global.__dynamoRunningFromIDE        = __DynamoRunningFromIDE();
+    global.__dynamoProjectDirectory      = "";
+    global.__dynamoProjectFileSystemName = undefined;
     
     if (!variable_global_exists("__dynamoVariableLookup")) global.__dynamoVariableLookup = {};
     
@@ -97,8 +98,14 @@ function __DynamoInit()
         //Clean up the discovered string
         global.__dynamoProjectDirectory = string_replace_all(global.__dynamoProjectDirectory, "\n", "");
         global.__dynamoProjectDirectory = string_replace_all(global.__dynamoProjectDirectory, "\r", "");
-        global.__dynamoProjectDirectory += "/";
         
+        var _prefix = filename_dir(global.__dynamoProjectDirectory);
+        global.__dynamoProjectFileSystemName = string_delete(global.__dynamoProjectDirectory, 1, string_length(_prefix)+1);
+        if (DYNAMO_VERBOSE) __DynamoTrace("Project file system name is \"", global.__dynamoProjectFileSystemName, "\"");
+        
+        //And finally generate the actual project directory string
+        //This will be used to orient further file access relative the main .yyp file
+        global.__dynamoProjectDirectory += "/";
         if (DYNAMO_VERBOSE) __DynamoTrace("Found project path \"", global.__dynamoProjectDirectory, "\"");
         
         //Load up the project

@@ -1,6 +1,7 @@
-function __DynamoClassObject(_path) constructor
+function __DynamoClassObject(_absolutePath, _relativePath) constructor
 {
-    __path = _path;
+    __absolutePath = _absolutePath;
+    __relativePath = _relativePath;
     
     __metadataStub = true;
     __metadataHash = undefined;
@@ -31,11 +32,12 @@ function __DynamoClassObject(_path) constructor
                 default: __DynamoError("Event type ", _eventType, " unhandled"); break;
             }
             
-            var _path = filename_dir(__path) + "/" + _filename + ".gml";
-            var _gml = new __DynamoClassGML(_path, _object, _eventType, _eventNum);
+            var _absolutePath = filename_dir(__absolutePath) + "/" + _filename + ".gml";
+            var _relativePath = __relativePath + _filename + ".gml";
+            var _gml = new __DynamoClassGML(_absolutePath, _relativePath, _object, _eventType, _eventNum);
             array_push(global.__dynamoGMLArray, _gml);
             
-            if (DYNAMO_VERBOSE) __DynamoTrace("Added \"", _path, "\"");
+            if (DYNAMO_VERBOSE) __DynamoTrace("Added \"", _absolutePath, "\"");
             _gml.__Apply();
             
             ++_i;
@@ -53,12 +55,12 @@ function __DynamoClassObject(_path) constructor
     
     static __MetadataEnsure = function(_dontCheckHash = true)
     {
-        var _foundHash = (_dontCheckHash && (__metadataHash != undefined) && !__metadataStub)? __metadataHash : __DynamoFileHash(__path);
+        var _foundHash = (_dontCheckHash && (__metadataHash != undefined) && !__metadataStub)? __metadataHash : __DynamoFileHash(__absolutePath);
         if (_foundHash != __metadataHash)
         {
             __metadataHash = _foundHash;
             
-            __json = __DynamoLoadJSON(__path, undefined);
+            __json = __DynamoLoadJSON(__absolutePath, undefined);
             if (is_struct(__json)) __metadataStub = false;
         }
         
