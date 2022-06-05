@@ -21,8 +21,9 @@ function __DynamoClassGML(_absolutePath, _relativePath, _object, _eventType, _ev
         
         //Load the base content and immediately save a backup
         var _inBuffer = buffer_load(__contentAbsolutePath);
-        __DynamoTrace("Saving backup of \"", __contentRelativePath, "\"");
-        buffer_save(_inBuffer, global.__dynamoProjectFileSystemName + "/" + __contentRelativePath);
+        var _backupPath = __contentAbsolutePath + "_backup";
+        file_copy(__contentAbsolutePath, _backupPath);
+        if (!file_exists(_backupPath)) __DynamoError("Could not save backup \"", _backupPath, "\"");
         
         //Parse the content into variable targets
         __contentParserData = __DynamoParseGML(_inBuffer);
