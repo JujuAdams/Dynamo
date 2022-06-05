@@ -24,11 +24,13 @@ function __DynamoClassGML(_absolutePath, _relativePath, _object, _eventType, _ev
             buffer_delete(__contentBuffer);
             __contentBuffer = undefined;
         }
+        
+        __contentHash = undefined;
     }
     
     static __ContentEnsure = function()
     {
-        if (!is_array(__contentParserData))
+        if (__contentHash == undefined)
         {
             __contentStub = false;
             __contentHash = __DynamoFileHash(__contentAbsolutePath);
@@ -55,7 +57,7 @@ function __DynamoClassGML(_absolutePath, _relativePath, _object, _eventType, _ev
         file_delete(__backupPath);
         file_copy(__contentAbsolutePath, __backupPath);
         if (!file_exists(__backupPath)) __DynamoError("Could not save backup \"", __backupPath, "\"");
-            
+        
         //Set up a batched buffer operation so we can modify the source GML
         //This handles the annoying offset calculations for us
         var _batchOp = new __DynamoBufferBatch();
@@ -83,6 +85,26 @@ function __DynamoClassGML(_absolutePath, _relativePath, _object, _eventType, _ev
         buffer_save(_batchOp.GetBuffer(), __contentAbsolutePath);
          
         _batchOp.Destroy();
+    }
+    
+    static __UpdateInternal = function()
+    {
+        if (!__ContentEnsure()) return;
+        
+        //Don't do anything if there're no Dynamo variables in this GML file
+        if (array_length(__contentParserData) <= 0) return;
+        
+        var _i = 0;
+        repeat(array_length(__contentParserData))
+        {
+            with(__contentParserData[_i])
+            {
+                var _variableIdentifier = "__Dynamo_" + other.__eventSignature + "_var" + string(_i);
+                global.__dynamoVariableLookup[$ _variableIdentifier] = __DynamoExpressionCompile(innerString);
+            }
+            
+            ++_i;
+        }
     }
     
     static __Restore = function()

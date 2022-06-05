@@ -77,6 +77,10 @@ function __DynamoInit()
     global.__dynamoInFocus    = false;
     global.__dynamoCheckIndex = 0;
     
+    //Big ol' list of operators. Operators at the top at processed first
+    //Not included here are negative signs, negation (! / NOT), and parentheses - these are handled separately
+    global.__dynamoExpressionOpList = ["/", "*", "+", "-"];
+    
     if (__DYNAMO_DEV_MODE)
     {
         global.__dynamoProjectDirectory = (__DYNAMO_FORCE_DIRECTORY != undefined)? __DYNAMO_FORCE_DIRECTORY : __DynamoLoadString(__DYNAMO_PROJECT_DIRECTORY_PATH_NAME);
@@ -135,6 +139,7 @@ function __DynamoInit()
                     if (__ContentEnsure())
                     {
                         __Apply();
+                        __Restore();
                         ++_i;
                     }
                     else
