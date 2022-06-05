@@ -122,11 +122,32 @@ function __DynamoInit()
             var _i = 0;
             repeat(array_length(_objectArray))
             {
-                _objectArray[_i].__MakeGML();
+                _objectArray[_i].__ConstructGMLContainers();
                 ++_i;
             }
             
-            __DynamoVariableLookupExport(global.__dynamoProjectDirectory);
+            //Insert __DynamoVariable() calls into GML whilst also filling out the expression lookup struct
+            var _i = 0;
+            repeat(array_length(global.__dynamoGMLArray))
+            {
+                with(global.__dynamoGMLArray[_i])
+                {
+                    if (__ContentEnsure())
+                    {
+                        __Apply();
+                        ++_i;
+                    }
+                    else
+                    {
+                        array_delete(global.__dynamoGMLArray, _i, 1);
+                    }
+                    
+                    __CleanUp();
+                }
+            }
+            
+            //Save out found expressions to the __DynamoVariableLookupData() script
+            __DynamoVariableDataExport(global.__dynamoProjectDirectory);
         }
         
         global.__dynamoScriptArray = __DynamoProjectFindAssetsByPath(global.__dynamoProjectJSON, global.__dynamoProjectDirectory, "scripts", __DynamoClassScript);

@@ -8,7 +8,7 @@ function __DynamoClassObject(_absolutePath, _relativePath) constructor
     
     __json = {};
     
-    static __MakeGML = function()
+    static __ConstructGMLContainers = function()
     {
         if (!is_struct(__json)) return;
         
@@ -25,7 +25,7 @@ function __DynamoClassObject(_absolutePath, _relativePath) constructor
             var _eventType = _eventStruct.eventType;
             
             var _filename = undefined;
-            switch(_eventType)
+            switch(_eventType) //TODO - Flesh this out
             {
                 case 8: _filename = "Draw_" + string(_eventNum); break;
                 
@@ -38,7 +38,6 @@ function __DynamoClassObject(_absolutePath, _relativePath) constructor
             array_push(global.__dynamoGMLArray, _gml);
             
             if (DYNAMO_VERBOSE) __DynamoTrace("Added \"", _absolutePath, "\"");
-            _gml.__Apply();
             
             ++_i;
         }

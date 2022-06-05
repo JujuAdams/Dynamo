@@ -16,7 +16,7 @@
     {"id":{"name":"DynamoSoundAutoGet","path":"scripts/DynamoSoundAutoGet/DynamoSoundAutoGet.yy",},"order":10,},
     {"id":{"name":"__DynamoLoadString","path":"scripts/__DynamoLoadString/__DynamoLoadString.yy",},"order":8,},
     {"id":{"name":"DynamoFileSaveString","path":"scripts/DynamoFileSaveString/DynamoFileSaveString.yy",},"order":6,},
-    {"id":{"name":"__DynamoVariableLookupExport","path":"scripts/__DynamoVariableLookupExport/__DynamoVariableLookupExport.yy",},"order":20,},
+    {"id":{"name":"__DynamoVariableDataExport","path":"scripts/__DynamoVariableDataExport/__DynamoVariableDataExport.yy",},"order":20,},
     {"id":{"name":"DynamoAssetType","path":"scripts/DynamoAssetType/DynamoAssetType.yy",},"order":2,},
     {"id":{"name":"__DynamoSystem","path":"scripts/__DynamoSystem/__DynamoSystem.yy",},"order":14,},
     {"id":{"name":"__DynamoClassGML","path":"scripts/__DynamoClassGML/__DynamoClassGML.yy",},"order":4,},
