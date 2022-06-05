@@ -4,6 +4,7 @@ function __DynamoParseGML(_inBuffer)
     buffer_seek(_inBuffer, buffer_seek_start, 0);
     var _parser = new __DynamoParseGMLInner(_inBuffer, buffer_get_size(_inBuffer));
     buffer_seek(_inBuffer, buffer_seek_start, _oldTell);
+    return _parser.targetArray;
 }
 
 function __DynamoParseGMLInner(_buffer, _bufferSize) constructor
@@ -21,8 +22,6 @@ function __DynamoParseGMLInner(_buffer, _bufferSize) constructor
     
     var _tokenArray       = [];
     var _bufferStartArray = [];
-    
-    var _time = get_timer();
     
     //TODO - Also handle #hexcodes $hexcodes 0xhexcodes int64
     while(buffer_tell(buffer) < _bufferSize)
@@ -51,9 +50,19 @@ function __DynamoParseGMLInner(_buffer, _bufferSize) constructor
                 {
                     if (_doubleBracketValidDict[_bracketDepth+1])
                     {
+                        var _startIndex = _doubleBracketTokenDict[_bracketDepth+1]+1;
+                        var _endIndex   = array_length(_tokenArray)-2;
+                        
+                        var _targetTokenCount = 1 + _endIndex - _startIndex;
+                        var _targetTokenArray = array_create(_targetTokenCount);
+                        array_copy(_targetTokenArray, 0, _tokenArray, _startIndex, _targetTokenCount);
+                        
                         array_push(targetArray, {
-                            startIndex: _doubleBracketTokenDict[_bracketDepth+1]+1,
-                            endIndex:   array_length(_tokenArray)-2,
+                            startIndex:  _startIndex,
+                            endIndex:    _endIndex,
+                            startPos:    undefined,
+                            endPos:      undefined,
+                            innerString: undefined,
                         });
                     }
                 }
@@ -72,15 +81,18 @@ function __DynamoParseGMLInner(_buffer, _bufferSize) constructor
     
     array_push(_bufferStartArray, buffer_tell(buffer)-1);
     
-    __DynamoTrace("time = ", get_timer() - _time);
-    
-    show_debug_message(_tokenArray);
-    show_debug_message(_bufferStartArray);
-    show_debug_message(targetArray);
-    
-    show_debug_message(__DynamoBufferReadString(buffer, _bufferStartArray[0], _bufferStartArray[targetArray[0].startIndex-1]));
-    show_debug_message(__DynamoBufferReadString(buffer, _bufferStartArray[targetArray[0].endIndex+1], _bufferStartArray[targetArray[1].startIndex-1]));
-    show_debug_message(__DynamoBufferReadString(buffer, _bufferStartArray[targetArray[1].endIndex+1], _bufferStartArray[array_length(_bufferStartArray)-1]));
+    var _i = 0;
+    repeat(array_length(targetArray))
+    {
+        with(targetArray[_i])
+        {
+            startPos    = _bufferStartArray[startIndex-1];
+            endPos      = _bufferStartArray[endIndex+1  ];
+            innerString = __DynamoBufferReadString(other.buffer, startPos+1, endPos-1);
+        }
+        
+        ++_i;
+    }
     
     static read_token = function()
     {

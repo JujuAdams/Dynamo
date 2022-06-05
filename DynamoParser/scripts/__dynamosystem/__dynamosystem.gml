@@ -2,7 +2,7 @@
 #macro __DYNAMO_DATE      "2022-05-28"
 #macro __DYNAMO_DEV_MODE  (DYNAMO_ENABLED && global.__dynamoRunningFromIDE)
 
-#macro __DYNAMO_FORCE_DIRECTORY "D:/GitHub/Dynamo/DynamoExample"
+#macro __DYNAMO_FORCE_DIRECTORY "A:\\GitHub repos\\Mine\\Dynamo\\DynamoExample"
 
 #macro __DYNAMO_PROJECT_DIRECTORY_PATH_NAME  "projectDirectory.txt"
 
@@ -55,6 +55,8 @@ function __DynamoInit()
     global.__dynamoProjectJSON      = {};
     global.__dynamoRunningFromIDE   = __DynamoRunningFromIDE();
     global.__dynamoProjectDirectory = "";
+    
+    if (!variable_global_exists("__dynamoVariableLookup")) global.__dynamoVariableLookup = {};
     
     global.__dynamoScriptAuto         = false;
     global.__dynamoScriptAutoApply    = false;
@@ -116,6 +118,8 @@ function __DynamoInit()
                 _objectArray[_i].__MakeGML();
                 ++_i;
             }
+            
+            __DynamoVariableLookupExport(global.__dynamoProjectDirectory);
         }
         
         global.__dynamoScriptArray = __DynamoProjectFindAssetsByPath(global.__dynamoProjectJSON, global.__dynamoProjectDirectory, "scripts", __DynamoClassScript);

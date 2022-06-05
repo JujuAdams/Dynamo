@@ -9,6 +9,7 @@
     {"id":{"name":"oTestLive","path":"objects/oTestLive/oTestLive.yy",},"order":6,},
     {"id":{"name":"DynamoAssetTracked","path":"scripts/DynamoAssetTracked/DynamoAssetTracked.yy",},"order":2,},
     {"id":{"name":"__DynamoLoadString","path":"scripts/__DynamoLoadString/__DynamoLoadString.yy",},"order":8,},
+    {"id":{"name":"__DynamoVariableLookupData","path":"scripts/__DynamoVariableLookupData/__DynamoVariableLookupData.yy",},"order":15,},
     {"id":{"name":"__DynamoProjectLoad","path":"scripts/__DynamoProjectLoad/__DynamoProjectLoad.yy",},"order":10,},
     {"id":{"name":"__DynamoAssetArrayFilterRejectByTag","path":"scripts/__DynamoAssetArrayFilterRejectByTag/__DynamoAssetArrayFilterRejectByTag.yy",},"order":4,},
     {"id":{"name":"__DynamoSystem","path":"scripts/__DynamoSystem/__DynamoSystem.yy",},"order":0,},
@@ -101,7 +102,7 @@
     {"CopyToMask":17179869184,"filePath":"datafiles","resourceVersion":"1.0","name":"OperaGX.txt","resourceType":"GMIncludedFile",},
   ],
   "MetaData": {
-    "IDEVersion": "2022.500.0.116",
+    "IDEVersion": "2022.500.0.97",
   },
   "resourceVersion": "1.5",
   "name": "Dynamo Example",

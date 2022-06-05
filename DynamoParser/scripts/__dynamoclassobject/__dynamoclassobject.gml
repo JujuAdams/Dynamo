@@ -36,7 +36,7 @@ function __DynamoClassObject(_path) constructor
             array_push(global.__dynamoGMLArray, _gml);
             
             if (DYNAMO_VERBOSE) __DynamoTrace("Added \"", _path, "\"");
-            _gml.__Setup();
+            _gml.__Apply();
             
             ++_i;
         }
