@@ -68,9 +68,9 @@ function __DynamoVariableDataExport(_directory)
         buffer_write(_buffer, buffer_text, "    ");
         buffer_write(_buffer, buffer_text, "\""); //We wrap the variable identifier in quote marks just in case a space sneaks in
         buffer_write(_buffer, buffer_text, _name);
-        buffer_write(_buffer, buffer_text, "\": \"");
+        buffer_write(_buffer, buffer_text, "\": __DynamoExpressionCompile(\"");
         buffer_write(_buffer, buffer_text, _value);
-        buffer_write(_buffer, buffer_text, "\",\n");
+        buffer_write(_buffer, buffer_text, "\"),\n");
         
         ++_i;
     }
