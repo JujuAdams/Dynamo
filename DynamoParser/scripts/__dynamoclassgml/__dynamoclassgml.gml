@@ -59,6 +59,8 @@ function __DynamoClassGML(_absolutePath, _relativePath, _object, _eventType, _ev
     
     static __Restore = function()
     {
-        
+        var _backupPath = __contentAbsolutePath + "_backup";
+        file_copy(_backupPath, __contentAbsolutePath);
+        if (md5_file(__contentAbsolutePath) != md5_file(_backupPath)) __DynamoError("Failed to restore backup \"", _backupPath, "\"");
     }
 }
