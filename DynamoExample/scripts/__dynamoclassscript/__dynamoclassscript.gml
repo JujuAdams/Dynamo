@@ -1,8 +1,11 @@
-function __DynamoClassScript(_path) constructor
+function __DynamoClassScript(_name, _path) constructor
 {
-    static __type = __DYNAMO_TYPE_SCRIPT;
-    
+    __name = _name;
     __path = _path;
+    
+    array_push(global.__dynamoScriptArray, self);
+    global.__dynamoScriptStruct[$ __name] = self;
+    array_push(global.__dynamoTrackingArray, self);
     
     __metadataStub = true;
     __metadataHash = undefined;
@@ -12,20 +15,15 @@ function __DynamoClassScript(_path) constructor
     __contentPath   = undefined;
     __contentString = "";
     
+    __callback = undefined;
+    
     __json = {};
     
-    static __Track = function()
-    {
-        if (!__MetadataEnsure()) return;
-        
-        var _name = __GetName();
-        array_push(global.__dynamoTrackingArray, _name);
-        global.__dynamoTrackingStruct[$ _name] = self;
-    }
     
-    static __MetadataEnsure = function(_dontCheckHash = true)
+    
+    static __MetadataEnsure = function()
     {
-        var _foundHash = (_dontCheckHash && (__metadataHash != undefined) && !__metadataStub)? __metadataHash : __DynamoFileHash(__path);
+        var _foundHash = __DynamoFileHash(__path);
         if (_foundHash != __metadataHash)
         {
             __metadataHash = _foundHash;
@@ -41,12 +39,12 @@ function __DynamoClassScript(_path) constructor
         return is_struct(__json);
     }
     
-    static __ContentEnsure = function(_dontCheckHash = true)
+    static __ContentEnsure = function()
     {
-        if (__contentPath == undefined) __MetadataEnsure(false);
+        if (__contentPath == undefined) __MetadataEnsure();
         if (__contentPath == undefined) return false;
         
-        var _foundHash = (_dontCheckHash && (__contentHash != undefined) && !__contentStub)? __contentHash : __DynamoFileHash(__contentPath);
+        var _foundHash = __DynamoFileHash(__contentPath);
         if (_foundHash != __contentHash)
         {
             __contentHash = _foundHash;
@@ -58,33 +56,21 @@ function __DynamoClassScript(_path) constructor
         return (__contentString != "");
     }
     
-    static __TagAnyMatches = function(_tag)
+    static __ContentHasChanged = function()
     {
         if (!__MetadataEnsure()) return false;
-        
-        var _tagArray = __json.tags;
-        var _i = 0;
-        repeat(array_length(_tagArray))
-        {
-            if (_tagArray[_i] == _tag) return true;
-            ++_i;
-        }
-        
-        return false;
+        return (__DynamoFileHash(__contentPath) != __contentHash);
     }
     
-    static __Check = function()
+    static __CheckAndLoad = function()
     {
-        return __Apply();
+        if (__ContentHasChanged()) __Load();
     }
     
-    static __Apply = function()
+    static __Load = function()
     {
-        if (!__MetadataEnsure(false)) return false;
-        if (!__ContentCheckForChanges()) return false;
-        if (!__ContentEnsure(false)) return false;
-        
-        if (DYNAMO_VERBOSE) __DynamoTrace("Changes found in \"", __contentPath, "\"");
+        __MetadataEnsure();
+        __ContentEnsure();
         
         try
         {
@@ -92,14 +78,15 @@ function __DynamoClassScript(_path) constructor
         }
         catch(_error)
         {
-            __DynamoTrace("Warning! Error encountered whilst parsing \"", __contentPath, "\"\n", _error);
-            return false;
+            __DynamoTrace("Warning! Error encountered whilst parsing \"", __contentPath, "\" as a script");
+            show_debug_message(_error);
+            return;
         }
         
         if (!is_struct(_data))
         {
             __DynamoTrace("Warning! Could not apply content for \"", __contentPath, "\"");
-            return false;
+            return;
         }
         
         var _topLevelNamesArray = variable_struct_get_names(_data);
@@ -124,23 +111,17 @@ function __DynamoClassScript(_path) constructor
             ++_i;
         }
         
-        return true;
-    }
-    
-    static __ContentCheckForChanges = function()
-    {
-        if (!__MetadataEnsure()) return false;
-        return (__DynamoFileHash(__contentPath) != __contentHash);
-    }
-    
-    static __GetName = function()
-    {
-        if (!__MetadataEnsure()) return "<unknown script>";
-        return __json.name;
-    }
-    
-    static toString = function()
-    {
-        return __GetName();
+        if (is_method(__callback))
+        {
+            __callback();
+        }
+        else if (is_numeric(__callback) && script_exists(__callback))
+        {
+            script_execute(__callback);
+        }
+        else if (!is_undefined(__callback))
+        {
+            __DynamoError("Illegal callback for script \"", __name, "\"");
+        }
     }
 }

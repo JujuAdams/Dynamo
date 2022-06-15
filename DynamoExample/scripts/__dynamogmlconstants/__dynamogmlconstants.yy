@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Dynamo Example",
-    "path": "Dynamo Example.yyp",
+    "name": "(System)",
+    "path": "folders/Dynamo/(System).yy",
   },
   "resourceVersion": "1.0",
-  "name": "TestScript2",
+  "name": "__DynamoGMLConstants",
   "tags": [],
   "resourceType": "GMScript",
 }

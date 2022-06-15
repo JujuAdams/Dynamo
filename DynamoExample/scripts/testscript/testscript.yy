@@ -7,8 +7,6 @@
   },
   "resourceVersion": "1.0",
   "name": "TestScript",
-  "tags": [
-    "dynamo",
-  ],
+  "tags": [],
   "resourceType": "GMScript",
 }

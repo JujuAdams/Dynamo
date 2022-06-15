@@ -1,1 +1,1 @@
-global.separateScript = "Any *simple* script tagged with \"dynamo\" can be live updated";
+global.separateScript = "Any *simple* script added via DynamoWatchScript() can be live edited";

@@ -4,18 +4,16 @@
 
 #macro __DYNAMO_PROJECT_DIRECTORY_PATH_NAME  "projectDirectory.txt"
 
-#macro __DYNAMO_TYPE_SCRIPT  "script"
-#macro __DYNAMO_TYPE_FILE    "included file"
-
 __DynamoTrace("Welcome to Dynamo by @jujuadams! This is version ", __DYNAMO_VERSION, ", ", __DYNAMO_DATE);
-global.__dynamoRunningFromIDE = undefined;
+global.__dynamoRunningFromIDE = false;
 
 
-__DynamoInit();
 
-function __DynamoInit()
+__DynamoInitialize();
+
+function __DynamoInitialize()
 {
-    if (variable_global_exists("__dynamoProjectJSON")) return;
+    if (variable_global_exists("__dynamoProjectDirectory")) return;
     
     //Attempt to set up a time source for slick automatic input handling
     try
@@ -48,22 +46,14 @@ function __DynamoInit()
         }
     }
     
-    global.__dynamoProjectJSON      = {};
     global.__dynamoRunningFromIDE   = __DynamoRunningFromIDE();
     global.__dynamoProjectDirectory = "";
     
-    global.__dynamoScriptAuto         = false;
-    global.__dynamoScriptAutoApply    = false;
-    global.__dynamoScriptAutoCallback = undefined;
-    global.__dynamoSoundAuto          = false;
-    global.__dynamoSoundAutoCallback  = undefined;
-    global.__dynamoFileAuto           = false;
-    global.__dynamoFileAutoCallback   = undefined;
-    
     global.__dynamoScriptArray    = [];
+    global.__dynamoScriptStruct   = {};
     global.__dynamoFileArray      = [];
+    global.__dynamoFileStruct     = {};
     global.__dynamoTrackingArray  = [];
-    global.__dynamoTrackingStruct = {};
     
     global.__dynamoInFocus    = false;
     global.__dynamoCheckIndex = 0;
@@ -87,48 +77,16 @@ function __DynamoInit()
     else
     {
         //Clean up the discovered string
+        global.__dynamoProjectDirectory = string_replace_all(global.__dynamoProjectDirectory, "\\", "/");
         global.__dynamoProjectDirectory = string_replace_all(global.__dynamoProjectDirectory, "\n", "");
         global.__dynamoProjectDirectory = string_replace_all(global.__dynamoProjectDirectory, "\r", "");
         global.__dynamoProjectDirectory += "/";
         
         if (DYNAMO_VERBOSE) __DynamoTrace("Found project path \"", global.__dynamoProjectDirectory, "\"");
-        
-        //Load up the project
-        global.__dynamoProjectJSON = __DynamoProjectLoad(global.__dynamoProjectDirectory);
-        
-        global.__dynamoScriptArray = __DynamoProjectFindAssetsByPath(global.__dynamoProjectJSON, global.__dynamoProjectDirectory, "scripts", __DynamoClassScript);
-        __DynamoAssetArrayFilterByTag(global.__dynamoScriptArray, DYNAMO_TRACK_TAG);
-        __DynamoAssetArrayFilterRejectByTag(global.__dynamoScriptArray, DYNAMO_REJECT_TAG);
-        
-        var _i = 0;
-        repeat(array_length(global.__dynamoScriptArray))
-        {
-            global.__dynamoScriptArray[_i].__Track();
-            ++_i;
-        }
-        
-        global.__dynamoSoundArray = __DynamoProjectFindAssetsByPath(global.__dynamoProjectJSON, global.__dynamoProjectDirectory, "sounds", __DynamoClassSound);
-        if (DYNAMO_OPT_IN_SOUNDS) __DynamoAssetArrayFilterByTag(global.__dynamoSoundArray, DYNAMO_TRACK_TAG);
-        __DynamoAssetArrayFilterRejectByTag(global.__dynamoSoundArray, DYNAMO_REJECT_TAG);
-        
-        var _i = 0;
-        repeat(array_length(global.__dynamoSoundArray))
-        {
-            global.__dynamoSoundArray[_i].__Track();
-            ++_i;
-        }
-        
-        global.__dynamoFileArray = __DynamoProjectFindFiles(global.__dynamoProjectJSON, global.__dynamoProjectDirectory, os_type, os_browser);
-        var _i = 0;
-        repeat(array_length(global.__dynamoFileArray))
-        {
-            global.__dynamoFileArray[_i].__Track();
-            ++_i;
-        }
-        
-        if (DYNAMO_VERBOSE) __DynamoTrace("Tracking ", global.__dynamoTrackingArray);
     }
 }
+
+
 
 function __DynamoTrace()
 {
@@ -143,19 +101,7 @@ function __DynamoTrace()
     show_debug_message("Dynamo: " + _string);
 }
 
-function __DynamoLoud()
-{
-    var _string = "";
-    var _i = 0;
-    repeat(argument_count)
-    {
-        _string += string(argument[_i]);
-        ++_i;
-    }
-    
-    if ((global.__dynamoRunningFromIDE == undefined) || __DYNAMO_DEV_MODE) show_message(_string);
-    show_debug_message("Dynamo: Loud: " + _string);
-}
+
 
 function __DynamoError()
 {

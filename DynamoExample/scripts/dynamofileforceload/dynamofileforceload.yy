@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Dynamo Example",
-    "path": "Dynamo Example.yyp",
+    "name": "Dynamo",
+    "path": "folders/Dynamo.yy",
   },
   "resourceVersion": "1.0",
-  "name": "TestScript2",
+  "name": "DynamoFileForceLoad",
   "tags": [],
   "resourceType": "GMScript",
 }

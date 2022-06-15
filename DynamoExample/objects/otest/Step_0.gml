@@ -1,1 +1,0 @@
-if (keyboard_check_pressed(ord("M"))) audio_play_sound(sndTest, 1, false);

@@ -1,28 +1,27 @@
-//Initialize our variables
-allText     = DynamoFileLoadString("All.txt");
-nestedText  = DynamoFileLoadString("Folder\\Nested.txt");
-windowsText = (os_type != os_windows)? "Not exported for this platform" : DynamoFileLoadString("Windows.txt");
-macText     = (os_type != os_macosx )? "Not exported for this platform" : DynamoFileLoadString("Folder/Nested.txt");
+DynamoWatchScript(TestScript);
+DynamoWatchScript(TestScript2);
 
-//Set up script auto-loading with a callback
-DynamoScriptAutoSet(true, true, function(_changesArray)
+DynamoWatchFile("All.txt", "string", function(_content)
 {
-    show_debug_message("The following scripts have changed: " + string(_changesArray));
+    allText = _content;
 });
 
-//Set up script auto-loading with a callback
-DynamoSoundAutoSet(true, function(_changesArray)
+DynamoWatchFile("Folder\\Nested.txt", "string", function(_content)
 {
-    show_debug_message("The following sounds have changed: " + string(_changesArray));
+    nestedText = _content;
 });
 
-//Set up file auto-loading with a callback
-DynamoFileAutoSet(true, function(_changesArray)
+DynamoWatchFile("Windows.txt", "string", function(_content)
 {
-    show_debug_message("The following included files have changed: " + string(_changesArray));
-    
-    allText    = DynamoFileLoadString("All.txt");
-    nestedText = DynamoFileLoadString("Folder\\Nested.txt");
-    if (os_type == os_windows) windowsText = DynamoFileLoadString("Windows.txt");
-    if (os_type == os_macosx ) macText     = DynamoFileLoadString("macOS.txt");
+    windowsText = _content ?? "Not exported for this platform";
 });
+
+DynamoWatchFile("macOS.txt", "string", function(_content)
+{
+    macText = _content ?? "Not exported for this platform";
+});
+
+DynamoFileForceLoad("All.txt");
+DynamoFileForceLoad("Folder\\Nested.txt");
+DynamoFileForceLoad("Windows.txt");
+DynamoFileForceLoad("macOS.txt");
