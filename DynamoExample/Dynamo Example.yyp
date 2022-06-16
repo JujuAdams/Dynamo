@@ -25,7 +25,7 @@
     {"id":{"name":"__DynamoParseCSV","path":"scripts/__DynamoParseCSV/__DynamoParseCSV.yy",},"order":11,},
     {"id":{"name":"__DynamoParseGML","path":"scripts/__DynamoParseGML/__DynamoParseGML.yy",},"order":9,},
     {"id":{"name":"__DynamoGMLConstants","path":"scripts/__DynamoGMLConstants/__DynamoGMLConstants.yy",},"order":1,},
-    {"id":{"name":"__DynamoScan","path":"scripts/__DynamoScan/__DynamoScan.yy",},"order":5,},
+    {"id":{"name":"__DynamoAutoScan","path":"scripts/__DynamoAutoScan/__DynamoAutoScan.yy",},"order":5,},
     {"id":{"name":"DynamoScriptWatch","path":"scripts/DynamoScriptWatch/DynamoScriptWatch.yy",},"order":1,},
     {"id":{"name":"rmMain","path":"rooms/rmMain/rmMain.yy",},"order":1,},
   ],

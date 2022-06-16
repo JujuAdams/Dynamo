@@ -1,4 +1,4 @@
-function __DynamoScan()
+function __DynamoAutoScan()
 {
     if (!__DYNAMO_DEV_MODE || !DYNAMO_AUTO_SCAN) return;
     

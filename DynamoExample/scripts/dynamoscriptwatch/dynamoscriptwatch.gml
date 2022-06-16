@@ -3,6 +3,10 @@
 /// loaded, parsed, and applied. If you specified a callback function when calling
 /// DynamoScriptWatch() then that will be executed after data in the script is applied.
 /// 
+/// Because data is being stored in a script and *not* instead a function, the code inside a
+/// script is executed on boot by the GameMaker runtime as you'd expect. This means that, unlike
+/// file watchers, data represented inside a Dynamo script is immediately available.
+/// 
 /// There are many limitations to what can be done with Dynamo and scripts. It's best to think
 /// about Dynamo scripts as being as complex as JSON but no further. It is possible to reference
 /// basic numbers and strings (of course!) as well as being able to nest arrays and structs as

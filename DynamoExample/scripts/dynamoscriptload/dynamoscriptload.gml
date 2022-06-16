@@ -1,4 +1,4 @@
-/// Forces a script to be loaded, executing the callback defined for the script via DynamoScriptWatch() (if any)
+/// Forces a script to be loaded, executing the callback defined for the script via DynamoScriptWatch() (if any).
 /// 
 /// @param script
 

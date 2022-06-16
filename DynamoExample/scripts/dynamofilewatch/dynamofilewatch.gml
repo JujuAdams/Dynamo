@@ -6,6 +6,9 @@
 /// If you call DynamoFileLoad() then the Included File will be loaded whether there have been
 /// changes or not, and the callback will be executed as normal.
 /// 
+/// Note that setting up a file watcher will not initially load a file. If you want immediate
+/// access to data inside a file at the start of your game you'll need to call DynamoFileLoad().
+/// 
 /// <dataFormat> can be:
 ///    "json"      Content is parsed as JSON
 ///    "csv"       Content is parsed as CSV (comma-separated, with strings delimited by double quotes ")

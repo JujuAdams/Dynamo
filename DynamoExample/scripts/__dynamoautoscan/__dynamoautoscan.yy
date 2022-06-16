@@ -6,7 +6,7 @@
     "path": "folders/Dynamo/(System).yy",
   },
   "resourceVersion": "1.0",
-  "name": "__DynamoScan",
+  "name": "__DynamoAutoScan",
   "tags": [],
   "resourceType": "GMScript",
 }

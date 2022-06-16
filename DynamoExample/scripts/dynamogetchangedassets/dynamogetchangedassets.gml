@@ -1,3 +1,6 @@
+/// Returns a struct that contains two arrays. These arrays will contain which assets have changed,
+/// be it names of script or Included File paths, as appropriate.
+
 function DynamoGetChangedAssets()
 {
     static _scriptArray = [];
@@ -7,6 +10,9 @@ function DynamoGetChangedAssets()
         scripts: _scriptArray,
         files: _fileArray,
     };
+    
+    array_resize(_scriptArray, 0);
+    array_resize(_fileArray, 0);
     
     var _i = 0;
     repeat(array_length(global.__dynamoScriptArray))

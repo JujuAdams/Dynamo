@@ -40,7 +40,7 @@ function __DynamoInitialize()
         }
         catch(_error)
         {
-            //If the above fails then fall back on needing to call DynamoAutoUpdate()
+            //If the above fails then fall back on needing to call DynamoForceScan()
             global.__dynamoTimeSource = undefined;
             __DynamoTrace("Warning! Running on a GM runtime earlier than 2022.5");
         }

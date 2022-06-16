@@ -1,3 +1,7 @@
+/// Forces Dynamo to scan all watched assets (scripts and Included Files). Any assets that
+/// have changed will be reloaded. If DYNAMO_AUTO_SCAN is set to <true> then you don't
+/// need to call this function as Dynamo will constantly scan assets for you.
+
 function DynamoForceScan()
 {
     if (!__DYNAMO_DEV_MODE) return undefined;
