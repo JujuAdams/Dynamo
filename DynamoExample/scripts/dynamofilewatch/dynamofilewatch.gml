@@ -9,9 +9,12 @@
 /// Note that setting up a file watcher will not initially load a file. If you want immediate
 /// access to data inside a file at the start of your game you'll need to call DynamoFileLoad().
 /// 
+/// If there're any problems whilst parsing data found in a file then <undefined> will be passed
+/// to the callback.
+/// 
 /// <dataFormat> can be:
 ///    "json"      Content is parsed as JSON
-///    "csv"       Content is parsed as CSV (comma-separated, with strings delimited by double quotes ")
+///    "csv"       Content is parsed as CSV: comma-separated, with strings delimited by double quotes
 ///    "string"    Content is parsed as UTF8-formatted plaintext
 ///    "buffer"    Content is not parsed and content is instead returned to the callback as a buffer index
 /// 

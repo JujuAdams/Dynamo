@@ -3,9 +3,9 @@ DynamoScriptWatch(TestScript);
 DynamoScriptWatch(TestScript2);
 
 //Set up Included Files watching
-DynamoFileWatch("All.txt", "string", function(_content)
+DynamoFileWatch("Root.txt", "string", function(_content)
 {
-    allText = _content;
+    rootText = _content;
 });
 
 DynamoFileWatch("Folder\\Nested.txt", "string", function(_content)
@@ -13,19 +13,19 @@ DynamoFileWatch("Folder\\Nested.txt", "string", function(_content)
     nestedText = _content;
 });
 
-DynamoFileWatch("Windows.txt", "string", function(_content)
+DynamoFileWatch("JSON.json", "json", function(_content)
 {
-    windowsText = _content ?? "Not exported for this platform";
+    jsonData = _content;
 });
 
-DynamoFileWatch("macOS.txt", "string", function(_content)
+DynamoFileWatch("CSV.csv", "csv", function(_content)
 {
-    macText = _content ?? "Not exported for this platform";
+    csvData = _content;
 });
 
 //Setting up file watchers doesn't automatically load files so let's do that now
 //(Scripts are, by their very nature, automatically executed by GameMaker on boot)
-DynamoFileLoad("All.txt");
+DynamoFileLoad("Root.txt");
 DynamoFileLoad("Folder\\Nested.txt");
-DynamoFileLoad("Windows.txt");
-DynamoFileLoad("macOS.txt");
+DynamoFileLoad("JSON.json");
+DynamoFileLoad("CSV.csv");

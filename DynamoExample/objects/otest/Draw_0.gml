@@ -6,9 +6,9 @@ _string += "global.anotherVariable = " + string(global.anotherVariable) + "\n";
 _string += "global.structArrayThing = " + string(global.structArrayThing) + "\n";
 _string += "global.separateScript = " + string(global.separateScript) + "\n";
 _string += "\n";
-_string += "allText = \"" + allText + "\"\n";
+_string += "rootText = \"" + rootText + "\"\n";
 _string += "nestedText = \"" + nestedText + "\"\n";
-_string += "windowsText = \"" + windowsText + "\"\n";
-_string += "macText = \"" + macText + "\"\n";
+_string += "jsonData = " + string(jsonData) + "\n";
+_string += "csvData = " + string(csvData) + "\n";
 
 draw_text(10, 10, _string);

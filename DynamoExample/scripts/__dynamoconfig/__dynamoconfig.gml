@@ -17,4 +17,8 @@
 //This can be useful to track down problems when using Dynamo
 #macro DYNAMO_VERBOSE  true
 
+//Values in CSV files cells are inherently strings
+//This macro control whether Dynamo should try to convert values in CSV files into numbers
+#macro DYNAMO_CSV_TRY_REAL  true
+
 #macro DYNAMO_DYNAMIC_VARIABLES  true

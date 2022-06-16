@@ -114,6 +114,11 @@ function __DynamoParseCSV()
                         _root_array[@ array_length(_root_array)] = _row_array;
                     }
                     
+                    if (DYNAMO_CSV_TRY_REAL)
+                    {
+                        try { _string = real(_string); } catch(_) {}
+                    }
+                    
                     _row_array[@ array_length(_row_array)] = _string;
                 
                     _string_cell = false;
