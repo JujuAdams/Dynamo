@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Dynamo",
-    "path": "folders/Dynamo.yy",
+    "name": "(System)",
+    "path": "folders/Dynamo/(System).yy",
   },
   "resourceVersion": "1.0",
-  "name": "DynamoWatchFile",
+  "name": "__DynamoParseGML",
   "tags": [],
   "resourceType": "GMScript",
 }

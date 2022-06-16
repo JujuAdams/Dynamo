@@ -7,52 +7,32 @@ function __DynamoClassFile(_name, _directory, _localPath) constructor
     global.__dynamoFileStruct[$ __name] = self;
     array_push(global.__dynamoTrackingArray, self);
     
-    __contentStub   = true;
-    __contentHash   = undefined;
-    __contentBuffer = undefined;
+    __hash = undefined;
     
     __dataFormat = undefined;
     __callback   = undefined;
     
     
     
-    static __ContentEnsure = function()
+    static __HasChanged = function()
     {
-        var _foundHash = __DynamoFileHash(__path);
-        if (_foundHash != __contentHash)
-        {
-            __contentHash = _foundHash;
-            
-            __contentBuffer = __DynamoLoadBuffer(__path);
-            if (__contentBuffer != undefined) __contentStub = false;
-        }
-        
-        return (__contentBuffer != undefined);
-    }
-    
-    static __ContentHasChanged = function()
-    {
-        return (__DynamoFileHash(__path) != __contentHash);
-    }
-    
-    static __CheckAndLoad = function()
-    {
-        if (__ContentHasChanged()) __Load();
+        return (__DynamoFileHash(__path) != __hash);
     }
     
     static __Load = function()
     {
-        __ContentEnsure();
+        __hash = __DynamoFileHash(__path);
+        var _buffer = __DynamoLoadBuffer(__path);
         
         var _return = undefined;
-        if (__contentBuffer != undefined)
+        if (_buffer != undefined)
         {
             switch(__dataFormat)
             {
                 case "json":
-                    var _oldTell = buffer_tell(__contentBuffer);
-                    _return = buffer_read(__contentBuffer, buffer_text);
-                    buffer_seek(__contentBuffer, buffer_seek_start, _oldTell);
+                    var _oldTell = buffer_tell(_buffer);
+                    _return = buffer_read(_buffer, buffer_text);
+                    buffer_seek(_buffer, buffer_seek_start, _oldTell);
                     
                     try
                     {
@@ -67,9 +47,9 @@ function __DynamoClassFile(_name, _directory, _localPath) constructor
                 break;
                 
                 case "csv":
-                    var _oldTell = buffer_tell(__contentBuffer);
-                    _return = buffer_read(__contentBuffer, buffer_text);
-                    buffer_seek(__contentBuffer, buffer_seek_start, _oldTell);
+                    var _oldTell = buffer_tell(_buffer);
+                    _return = buffer_read(_buffer, buffer_text);
+                    buffer_seek(_buffer, buffer_seek_start, _oldTell);
                     
                     try
                     {
@@ -84,20 +64,20 @@ function __DynamoClassFile(_name, _directory, _localPath) constructor
                 break;
                 
                 case "string":
-                    if (buffer_get_size(__contentBuffer) == 0)
+                    if (buffer_get_size(_buffer) == 0)
                     {
                         _return = "";
                     }
                     else
                     {
-                        var _oldTell = buffer_tell(__contentBuffer);
-                        var _return = buffer_read(__contentBuffer, buffer_text);
-                        buffer_seek(__contentBuffer, buffer_seek_start, _oldTell);
+                        var _oldTell = buffer_tell(_buffer);
+                        var _return = buffer_read(_buffer, buffer_text);
+                        buffer_seek(_buffer, buffer_seek_start, _oldTell);
                     }
                 break;
                 
                 case "buffer":
-                    _return = __contentBuffer;
+                    _return = _buffer;
                 break;
                 
                 default:
@@ -118,5 +98,7 @@ function __DynamoClassFile(_name, _directory, _localPath) constructor
         {
             __DynamoError("Illegal callback for file \"", __path, "\"");
         }
+        
+        if (_buffer != undefined) buffer_delete(_buffer);
     }
 }

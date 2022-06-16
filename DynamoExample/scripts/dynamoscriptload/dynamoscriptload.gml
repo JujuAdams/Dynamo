@@ -1,6 +1,8 @@
+/// Forces a script to be loaded, executing the callback defined for the script via DynamoScriptWatch() (if any)
+/// 
 /// @param script
 
-function DynamoScriptForceLoad(_script)
+function DynamoScriptLoad(_script)
 {
     __DynamoInitialize();
     

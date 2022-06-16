@@ -1,15 +1,15 @@
-function __DynamoGMLToJSON(_string)
+function __DynamoParseGML(_string)
 {
     var _buffer = buffer_create(string_byte_length(_string) + 1, buffer_fixed, 1);
     buffer_write(_buffer, buffer_text, _string);
     buffer_seek(_buffer, buffer_seek_start, 0);
-    var _parser = new __DynamoGMLToJSONParser(_buffer, buffer_get_size(_buffer));
+    var _parser = new __DynamoParseGMLParser(_buffer, buffer_get_size(_buffer));
     buffer_delete(_buffer);
     
     return _parser.root;
 }
 
-function __DynamoGMLToJSONParser(_buffer, _buffer_size) constructor
+function __DynamoParseGMLParser(_buffer, _buffer_size) constructor
 {
     root = {};
     

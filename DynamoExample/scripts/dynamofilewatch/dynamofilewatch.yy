@@ -6,7 +6,7 @@
     "path": "folders/Dynamo.yy",
   },
   "resourceVersion": "1.0",
-  "name": "DynamoScriptForceLoad",
+  "name": "DynamoFileWatch",
   "tags": [],
   "resourceType": "GMScript",
 }

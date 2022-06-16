@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Dynamo",
-    "path": "folders/Dynamo.yy",
+    "name": "Manual Mode",
+    "path": "folders/Dynamo/Manual Mode.yy",
   },
   "resourceVersion": "1.0",
-  "name": "DynamoFileForceLoad",
+  "name": "DynamoFileLoad",
   "tags": [],
   "resourceType": "GMScript",
 }

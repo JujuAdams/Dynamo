@@ -1,6 +1,8 @@
+/// Forces an Included File to be loaded, executing the callback defined for the file via DynamoFileWatch()
+/// 
 /// @param path
 
-function DynamoFileForceLoad(_path)
+function DynamoFileLoad(_path)
 {
     __DynamoInitialize();
     

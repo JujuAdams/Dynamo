@@ -7,85 +7,36 @@ function __DynamoClassScript(_name, _path) constructor
     global.__dynamoScriptStruct[$ __name] = self;
     array_push(global.__dynamoTrackingArray, self);
     
-    __metadataStub = true;
-    __metadataHash = undefined;
-    
-    __contentStub   = true;
-    __contentHash   = undefined;
-    __contentPath   = undefined;
-    __contentString = "";
+    __hash = undefined;
     
     __callback = undefined;
     
-    __json = {};
     
     
-    
-    static __MetadataEnsure = function()
+    static __HasChanged = function()
     {
-        var _foundHash = __DynamoFileHash(__path);
-        if (_foundHash != __metadataHash)
-        {
-            __metadataHash = _foundHash;
-            
-            __json = __DynamoLoadJSON(__path, undefined);
-            if (is_struct(__json))
-            {
-                __metadataStub = false;
-                __contentPath = filename_dir(__path) + "/" + __json.name + ".gml";
-            }
-        }
-        
-        return is_struct(__json);
-    }
-    
-    static __ContentEnsure = function()
-    {
-        if (__contentPath == undefined) __MetadataEnsure();
-        if (__contentPath == undefined) return false;
-        
-        var _foundHash = __DynamoFileHash(__contentPath);
-        if (_foundHash != __contentHash)
-        {
-            __contentHash = _foundHash;
-            
-            __contentString = __DynamoLoadString(__contentPath, "");
-            if (__contentString != "") __contentStub = false;
-        }
-        
-        return (__contentString != "");
-    }
-    
-    static __ContentHasChanged = function()
-    {
-        if (!__MetadataEnsure()) return false;
-        return (__DynamoFileHash(__contentPath) != __contentHash);
-    }
-    
-    static __CheckAndLoad = function()
-    {
-        if (__ContentHasChanged()) __Load();
+        return (__DynamoFileHash(__path) != __hash);
     }
     
     static __Load = function()
     {
-        __MetadataEnsure();
-        __ContentEnsure();
+        __hash = __DynamoFileHash(__path);
         
         try
         {
-            var _data = __DynamoGMLToJSON(__contentString);
+            var _string = __DynamoLoadString(__path, "");
+            var _data = __DynamoParseGML(_string);
         }
         catch(_error)
         {
-            __DynamoTrace("Warning! Error encountered whilst parsing \"", __contentPath, "\" as a script");
+            __DynamoTrace("Warning! Error encountered whilst parsing \"", __path, "\" as a script");
             show_debug_message(_error);
             return;
         }
         
         if (!is_struct(_data))
         {
-            __DynamoTrace("Warning! Could not apply content for \"", __contentPath, "\"");
+            __DynamoTrace("Warning! Could not apply content for \"", __path, "\"");
             return;
         }
         

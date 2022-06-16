@@ -1,22 +1,22 @@
-DynamoWatchScript(TestScript);
-DynamoWatchScript(TestScript2);
+DynamoScriptWatch(TestScript);
+DynamoScriptWatch(TestScript2);
 
-DynamoWatchFile("All.txt", "string", function(_content)
+DynamoFileWatch("All.txt", "string", function(_content)
 {
     allText = _content;
 });
 
-DynamoWatchFile("Folder\\Nested.txt", "string", function(_content)
+DynamoFileWatch("Folder\\Nested.txt", "string", function(_content)
 {
     nestedText = _content;
 });
 
-DynamoWatchFile("Windows.txt", "string", function(_content)
+DynamoFileWatch("Windows.txt", "string", function(_content)
 {
     windowsText = _content ?? "Not exported for this platform";
 });
 
-DynamoWatchFile("macOS.txt", "string", function(_content)
+DynamoFileWatch("macOS.txt", "string", function(_content)
 {
     macText = _content ?? "Not exported for this platform";
 });

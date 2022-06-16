@@ -1,14 +1,26 @@
+/// Sets up an Included File to watch for changes. If DYNAMO_AUTO_SCAN is set to <true> then
+/// watched Included Files will be scanned for changes automatically. If a file *has* changed
+/// then it will be loaded and parsed. The parsed data will be passed into the callback function
+/// defined when calling DynamoFileWatch().
+/// 
+/// If you call DynamoFileLoad() then the Included File will be loaded whether there have been
+/// changes or not, and the callback will be executed as normal.
+/// 
 /// <dataFormat> can be:
-///    "json"
-///    "csv"
-///    "string"
-///    "buffer"
+///    "json"      Content is parsed as JSON
+///    "csv"       Content is parsed as CSV (comma-separated, with strings delimited by double quotes ")
+///    "string"    Content is parsed as UTF8-formatted plaintext
+///    "buffer"    Content is not parsed and content is instead returned to the callback as a buffer index
+/// 
+/// N.B. Much like GameMaker's native asynchronous load functionality, the buffer returned to the
+///      callback is destroyed immediately after your callback function finishes executing. If you
+///      want to keep the buffer data around then you'll need to make and keep a copy yourself.
 /// 
 /// @param path
 /// @param dataFormat
 /// @param callback
 
-function DynamoWatchFile(_path, _dataFormat, _callback)
+function DynamoFileWatch(_path, _dataFormat, _callback)
 {
     __DynamoInitialize();
     

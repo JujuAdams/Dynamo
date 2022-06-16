@@ -21,7 +21,7 @@ function __DynamoInitialize()
         //GMS2022.500.58 runtime
         global.__dynamoTimeSource = time_source_create(time_source_game, 1, time_source_units_frames, function()
         {
-            __DynamoAutoUpdate();
+            __DynamoAutoScan();
         }, [], -1);
         
         time_source_start(global.__dynamoTimeSource);
@@ -33,7 +33,7 @@ function __DynamoInitialize()
             //Early GMS2022.500.xx runtimes
             global.__dynamoTimeSource = time_source_create(time_source_game, 1, time_source_units_frames, function()
             {
-                __DynamoAutoUpdate();
+                __DynamoAutoScan();
             }, -1);
             
             time_source_start(global.__dynamoTimeSource);
