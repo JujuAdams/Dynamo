@@ -112,6 +112,8 @@ function __DynamoInit()
         global.__dynamoProjectDirectory += "/";
         if (DYNAMO_VERBOSE) __DynamoTrace("Found project path \"", global.__dynamoProjectDirectory, "\"");
         
+        __DynamoVariablesParserSetup(global.__dynamoProjectDirectory);
+        
         //Load up the project
         global.__dynamoProjectJSON = __DynamoProjectLoad(global.__dynamoProjectDirectory);
         

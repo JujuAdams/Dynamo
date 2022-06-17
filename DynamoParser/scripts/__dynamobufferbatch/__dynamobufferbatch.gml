@@ -322,8 +322,6 @@ function __DynamoBufferBatch() constructor
         if (__inBuffer != undefined) __Error("Input buffer already loaded");
         
         __inBuffer = _buffer;
-        buffer_seek(__inBuffer, buffer_seek_start, 0);
-        
         return __inBuffer;
     }
     

@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Dynamo",
-    "path": "folders/Dynamo.yy",
+    "name": "DynamoParser",
+    "path": "DynamoParser.yyp",
   },
   "resourceVersion": "1.0",
-  "name": "DynamoAutoUpdate",
+  "name": "__DynamoVariablesParserSetup",
   "tags": [],
   "resourceType": "GMScript",
 }
