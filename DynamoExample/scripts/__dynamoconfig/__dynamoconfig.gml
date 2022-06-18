@@ -21,6 +21,8 @@
 //This macro control whether Dynamo should try to convert values in CSV files into numbers
 #macro DYNAMO_CSV_TRY_REAL  true
 
+#macro DYNAMO_EXPRESSIONS_ENABLED  true
+
 DYNAMO_LIVE_ASSETS [
     oTest,
     oTestLive,
