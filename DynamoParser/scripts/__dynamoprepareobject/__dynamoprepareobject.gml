@@ -17,7 +17,7 @@ function __DynamoPrepareObject(_name, _relativeDirectory, _absoluteDirectory, _y
         var _eventName = __DynamoEventFilename(_eventStruct.eventType, _eventStruct.eventNum);
         var _relativePath = _relativeDirectory + _eventName + ".gml";
         var _absolutePath = _absoluteDirectory + _eventName + ".gml";
-        __DynamoPrepareGMLFile(_name + " " + _eventName, _relativePath, _absolutePath, "__Dynamo_" + _name + "_" + _eventName + "_var");
+        __DynamoPrepareGMLFile(_name + " " + _eventName, _relativePath, _absolutePath, "__dynamo_" + _name + "_" + _eventName + "_var");
         ++_i;
     }
 }

@@ -209,9 +209,9 @@ function __DynamoExpressionsSetup(_directory)
         _name  = string_replace_all(_name,  "\"", "\\\"");
         _value = string_replace_all(_value, "\"", "\\\"");
         
-        buffer_write(_buffer, buffer_text, "        \""); //We wrap the variable identifier in quote marks just in case a space sneaks in
+        buffer_write(_buffer, buffer_text, "        "); //We wrap the variable identifier in quote marks just in case a space sneaks in
         buffer_write(_buffer, buffer_text, _name);
-        buffer_write(_buffer, buffer_text, "\": __DynamoExpressionCompile(\"");
+        buffer_write(_buffer, buffer_text, ": __DynamoExpressionCompile(\"");
         buffer_write(_buffer, buffer_text, _value);
         buffer_write(_buffer, buffer_text, "\"),\n");
         
