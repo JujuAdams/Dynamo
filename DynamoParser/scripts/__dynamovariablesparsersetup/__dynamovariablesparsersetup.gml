@@ -11,10 +11,11 @@ function __DynamoVariablesParserSetup(_directory)
         return;
     }
     
+    __DynamoAddRestorableFile("__dynamoconfig.gml", _path, _backupPath);
+    
     var _foundAssets = [];
     
     var _buffer = buffer_load(_path);
-    buffer_save(_buffer, _backupPath);
     var _string = buffer_read(_buffer, buffer_string);
     
     var _pos = string_pos("DYNAMO_LIVE_ASSETS", _string);
