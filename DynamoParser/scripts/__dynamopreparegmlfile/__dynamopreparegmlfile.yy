@@ -6,7 +6,7 @@
     "path": "DynamoParser.yyp",
   },
   "resourceVersion": "1.0",
-  "name": "__DynamoVariablesParserSetup",
+  "name": "__DynamoPrepareGMLFile",
   "tags": [],
   "resourceType": "GMScript",
 }

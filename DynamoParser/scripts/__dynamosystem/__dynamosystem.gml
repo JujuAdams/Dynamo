@@ -114,10 +114,8 @@ function __DynamoInit()
         
         
         
-        global.__dynamoRestoreArray = [];
-        __DynamoVariablesParserSetup(global.__dynamoProjectDirectory);
-        __DynamoSaveOutRestoreBatchFile(global.__dynamoProjectDirectory);
-        
+        global.__dynamoBackupArray = [];
+        __DynamoExpressionsSetup(global.__dynamoProjectDirectory);
         
         //Load up the project
         global.__dynamoProjectJSON = __DynamoProjectLoad(global.__dynamoProjectDirectory);
