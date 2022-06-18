@@ -135,17 +135,17 @@ function __DynamoExpressionsSetup(_directory)
         var _name = global.__dynamoLiveAssetArray[_i];
         var _lowerName = string_lower(_name);
         
-        var _searchDirectory = _directory + "objects/" + _lowerName + "/";
-        if (directory_exists(_searchDirectory))
+        var _searchDirectory = "objects/" + _lowerName + "/";
+        if (directory_exists(_directory + _searchDirectory))
         {
-            __DynamoPrepareObject(_name, _searchDirectory, _lowerName + ".yy");
+            __DynamoPrepareObject(_name, _searchDirectory, _directory + _searchDirectory, _lowerName + ".yy");
         }
         else
         {
-            _searchDirectory = _directory + "scripts/" + _lowerName + "/";
-            if (directory_exists(_searchDirectory))
+            _searchDirectory = "scripts/" + _lowerName + "/";
+            if (directory_exists(_directory + _searchDirectory))
             {
-                __DynamoPrepareScript(_name, _searchDirectory, _lowerName + ".gml");
+                __DynamoPrepareScript(_name, _searchDirectory, _directory + _searchDirectory, _lowerName + ".gml");
             }
             else
             {

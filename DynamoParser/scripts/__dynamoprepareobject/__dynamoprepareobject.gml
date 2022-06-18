@@ -1,6 +1,6 @@
-function __DynamoPrepareObject(_name, _directory, _yyFilename)
+function __DynamoPrepareObject(_name, _relativeDirectory, _absoluteDirectory, _yyFilename)
 {
-    var _yyPath = _directory + _yyFilename;
+    var _yyPath = _absoluteDirectory + _yyFilename;
     if (!file_exists(_yyPath)) __DynamoError("Could not find \"", _yyPath, "\"");
     
     var _buffer = buffer_load(_yyPath);
@@ -15,26 +15,9 @@ function __DynamoPrepareObject(_name, _directory, _yyFilename)
     {
         var _eventStruct = _eventArray[_i];
         var _eventName = __DynamoEventFilename(_eventStruct.eventType, _eventStruct.eventNum);
-        var _path = _directory + _eventName + ".gml";
-        __DynamoPrepareGMLFile(_name + " " + _eventName, _path, "__Dynamo_" + _name + "_" + _eventName + "_var");
+        var _relativePath = _relativeDirectory + _eventName + ".gml";
+        var _absolutePath = _absoluteDirectory + _eventName + ".gml";
+        __DynamoPrepareGMLFile(_name + " " + _eventName, _relativePath, _absolutePath, "__Dynamo_" + _name + "_" + _eventName + "_var");
         ++_i;
     }
 }
-
- function __DynamoEventFilename(_eventType, _eventNumber)
- {
-     var _string = undefined;
-     
-     switch(_eventType)
-     {
-         case 0: _string = "Create"; break;
-         case 3: _string = "Step";   break;
-         case 8: _string = "Draw";   break;
-         
-         default:
-            __DynamoError("Did not recognise event type ", _eventType);
-         break;
-     }
-     
-     return _string + "_" + string(_eventNumber);
- }

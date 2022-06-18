@@ -1,8 +1,8 @@
-function __DynamoPrepareGMLFile(_name, _path, _variablePrefix)
+function __DynamoPrepareGMLFile(_name, _relativePath, _absolutePath, _variablePrefix)
 {
-    if (!file_exists(_path)) __DynamoError("Could not find \"", _path, "\"");
+    if (!file_exists(_absolutePath)) __DynamoError("Could not find \"", _absolutePath, "\"");
     
-    var _contentBuffer = buffer_load(_path);
+    var _contentBuffer = buffer_load(_absolutePath);
     var _parserData = __DynamoParseGML(_contentBuffer);
     
     //Don't do anything if there're no Dynamo variables in this GML file
@@ -13,7 +13,7 @@ function __DynamoPrepareGMLFile(_name, _path, _variablePrefix)
     }
     
     //Otherwise we're gonna get our hands dirty, make a backup
-    __DynamoRegisterBackup(_name, _path);
+    __DynamoRegisterBackup(_name, _absolutePath);
     
     //Set up a batched buffer operation so we can modify the source GML
     //This handles the annoying offset calculations for us
@@ -39,8 +39,8 @@ function __DynamoPrepareGMLFile(_name, _path, _variablePrefix)
     }
     
     //Commit the batch operation and return a buffer, then immediately save it out to disk
-    buffer_save(_batchOp.GetBuffer(), _path);
+    buffer_save(_batchOp.GetBuffer(), _absolutePath);
     _batchOp.Destroy();
     
-    array_push(global.__dynamoExpressionFileArray, _path);
+    array_push(global.__dynamoExpressionFileArray, _relativePath);
 }
