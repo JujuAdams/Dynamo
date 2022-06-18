@@ -112,85 +112,10 @@ function __DynamoInit()
         global.__dynamoProjectDirectory += "/";
         if (DYNAMO_VERBOSE) __DynamoTrace("Found project path \"", global.__dynamoProjectDirectory, "\"");
         
-        
-        
+        global.__dynamoExpressionFoundDict = {};
+        global.__dynamoExpressionFileArray = [];
         global.__dynamoBackupArray = [];
         __DynamoExpressionsSetup(global.__dynamoProjectDirectory);
-        
-        //Load up the project
-        global.__dynamoProjectJSON = __DynamoProjectLoad(global.__dynamoProjectDirectory);
-        
-        if (DYNAMO_DYNAMIC_VARIABLES)
-        {
-            //Find objects to parse
-            var _objectArray = __DynamoProjectFindAssetsByPath(global.__dynamoProjectJSON, global.__dynamoProjectDirectory, "objects", __DynamoClassObject);
-            __DynamoAssetArrayFilterByTag(_objectArray, DYNAMO_LIVE_TAG);
-            __DynamoAssetArrayFilterRejectByTag(_objectArray, DYNAMO_REJECT_TAG);
-            
-            //Break down objects into GML files
-            var _i = 0;
-            repeat(array_length(_objectArray))
-            {
-                _objectArray[_i].__ConstructGMLContainers();
-                ++_i;
-            }
-            
-            //Insert __DynamoVariable() calls into GML whilst also filling out the expression lookup struct
-            var _i = 0;
-            repeat(array_length(global.__dynamoGMLArray))
-            {
-                with(global.__dynamoGMLArray[_i])
-                {
-                    if (__ContentEnsure())
-                    {
-                        __Apply();
-                        __Restore();
-                        ++_i;
-                    }
-                    else
-                    {
-                        array_delete(global.__dynamoGMLArray, _i, 1);
-                    }
-                    
-                    __CleanUp();
-                }
-            }
-            
-            //Save out found expressions to the __DynamoVariableLookupData() script
-            __DynamoVariableDataExport(global.__dynamoProjectDirectory);
-        }
-        
-        global.__dynamoScriptArray = __DynamoProjectFindAssetsByPath(global.__dynamoProjectJSON, global.__dynamoProjectDirectory, "scripts", __DynamoClassScript);
-        __DynamoAssetArrayFilterByTag(global.__dynamoScriptArray, DYNAMO_TRACK_TAG);
-        __DynamoAssetArrayFilterRejectByTag(global.__dynamoScriptArray, DYNAMO_REJECT_TAG);
-        
-        var _i = 0;
-        repeat(array_length(global.__dynamoScriptArray))
-        {
-            global.__dynamoScriptArray[_i].__Track();
-            ++_i;
-        }
-        
-        global.__dynamoSoundArray = __DynamoProjectFindAssetsByPath(global.__dynamoProjectJSON, global.__dynamoProjectDirectory, "sounds", __DynamoClassSound);
-        if (DYNAMO_OPT_IN_SOUNDS) __DynamoAssetArrayFilterByTag(global.__dynamoSoundArray, DYNAMO_TRACK_TAG);
-        __DynamoAssetArrayFilterRejectByTag(global.__dynamoSoundArray, DYNAMO_REJECT_TAG);
-        
-        var _i = 0;
-        repeat(array_length(global.__dynamoSoundArray))
-        {
-            global.__dynamoSoundArray[_i].__Track();
-            ++_i;
-        }
-        
-        global.__dynamoFileArray = __DynamoProjectFindFiles(global.__dynamoProjectJSON, global.__dynamoProjectDirectory, os_type, os_browser);
-        var _i = 0;
-        repeat(array_length(global.__dynamoFileArray))
-        {
-            global.__dynamoFileArray[_i].__Track();
-            ++_i;
-        }
-        
-        if (DYNAMO_VERBOSE) __DynamoTrace("Tracking ", global.__dynamoTrackingArray);
     }
 }
 

@@ -215,25 +215,17 @@ function __DynamoExpressionsSetup(_directory)
     buffer_write(_buffer, buffer_text, date_datetime_string(date_current_datetime()));
     buffer_write(_buffer, buffer_text, "\n\n");
     
-    //Write the trackable GML files first
-    buffer_write(_buffer, buffer_text, "global.__dynamoGMLArray = [\n");
+    //Write the trackable files first
+    buffer_write(_buffer, buffer_text, "global.__dynamoExpressionFileArray = [\n");
     
-    var _nameArray = array_create(array_length(global.__dynamoGMLArray));
-    var _i = 0;
-    repeat(array_length(global.__dynamoGMLArray))
-    {
-        _nameArray[@ _i] = global.__dynamoGMLArray[_i].__contentRelativePath;
-        ++_i;
-    }
-    
-    array_sort(_nameArray, true); //Prettify the output a bit
+    array_sort(global.__dynamoExpressionFileArray, true); //Prettify the output a bit
     
     var _i = 0;
-    repeat(array_length(_nameArray))
+    repeat(array_length(global.__dynamoExpressionFileArray))
     {
         buffer_write(_buffer, buffer_text, "    ");
         buffer_write(_buffer, buffer_text, "\"");
-        buffer_write(_buffer, buffer_text, _nameArray[_i]);
+        buffer_write(_buffer, buffer_text, global.__dynamoExpressionFileArray[_i]);
         buffer_write(_buffer, buffer_text, "\",\n");
         ++_i;
     }
@@ -242,16 +234,16 @@ function __DynamoExpressionsSetup(_directory)
     buffer_write(_buffer, buffer_text, "\n");
     
     //Then the variable expressions
-    buffer_write(_buffer, buffer_text, "global.__dynamoVariableLookup = {\n");
+    buffer_write(_buffer, buffer_text, "global.__dynamoExpressionLookup = {\n");
     
-    var _nameArray = variable_struct_get_names(global.__dynamoVariableLookup);
+    var _nameArray = variable_struct_get_names(global.__dynamoExpressionFoundDict);
     array_sort(_nameArray, true); //Prettify the output a bit
     
     var _i = 0;
     repeat(array_length(_nameArray))
     {
         var _name  = _nameArray[_i];
-        var _value = global.__dynamoVariableLookup[$ _name];
+        var _value = global.__dynamoExpressionFoundDict[$ _name];
         
         //Sanitize!
         _name  = string_replace_all(_name,  "\"", "\\\"");
@@ -274,5 +266,5 @@ function __DynamoExpressionsSetup(_directory)
     buffer_save(_buffer, _path);
     buffer_delete(_buffer);
     
-    __DynamoTrace(array_length(global.__dynamoGMLArray), " GML files and ", variable_struct_names_count(global.__dynamoVariableLookup), " expressions were exported");
+    __DynamoTrace(array_length(global.__dynamoExpressionFileArray), " files and ", variable_struct_names_count(global.__dynamoExpressionFoundDict), " expressions were exported");
 }

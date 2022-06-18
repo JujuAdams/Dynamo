@@ -16,7 +16,7 @@ function __DynamoPrepareObject(_name, _directory, _yyFilename)
         var _eventStruct = _eventArray[_i];
         var _eventName = __DynamoEventFilename(_eventStruct.eventType, _eventStruct.eventNum);
         var _path = _directory + _eventName + ".gml";
-        __DynamoPrepareGMLFile(_name + " " + _eventName, _path);
+        __DynamoPrepareGMLFile(_name + " " + _eventName, _path, "__Dynamo_" + _name + "_" + _eventName + "_var");
         ++_i;
     }
 }

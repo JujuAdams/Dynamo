@@ -17,11 +17,12 @@ function __DynamoRegisterBackup(_name, _originalPath)
         ++_i;
     }
     
+    file_copy(_originalPath, _backupPath);
+    if (!file_exists(_backupPath)) __DynamoError("Could not save \"", _backupPath, "\"");
+    
     array_push(global.__dynamoBackupArray, {
         __name: _name,
         __originalPath: _originalPath,
         __backupPath: _backupPath,
     });
-    
-    file_copy(_originalPath, _backupPath);
 }
