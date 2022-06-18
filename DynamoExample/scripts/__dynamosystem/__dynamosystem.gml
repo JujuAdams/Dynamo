@@ -50,8 +50,9 @@ function __DynamoInitialize()
     global.__dynamoRunningFromIDE   = __DynamoRunningFromIDE();
     global.__dynamoProjectDirectory = "";
     
-    if (!variable_global_exists("__dynamoExpressionDict"     )) global.__dynamoExpressionDict      = {};
-    if (!variable_global_exists("__dynamoExpressionFileArray")) global.__dynamoExpressionFileArray = [];
+    global.__dynamoExpressionDict      = {};
+    global.__dynamoExpressionFileArray = [];
+    if (DYNAMO_EXPRESSIONS_ENABLED) __DynamoExpressionData();
     
     global.__dynamoScriptArray    = [];
     global.__dynamoScriptStruct   = {};
