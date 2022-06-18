@@ -23,9 +23,11 @@ function __DynamoSaveOutRestoreBatchFile(_directory)
         buffer_write(_buffer, buffer_text, _backupPath);
         buffer_write(_buffer, buffer_text, "\" \"");
         buffer_write(_buffer, buffer_text, _originalPath);
-        buffer_write(_buffer, buffer_text, "\" /f /c /y\r\ndel \"");
-        buffer_write(_buffer, buffer_text, _backupPath);
-        buffer_write(_buffer, buffer_text, "\" /q\r\n\r\n");
+        buffer_write(_buffer, buffer_text, "\" /f /c /y\r\ncd \"");
+        buffer_write(_buffer, buffer_text, filename_dir(_backupPath));
+        buffer_write(_buffer, buffer_text, "\"\r\ndel /q \"");
+        buffer_write(_buffer, buffer_text, filename_name(_backupPath));
+        buffer_write(_buffer, buffer_text, "\"\r\n\r\n");
         
         ++_i;
     }
