@@ -3,7 +3,7 @@ function __DynamoPrepareGMLFile(_name, _relativePath, _absolutePath, _variablePr
     if (!file_exists(_absolutePath)) __DynamoError("Could not find \"", _absolutePath, "\"");
     
     var _contentBuffer = buffer_load(_absolutePath);
-    var _parserData = __DynamoParseGML(_contentBuffer);
+    var _parserData = __DynamoExtractExpressions(_contentBuffer);
     
     //Don't do anything if there're no Dynamo variables in this GML file
     if (array_length(_parserData) <= 0)
