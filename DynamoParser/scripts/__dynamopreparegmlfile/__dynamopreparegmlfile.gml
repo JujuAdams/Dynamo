@@ -32,7 +32,7 @@ function __DynamoPrepareGMLFile(_name, _path, _variablePrefix)
             _batchOp.Insert(endPos+1, "*/");
                 
             //Add the variable identifier and token information to our global handler
-            global.__dynamoExpressionFoundDict[$ _variableIdentifier] = innerString;
+            global.__dynamoExpressionDict[$ _variableIdentifier] = innerString;
         }
             
         ++_i;

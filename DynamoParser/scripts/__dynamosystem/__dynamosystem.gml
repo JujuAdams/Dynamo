@@ -6,11 +6,6 @@
 
 #macro __DYNAMO_PROJECT_DIRECTORY_PATH_NAME  "projectDirectory.txt"
 
-#macro __DYNAMO_TYPE_GML     "gml"
-#macro __DYNAMO_TYPE_SCRIPT  "script"
-#macro __DYNAMO_TYPE_SOUND   "script"
-#macro __DYNAMO_TYPE_FILE    "included file"
-
 __DynamoTrace("Welcome to Dynamo by @jujuadams! This is version ", __DYNAMO_VERSION, ", ", __DYNAMO_DATE);
 global.__dynamoRunningFromIDE = undefined;
 
@@ -19,7 +14,7 @@ __DynamoInit();
 
 function __DynamoInit()
 {
-    if (variable_global_exists("__dynamoProjectJSON")) return;
+    if (global.__dynamoRunningFromIDE != undefined) return;
     
     //Attempt to set up a time source for slick automatic input handling
     try
@@ -52,12 +47,12 @@ function __DynamoInit()
         }
     }
     
-    global.__dynamoProjectJSON           = {};
     global.__dynamoRunningFromIDE        = __DynamoRunningFromIDE();
     global.__dynamoProjectDirectory      = "";
     global.__dynamoProjectFileSystemName = undefined;
     
-    if (!variable_global_exists("__dynamoVariableLookup")) global.__dynamoVariableLookup = {};
+    if (!variable_global_exists("__dynamoExpressionDict"     )) global.__dynamoExpressionDict      = {};
+    if (!variable_global_exists("__dynamoExpressionFileArray")) global.__dynamoExpressionFileArray = [];
     
     global.__dynamoScriptAuto         = false;
     global.__dynamoScriptAutoApply    = false;
@@ -67,7 +62,6 @@ function __DynamoInit()
     global.__dynamoFileAuto           = false;
     global.__dynamoFileAutoCallback   = undefined;
     
-    global.__dynamoGMLArray       = [];
     global.__dynamoScriptArray    = [];
     global.__dynamoSoundArray     = [];
     global.__dynamoFileArray      = [];
@@ -112,9 +106,6 @@ function __DynamoInit()
         global.__dynamoProjectDirectory += "/";
         if (DYNAMO_VERBOSE) __DynamoTrace("Found project path \"", global.__dynamoProjectDirectory, "\"");
         
-        global.__dynamoExpressionFoundDict = {};
-        global.__dynamoExpressionFileArray = [];
-        global.__dynamoBackupArray = [];
         __DynamoExpressionsSetup(global.__dynamoProjectDirectory);
     }
 }

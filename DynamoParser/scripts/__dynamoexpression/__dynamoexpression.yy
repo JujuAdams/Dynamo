@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Classes",
-    "path": "folders/Dynamo/(System)/Classes.yy",
+    "name": "Expressions",
+    "path": "folders/Dynamo/(System)/Expressions.yy",
   },
   "resourceVersion": "1.0",
-  "name": "__DynamoClassGML",
+  "name": "__DynamoExpression",
   "tags": [],
   "resourceType": "GMScript",
 }
