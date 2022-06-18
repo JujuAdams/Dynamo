@@ -50,6 +50,9 @@ function __DynamoInitialize()
     global.__dynamoRunningFromIDE   = __DynamoRunningFromIDE();
     global.__dynamoProjectDirectory = "";
     
+    if (!variable_global_exists("__dynamoExpressionDict"     )) global.__dynamoExpressionDict      = {};
+    if (!variable_global_exists("__dynamoExpressionFileArray")) global.__dynamoExpressionFileArray = [];
+    
     global.__dynamoScriptArray    = [];
     global.__dynamoScriptStruct   = {};
     global.__dynamoFileArray      = [];
@@ -58,6 +61,10 @@ function __DynamoInitialize()
     
     global.__dynamoInFocus    = false;
     global.__dynamoCheckIndex = 0;
+    
+    //Big ol' list of operators. Operators at the top at processed first
+    //Not included here are negative signs, negation (! / NOT), and parentheses - these are handled separately
+    global.__dynamoExpressionOpList = ["/", "*", "+", "-"];
     
     if (__DYNAMO_DEV_MODE)
     {
