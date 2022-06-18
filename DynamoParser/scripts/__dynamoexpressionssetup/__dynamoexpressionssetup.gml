@@ -177,7 +177,7 @@ function __DynamoExpressionsSetup(_directory)
     buffer_write(_buffer, buffer_text, "\n\n");
     
     //Write the trackable files first
-    buffer_write(_buffer, buffer_text, "function __DynamoExpressionData()\n{\n    __DynamoInitialize();\n    \n    global.__dynamoExpressionFileArray = [\n");
+    buffer_write(_buffer, buffer_text, "function __DynamoExpressionData()\n{\n    global.__dynamoExpressionFileArray = [\n");
     
     array_sort(global.__dynamoExpressionFileArray, true); //Prettify the output a bit
     
