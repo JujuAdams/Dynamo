@@ -6,7 +6,7 @@
     {"id":{"name":"DynamoForceScan","path":"scripts/DynamoForceScan/DynamoForceScan.yy",},"order":4,},
     {"id":{"name":"__DynamoLoadString","path":"scripts/__DynamoLoadString/__DynamoLoadString.yy",},"order":7,},
     {"id":{"name":"DynamoScriptLoad","path":"scripts/DynamoScriptLoad/DynamoScriptLoad.yy",},"order":1,},
-    {"id":{"name":"__DynamoVariableLookupData","path":"scripts/__DynamoVariableLookupData/__DynamoVariableLookupData.yy",},"order":12,},
+    {"id":{"name":"__DynamoExpressionData","path":"scripts/__DynamoExpressionData/__DynamoExpressionData.yy",},"order":12,},
     {"id":{"name":"DynamoFileWatch","path":"scripts/DynamoFileWatch/DynamoFileWatch.yy",},"order":3,},
     {"id":{"name":"DynamoFileLoad","path":"scripts/DynamoFileLoad/DynamoFileLoad.yy",},"order":3,},
     {"id":{"name":"DynamoScriptChanged","path":"scripts/DynamoScriptChanged/DynamoScriptChanged.yy",},"order":0,},
