@@ -28,7 +28,7 @@ function __DynamoPrepareGMLFile(_name, _relativePath, _absolutePath, _variablePr
             var _variableIdentifier = _variablePrefix + string(_i);
                 
             //Insert the function call to __DynamoVariable() with the variable identifier whilst also commenting out the original expression
-            _batchOp.Insert(startPos, "__DynamoVariable(\"", _variableIdentifier, "\") /*");
+            _batchOp.Insert(startPos, "__DynamoExpression(\"", _variableIdentifier, "\") /*");
             _batchOp.Insert(endPos+1, "*/");
                 
             //Add the variable identifier and token information to our global handler
