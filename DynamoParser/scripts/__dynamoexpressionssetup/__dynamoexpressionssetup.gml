@@ -248,6 +248,8 @@ function __DynamoExpressionsSetup(_directory)
         ++_i;
     }
     
+    buffer_write(_buffer, buffer_text, "exit 0");
+    
     buffer_save(_buffer, _batchPath);
     buffer_delete(_buffer);
 }
