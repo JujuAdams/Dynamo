@@ -40,15 +40,14 @@ function __DynamoExtractExpressionsInner(_buffer, _bufferSize) constructor
         {
             if (token == "(")
             {
-                ++_bracketDepth;
-                _doubleBracketValidDict[_bracketDepth] = (_prevToken == "(");
-                _doubleBracketTokenDict[_bracketDepth] = array_length(_tokenArray);
+                array_push(_doubleBracketValidDict, (_prevToken == "("));
+                array_push(_doubleBracketTokenDict, array_length(_tokenArray));
             }
             else if (token == ")")
             {
                 if (_prevToken == ")")
                 {
-                    if (_doubleBracketValidDict[_bracketDepth+1])
+                    if (_doubleBracketValidDict[array_length(_doubleBracketValidDict)-1])
                     {
                         var _startIndex = _doubleBracketTokenDict[_bracketDepth+1]+1;
                         var _endIndex   = array_length(_tokenArray)-2;
@@ -66,12 +65,9 @@ function __DynamoExtractExpressionsInner(_buffer, _bufferSize) constructor
                         });
                     }
                 }
-                else if (_doubleBracketTokenDict[_bracketDepth] > _doubleBracketTokenDict[_bracketDepth-1] + 1)
-                {
-                    _doubleBracketValidDict[_bracketDepth-1] = false;
-                }
                 
-                --_bracketDepth;
+                array_pop(_doubleBracketValidDict);
+                array_pop(_doubleBracketTokenDict);
             }
         }
         

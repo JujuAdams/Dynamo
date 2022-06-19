@@ -24,6 +24,5 @@
 #macro DYNAMO_EXPRESSIONS_ENABLED  true
 
 DYNAMO_LIVE_ASSETS [
-    oTest,
     oTestLive,
 ]
