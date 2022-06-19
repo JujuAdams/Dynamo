@@ -2,8 +2,6 @@
   "resources": [
     {"id":{"name":"__DynamoRunningFromIDE","path":"scripts/__DynamoRunningFromIDE/__DynamoRunningFromIDE.yy",},"order":1,},
     {"id":{"name":"__DynamoExtractExpressions","path":"scripts/__DynamoExtractExpressions/__DynamoExtractExpressions.yy",},"order":10,},
-    {"id":{"name":"__DynamoExpressionCompile","path":"scripts/__DynamoExpressionCompile/__DynamoExpressionCompile.yy",},"order":9,},
-    {"id":{"name":"__DynamoExpressionEvaluate","path":"scripts/__DynamoExpressionEvaluate/__DynamoExpressionEvaluate.yy",},"order":8,},
     {"id":{"name":"sprPug","path":"sprites/sprPug/sprPug.yy",},"order":1,},
     {"id":{"name":"__DynamoBufferReadString","path":"scripts/__DynamoBufferReadString/__DynamoBufferReadString.yy",},"order":0,},
     {"id":{"name":"__DynamoFileHash","path":"scripts/__DynamoFileHash/__DynamoFileHash.yy",},"order":3,},
@@ -12,7 +10,6 @@
     {"id":{"name":"__DynamoEventFilename","path":"scripts/__DynamoEventFilename/__DynamoEventFilename.yy",},"order":5,},
     {"id":{"name":"__DynamoPrepareObject","path":"scripts/__DynamoPrepareObject/__DynamoPrepareObject.yy",},"order":2,},
     {"id":{"name":"__DynamoRegisterExpression","path":"scripts/__DynamoRegisterExpression/__DynamoRegisterExpression.yy",},"order":7,},
-    {"id":{"name":"__DynamoExpression","path":"scripts/__DynamoExpression/__DynamoExpression.yy",},"order":2,},
     {"id":{"name":"__DynamoBufferBatch","path":"scripts/__DynamoBufferBatch/__DynamoBufferBatch.yy",},"order":1,},
     {"id":{"name":"__DynamoExpressionsSetup","path":"scripts/__DynamoExpressionsSetup/__DynamoExpressionsSetup.yy",},"order":1,},
     {"id":{"name":"oMain","path":"objects/oMain/oMain.yy",},"order":2,},
