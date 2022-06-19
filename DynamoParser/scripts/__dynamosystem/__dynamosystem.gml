@@ -5,12 +5,7 @@ __DynamoTrace("Welcome to Dynamo by @jujuadams! This is version ", __DYNAMO_VERS
 
 global.__dynamoExpressionDict      = {};
 global.__dynamoExpressionFileArray = [];
-
-//Big ol' list of operators. Operators at the top at processed first
-//Not included here are negative signs, negation (! / NOT), and parentheses - these are handled separately
-global.__dynamoExpressionOpList = ["/", "*", "+", "-"];
-
-
+global.__dynamoNoteArray           = [];
 
 function __DynamoTrace()
 {
