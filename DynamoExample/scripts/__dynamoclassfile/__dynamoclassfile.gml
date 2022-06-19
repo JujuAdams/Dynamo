@@ -14,6 +14,11 @@ function __DynamoClassFile(_name, _directory, _localPath) constructor
     
     
     
+    static toString = function()
+    {
+        return __name;
+    }
+    
     static __HasChanged = function()
     {
         return (__DynamoFileHash(__path) != __hash);

@@ -13,6 +13,11 @@ function __DynamoClassScript(_name, _path) constructor
     
     
     
+    static toString = function()
+    {
+        return __name;
+    }
+    
     static __HasChanged = function()
     {
         return (__DynamoFileHash(__path) != __hash);
