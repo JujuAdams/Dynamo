@@ -22,12 +22,12 @@ DynamoFileWatch("CSV.csv", "csv", function(_content)
 //Set up Notes access
 DynamoNoteWatch("EmptyNote", "string", function(_content)
 {
-    show_message(_content);
+    emptyNoteText = _content;
 });
 
 DynamoNoteWatch("TestNote", "string", function(_content)
 {
-    show_message(_content);
+    testNoteText = _content;
 });
 
 //Set up script watching
