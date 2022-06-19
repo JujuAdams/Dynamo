@@ -21,6 +21,24 @@ function __DynamoExpressionsSetup(_directory)
     var _buffer = buffer_load(_path);
     var _string = buffer_read(_buffer, buffer_string);
     
+    var _loadExpressions = true;
+    
+    //Find the DYNAMO_ENABLED macro and figure out what value it has
+    var _startPos = string_pos("DYNAMO_ENABLED", _string);
+    if (_startPos <= 0) __DynamoError("Could not find DYNAMO_ENABLED macro in __DynamoConfig()");
+    _startPos += string_length("DYNAMO_ENABLED");
+    var _endPos = string_pos_ext("\n", _string, _startPos);
+    var _substring = string_copy(_string, _startPos, _endPos - _startPos)
+    
+    if (string_pos("false", _substring) > 0)
+    {
+        _loadExpressions = false;
+    }
+    else if (string_pos("true", _substring) <= 0)
+    {
+        __DynamoError("Illegal value for macro DYNAMO_EXPRESSIONS_ENABLED (found ", _substring, ", expecting true or false)");
+    }
+    
     //Find the DYNAMO_EXPRESSIONS_ENABLED macro and figure out what value it has
     var _startPos = string_pos("DYNAMO_EXPRESSIONS_ENABLED", _string);
     if (_startPos <= 0) __DynamoError("Could not find DYNAMO_EXPRESSIONS_ENABLED macro in __DynamoConfig()");
@@ -30,13 +48,14 @@ function __DynamoExpressionsSetup(_directory)
     
     if (string_pos("false", _substring) > 0)
     {
-        //Don't do any expression parsing
+        _loadExpressions = false;
     }
     else if (string_pos("true", _substring) <= 0)
     {
         __DynamoError("Illegal value for macro DYNAMO_EXPRESSIONS_ENABLED (found ", _substring, ", expecting true or false)");
     }
-    else
+    
+    if (_loadExpressions)
     {
         var _pos = string_pos("DYNAMO_LIVE_ASSETS", _string);
         if (_pos <= 0)
