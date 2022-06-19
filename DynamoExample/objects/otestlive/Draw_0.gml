@@ -1,1 +1,1 @@
-draw_text(((10) + (4)), ((310 + 64)), (("hello world")));
+draw_text(((10) + (4)), ((310 + 64)), (("hello world!!")));
