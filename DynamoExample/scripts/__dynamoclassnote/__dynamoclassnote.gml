@@ -30,16 +30,19 @@ function __DynamoClassNote(_name, _hash, _buffer) constructor
     
     static __Load = function()
     {
-        if (__buffer != undefined) buffer_delete(__buffer);
-        
-        if (file_exists(__path))
+        if (__DYNAMO_DEV_MODE)
         {
-            __hash = __DynamoFileHash(__path);
-            __buffer = __DynamoLoadBuffer(__path);
-        }
-        else
-        {
-            __buffer = buffer_create(0, buffer_grow, 1);
+            if (__buffer != undefined) buffer_delete(__buffer);
+            
+            if (file_exists(__path))
+            {
+                __hash = __DynamoFileHash(__path);
+                __buffer = __DynamoLoadBuffer(__path);
+            }
+            else
+            {
+                __buffer = buffer_create(0, buffer_grow, 1);
+            }
         }
         
         var _return = undefined;
