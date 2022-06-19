@@ -31,9 +31,11 @@ function DynamoFileWatch(_path, _dataFormat, _callback)
     __DynamoInitialize();
     
     var _adjustedPath = string_replace_all(_path, "\\", "/");
-    if (!file_exists(global.__dynamoProjectDirectory + "datafiles/" + _adjustedPath))
+    var _directory = __DYNAMO_DEV_MODE? (global.__dynamoProjectDirectory + "datafiles/") : "";
+    
+    if (!file_exists(_directory + _adjustedPath))
     {
-        __DynamoTrace("Warning! File \"", global.__dynamoProjectDirectory, "datafiles/", _path, "\" not found");
+        __DynamoError("Warning! File \"", _directory + _path, "\" not found");
     }
     
     _dataFormat = string_lower(_dataFormat);
@@ -61,7 +63,7 @@ function DynamoFileWatch(_path, _dataFormat, _callback)
     
     if (variable_struct_exists(global.__dynamoScriptStruct, _path)) __DynamoError("File \"", _path, "\" is already being watched");
     
-    var _watcher = new __DynamoClassFile(_path, global.__dynamoProjectDirectory + "datafiles/", _adjustedPath);
+    var _watcher = new __DynamoClassFile(_path, _directory, _adjustedPath);
     _watcher.__dataFormat = _dataFormat;
     _watcher.__callback   = _callback;
 }
