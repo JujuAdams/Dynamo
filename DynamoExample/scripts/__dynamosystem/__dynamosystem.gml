@@ -50,11 +50,14 @@ function __DynamoInitialize()
     global.__dynamoRunningFromIDE   = __DynamoRunningFromIDE();
     global.__dynamoProjectDirectory = "";
     
-    global.__dynamoScriptArray    = [];
-    global.__dynamoScriptStruct   = {};
-    global.__dynamoFileArray      = [];
-    global.__dynamoFileStruct     = {};
-    global.__dynamoTrackingArray  = [];
+    global.__dynamoScriptArray     = [];
+    global.__dynamoScriptStruct    = {};
+    global.__dynamoFileArray       = [];
+    global.__dynamoFileStruct      = {};
+    global.__dynamoNoteArray       = [];
+    global.__dynamoNoteStruct      = {};
+    global.__dynamoNoteAddedStruct = {};
+    global.__dynamoTrackingArray   = [];
     
     global.__dynamoInFocus    = false;
     global.__dynamoCheckIndex = 0;
@@ -94,7 +97,7 @@ function __DynamoInitialize()
         if (DYNAMO_VERBOSE) __DynamoTrace("Found project path \"", global.__dynamoProjectDirectory, "\"");
     }
     
-    if (__DYNAMO_DEV_MODE && DYNAMO_EXPRESSIONS_ENABLED) __DynamoExpressionData();
+    __DynamoReadData();
 }
 
 

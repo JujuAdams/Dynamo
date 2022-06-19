@@ -21,6 +21,13 @@ function DynamoForceScan()
     }
     
     var _i = 0;
+    repeat(array_length(global.__dynamoNoteArray))
+    {
+        if (global.__dynamoNoteArray[_i].__HasChanged()) global.__dynamoNoteArray[_i].__Load();
+        ++_i;
+    }
+    
+    var _i = 0;
     repeat(array_length(global.__dynamoExpressionFileArray))
     {
         if (global.__dynamoExpressionFileArray[_i].__HasChanged()) global.__dynamoExpressionFileArray[_i].__Load();
