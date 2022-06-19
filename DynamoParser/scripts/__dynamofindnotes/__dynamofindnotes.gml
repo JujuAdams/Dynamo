@@ -22,14 +22,14 @@ function __DynamoFindNotes(_directory)
                 var _name = _json.name;
                 var _tags = _json.tags;
                 
-                var _accept = false;
+                var _accept = true;
                 var _i = 0;
                 repeat(array_length(_tags))
                 {
                     var _tag = _tags[_i];
-                    if (string_lower(_tag) == "dynamo")
+                    if (string_lower(_tag) == "dynamo ignore")
                     {
-                        _accept = true;
+                        _accept = false;
                         break;
                     }
                     
