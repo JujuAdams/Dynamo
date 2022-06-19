@@ -21,122 +21,140 @@ function __DynamoExpressionsSetup(_directory)
     var _buffer = buffer_load(_path);
     var _string = buffer_read(_buffer, buffer_string);
     
-    var _pos = string_pos("DYNAMO_LIVE_ASSETS", _string);
-    if (_pos <= 0)
+    //Find the DYNAMO_EXPRESSIONS_ENABLED macro and figure out what value it has
+    var _startPos = string_pos("DYNAMO_EXPRESSIONS_ENABLED", _string);
+    if (_startPos <= 0) __DynamoError("Could not find DYNAMO_EXPRESSIONS_ENABLED macro in __DynamoConfig()");
+    _startPos += string_length("DYNAMO_EXPRESSIONS_ENABLED");
+    var _endPos = string_pos_ext("\n", _string, _startPos);
+    var _substring = string_copy(_string, _startPos, _endPos - _startPos);
+    
+    if (string_pos("false", _substring) > 0)
     {
-        __DynamoError("DYNAMO_LIVE_ASSETS not found in __DynamoConfig()");
-        return;
+        //Don't do any expression parsing
     }
-    
-    //Move the buffer to just after the macro
-    //We want to start looking for an array (of assets) immediately following the macro
-    var _substring = string_copy(_string, 1, _pos + string_length("DYNAMO_LIVE_ASSETS"));
-    buffer_seek(_buffer, buffer_seek_start, string_byte_length(_substring) - 1);
-    
-    //Search for the opening [ for the array
-    repeat(buffer_get_size(_buffer) - buffer_tell(_buffer))
+    else if (string_pos("true", _substring) <= 0)
     {
-        var _byte = buffer_read(_buffer, buffer_u8);
-        if (_byte <= 32)
-        {
-            //Whitespace, do nothing
-        }
-        else if (_byte == 91) // [
-        {
-            break;
-        }
-        else
-        {
-            __DynamoError("Syntax error whilst reading DYNAMO_LIVE_ASSETS\nCould not find start of array");
-        }
+        __DynamoError("Illegal value for macro DYNAMO_EXPRESSIONS_ENABLED (found ", _substring, ", expecting true or false)");
     }
-    
-    //Extract asset names and store them for handling later
-    var _nameStart = 0;
-    var _inName = false;
-    var _lookingForComma = false;
-    repeat(buffer_get_size(_buffer) - buffer_tell(_buffer))
+    else
     {
-        var _byte = buffer_read(_buffer, buffer_u8);
-        if (_byte <= 32)
+        var _pos = string_pos("DYNAMO_LIVE_ASSETS", _string);
+        if (_pos <= 0)
         {
-            if (_inName)
-            {
-                _inName = false;
-                _lookingForComma = true;
-                
-                //Extract the asset name if we find a space
-                //Bit of a weird formatting choice to have whitespace before a comma but it's technically legal...
-                var _name = __DynamoBufferReadString(_buffer, _nameStart, buffer_tell(_buffer)-2);
-                array_push(_assetArray, _name);
-            }
+            __DynamoError("DYNAMO_LIVE_ASSETS not found in __DynamoConfig()");
+            return;
         }
-        else if (_byte == 44) // ,
+        
+        //Move the buffer to just after the macro
+        //We want to start looking for an array (of assets) immediately following the macro
+        var _substring = string_copy(_string, 1, _pos + string_length("DYNAMO_LIVE_ASSETS"));
+        buffer_seek(_buffer, buffer_seek_start, string_byte_length(_substring) - 1);
+        
+        //Search for the opening [ for the array
+        repeat(buffer_get_size(_buffer) - buffer_tell(_buffer))
         {
-            if (_inName)
+            var _byte = buffer_read(_buffer, buffer_u8);
+            if (_byte <= 32)
             {
-                _inName = false;
-                
-                //We've seen a comma, extract the asset name and carry on
-                var _name = __DynamoBufferReadString(_buffer, _nameStart, buffer_tell(_buffer)-2);
-                array_push(_assetArray, _name);
+                //Whitespace, do nothing
             }
-            else
-            {
-                if (!_lookingForComma) __DynamoError("Syntax error whilst reading DYNAMO_LIVE_ASSETS\nUnexpected comma found");
-                _lookingForComma = false;
-            }
-        }
-        else
-        {
-            if (_byte == 34) // "
-            {
-                __DynamoError("Syntax error whilst reading DYNAMO_LIVE_ASSETS\nUnexpected double quote found");
-            }
-            else if (_byte == 93)
+            else if (_byte == 91) // [
             {
                 break;
             }
             else
             {
-                if (_lookingForComma) __DynamoError("Syntax error whilst reading DYNAMO_LIVE_ASSETS\nExpecting comma, found alphanumeric character");
-            
-                if (!_inName)
-                {
-                    _inName = true;
-                    _nameStart = buffer_tell(_buffer)-1;
-                }
+                __DynamoError("Syntax error whilst reading DYNAMO_LIVE_ASSETS\nCould not find start of array");
             }
         }
-    }
-    
-    //Now iterate over all the assets we found and prepare that for use with Dynamo
-    //We don't know, on the face of it, what datatype these assets are so we're going to search for them
-    var _i = 0;
-    repeat(array_length(_assetArray))
-    {
-        var _name = _assetArray[_i];
-        var _lowerName = string_lower(_name);
         
-        var _searchDirectory = "objects/" + _lowerName + "/";
-        if (directory_exists(_directory + _searchDirectory))
+        //Extract asset names and store them for handling later
+        var _nameStart = 0;
+        var _inName = false;
+        var _lookingForComma = false;
+        repeat(buffer_get_size(_buffer) - buffer_tell(_buffer))
         {
-            __DynamoPrepareObject(_name, _searchDirectory, _directory + _searchDirectory, _lowerName + ".yy");
-        }
-        else
-        {
-            _searchDirectory = "scripts/" + _lowerName + "/";
-            if (directory_exists(_directory + _searchDirectory))
+            var _byte = buffer_read(_buffer, buffer_u8);
+            if (_byte <= 32)
             {
-                __DynamoPrepareScript(_name, _searchDirectory, _directory + _searchDirectory, _lowerName + ".gml");
+                if (_inName)
+                {
+                    _inName = false;
+                    _lookingForComma = true;
+                    
+                    //Extract the asset name if we find a space
+                    //Bit of a weird formatting choice to have whitespace before a comma but it's technically legal...
+                    var _name = __DynamoBufferReadString(_buffer, _nameStart, buffer_tell(_buffer)-2);
+                    array_push(_assetArray, _name);
+                }
+            }
+            else if (_byte == 44) // ,
+            {
+                if (_inName)
+                {
+                    _inName = false;
+                    
+                    //We've seen a comma, extract the asset name and carry on
+                    var _name = __DynamoBufferReadString(_buffer, _nameStart, buffer_tell(_buffer)-2);
+                    array_push(_assetArray, _name);
+                }
+                else
+                {
+                    if (!_lookingForComma) __DynamoError("Syntax error whilst reading DYNAMO_LIVE_ASSETS\nUnexpected comma found");
+                    _lookingForComma = false;
+                }
             }
             else
             {
-                __DynamoError("Could not determine type of asset \"", _name, "\"");
+                if (_byte == 34) // "
+                {
+                    __DynamoError("Syntax error whilst reading DYNAMO_LIVE_ASSETS\nUnexpected double quote found");
+                }
+                else if (_byte == 93)
+                {
+                    break;
+                }
+                else
+                {
+                    if (_lookingForComma) __DynamoError("Syntax error whilst reading DYNAMO_LIVE_ASSETS\nExpecting comma, found alphanumeric character");
+                    
+                    if (!_inName)
+                    {
+                        _inName = true;
+                        _nameStart = buffer_tell(_buffer)-1;
+                    }
+                }
             }
         }
         
-        ++_i;
+        //Now iterate over all the assets we found and prepare that for use with Dynamo
+        //We don't know, on the face of it, what datatype these assets are so we're going to search for them
+        var _i = 0;
+        repeat(array_length(_assetArray))
+        {
+            var _name = _assetArray[_i];
+            var _lowerName = string_lower(_name);
+            
+            var _searchDirectory = "objects/" + _lowerName + "/";
+            if (directory_exists(_directory + _searchDirectory))
+            {
+                __DynamoPrepareObject(_name, _searchDirectory, _directory + _searchDirectory, _lowerName + ".yy");
+            }
+            else
+            {
+                _searchDirectory = "scripts/" + _lowerName + "/";
+                if (directory_exists(_directory + _searchDirectory))
+                {
+                    __DynamoPrepareScript(_name, _searchDirectory, _directory + _searchDirectory, _lowerName + ".gml");
+                }
+                else
+                {
+                    __DynamoError("Could not determine type of asset \"", _name, "\"");
+                }
+            }
+            
+            ++_i;
+        }
     }
     
     //Save our expression data into the project too
