@@ -2,8 +2,8 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Manual Mode",
-    "path": "folders/Dynamo/Manual Mode.yy",
+    "name": "Manual Functions",
+    "path": "folders/Dynamo/Manual Functions.yy",
   },
   "resourceVersion": "1.0",
   "name": "DynamoFileChanged",

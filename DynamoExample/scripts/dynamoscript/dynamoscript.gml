@@ -1,7 +1,7 @@
 /// Sets up a script to watch for changes. If DYNAMO_AUTO_SCAN is set to <true> then watched
 /// scripts will be scanned for changes automatically. If a script *has* changed then it will be
 /// loaded, parsed, and applied. If you specified a callback function when calling
-/// DynamoScriptWatch() then that will be executed after data in the script is applied.
+/// DynamoScript() then that will be executed after data in the script is applied.
 /// 
 /// Because data is being stored in a script and *not* instead a function, the code inside a
 /// script is executed on boot by the GameMaker runtime as you'd expect. This means that, unlike
@@ -21,7 +21,7 @@
 /// @param script
 /// @param [callback]
 
-function DynamoScriptWatch(_script, _callback = undefined)
+function DynamoScript(_script, _callback = undefined)
 {
     __DynamoInitialize();
     

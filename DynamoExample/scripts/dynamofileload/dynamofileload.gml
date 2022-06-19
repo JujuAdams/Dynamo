@@ -1,4 +1,4 @@
-/// Forces an Included File to be loaded, executing the callback defined for the file via DynamoFileWatch().
+/// Forces an Included File to be loaded, executing the callback defined for the file via DynamoFile().
 /// 
 /// @param path
 

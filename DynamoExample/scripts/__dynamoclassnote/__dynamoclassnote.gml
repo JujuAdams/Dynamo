@@ -102,7 +102,7 @@ function __DynamoClassNote(_name, _hash, _buffer) constructor
                 break;
                 
                 case undefined:
-                    __DynamoError("Note \"", __name, "\" hasn't been added using DynamoNoteWatch()");
+                    __DynamoError("Note \"", __name, "\" hasn't been added using DynamoNote()");
                 break;
                 
                 default:

@@ -1,7 +1,7 @@
 /// Sets up an Included File to watch for changes. If DYNAMO_AUTO_SCAN is set to <true> then
 /// watched Included Files will be scanned for changes automatically. If a file *has* changed
 /// then it will be loaded and parsed. The parsed data will be passed into the callback function
-/// defined when calling DynamoFileWatch().
+/// defined when calling DynamoFile().
 /// 
 /// If you call DynamoFileLoad() then the Included File will be loaded whether there have been
 /// changes or not, and the callback will be executed as normal.
@@ -26,7 +26,7 @@
 /// @param dataFormat
 /// @param callback
 
-function DynamoFileWatch(_path, _dataFormat, _callback)
+function DynamoFile(_path, _dataFormat, _callback)
 {
     __DynamoInitialize();
     

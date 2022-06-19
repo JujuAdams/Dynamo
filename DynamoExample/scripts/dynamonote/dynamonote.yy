@@ -6,7 +6,7 @@
     "path": "folders/Dynamo.yy",
   },
   "resourceVersion": "1.0",
-  "name": "DynamoScriptWatch",
+  "name": "DynamoNote",
   "tags": [],
   "resourceType": "GMScript",
 }

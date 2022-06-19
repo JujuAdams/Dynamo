@@ -2,7 +2,7 @@
 /// @param dataFormat
 /// @param callback
 
-function DynamoNoteWatch(_note, _dataFormat, _callback)
+function DynamoNote(_note, _dataFormat, _callback)
 {
     __DynamoInitialize();
     
