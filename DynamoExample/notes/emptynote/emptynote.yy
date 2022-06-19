@@ -5,8 +5,6 @@
   },
   "resourceVersion": "1.1",
   "name": "EmptyNote",
-  "tags": [
-    "dynamo",
-  ],
+  "tags": [],
   "resourceType": "GMNotes",
 }

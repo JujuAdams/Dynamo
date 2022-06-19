@@ -5,6 +5,8 @@
   },
   "resourceVersion": "1.1",
   "name": "IgnoreNote",
-  "tags": [],
+  "tags": [
+    "dynamo ignore",
+  ],
   "resourceType": "GMNotes",
 }
