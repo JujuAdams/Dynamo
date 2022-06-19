@@ -14,6 +14,7 @@ function __DynamoPrepareGMLFile(_name, _relativePath, _absolutePath, _variablePr
     
     //Otherwise we're gonna get our hands dirty, make a backup
     __DynamoRegisterBackup(_name, _absolutePath);
+    var _hash = __DynamoFileHash(_absolutePath);
     
     //Set up a batched buffer operation so we can modify the source GML
     //This handles the annoying offset calculations for us
@@ -42,5 +43,10 @@ function __DynamoPrepareGMLFile(_name, _relativePath, _absolutePath, _variablePr
     buffer_save(_batchOp.GetBuffer(), _absolutePath);
     _batchOp.Destroy();
     
-    array_push(global.__dynamoExpressionFileArray, _relativePath);
+    array_push(global.__dynamoExpressionFileArray, {
+        __name: _name,
+        __variablePrefix: _variablePrefix,
+        __path: _relativePath,
+        __hash: _hash,
+    });
 }

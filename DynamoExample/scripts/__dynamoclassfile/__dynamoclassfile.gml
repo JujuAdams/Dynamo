@@ -7,7 +7,7 @@ function __DynamoClassFile(_name, _directory, _localPath) constructor
     global.__dynamoFileStruct[$ __name] = self;
     array_push(global.__dynamoTrackingArray, self);
     
-    __hash = undefined;
+    __hash = DYNAMO_ENABLED? __DynamoFileHash(__path) : undefined;
     
     __dataFormat = undefined;
     __callback   = undefined;
@@ -21,6 +21,7 @@ function __DynamoClassFile(_name, _directory, _localPath) constructor
     
     static __HasChanged = function()
     {
+        if (!DYNAMO_ENABLED) return false;
         return (__DynamoFileHash(__path) != __hash);
     }
     

@@ -1,14 +1,16 @@
-/// Returns a struct that contains two arrays. These arrays will contain which assets have changed,
-/// be it names of script or Included File paths, as appropriate.
+/// Returns a struct that contains three arrays. These arrays will contain which assets have changed,
+/// be it names of scripts, Included File paths, or object event names, as appropriate.
 
 function DynamoGetChangedAssets()
 {
-    static _scriptArray = [];
-    static _fileArray = [];
+    static _scriptArray         = [];
+    static _fileArray           = [];
+    static _expressionFileArray = [];
     
     static _return = {
-        scripts: _scriptArray,
-        files: _fileArray,
+        scripts:         _scriptArray,
+        files:           _fileArray,
+        expressionFiles: _expressionFileArray,
     };
     
     array_resize(_scriptArray, 0);
@@ -25,6 +27,13 @@ function DynamoGetChangedAssets()
     repeat(array_length(global.__dynamoFileArray))
     {
         if (global.__dynamoFileArray[_i].__HasChanged()) array_push(_fileArray, string(global.__dynamoFileArray[_i]));
+        ++_i;
+    }
+    
+    var _i = 0;
+    repeat(array_length(global.__dynamoExpressionFileArray))
+    {
+        if (global.__dynamoExpressionFileArray[_i].__HasChanged()) array_push(_expressionFileArray, string(global.__dynamoExpressionFileArray[_i]));
         ++_i;
     }
    

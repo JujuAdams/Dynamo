@@ -7,5 +7,5 @@ global.structArrayThing = {
         3.141,
         42,
     ],
-    "some other data": "here it is, some other data",
+    "some_other_data": "here it is, some other data",
 };

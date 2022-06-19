@@ -63,9 +63,9 @@ function __DynamoInitialize()
     //Not included here are negative signs, negation (! / NOT), and parentheses - these are handled separately
     global.__dynamoExpressionOpList = ["/", "*", "+", "-"];
     
-    global.__dynamoExpressionDict      = {};
-    global.__dynamoExpressionFileArray = [];
-    if (DYNAMO_EXPRESSIONS_ENABLED) __DynamoExpressionData();
+    global.__dynamoExpressionDict       = {};
+    global.__dynamoExpressionFileArray  = [];
+    global.__dynamoExpressionFileStruct = {};
     
     if (__DYNAMO_DEV_MODE)
     {
@@ -93,6 +93,8 @@ function __DynamoInitialize()
         
         if (DYNAMO_VERBOSE) __DynamoTrace("Found project path \"", global.__dynamoProjectDirectory, "\"");
     }
+    
+    if (__DYNAMO_DEV_MODE && DYNAMO_EXPRESSIONS_ENABLED) __DynamoExpressionData();
 }
 
 

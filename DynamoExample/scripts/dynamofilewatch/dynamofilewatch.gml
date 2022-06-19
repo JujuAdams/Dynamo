@@ -33,7 +33,7 @@ function DynamoFileWatch(_path, _dataFormat, _callback)
     var _adjustedPath = string_replace_all(_path, "\\", "/");
     if (!file_exists(global.__dynamoProjectDirectory + "datafiles/" + _adjustedPath))
     {
-        __DynamoTrace("Warning! File \"", global.__dynamoProjectDirectory + "datafiles/" + _path, "\" not found");
+        __DynamoTrace("Warning! File \"", global.__dynamoProjectDirectory, "datafiles/", _path, "\" not found");
     }
     
     _dataFormat = string_lower(_dataFormat);

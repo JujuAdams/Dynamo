@@ -11,7 +11,7 @@
 //Whether to progressively scan through tracked data looking for changes
 //The alternative is for Dynamo to only scan for changes when the window regains focus
 //This macro is forced to <true> on MacOS due to bugs in GameMaker
-#macro DYNAMO_AUTO_PROGRESSIVE_SCAN  false
+#macro DYNAMO_AUTO_PROGRESSIVE_SCAN  true
 
 //Whether to show extended debug information in the debug log
 //This can be useful to track down problems when using Dynamo

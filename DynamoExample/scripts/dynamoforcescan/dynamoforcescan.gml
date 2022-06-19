@@ -19,4 +19,11 @@ function DynamoForceScan()
         if (global.__dynamoFileArray[_i].__HasChanged()) global.__dynamoFileArray[_i].__Load();
         ++_i;
     }
+    
+    var _i = 0;
+    repeat(array_length(global.__dynamoExpressionFileArray))
+    {
+        if (global.__dynamoExpressionFileArray[_i].__HasChanged()) global.__dynamoExpressionFileArray[_i].__Load();
+        ++_i;
+    }
 }

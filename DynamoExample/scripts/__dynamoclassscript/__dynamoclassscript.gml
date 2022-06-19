@@ -7,7 +7,7 @@ function __DynamoClassScript(_name, _path) constructor
     global.__dynamoScriptStruct[$ __name] = self;
     array_push(global.__dynamoTrackingArray, self);
     
-    __hash = undefined;
+    __hash = DYNAMO_ENABLED? __DynamoFileHash(__path) : undefined;
     
     __callback = undefined;
     
@@ -20,11 +20,14 @@ function __DynamoClassScript(_name, _path) constructor
     
     static __HasChanged = function()
     {
+        if (!DYNAMO_ENABLED) return false;
         return (__DynamoFileHash(__path) != __hash);
     }
     
     static __Load = function()
     {
+        if (!DYNAMO_ENABLED) return;
+        
         __hash = __DynamoFileHash(__path);
         
         try

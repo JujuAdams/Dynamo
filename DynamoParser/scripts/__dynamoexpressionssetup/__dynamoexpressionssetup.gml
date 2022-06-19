@@ -13,12 +13,9 @@ function __DynamoExpressionsSetup(_directory)
         return;
     }
     
-    //Make a backup before we do anything spicy
-    __DynamoRegisterBackup("__dynamoconfig.gml", _path);
-    
     //This array will contain names of assets that we find in __DynamoConfig()
     //Having assets specified like this is a lot faster than reading the whole project and looking for tags
-    global.__dynamoLiveAssetArray = [];
+    var _assetArray = [];
     
     //Load up __DynamoConfig() as a buffer and search for DYNAMO_LIVE_ASSETS
     var _buffer = buffer_load(_path);
@@ -54,12 +51,7 @@ function __DynamoExpressionsSetup(_directory)
         }
     }
     
-    //Set up a batch operation so we can insert double quotes easily and quickly
-    var _batchOp = new __DynamoBufferBatch();
-    _batchOp.FromBuffer(_buffer);
-    
-    //Extract asset names and wrap them in double quotes
-    //We store the asset names for handling later
+    //Extract asset names and store them for handling later
     var _nameStart = 0;
     var _inName = false;
     var _lookingForComma = false;
@@ -75,9 +67,8 @@ function __DynamoExpressionsSetup(_directory)
                 
                 //Extract the asset name if we find a space
                 //Bit of a weird formatting choice to have whitespace before a comma but it's technically legal...
-                _batchOp.Insert(buffer_tell(_buffer)-1, "\"");
                 var _name = __DynamoBufferReadString(_buffer, _nameStart, buffer_tell(_buffer)-2);
-                array_push(global.__dynamoLiveAssetArray, _name);
+                array_push(_assetArray, _name);
             }
         }
         else if (_byte == 44) // ,
@@ -87,9 +78,8 @@ function __DynamoExpressionsSetup(_directory)
                 _inName = false;
                 
                 //We've seen a comma, extract the asset name and carry on
-                _batchOp.Insert(buffer_tell(_buffer)-1, "\"");
                 var _name = __DynamoBufferReadString(_buffer, _nameStart, buffer_tell(_buffer)-2);
-                array_push(global.__dynamoLiveAssetArray, _name);
+                array_push(_assetArray, _name);
             }
             else
             {
@@ -115,24 +105,17 @@ function __DynamoExpressionsSetup(_directory)
                 {
                     _inName = true;
                     _nameStart = buffer_tell(_buffer)-1;
-                    
-                    //Immediately insert a double quote at the start of the name
-                    _batchOp.Insert(_nameStart, "\"");
                 }
             }
         }
     }
     
-    //Save our modified __DynamoConfig() to disk
-    buffer_save(_batchOp.GetBuffer(), _path);
-    _batchOp.Destroy();
-    
     //Now iterate over all the assets we found and prepare that for use with Dynamo
     //We don't know, on the face of it, what datatype these assets are so we're going to search for them
     var _i = 0;
-    repeat(array_length(global.__dynamoLiveAssetArray))
+    repeat(array_length(_assetArray))
     {
-        var _name = global.__dynamoLiveAssetArray[_i];
+        var _name = _assetArray[_i];
         var _lowerName = string_lower(_name);
         
         var _searchDirectory = "objects/" + _lowerName + "/";
@@ -164,8 +147,6 @@ function __DynamoExpressionsSetup(_directory)
         return;
     }
     
-    __DynamoRegisterBackup("__DynamoExpressionData", _path);
-    
     __DynamoTrace("Exporting Dynamo expressions and trackable files to \"", _path, "\"");
     
     //File header
@@ -177,24 +158,28 @@ function __DynamoExpressionsSetup(_directory)
     buffer_write(_buffer, buffer_text, "\n\n");
     
     //Write the trackable files first
-    buffer_write(_buffer, buffer_text, "function __DynamoExpressionData()\n{\n    global.__dynamoExpressionFileArray = [\n");
+    buffer_write(_buffer, buffer_text, "function __DynamoExpressionData()\n{\n");
     
     array_sort(global.__dynamoExpressionFileArray, true); //Prettify the output a bit
     
     var _i = 0;
     repeat(array_length(global.__dynamoExpressionFileArray))
     {
-        buffer_write(_buffer, buffer_text, "        \"");
-        buffer_write(_buffer, buffer_text, global.__dynamoExpressionFileArray[_i]);
-        buffer_write(_buffer, buffer_text, "\",\n");
+        var _data = global.__dynamoExpressionFileArray[_i];
+        buffer_write(_buffer, buffer_text, "    __DynamoExpressionFileWatch(\"");
+        buffer_write(_buffer, buffer_text, _data.__name);
+        buffer_write(_buffer, buffer_text, "\", \"");
+        buffer_write(_buffer, buffer_text, _data.__variablePrefix);
+        buffer_write(_buffer, buffer_text, "\", \"");
+        buffer_write(_buffer, buffer_text, _data.__path);
+        buffer_write(_buffer, buffer_text, "\", \"");
+        buffer_write(_buffer, buffer_text, _data.__hash);
+        buffer_write(_buffer, buffer_text, "\");\n");
         ++_i;
     }
     
-    buffer_write(_buffer, buffer_text, "    ];\n");
-    buffer_write(_buffer, buffer_text, "    \n");
-    
     //Then the variable expressions
-    buffer_write(_buffer, buffer_text, "    global.__dynamoExpressionDict = {\n");
+    buffer_write(_buffer, buffer_text, "    \n    global.__dynamoExpressionDict = {\n");
     
     var _nameArray = variable_struct_get_names(global.__dynamoExpressionDict);
     array_sort(_nameArray, true); //Prettify the output a bit
