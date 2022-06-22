@@ -175,6 +175,34 @@ This function always returns `false` when not running the game from inside the I
 
 &nbsp;
 
+### `DynamoLiveUpdateEnabled()`
+
+**Returns:** Boolean, whether Dynamo's live update features are enabled
+
+|Name|Datatype|Purpose|
+|----|--------|-------|
+|None|        |       |
+
+This function will return `false` if `DYNAMO_ENABLED` is set to `false`, or the game is being run outside the GameMaker IDE.
+
+&nbsp;
+
+&nbsp;
+
+### `DynamoProjectDirectory()`
+
+**Returns:** String, the project directory if Dynamo is enabled, otherwise `undefined`
+
+|Name|Datatype|Purpose|
+|----|--------|-------|
+|None|        |       |
+
+This function will return `undefined` if `DYNAMO_ENABLED` is set to `false`, or the game is being run outside the GameMaker IDE.
+
+&nbsp;
+
+&nbsp;
+
 ### `DynamoForceScan()`
 
 **Returns:** N/A (`undefined`)
