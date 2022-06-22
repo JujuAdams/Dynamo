@@ -1,7 +1,14 @@
 function __DynamoReadNoteData()
 {
     var _sourceBuffer = buffer_load("DynamoData");
+    
     var _buffer = buffer_decompress(_sourceBuffer);
+    if (_buffer < 0)
+    {
+        __DynamoError("Failed to decompress \"DynamoData\"");
+        return;
+    }
+    
     buffer_delete(_sourceBuffer);
     
     var _header = buffer_read(_buffer, buffer_string);
