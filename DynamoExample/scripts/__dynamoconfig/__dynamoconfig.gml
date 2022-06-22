@@ -20,9 +20,3 @@
 //Values in CSV files cells are inherently strings
 //This macro control whether Dynamo should try to convert values in CSV files into numbers
 #macro DYNAMO_CSV_TRY_REAL  false
-
-#macro DYNAMO_EXPRESSIONS_ENABLED  true
-
-DYNAMO_LIVE_ASSETS [
-    oTestLive,
-]
