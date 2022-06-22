@@ -1,5 +1,5 @@
-/// Returns a struct that contains four arrays. These arrays will contain which assets have changed,
-/// be it names of scripts, notes, Included File paths, or object event names, as appropriate.
+/// Returns a struct that contains three arrays. These arrays will contain which assets have changed,
+/// be it names of scripts, notes, or Included File paths, as appropriate.
 
 function DynamoGetChangedAssets()
 {
