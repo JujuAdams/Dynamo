@@ -14,6 +14,7 @@ __DynamoInitialize();
 
 function __DynamoInitialize()
 {
+    //Don't initialize twice
     if (variable_global_exists("__dynamoProjectDirectory")) return;
     
     //Attempt to set up a time source for slick automatic input handling
@@ -47,7 +48,7 @@ function __DynamoInitialize()
         }
     }
     
-    global.__dynamoRunningFromIDE   = __DynamoRunningFromIDE();
+    global.__dynamoRunningFromIDE   = file_exists(__DYNAMO_PROJECT_DIRECTORY_PATH_NAME);
     global.__dynamoProjectDirectory = "";
     
     global.__dynamoScriptArray     = [];
@@ -70,21 +71,12 @@ function __DynamoInitialize()
     global.__dynamoExpressionFileArray  = [];
     global.__dynamoExpressionFileStruct = {};
     
-    if (__DYNAMO_DEV_MODE)
-    {
-        global.__dynamoProjectDirectory = __DynamoLoadString(__DYNAMO_PROJECT_DIRECTORY_PATH_NAME);
-    }
+    //Load up the project directory from the text string we wrote into the output folder
+    global.__dynamoProjectDirectory = __DynamoLoadString(__DYNAMO_PROJECT_DIRECTORY_PATH_NAME);
     
     if (global.__dynamoProjectDirectory == "")
     {
-        if (__DYNAMO_DEV_MODE)
-        {
-            __DynamoError("Failed to load \"", __DYNAMO_PROJECT_DIRECTORY_PATH_NAME, "\"\n- You may need to run the GameMaker IDE in administrator mode\n- Ensure that \"pre_run_step.bat\" and \"pre_run_step.sh\" exist in your project's root directory");
-        }
-        else
-        {
-            __DynamoTrace("Warning! Failed to load \"", __DYNAMO_PROJECT_DIRECTORY_PATH_NAME, "\"");
-        }
+        if (DYNAMO_ENABLED) __DynamoTrace("Warning! Could not find project directory information, development mode is disabled");
     }
     else
     {
@@ -93,6 +85,12 @@ function __DynamoInitialize()
         global.__dynamoProjectDirectory = string_replace_all(global.__dynamoProjectDirectory, "\n", "");
         global.__dynamoProjectDirectory = string_replace_all(global.__dynamoProjectDirectory, "\r", "");
         global.__dynamoProjectDirectory += "/";
+        
+        //Verify the directory just in case
+        if (!directory_exists(global.__dynamoProjectDirectory))
+        {
+            __DynamoError("Could not find project directory \"", global.__dynamoProjectDirectory, "\"\nYou may need to run the GameMaker IDE in administrator mode");
+        }
         
         if (DYNAMO_VERBOSE) __DynamoTrace("Found project path \"", global.__dynamoProjectDirectory, "\"");
     }
