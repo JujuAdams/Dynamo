@@ -8,7 +8,7 @@ function __DynamoReadNoteData()
     if (_header != "Dynamo") __DynamoError("Invalid header in data file");
     
     var _version = buffer_read(_buffer, buffer_string);
-    if (_version != __DYNAMO_VERSION) __DynamoError("Version mismatch in data file (found ", _version, ", expected ", __DYNAMO_VERSION, ")");
+    if (_version != __DYNAMO_PARSER_VERSION) __DynamoError("Parser version mismatch in data file (found ", _version, ", expected ", __DYNAMO_PARSER_VERSION, ")");
     
     var _noteCount = buffer_read(_buffer, buffer_u64);
     var _i = 0;

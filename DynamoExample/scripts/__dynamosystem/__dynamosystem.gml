@@ -1,7 +1,8 @@
-#macro __DYNAMO_VERSION    "2.0.0 alpha 3"
-#macro __DYNAMO_DATE       "2022-05-28"
-#macro __DYNAMO_DEV_MODE   (DYNAMO_ENABLED && global.__dynamoRunningFromIDE)
-#macro DYNAMO_LIVE_ASSETS  global.__dynamoLiveAssetArray =
+#macro __DYNAMO_VERSION         "2.0.1 beta 1"
+#macro __DYNAMO_PARSER_VERSION  "2.0"
+#macro __DYNAMO_DATE            "2022-06-22"
+#macro __DYNAMO_DEV_MODE        (DYNAMO_ENABLED && global.__dynamoRunningFromIDE)
+#macro DYNAMO_LIVE_ASSETS       global.__dynamoLiveAssetArray =
 
 #macro __DYNAMO_PROJECT_DIRECTORY_PATH_NAME  "projectDirectory.txt"
 

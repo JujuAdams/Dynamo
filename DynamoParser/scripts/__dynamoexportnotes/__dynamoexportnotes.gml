@@ -41,7 +41,7 @@ function __DynamoExportNotes(_directory)
     //Export Notes that we found
     var _buffer = buffer_create(1024, buffer_grow, 1);
     buffer_write(_buffer, buffer_string, "Dynamo");
-    buffer_write(_buffer, buffer_string, __DYNAMO_VERSION);
+    buffer_write(_buffer, buffer_string, __DYNAMO_PARSER_VERSION);
     
     var _count = array_length(global.__dynamoNoteArray);
     buffer_write(_buffer, buffer_u64, _count);
