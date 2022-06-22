@@ -1,4 +1,5 @@
-<h1 align="center">Dynamo</h1>
+<img src="https://raw.githubusercontent.com/JujuAdams/Dynamo/master/LOGO.png" width="50%" style="display: block; margin: auto;" />
+<h1 align="center">Dynamo 1.1</h1>
 <p align="center">Dynamic data loader for GameMaker 2022 by <b>@jujuadams</b></p>
 <p align="center"><a href="https://github.com/JujuAdams/Dynamo/releases/">Download the .yymps</a></p>
 <p align="center">Chat about dynamo on the <a href="https://discord.gg/8krYCqr">Discord server</a></p>
