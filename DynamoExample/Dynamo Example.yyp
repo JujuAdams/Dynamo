@@ -11,6 +11,7 @@
     {"id":{"name":"DynamoFile","path":"scripts/DynamoFile/DynamoFile.yy",},"order":2,},
     {"id":{"name":"DynamoFileLoad","path":"scripts/DynamoFileLoad/DynamoFileLoad.yy",},"order":0,},
     {"id":{"name":"DynamoScriptChanged","path":"scripts/DynamoScriptChanged/DynamoScriptChanged.yy",},"order":5,},
+    {"id":{"name":"DynamoProjectDirectory","path":"scripts/DynamoProjectDirectory/DynamoProjectDirectory.yy",},"order":5,},
     {"id":{"name":"EmptyNote","path":"notes/EmptyNote/EmptyNote.yy",},"order":7,},
     {"id":{"name":"DynamoGetChangedAssets","path":"scripts/DynamoGetChangedAssets/DynamoGetChangedAssets.yy",},"order":7,},
     {"id":{"name":"__DynamoReadNoteData","path":"scripts/__DynamoReadNoteData/__DynamoReadNoteData.yy",},"order":17,},
@@ -33,6 +34,7 @@
     {"id":{"name":"DynamoScript","path":"scripts/DynamoScript/DynamoScript.yy",},"order":1,},
     {"id":{"name":"__DynamoBufferReadString","path":"scripts/__DynamoBufferReadString/__DynamoBufferReadString.yy",},"order":13,},
     {"id":{"name":"DynamoNoteLoad","path":"scripts/DynamoNoteLoad/DynamoNoteLoad.yy",},"order":2,},
+    {"id":{"name":"DynamoLiveUpdateEnabled","path":"scripts/DynamoLiveUpdateEnabled/DynamoLiveUpdateEnabled.yy",},"order":4,},
     {"id":{"name":"DynamoNoteChanged","path":"scripts/DynamoNoteChanged/DynamoNoteChanged.yy",},"order":3,},
     {"id":{"name":"rmMain","path":"rooms/rmMain/rmMain.yy",},"order":1,},
   ],
@@ -65,9 +67,9 @@
   ],
   "Folders": [
     {"folderPath":"folders/Dynamo.yy","order":0,"resourceVersion":"1.0","name":"Dynamo","tags":[],"resourceType":"GMFolder",},
-    {"folderPath":"folders/Dynamo/(System).yy","order":5,"resourceVersion":"1.0","name":"(System)","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/Dynamo/(System).yy","order":7,"resourceVersion":"1.0","name":"(System)","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Dynamo/(System)/Classes.yy","order":3,"resourceVersion":"1.0","name":"Classes","tags":[],"resourceType":"GMFolder",},
-    {"folderPath":"folders/Dynamo/Manual Functions.yy","order":4,"resourceVersion":"1.0","name":"Manual Functions","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/Dynamo/Manual Functions.yy","order":6,"resourceVersion":"1.0","name":"Manual Functions","tags":[],"resourceType":"GMFolder",},
   ],
   "AudioGroups": [
     {"targets":-1,"resourceVersion":"1.3","name":"audiogroup_default","resourceType":"GMAudioGroup",},
