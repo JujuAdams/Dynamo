@@ -14,6 +14,8 @@
 
 Sets up an Included File to watch for changes. If `DYNAMO_AUTO_SCAN` is set to `true` then watched Included Files will be scanned for changes automatically. If a file *has* changed then it will be loaded and parsed. The parsed data will be passed into the callback function defined when calling `DynamoFile()`.
 
+?> Please note that Dynamo cannot live update sprites or OGG-formatted audio; it only deals with data that can be passed into GameMaker as a buffer. If you'd like to live reload sprites, audio, and more besides, please use the amazing [GMLive by YellowAfterlife](https://yellowafterlife.itch.io/gamemaker-live).
+
 If you call `DynamoFileLoad()` then the Included File will be loaded whether there have been changes or not, and the callback will be executed as normal.
 
 Note that setting up a file watcher will not initially load a file. If you want immediate access to data inside a file at the start of your game you'll need to call `DynamoFileLoad()`.
