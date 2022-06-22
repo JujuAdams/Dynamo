@@ -1,3 +1,7 @@
+/// Returns whether the Note asset on disk has changed since the last time Dynamo loaded it. If
+/// your game isn't running from the IDE or DYNAMO_ENABLED is set to <false> this function will
+/// always return <false>.
+/// 
 /// @param note
 
 function DynamoNoteChanged(_note)

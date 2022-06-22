@@ -3,16 +3,14 @@
 
 function DynamoGetChangedAssets()
 {
-    static _scriptArray         = [];
-    static _fileArray           = [];
-    static _noteArray           = [];
-    static _expressionFileArray = [];
+    static _scriptArray = [];
+    static _fileArray   = [];
+    static _noteArray   = [];
     
     static _return = {
         scripts:         _scriptArray,
         files:           _fileArray,
         notes:           _noteArray,
-        expressionFiles: _expressionFileArray,
     };
     
     array_resize(_scriptArray, 0);

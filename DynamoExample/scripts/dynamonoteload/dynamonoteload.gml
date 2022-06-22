@@ -1,3 +1,5 @@
+/// Forces a Note file to be loaded, executing the callback defined for the file via DynamoNote().
+/// 
 /// @param note
 
 function DynamoNoteLoad(_note)
