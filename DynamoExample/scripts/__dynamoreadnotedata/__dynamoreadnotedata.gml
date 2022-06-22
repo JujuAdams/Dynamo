@@ -1,4 +1,4 @@
-function __DynamoReadData()
+function __DynamoReadNoteData()
 {
     var _sourceBuffer = buffer_load("DynamoData");
     var _buffer = buffer_decompress(_sourceBuffer);

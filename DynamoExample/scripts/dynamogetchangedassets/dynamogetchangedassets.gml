@@ -39,12 +39,5 @@ function DynamoGetChangedAssets()
         ++_i;
     }
     
-    var _i = 0;
-    repeat(array_length(global.__dynamoExpressionFileArray))
-    {
-        if (global.__dynamoExpressionFileArray[_i].__HasChanged()) array_push(_expressionFileArray, string(global.__dynamoExpressionFileArray[_i]));
-        ++_i;
-    }
-   
     return _return;
 }

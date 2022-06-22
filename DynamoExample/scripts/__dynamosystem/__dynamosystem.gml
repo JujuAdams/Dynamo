@@ -63,14 +63,6 @@ function __DynamoInitialize()
     global.__dynamoInFocus    = false;
     global.__dynamoCheckIndex = 0;
     
-    //Big ol' list of operators. Operators at the top at processed first
-    //Not included here are negative signs, negation (! / NOT), and parentheses - these are handled separately
-    global.__dynamoExpressionOpList = ["/", "*", "+", "-"];
-    
-    global.__dynamoExpressionDict       = {};
-    global.__dynamoExpressionFileArray  = [];
-    global.__dynamoExpressionFileStruct = {};
-    
     //Load up the project directory from the text string we wrote into the output folder
     global.__dynamoProjectDirectory = __DynamoLoadString(__DYNAMO_PROJECT_DIRECTORY_PATH_NAME);
     
@@ -95,7 +87,7 @@ function __DynamoInitialize()
         if (DYNAMO_VERBOSE) __DynamoTrace("Found project path \"", global.__dynamoProjectDirectory, "\"");
     }
     
-    __DynamoReadData();
+    __DynamoReadNoteData();
 }
 
 

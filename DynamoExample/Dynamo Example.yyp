@@ -13,7 +13,7 @@
     {"id":{"name":"DynamoScriptChanged","path":"scripts/DynamoScriptChanged/DynamoScriptChanged.yy",},"order":5,},
     {"id":{"name":"EmptyNote","path":"notes/EmptyNote/EmptyNote.yy",},"order":7,},
     {"id":{"name":"DynamoGetChangedAssets","path":"scripts/DynamoGetChangedAssets/DynamoGetChangedAssets.yy",},"order":7,},
-    {"id":{"name":"__DynamoReadData","path":"scripts/__DynamoReadData/__DynamoReadData.yy",},"order":17,},
+    {"id":{"name":"__DynamoReadNoteData","path":"scripts/__DynamoReadNoteData/__DynamoReadNoteData.yy",},"order":17,},
     {"id":{"name":"__DynamoSystem","path":"scripts/__DynamoSystem/__DynamoSystem.yy",},"order":0,},
     {"id":{"name":"TestNote","path":"notes/TestNote/TestNote.yy",},"order":8,},
     {"id":{"name":"DynamoFileChanged","path":"scripts/DynamoFileChanged/DynamoFileChanged.yy",},"order":1,},

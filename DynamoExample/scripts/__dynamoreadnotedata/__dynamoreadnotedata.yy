@@ -6,7 +6,7 @@
     "path": "folders/Dynamo/(System).yy",
   },
   "resourceVersion": "1.0",
-  "name": "__DynamoReadData",
+  "name": "__DynamoReadNoteData",
   "tags": [],
   "resourceType": "GMScript",
 }
