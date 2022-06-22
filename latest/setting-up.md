@@ -10,7 +10,7 @@ Now, running executables distributed by strangers you find on the internet isn't
 
 Once you've imported Dynamo into your project, and possibly recompiled `DynamoParser.exe`, you'll want to start adding Included Files, and maybe Notes and scriptst too to Dynamo's tracker. You can do this with the `DynamoFile()`, `DynamoNote()`, and `DynamoScript()` functions. Calling one of these functions and targetting a specific asset will let Dynamo know that you want to live update that asset. These setups functions also require you to specify a callback function. This callback is executed whenever you call the associated load function for assets (e.g. `DynamoFileLoad()` for an Included File) or when Dynamo detects a change in that particular asset.
 
-?> To ensure consistency between your production builds that you give players and your development builds, you should always use Dynamo's native `DynamoFileLoad()` function to load Included Files.
+?> To ensure consistency between your production builds that you give players and your development builds, you should always use Dynamo's native `DynamoFileLoad()` function to load Included Files rather than `buffer_load()`.
 
 Once you've got Dynamo set up to watch specific Included Files, try running the game. The first time you run Dynamo with a project you will get a failure to compile with a Dynamo-specific message in the console output. This is normal! Run the game again and Dynamo will work fine. You should be able to edit data as you wish and those changes will be reflected in the game.
 
