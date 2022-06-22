@@ -6,7 +6,7 @@
 /// If you call DynamoNoteLoad() then the Note will be loaded whether there have been
 /// changes or not, and the callback will be executed as normal.
 /// 
-/// Note that setting up a note watcher will not initially load a nnote. If you want immediate
+/// Note that setting up a note watcher will not initially load a note. If you want immediate
 /// access to data inside a file at the start of your game you'll need to call DynamoNoteLoad().
 /// 
 /// If there're any problems whilst parsing data found in a file then <undefined> will be passed
