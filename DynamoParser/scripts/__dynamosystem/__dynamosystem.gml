@@ -1,7 +1,7 @@
 #macro __DYNAMO_PARSER_VERSION  "2.0"
 #macro __DYNAMO_DATE            "2022-06-22"
 
-__DynamoTrace("Welcome to Dynamo by @jujuadams! This is version ", __DYNAMO_VERSION, ", ", __DYNAMO_DATE);
+__DynamoTrace("Welcome to Dynamo by @jujuadams! This is version ", __DYNAMO_PARSER_VERSION, ", ", __DYNAMO_DATE);
 
 global.__dynamoNoteArray = [];
 
