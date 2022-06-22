@@ -1,3 +1,3 @@
-__DynamoFindNotes(projectDirectory);
-__DynamoExpressionsSetup(projectDirectory);
+__DynamoExportNotes(projectDirectory);
+
 alarm[1] = 10;

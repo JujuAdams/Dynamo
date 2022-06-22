@@ -1,5 +1,8 @@
 {
-  "spriteId": null,
+  "spriteId": {
+    "name": "sprDynamo",
+    "path": "sprites/sprDynamo/sprDynamo.yy",
+  },
   "solid": false,
   "visible": true,
   "managed": true,

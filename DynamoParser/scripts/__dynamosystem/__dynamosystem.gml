@@ -3,9 +3,7 @@
 
 __DynamoTrace("Welcome to Dynamo by @jujuadams! This is version ", __DYNAMO_VERSION, ", ", __DYNAMO_DATE);
 
-global.__dynamoExpressionDict      = {};
-global.__dynamoExpressionFileArray = [];
-global.__dynamoNoteArray           = [];
+global.__dynamoNoteArray = [];
 
 function __DynamoTrace()
 {
