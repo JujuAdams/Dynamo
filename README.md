@@ -1,4 +1,4 @@
-<h1 align="center">Dynamo 2.0.2</h1>
+<h1 align="center">Dynamo 2.0.3</h1>
 
 <p align="center">Dynamic data loader for GameMaker 2022 by <b>@jujuadams</b></p>
 
