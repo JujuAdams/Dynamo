@@ -80,7 +80,7 @@
   "IncludedFiles": [
     {"CopyToMask":3035461389054378222,"filePath":"datafiles","resourceVersion":"1.0","name":"Root.txt","resourceType":"GMIncludedFile",},
     {"CopyToMask":3035461389054378222,"filePath":"datafiles/Folder","resourceVersion":"1.0","name":"Nested.txt","resourceType":"GMIncludedFile",},
-    {"CopyToMask":-1,"filePath":"datafiles","resourceVersion":"1.0","name":"CSV.csv","resourceType":"GMIncludedFile",},
+    {"CopyToMask":3035461389054378222,"filePath":"datafiles","resourceVersion":"1.0","name":"CSV.csv","resourceType":"GMIncludedFile",},
     {"CopyToMask":-1,"filePath":"datafiles","resourceVersion":"1.0","name":"JSON.json","resourceType":"GMIncludedFile",},
     {"CopyToMask":-1,"filePath":"datafiles","resourceVersion":"1.0","name":"DynamoData","resourceType":"GMIncludedFile",},
   ],
