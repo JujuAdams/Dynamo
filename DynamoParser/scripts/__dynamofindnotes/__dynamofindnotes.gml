@@ -2,7 +2,15 @@ function __DynamoFindNotes(_directory)
 {
     _directory += "notes/";
     
-    var _file = file_find_first(_directory + "*.*", fa_directory);
+	if (os_type ==os_windows)
+	{
+		var _file = file_find_first(_directory + "*.*", fa_directory);
+	}
+	else
+	{
+		var _file = file_find_first(_directory + "*", fa_directory);
+	}
+	
     while(_file != "")
     {
         var _path = _directory + _file + "/";
