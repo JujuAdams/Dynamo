@@ -1,4 +1,7 @@
 {
+  "resourceType": "GMProject",
+  "resourceVersion": "1.6",
+  "name": "Dynamo Example",
   "resources": [
     {"id":{"name":"__DynamoClassNote","path":"scripts/__DynamoClassNote/__DynamoClassNote.yy",},"order":2,},
     {"id":{"name":"TestScript2","path":"scripts/TestScript2/TestScript2.yy",},"order":3,},
@@ -50,8 +53,6 @@
     {"name":"Switch","path":"options/switch/options_switch.yy",},
     {"name":"tvOS","path":"options/tvos/options_tvos.yy",},
     {"name":"Windows","path":"options/windows/options_windows.yy",},
-    {"name":"Windows UWP","path":"options/windowsuap/options_windowsuap.yy",},
-    {"name":"Xbox One","path":"options/xboxone/options_xboxone.yy",},
     {"name":"Xbox Series XS","path":"options/xboxseriesxs/options_xboxseriesxs.yy",},
     {"name":"operagx","path":"options/operagx/options_operagx.yy",},
     {"name":"Amazon Fire","path":"options/amazonfire/options_amazonfire.yy",},
@@ -66,29 +67,25 @@
     {"roomId":{"name":"rmMain","path":"rooms/rmMain/rmMain.yy",},},
   ],
   "Folders": [
-    {"folderPath":"folders/Dynamo.yy","order":0,"resourceVersion":"1.0","name":"Dynamo","tags":[],"resourceType":"GMFolder",},
-    {"folderPath":"folders/Dynamo/(System).yy","order":7,"resourceVersion":"1.0","name":"(System)","tags":[],"resourceType":"GMFolder",},
-    {"folderPath":"folders/Dynamo/(System)/Classes.yy","order":3,"resourceVersion":"1.0","name":"Classes","tags":[],"resourceType":"GMFolder",},
-    {"folderPath":"folders/Dynamo/Manual Functions.yy","order":6,"resourceVersion":"1.0","name":"Manual Functions","tags":[],"resourceType":"GMFolder",},
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Dynamo","folderPath":"folders/Dynamo.yy","order":0,},
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"(System)","folderPath":"folders/Dynamo/(System).yy","order":7,},
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Classes","folderPath":"folders/Dynamo/(System)/Classes.yy","order":3,},
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Manual Functions","folderPath":"folders/Dynamo/Manual Functions.yy","order":6,},
   ],
   "AudioGroups": [
-    {"targets":-1,"resourceVersion":"1.3","name":"audiogroup_default","resourceType":"GMAudioGroup",},
+    {"resourceType":"GMAudioGroup","resourceVersion":"1.3","name":"audiogroup_default","targets":-1,},
   ],
   "TextureGroups": [
-    {"isScaled":true,"compressFormat":"bz2","autocrop":true,"border":2,"mipsToGenerate":0,"groupParent":null,"targets":-1,"resourceVersion":"1.3","name":"Default","resourceType":"GMTextureGroup",},
+    {"resourceType":"GMTextureGroup","resourceVersion":"1.3","name":"Default","isScaled":true,"compressFormat":"bz2","autocrop":true,"border":2,"mipsToGenerate":0,"groupParent":null,"targets":-1,},
   ],
   "IncludedFiles": [
-    {"CopyToMask":3035461389054378222,"filePath":"datafiles","resourceVersion":"1.0","name":"Root.txt","resourceType":"GMIncludedFile",},
-    {"CopyToMask":3035461389054378222,"filePath":"datafiles/Folder","resourceVersion":"1.0","name":"Nested.txt","resourceType":"GMIncludedFile",},
-    {"CopyToMask":3035461389054378222,"filePath":"datafiles","resourceVersion":"1.0","name":"CSV.csv","resourceType":"GMIncludedFile",},
-    {"CopyToMask":-1,"filePath":"datafiles","resourceVersion":"1.0","name":"JSON.json","resourceType":"GMIncludedFile",},
-    {"CopyToMask":-1,"filePath":"datafiles","resourceVersion":"1.0","name":"DynamoData","resourceType":"GMIncludedFile",},
+    {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"Root.txt","CopyToMask":3035461389054378222,"filePath":"datafiles",},
+    {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"Nested.txt","CopyToMask":3035461389054378222,"filePath":"datafiles/Folder",},
+    {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"CSV.csv","CopyToMask":-1,"filePath":"datafiles",},
+    {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"JSON.json","CopyToMask":-1,"filePath":"datafiles",},
+    {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"DynamoData","CopyToMask":-1,"filePath":"datafiles",},
   ],
   "MetaData": {
-    "IDEVersion": "2022.600.0.143",
+    "IDEVersion": "2022.900.0.209",
   },
-  "resourceVersion": "1.5",
-  "name": "Dynamo Example",
-  "tags": [],
-  "resourceType": "GMProject",
 }
