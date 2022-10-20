@@ -1,1 +1,1 @@
-game_end(1);
+game_end();
