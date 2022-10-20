@@ -1,5 +1,5 @@
 #macro __DYNAMO_PARSER_VERSION  "2.0"
-#macro __DYNAMO_DATE            "2022-06-22"
+#macro __DYNAMO_DATE            "2022-10-20"
 
 __DynamoTrace("Welcome to Dynamo by @jujuadams! This is version ", __DYNAMO_PARSER_VERSION, ", ", __DYNAMO_DATE);
 

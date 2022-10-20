@@ -28,20 +28,23 @@ function __DynamoFindNotes(_directory)
                 var _json = json_parse(_string);
                 
                 var _name = _json.name;
-                var _tags = _json.tags;
                 
-                var _accept = true;
-                var _i = 0;
-                repeat(array_length(_tags))
+                if (variable_struct_exists(_json, "tags"))
                 {
-                    var _tag = _tags[_i];
-                    if (string_lower(_tag) == "dynamo ignore")
+                    var _tags = _json.tags;
+                    var _accept = true;
+                    var _i = 0;
+                    repeat(array_length(_tags))
                     {
-                        _accept = false;
-                        break;
+                        var _tag = _tags[_i];
+                        if (string_lower(_tag) == "dynamo ignore")
+                        {
+                            _accept = false;
+                            break;
+                        }
+                        
+                        ++_i;
                     }
-                    
-                    ++_i;
                 }
                 
                 if (_accept)
