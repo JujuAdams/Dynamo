@@ -32,6 +32,11 @@ function DynamoNote(_note, _dataFormat, _callback)
 {
     __DynamoInitialize();
     
+    if (!global.__dynamoNoteDataExists)
+    {
+        __DynamoError("Note data not found, this may indicate a compilation error\nPlease reload your project in the GameMaker IDE\nIf the issue persists, please report this crash");
+    }
+    
     if (!variable_struct_exists(global.__dynamoNoteStruct, _note))
     {
         __DynamoError("Note \"", _note, "\" not found");

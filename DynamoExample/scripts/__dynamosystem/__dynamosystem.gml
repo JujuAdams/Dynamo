@@ -29,6 +29,7 @@ function __DynamoInitialize()
     global.__dynamoNoteStruct      = {};
     global.__dynamoNoteAddedStruct = {};
     global.__dynamoTrackingArray   = [];
+    global.__dynamoNoteDataExists  = false;
     
     global.__dynamoInFocus    = false;
     global.__dynamoCheckIndex = 0;

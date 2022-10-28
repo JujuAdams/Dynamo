@@ -1,5 +1,11 @@
 function __DynamoReadNoteData()
 {
+    if (!file_exists("DynamoData"))
+    {
+        __DynamoTrace("Warning! \"DynamoData\" not found in file bundle")
+        return;
+    }
+    
     var _sourceBuffer = buffer_load("DynamoData");
     
     var _buffer = buffer_decompress(_sourceBuffer);
@@ -34,4 +40,6 @@ function __DynamoReadNoteData()
     }
     
     buffer_delete(_buffer);
+    
+    global.__dynamoNoteDataExists = true;
 }
