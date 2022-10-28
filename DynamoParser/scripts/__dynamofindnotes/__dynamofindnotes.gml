@@ -2,7 +2,7 @@ function __DynamoFindNotes(_directory)
 {
     _directory += "notes/";
     
-	if (os_type ==os_windows)
+	if (os_type == os_windows)
 	{
 		var _file = file_find_first(_directory + "*.*", fa_directory);
 	}
@@ -28,11 +28,11 @@ function __DynamoFindNotes(_directory)
                 var _json = json_parse(_string);
                 
                 var _name = _json.name;
+                var _accept = true;
                 
                 if (variable_struct_exists(_json, "tags"))
                 {
                     var _tags = _json.tags;
-                    var _accept = true;
                     var _i = 0;
                     repeat(array_length(_tags))
                     {
