@@ -9,7 +9,7 @@ function __DynamoClassNote(_name, _hash, _buffer) constructor
     global.__dynamoNoteStruct[$ __name] = self;
     array_push(global.__dynamoTrackingArray, self);
     
-    __hash = DYNAMO_ENABLED? _hash : undefined;
+    __hash = __DYNAMO_DEV_MODE? _hash : undefined;
     
     __dataFormat = undefined;
     __callback   = undefined;
@@ -23,7 +23,7 @@ function __DynamoClassNote(_name, _hash, _buffer) constructor
     
     static __HasChanged = function()
     {
-        if (!DYNAMO_ENABLED) return false;
+        if (!__DYNAMO_DEV_MODE) return false;
         if (__dataFormat == undefined) return false;
         return (__DynamoFileHash(__path) != __hash);
     }
