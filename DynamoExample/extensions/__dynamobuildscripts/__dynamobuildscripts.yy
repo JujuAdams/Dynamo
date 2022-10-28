@@ -1,4 +1,7 @@
 {
+  "resourceType": "GMExtension",
+  "resourceVersion": "1.2",
+  "name": "__DynamoBuildScripts",
   "optionsFile": "options.json",
   "options": [],
   "exportToGame": true,
@@ -16,8 +19,8 @@
   "androidProps": false,
   "installdir": "",
   "files": [
-    {"filename":"pre_run_step.bat","origname":"","init":"","final":"","kind":4,"uncompress":false,"functions":[],"constants":[],"ProxyFiles":[],"copyToTargets":64,"order":[],"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMExtensionFile",},
-    {"filename":"pre_run_step.sh","origname":"","init":"","final":"","kind":4,"uncompress":false,"functions":[],"constants":[],"ProxyFiles":[],"copyToTargets":2,"order":[],"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMExtensionFile",},
+    {"resourceType":"GMExtensionFile","resourceVersion":"1.0","name":"","filename":"pre_run_step.bat","origname":"","init":"","final":"","kind":4,"uncompress":false,"functions":[],"constants":[],"ProxyFiles":[],"copyToTargets":64,"order":[],},
+    {"resourceType":"GMExtensionFile","resourceVersion":"1.0","name":"","filename":"pre_run_step.sh","origname":"","init":"","final":"","kind":4,"uncompress":false,"functions":[],"constants":[],"ProxyFiles":[],"copyToTargets":2,"order":[],},
   ],
   "classname": "",
   "tvosclassname": null,
@@ -56,8 +59,4 @@
     "name": "(System)",
     "path": "folders/Dynamo/(System).yy",
   },
-  "resourceVersion": "1.2",
-  "name": "__DynamoBuildScripts",
-  "tags": [],
-  "resourceType": "GMExtension",
 }
