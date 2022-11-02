@@ -20,6 +20,17 @@ You can always force a load using `DynamoFileLoad()`, `DynamoNoteLoad()`, and `D
 
 &nbsp;
 
+### Updating Dynamo
+
+From time to time I'll need to release updates to Dynamo, either to add new features or to address bugs. Updating Dynamo is really easy:
+
+1. Delete the Dynamo folder from the asset browser
+2. Reimport the Dynamo .yymps from the [GitHub releases page](https://github.com/JujuAdams/Dynamo/releases)
+
+There may occasionally be times when more steps are needed so please read patch notes carefully.
+
+&nbsp;
+
 ### Removing Dynamo
 
 Should you wish to remove Dynamo from your project, you'll need to follow these steps:
