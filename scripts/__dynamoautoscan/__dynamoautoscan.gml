@@ -23,7 +23,7 @@ function __DynamoAutoScan()
         if (_count <= 0) return;
         _checkIndex = (_checkIndex + 1) mod _count;
         
-        if (_trackingArray[_checkIndex].__HasChanged())
+        if (_trackingArray[_checkIndex].__DetectChange())
         {
             if (DYNAMO_VERBOSE) __DynamoTrace("Change found in \"", _trackingArray[_checkIndex].__name, "\" during progressive scan");
             DynamoForceScan();

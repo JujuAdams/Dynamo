@@ -9,6 +9,7 @@ function __DynamoClassScript(_name, _path) constructor
     array_push(_globalState.__trackingArray, self);
     
     __hash = __DYNAMO_DEV_MODE? __DynamoFileHash(__path) : undefined;
+    __changed = false;
     
     __callback     = undefined;
     __callbackData = undefined;
@@ -20,10 +21,27 @@ function __DynamoClassScript(_name, _path) constructor
         return __name;
     }
     
+    static __DetectChange = function()
+    {
+        if (!__DYNAMO_DEV_MODE) return;
+        if (__DynamoFileHash(__path) != __hash)
+        {
+            __changed = true;
+            return true;
+        }
+        
+        return false;
+    }
+    
     static __HasChanged = function()
     {
-        if (!__DYNAMO_DEV_MODE) return false;
-        return (__DynamoFileHash(__path) != __hash);
+        if (__DYNAMO_DEV_MODE && __changed)
+        {
+            __changed = false;
+            return true;
+        }
+        
+        return false;
     }
     
     static __Load = function()

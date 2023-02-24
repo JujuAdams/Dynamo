@@ -12,14 +12,22 @@ function DynamoForceScan()
     var _i = 0;
     repeat(array_length(_scriptArray))
     {
-        if (_scriptArray[_i].__HasChanged()) _scriptArray[_i].__Load();
+        if (_scriptArray[_i].__DetectChange())
+        {
+            _scriptArray[_i].__Load();
+        }
+        
         ++_i;
     }
     
     var _i = 0;
     repeat(array_length(_fileArray))
     {
-        if (_fileArray[_i].__HasChanged()) _fileArray[_i].__Load();
+        if (_fileArray[_i].__DetectChange())
+        {
+            _fileArray[_i].__Load();
+        }
+        
         ++_i;
     }
 }

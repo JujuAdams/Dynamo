@@ -1,5 +1,7 @@
-/// Returns whether the script file on disk has changed since the last time Dynamo loaded it. If
-/// your game isn't running from the IDE or DYNAMO_ENABLED is set to <false> this function will
+/// Returns whether the script file on disk has changed since the last time DynamoScriptChanged()
+/// was called (targetting that script file).
+/// 
+/// If your game isn't running from the IDE or DYNAMO_ENABLED is set to <false> this function will
 /// always return <false>.
 /// 
 /// @param path

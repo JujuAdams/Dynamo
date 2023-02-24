@@ -11,7 +11,7 @@ function DynamoScriptLoad(_script)
     
     var _scriptName = script_get_name(_scriptName);
     var _tracker = _scriptStruct[$ _scriptName];
-    if (_tracker == undefined) __DynamoError("\"", _scriptName, "\" hasn't been added with DynamoWatchScript()");
+    if (_tracker == undefined) __DynamoError("\"", _scriptName, "\" hasn't been added with DynamoScript()");
     
     _tracker.__Load();
 }
