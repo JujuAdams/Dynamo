@@ -4,7 +4,7 @@
 
 ### What platforms does Dynamo support?
 
-Dynamo allows Note assets and datafiles to be read on any platform. Live reloading of assets in only available on Windows at this time.
+**Live reloading** of Included Files and Notes is only available on Windows, Mac, and Linux at this time. Utilising Dynamo's callback system when loading Included Files is supported on every platform.
 
 &nbsp;
 

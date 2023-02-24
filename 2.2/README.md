@@ -12,7 +12,7 @@ Dynamo addresses three shortcomings of GameMaker's native datafiles implementati
 
 1. Included Files (and data in general) cannot be updated once GameMaker has started running your game. Once you compile your game, whatever data you had is the only data GameMaker can natively access. Dynamo breaks apart this limitation and allows for automatic update of Included Files and makes the new files available to your game whilst it's running
 2. GameMaker doesn't allow access to Note assets in your game, instead requiring that simple text files are edited using a totally separate program. Dynamo automatically packages Note assets with your game and they can be easily accessed at runtime with [`DynamoNoteLoad()`](gml-functions?id=dynamonoteloadname). Dynamo will ignore any Notes that have the `dynamo ignore` tag assigned to them.
-3. Dynamo allows you to set up simple data definition scripts (typically JSON) to be live updated at runtime. Add the `dynamo` tag to a script to indicate that Dynamo should check for changes in the source file and then update your game
+3. Dynamo allows you to set up simple data definition scripts (typically JSON) to be live updated at runtime.
 
 ?> Please note that Dynamo cannot live update sprites or OGG-formatted audio; it only deals with data that can be passed into GameMaker as a buffer. If you'd like to live reload sprites, audio, and more besides, please use the amazing [GMLive by YellowAfterlife](https://yellowafterlife.itch.io/gamemaker-live).
 
