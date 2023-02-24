@@ -9,12 +9,12 @@ DynamoFile("Folder\\Nested.txt", "string", true, function(_content, _callbackDat
     nestedText = _content;
 });
 
-DynamoFile("JSON.json", "json", true, function(_content, _callbackData)
+DynamoFile("JSON.json", "json", false, function(_content, _callbackData)
 {
     jsonData = _content;
 });
 
-DynamoFile("CSV.csv", "csv", true, function(_content, _callbackData)
+DynamoFile("CSV.csv", "csv", false, function(_content, _callbackData)
 {
     csvData = _content;
 });
