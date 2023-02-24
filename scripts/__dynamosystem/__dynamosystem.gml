@@ -1,6 +1,6 @@
 #macro __DYNAMO_VERSION   "3.0.0"
 #macro __DYNAMO_DATE      "2023-02-24"
-#macro __DYNAMO_DEV_MODE  (DYNAMO_ENABLED && (GM_build_type == "run"))
+#macro __DYNAMO_DEV_MODE  (DYNAMO_ENABLED && (GM_build_type == "run") && ((os_type == os_windows) || (os_type == os_macosx) || (os_type == os_linux)))
 
 __DynamoInitialize();
 
@@ -14,16 +14,19 @@ function __DynamoInitialize()
     
     var _globalState = __DynamoState();
     
-    //Attempt to set up a time source for slick automatic input handling
-    time_source_start(time_source_create(time_source_global, 1, time_source_units_frames, __DynamoAutoScan, [], -1));
-    
     //Verify the directory just in case
-    if (__DYNAMO_DEV_MODE && !directory_exists(_globalState.__projectDirectory))
+    if (__DYNAMO_DEV_MODE)
     {
-        __DynamoError("Could not find project directory \"", _globalState.__projectDirectory, "\"\nYou may need to run the GameMaker IDE in administrator mode");
+        if (!directory_exists(_globalState.__projectDirectory))
+        {
+            __DynamoError("Could not find project directory \"", _globalState.__projectDirectory, "\"\nYou may need to run the GameMaker IDE in administrator mode");
+        }
+        
+        if (DYNAMO_VERBOSE) __DynamoTrace("Found project path \"", _globalState.__projectDirectory, "\"");
+        
+        //Attempt to set up a time source for slick automatic input handling
+        time_source_start(time_source_create(time_source_global, 1, time_source_units_frames, __DynamoAutoScan, [], -1));
     }
-    
-    if (DYNAMO_VERBOSE) __DynamoTrace("Found project path \"", _globalState.__projectDirectory, "\"");
 }
 
 

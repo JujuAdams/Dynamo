@@ -41,7 +41,7 @@ function DynamoFile(_path, _dataFormat, _autoLoad, _callback, _callbackData = un
     
     if (!file_exists(_directory + _adjustedPath))
     {
-        __DynamoError("Warning! File \"", _directory + _path, "\" not found");
+        __DynamoError("Warning! File \"", _directory + _path, "\" not found\nCheck that the file system sandbox is disabled");
     }
     
     _dataFormat = string_lower(_dataFormat);
