@@ -13,8 +13,5 @@ _string += "rootText = \"" + rootText + "\"\n";
 _string += "nestedText = \"" + nestedText + "\"\n";
 _string += "jsonData = " + string(jsonData) + "\n";
 _string += "csvData = " + string(csvData) + "\n";
-_string += "\n";
-_string += "emptyNoteText = \"" + emptyNoteText + "\"\n";
-_string += "testNoteText = \"" + testNoteText + "\"\n";
 
 draw_text(10, 10, _string);

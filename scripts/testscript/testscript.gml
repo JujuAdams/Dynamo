@@ -5,7 +5,7 @@ global.anotherVariable = 2;
 global.structArrayThing = {
     array: [
         3.141,
-        42,
+        42
     ],
     "some_other_data": "here it is, some other data",
 };

@@ -19,17 +19,6 @@ DynamoFile("CSV.csv", "csv", function(_content)
     csvData = _content;
 });
 
-//Set up Notes access
-DynamoNote("EmptyNote", "string", function(_content)
-{
-    emptyNoteText = _content;
-});
-
-DynamoNote("TestNote", "string", function(_content)
-{
-    testNoteText = _content;
-});
-
 //Set up script watching
 DynamoScript(TestScript);
 DynamoScript(TestScript2);
@@ -40,5 +29,3 @@ DynamoFileLoad("Root.txt");
 DynamoFileLoad("Folder\\Nested.txt");
 DynamoFileLoad("JSON.json");
 DynamoFileLoad("CSV.csv");
-DynamoNoteLoad("EmptyNote");
-DynamoNoteLoad("TestNote");
