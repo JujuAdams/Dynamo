@@ -1,6 +1,6 @@
 # Setting Up
 
-!> For live updating to work, you must tick the `Disable file system sandbox` option in Game Options/Windows/General. Live updating is only available on Windows at this time.
+!> For live updating to work, you must tick the `Disable file system sandbox` option in Game Options/Windows/General (or for whatever desktop platform you're using).
 
 Dynamo can be installed into your project by importing the .yymps from the [GitHub releases page](https://github.com/JujuAdams/Dynamo/releases). This package contains all the scripts that you need to run Dynamo.
 
