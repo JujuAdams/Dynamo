@@ -10,8 +10,6 @@ function __DynamoState()
         __fileArray:     [],
         __fileStruct:    {},
         __trackingArray: [],
-        
-        __checkIndex: 0,
     };
     
     return _struct;

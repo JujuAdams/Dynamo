@@ -19,10 +19,11 @@
 /// been changes or not, and the callback will be executed as normal (if defined).
 /// 
 /// @param script
+/// @param autoLoad
 /// @param [callback]
 /// @param [callbackData]
 
-function DynamoScript(_script, _callback = undefined, _callbackData = undefined)
+function DynamoScript(_script, _autoLoad, _callback = undefined, _callbackData = undefined)
 {
     static __globalState = __DynamoState();
     
@@ -44,6 +45,7 @@ function DynamoScript(_script, _callback = undefined, _callbackData = undefined)
         if (variable_struct_exists(__globalState.__scriptStruct, _scriptName)) __DynamoError("Script \"", _scriptName, "\" is already being watched");
         
         var _watcher = new __DynamoClassScript(_scriptName, __globalState.__projectDirectory + "scripts/" + string_lower(_scriptName) + "/" + string_lower(_scriptName) + ".gml");
+        _watcher.__autoLoad     = _autoLoad;
         _watcher.__callback     = _callback;
         _watcher.__callbackData = _callbackData;
     }

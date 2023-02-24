@@ -24,10 +24,11 @@
 /// 
 /// @param path
 /// @param dataFormat
+/// @param autoLoad
 /// @param callback
 /// @param [callbackData]
 
-function DynamoFile(_path, _dataFormat, _callback, _callbackData = undefined)
+function DynamoFile(_path, _dataFormat, _autoLoad, _callback, _callbackData = undefined)
 {
     static __globalState = __DynamoState();
     
@@ -66,6 +67,7 @@ function DynamoFile(_path, _dataFormat, _callback, _callbackData = undefined)
     
     var _watcher = new __DynamoClassFile(_path, _directory, _adjustedPath);
     _watcher.__dataFormat   = _dataFormat;
+    _watcher.__autoLoad     = _autoLoad;
     _watcher.__callback     = _callback;
     _watcher.__callbackData = _callbackData;
 }

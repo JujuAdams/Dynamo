@@ -11,6 +11,7 @@ function __DynamoClassScript(_name, _path) constructor
     __hash = __DYNAMO_DEV_MODE? __DynamoFileHash(__path) : undefined;
     __changed = false;
     
+    __autoLoad     = false;
     __callback     = undefined;
     __callbackData = undefined;
     
@@ -42,6 +43,11 @@ function __DynamoClassScript(_name, _path) constructor
         }
         
         return false;
+    }
+    
+    static __AutoLoad = function()
+    {
+        if (__autoLoad) __Load();
     }
     
     static __Load = function()

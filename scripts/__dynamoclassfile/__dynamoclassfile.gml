@@ -12,6 +12,7 @@ function __DynamoClassFile(_name, _directory, _localPath) constructor
     __changed = false;
     
     __dataFormat   = undefined;
+    __autoLoad     = false;
     __callback     = undefined;
     __callbackData = undefined;
     
@@ -43,6 +44,11 @@ function __DynamoClassFile(_name, _directory, _localPath) constructor
         }
         
         return false;
+    }
+    
+    static __AutoLoad = function()
+    {
+        if (__autoLoad) __Load();
     }
     
     static __Load = function()
