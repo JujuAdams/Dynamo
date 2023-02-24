@@ -46,8 +46,8 @@
     "PhysicsWorldPixToMetres": 0.1,
   },
   "parent": {
-    "name": "Dynamo Example",
-    "path": "Dynamo Example.yyp",
+    "name": "Dynamo",
+    "path": "Dynamo.yyp",
   },
   "resourceVersion": "1.0",
   "name": "rmMain",
