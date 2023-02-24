@@ -1,20 +1,20 @@
 //Set up Included Files watching
-DynamoFile("Root.txt", "string", true, function(_content)
+DynamoFile("Root.txt", "string", true, function(_content, _callbackData)
 {
     rootText = _content;
 });
 
-DynamoFile("Folder\\Nested.txt", "string", true, function(_content)
+DynamoFile("Folder\\Nested.txt", "string", true, function(_content, _callbackData)
 {
     nestedText = _content;
 });
 
-DynamoFile("JSON.json", "json", true, function(_content)
+DynamoFile("JSON.json", "json", true, function(_content, _callbackData)
 {
     jsonData = _content;
 });
 
-DynamoFile("CSV.csv", "csv", true, function(_content)
+DynamoFile("CSV.csv", "csv", true, function(_content, _callbackData)
 {
     csvData = _content;
 });
