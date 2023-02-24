@@ -9,6 +9,8 @@ DynamoFile("Folder\\Nested.txt", "string", true, function(_content, _callbackDat
     nestedText = _content;
 });
 
+//These two files are set to *not* autoload
+//This means they have to be manually loaded elsewhere (in this example, in the Step event
 DynamoFile("JSON.json", "json", false, function(_content, _callbackData)
 {
     jsonData = _content;
