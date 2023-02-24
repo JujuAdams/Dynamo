@@ -1,4 +1,4 @@
-#macro __DYNAMO_VERSION   "3.0.0"
+#macro __DYNAMO_VERSION   "3.0.1"
 #macro __DYNAMO_DATE      "2023-02-24"
 #macro __DYNAMO_DEV_MODE  (DYNAMO_ENABLED && (GM_build_type == "run") && ((os_type == os_windows) || (os_type == os_macosx) || (os_type == os_linux)))
 
