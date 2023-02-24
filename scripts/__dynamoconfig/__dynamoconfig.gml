@@ -4,8 +4,8 @@
 
 //Whether to automatically scan for changes to files
 //This is very convenient! But sometimes not what you want
-//If you turn this off you'll need to call DynamoScan() to rescan files for changes and then reload
-//You may also want to manually check for changes and handle reloads yourself
+//If you turn this off you'll need to call DynamoForceScan() to rescan files for changes and
+//then reload as necessary
 #macro DYNAMO_AUTO_SCAN  true
 
 //Whether to progressively scan through tracked data looking for changes

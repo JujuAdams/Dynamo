@@ -1,7 +1,7 @@
 /// Sets up a script to watch for changes. If DYNAMO_AUTO_SCAN is set to <true> then watched
-/// scripts will be scanned for changes automatically. If a script *has* changed then it will be
-/// loaded, parsed, and applied. If you specified a callback function when calling
-/// DynamoScript() then that will be executed after data in the script is applied.
+/// scripts will be scanned for changes automatically. You can check if a script has  changed
+/// by calling DynamoScriptChanged(), and the script can be loaded and its changes applied with
+/// DynamoScriptLoad().
 /// 
 /// Because data is being stored in a script and *not* instead a function, the code inside a
 /// script is executed on boot by the GameMaker runtime as you'd expect. This means that, unlike
@@ -15,8 +15,18 @@
 /// or anything that controls programme "flow". Dynamo is also expecting all variables you're
 /// defining in the script to be globals.
 /// 
-/// If you call DynamoScriptLoad() then the script will be loaded and applied whether there have
-/// been changes or not, and the callback will be executed as normal (if defined).
+/// If you call DynamoScriptLoad() then the script will be loaded, and its changed applied,
+/// whether there have been changes or not, and the callback provided when calling DynamoScript()
+/// will be executed. The callback will be handed one arguments: the callback data provided when
+/// calling DynamoScript().
+/// 
+/// If the <autoLoad> argument is set to <true> when calling DynamoScript() then the script will
+/// automatically be loaded and applied whenever a change is detected, executing the callback as
+/// though DynamoScriptLoad() had been called directly for the file.
+/// 
+/// Note that setting up a script watcher will not automatically execute the callback on boot.
+/// If you want to execute the callback at the start of your game you'll need to call
+/// DynamoScriptLoad() directly yourself.
 /// 
 /// @param script
 /// @param autoLoad
