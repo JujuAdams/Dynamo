@@ -9,8 +9,9 @@ function __DynamoClassFile(_name, _directory, _localPath) constructor
     
     __hash = __DYNAMO_DEV_MODE? __DynamoFileHash(__path) : undefined;
     
-    __dataFormat = undefined;
-    __callback   = undefined;
+    __dataFormat   = undefined;
+    __callback     = undefined;
+    __callbackData = undefined;
     
     
     
@@ -94,11 +95,11 @@ function __DynamoClassFile(_name, _directory, _localPath) constructor
         
         if (is_method(__callback))
         {
-            __callback(_return);
+            __callback(_return, __callbackData);
         }
         else if (is_numeric(__callback) && script_exists(__callback))
         {
-            script_execute(__callback, _return);
+            script_execute(__callback, _return, __callbackData);
         }
         else
         {

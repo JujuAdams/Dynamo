@@ -30,12 +30,5 @@ function DynamoGetChangedAssets()
         ++_i;
     }
     
-    var _i = 0;
-    repeat(array_length(global.__dynamoNoteArray))
-    {
-        if (global.__dynamoNoteArray[_i].__HasChanged()) array_push(_noteArray, string(global.__dynamoNoteArray[_i]));
-        ++_i;
-    }
-    
     return _return;
 }

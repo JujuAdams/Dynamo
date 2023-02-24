@@ -25,8 +25,9 @@
 /// @param path
 /// @param dataFormat
 /// @param callback
+/// @param [callbackData]
 
-function DynamoFile(_path, _dataFormat, _callback)
+function DynamoFile(_path, _dataFormat, _callback, _callbackData = undefined)
 {
     __DynamoInitialize();
     
@@ -61,9 +62,10 @@ function DynamoFile(_path, _dataFormat, _callback)
         __DynamoError("Illegal datatype passed for the callback (was ", typeof(_callback), ")");
     }
     
-    if (variable_struct_exists(global.__dynamoScriptStruct, _path)) __DynamoError("File \"", _path, "\" is already being watched");
+    if (variable_struct_exists(global.__dynamoFileStruct, _path)) __DynamoError("File \"", _path, "\" is already being watched");
     
     var _watcher = new __DynamoClassFile(_path, _directory, _adjustedPath);
-    _watcher.__dataFormat = _dataFormat;
-    _watcher.__callback   = _callback;
+    _watcher.__dataFormat   = _dataFormat;
+    _watcher.__callback     = _callback;
+    _watcher.__callbackData = _callbackData;
 }

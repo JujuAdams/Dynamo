@@ -25,7 +25,6 @@ function __DynamoInitialize()
     global.__dynamoScriptStruct    = {};
     global.__dynamoFileArray       = [];
     global.__dynamoFileStruct      = {};
-    global.__dynamoNoteArray       = [];
     global.__dynamoNoteStruct      = {};
     global.__dynamoNoteAddedStruct = {};
     global.__dynamoTrackingArray   = [];
@@ -41,8 +40,6 @@ function __DynamoInitialize()
     }
     
     if (DYNAMO_VERBOSE) __DynamoTrace("Found project path \"", global.__dynamoProjectDirectory, "\"");
-    
-    __DynamoReadNoteData();
 }
 
 

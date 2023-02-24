@@ -20,8 +20,9 @@
 /// 
 /// @param script
 /// @param [callback]
+/// @param [callbackData]
 
-function DynamoScript(_script, _callback = undefined)
+function DynamoScript(_script, _callback = undefined, _callbackData = undefined)
 {
     __DynamoInitialize();
     
@@ -43,6 +44,7 @@ function DynamoScript(_script, _callback = undefined)
         if (variable_struct_exists(global.__dynamoScriptStruct, _scriptName)) __DynamoError("Script \"", _scriptName, "\" is already being watched");
         
         var _watcher = new __DynamoClassScript(_scriptName, global.__dynamoProjectDirectory + "scripts/" + string_lower(_scriptName) + "/" + string_lower(_scriptName) + ".gml");
-        _watcher.__callback = _callback;
+        _watcher.__callback     = _callback;
+        _watcher.__callbackData = _callbackData;
     }
 }
