@@ -4,7 +4,7 @@
 
 ### What platforms does Dynamo support?
 
-**Live reloading** of Included Files and Notes is only available on Windows, Mac, and Linux at this time. Utilising Dynamo's callback system when loading Included Files is supported on every platform.
+**Live reloading** of Included Files and Notes is only available on Windows and Mac at this time. Utilising Dynamo's callback system when loading Included Files is supported on every platform.
 
 &nbsp;
 
