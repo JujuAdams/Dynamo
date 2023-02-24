@@ -24,7 +24,7 @@
 
 function DynamoScript(_script, _callback = undefined, _callbackData = undefined)
 {
-    __DynamoInitialize();
+    static __globalState = __DynamoState();
     
     if (__DYNAMO_DEV_MODE)
     {
@@ -41,9 +41,9 @@ function DynamoScript(_script, _callback = undefined, _callbackData = undefined)
         }
         
         var _scriptName = script_get_name(_script);
-        if (variable_struct_exists(global.__dynamoScriptStruct, _scriptName)) __DynamoError("Script \"", _scriptName, "\" is already being watched");
+        if (variable_struct_exists(__globalState.__scriptStruct, _scriptName)) __DynamoError("Script \"", _scriptName, "\" is already being watched");
         
-        var _watcher = new __DynamoClassScript(_scriptName, global.__dynamoProjectDirectory + "scripts/" + string_lower(_scriptName) + "/" + string_lower(_scriptName) + ".gml");
+        var _watcher = new __DynamoClassScript(_scriptName, __globalState.__projectDirectory + "scripts/" + string_lower(_scriptName) + "/" + string_lower(_scriptName) + ".gml");
         _watcher.__callback     = _callback;
         _watcher.__callbackData = _callbackData;
     }

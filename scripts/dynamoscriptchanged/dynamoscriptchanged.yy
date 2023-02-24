@@ -1,12 +1,11 @@
 {
+  "resourceType": "GMScript",
+  "resourceVersion": "1.0",
+  "name": "DynamoScriptChanged",
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Manual Functions",
-    "path": "folders/Dynamo/Manual Functions.yy",
+    "name": "Dynamo",
+    "path": "folders/Dynamo.yy",
   },
-  "resourceVersion": "1.0",
-  "name": "DynamoScriptChanged",
-  "tags": [],
-  "resourceType": "GMScript",
 }

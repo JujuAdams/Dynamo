@@ -1,11 +1,11 @@
 {
   "resourceType": "GMScript",
   "resourceVersion": "1.0",
-  "name": "DynamoGetChangedAssets",
+  "name": "__DynamoState",
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Manual Functions",
-    "path": "folders/Dynamo/Manual Functions.yy",
+    "name": "(System)",
+    "path": "folders/Dynamo/(System).yy",
   },
 }

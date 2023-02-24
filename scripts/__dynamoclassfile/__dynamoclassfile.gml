@@ -3,9 +3,10 @@ function __DynamoClassFile(_name, _directory, _localPath) constructor
     __name = _name;
     __path = _directory + _localPath;
     
-    array_push(global.__dynamoFileArray, self);
-    global.__dynamoFileStruct[$ __name] = self;
-    array_push(global.__dynamoTrackingArray, self);
+    var _globalState = __DynamoState();
+    array_push(_globalState.__fileArray, self);
+    _globalState.__fileStruct[$ __name] = self;
+    array_push(_globalState.__trackingArray, self);
     
     __hash = __DYNAMO_DEV_MODE? __DynamoFileHash(__path) : undefined;
     

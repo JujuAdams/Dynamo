@@ -4,9 +4,9 @@
 
 function DynamoFileLoad(_path)
 {
-    __DynamoInitialize();
+    static _fileStruct = __DynamoState().__fileStruct;
     
-    var _tracker = global.__dynamoFileStruct[$ _path];
+    var _tracker = _fileStruct[$ _path];
     if (_tracker == undefined) __DynamoError("\"", _path, "\" hasn't been added with DynamoWatchFile()");
     
     _tracker.__Load();

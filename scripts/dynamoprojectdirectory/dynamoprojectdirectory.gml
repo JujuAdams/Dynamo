@@ -3,5 +3,6 @@
 
 function DynamoProjectDirectory()
 {
-    return __DYNAMO_DEV_MODE? global.__dynamoProjectDirectory : undefined;
+    static _result = __DYNAMO_DEV_MODE? __DynamoState().__projectDirectory : undefined;
+    return _result;
 }

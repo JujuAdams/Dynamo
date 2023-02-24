@@ -3,9 +3,10 @@ function __DynamoClassScript(_name, _path) constructor
     __name = _name;
     __path = _path;
     
-    array_push(global.__dynamoScriptArray, self);
-    global.__dynamoScriptStruct[$ __name] = self;
-    array_push(global.__dynamoTrackingArray, self);
+    var _globalState = __DynamoState();
+    array_push(_globalState.__scriptArray, self);
+    _globalState.__scriptStruct[$ __name] = self;
+    array_push(_globalState.__trackingArray, self);
     
     __hash = __DYNAMO_DEV_MODE? __DynamoFileHash(__path) : undefined;
     

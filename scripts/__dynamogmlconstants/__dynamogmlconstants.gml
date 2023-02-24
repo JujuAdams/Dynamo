@@ -1,5 +1,8 @@
 global.__DynamoGMLConstantLookupTable = {
     
+    noone: noone,
+    all: all,
+    
     //Colours
     c_black:   c_black,
     c_blue:    c_blue,

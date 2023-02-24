@@ -29,10 +29,10 @@
 
 function DynamoFile(_path, _dataFormat, _callback, _callbackData = undefined)
 {
-    __DynamoInitialize();
+    static __globalState = __DynamoState();
     
     var _adjustedPath = string_replace_all(_path, "\\", "/");
-    var _directory = __DYNAMO_DEV_MODE? (global.__dynamoProjectDirectory + "datafiles/") : "";
+    var _directory = __DYNAMO_DEV_MODE? (__globalState.__projectDirectory + "datafiles/") : "";
     
     if (!file_exists(_directory + _adjustedPath))
     {
@@ -49,7 +49,7 @@ function DynamoFile(_path, _dataFormat, _callback, _callbackData = undefined)
         break;
         
         default:
-            __DynamoError("Illegal data format provided (", _dataFormat, ")\nData format must be \"json\", \"csv\", \"text\", or \"binary\"");
+            __DynamoError("Illegal data format provided (", _dataFormat, ")\nData format must be \"json\", \"csv\", \"text\", or \"buffer\"");
         break;
     }
     
@@ -62,7 +62,7 @@ function DynamoFile(_path, _dataFormat, _callback, _callbackData = undefined)
         __DynamoError("Illegal datatype passed for the callback (was ", typeof(_callback), ")");
     }
     
-    if (variable_struct_exists(global.__dynamoFileStruct, _path)) __DynamoError("File \"", _path, "\" is already being watched");
+    if (variable_struct_exists(__globalState.__fileStruct, _path)) __DynamoError("File \"", _path, "\" is already being watched");
     
     var _watcher = new __DynamoClassFile(_path, _directory, _adjustedPath);
     _watcher.__dataFormat   = _dataFormat;

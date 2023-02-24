@@ -6,10 +6,11 @@
 
 function DynamoFileChanged(_path)
 {
-    __DynamoInitialize();
     if (!__DYNAMO_DEV_MODE) return false;
     
-    var _tracker = global.__dynamoFileStruct[$ _path];
+    static _fileStruct = __DynamoState().__fileStruct;
+    
+    var _tracker = _fileStruct[$ _path];
     if (_tracker == undefined) __DynamoError("\"", _path, "\" hasn't been added with DynamoFile()");
     
     return _tracker.__HasChanged();

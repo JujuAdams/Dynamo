@@ -6,10 +6,11 @@
 
 function DynamoScriptChanged(_path)
 {
-    __DynamoInitialize();
     if (!__DYNAMO_DEV_MODE) return false;
     
-    var _tracker = global.__dynamoScriptStruct[$ _path];
+    static _scriptStruct = __DynamoState().__scriptStruct;
+    
+    var _tracker = _scriptStruct[$ _path];
     if (_tracker == undefined) __DynamoError("\"", _path, "\" hasn't been added with DynamoScript()");
     
     return _tracker.__HasChanged();
