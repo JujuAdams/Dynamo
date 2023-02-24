@@ -2,7 +2,7 @@
 
 &nbsp;
 
-### `DynamoFile`
+## `DynamoFile`
 
 `DynamoFile(path, datatype, autoLoad, callback, [callbackData])`
 
@@ -39,7 +39,7 @@ Note that setting up a file watcher will not initially load a file. If you want 
 
 &nbsp;
 
-### `DynamoFileLoad`
+## `DynamoFileLoad`
 
 `DynamoFileLoad(path)`
 
@@ -55,7 +55,7 @@ Forces an Included File to be loaded, executing the callback defined for the fil
 
 &nbsp;
 
-### `DynamoFileChanged`
+## `DynamoFileChanged`
 
 `DynamoFileChanged(path)`
 
@@ -71,7 +71,7 @@ If your game isn't running from the IDE or `DYNAMO_ENABLED` is set to `false` th
 
 &nbsp;
 
-### `DynamoScript`
+## `DynamoScript`
 
 `DynamoScript(script, autoLoad, [callback], [callbackData])`
 
@@ -100,7 +100,7 @@ Note that setting up a script watcher will not automatically execute the callbac
 
 &nbsp;
 
-### `DynamoScriptLoad`
+## `DynamoScriptLoad`
 
 `DynamoScriptLoad(script)`
 
@@ -116,7 +116,7 @@ Forces a script to be loaded, executing the callback defined for the script via 
 
 &nbsp;
 
-### `DynamoScriptChanged`
+## `DynamoScriptChanged`
 
 `DynamoScriptChanged(name)`
 
@@ -132,7 +132,7 @@ If your game isn't running from the IDE or `DYNAMO_ENABLED` is set to `false` th
 
 &nbsp;
 
-### `DynamoLiveUpdateEnabled`
+## `DynamoLiveUpdateEnabled`
 
 `DynamoLiveUpdateEnabled()`
 
@@ -148,7 +148,7 @@ This function will return `false` if `DYNAMO_ENABLED` is set to `false`, or the 
 
 &nbsp;
 
-### `DynamoProjectDirectory`
+## `DynamoProjectDirectory`
 
 `DynamoProjectDirectory()`
 
@@ -164,7 +164,7 @@ This function will return `undefined` if `DYNAMO_ENABLED` is set to `false`, or 
 
 &nbsp;
 
-### `DynamoForceScan`
+## `DynamoForceScan`
 
 `DynamoForceScan()`
 
