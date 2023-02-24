@@ -1,1 +1,0 @@
-global.separateScript = "Any *simple* script added via DynamoWatchScript() can be live edited";
