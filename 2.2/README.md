@@ -1,6 +1,6 @@
 <img src="https://raw.githubusercontent.com/JujuAdams/Dynamo/master/LOGO.png" width="50%" style="display: block; margin: auto;" />
-<h1 align="center">Dynamo 3.0</h1>
-<p align="center">Dynamic data loader for GameMaker 2022 LTS by <b>@jujuadams</b></p>
+<h1 align="center">Dynamo 2.2</h1>
+<p align="center">Dynamic data loader for GameMaker 2022.9 by <b>@jujuadams</b></p>
 <p align="center"><a href="https://github.com/JujuAdams/Dynamo/releases/">Download the .yymps</a></p>
 <p align="center">Chat about dynamo on the <a href="https://discord.gg/8krYCqr">Discord server</a></p>
 
