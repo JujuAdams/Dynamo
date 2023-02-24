@@ -26,8 +26,11 @@ function __DynamoClassFile(_name, _directory, _localPath) constructor
     static __DetectChange = function()
     {
         if (!__DYNAMO_DEV_MODE) return;
-        if (__DynamoFileHash(__path) != __hash)
+        
+        var _foundHash = __DynamoFileHash(__path);
+        if (_foundHash != __hash)
         {
+            __hash = _foundHash;
             __changed = true;
             return true;
         }
@@ -53,7 +56,6 @@ function __DynamoClassFile(_name, _directory, _localPath) constructor
     
     static __Load = function()
     {
-        __hash = __DynamoFileHash(__path);
         var _buffer = __DynamoLoadBuffer(__path);
         
         var _return = undefined;
