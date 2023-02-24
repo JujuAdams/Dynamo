@@ -480,13 +480,15 @@ function __DynamoParseGMLParser(_buffer, _buffer_size) constructor
     
     static try_to_find_asset_index = function(_asset)
     {
+        static _constantStruct = __DynamoGMLConstants();
+        
         if (!is_string(_asset)) return _asset;
         
         var _index = asset_get_index(_asset);
         if (_index >= 0) return _index;
         
-        if (!variable_struct_exists(global.__DynamoGMLConstantLookupTable, _asset)) return -1;
-        return global.__DynamoGMLConstantLookupTable[$ _asset];
+        if (!variable_struct_exists(_constantStruct, _asset)) return -1;
+        return _constantStruct[$ _asset];
     }
     
     read_root();
