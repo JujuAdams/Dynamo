@@ -6,7 +6,7 @@ function __DynamoAutoScan()
     static _prevFocus  = true;
     static _checkIndex = 0;
     
-    if (!DYNAMO_AUTO_PROGRESSIVE_SCAN && (os_type == os_windows))
+    if (!DYNAMO_AUTO_SCAN_PROGRESSIVE && (os_type == os_windows))
     {
         //Track whether the window focus has changed
         if (_prevFocus != window_has_focus())
@@ -16,7 +16,7 @@ function __DynamoAutoScan()
             if (_prevFocus) DynamoForceScan();
         }
     }
-    else if (DYNAMO_AUTO_PROGRESSIVE_SCAN || (os_type == os_macosx))
+    else if (DYNAMO_AUTO_SCAN_PROGRESSIVE || (os_type == os_macosx))
     {
         //We have to use progressive scanning on Mac because YoYoGames are idiots and can't make a simple function like window_has_focus() work
         var _count = array_length(_trackingArray);
