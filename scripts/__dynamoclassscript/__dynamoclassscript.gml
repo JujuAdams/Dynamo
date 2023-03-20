@@ -22,6 +22,13 @@ function __DynamoClassScript(_name, _path) constructor
         return __name;
     }
     
+    static __TestHashDifferent = function()
+    {
+        if (!__DYNAMO_DEV_MODE) return false;
+        
+        return (__DynamoFileHash(__path) != __hash);
+    }
+    
     static __DetectChange = function()
     {
         if (!__DYNAMO_DEV_MODE) return;
