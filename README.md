@@ -12,7 +12,7 @@
 &nbsp;
 
 - ### [Wait, what is this all about?](http://jujuadams.github.io/Dynamo/)
-- ### [Download the .yymps](https://github.com/JujuAdams/Dynamo/releases/) (setup instructions [here](https://jujuadams.github.io/Dynamo/#/latest/setting-up?id=setting-up))
+- ### [Download the .yymps](https://github.com/JujuAdams/Dynamo/releases/) (setup instructions [here](https://jujuadams.github.io/Dynamo/#/latest/setting-up))
 - ### Read the [documentation](http://jujuadams.github.io/Dynamo)
 - ### Talk about Dynamo on the [Discord server](https://discord.gg/8krYCqr)
 - ### See also: the amazing [GMLive by YellowAfterlife](https://yellowafterlife.itch.io/gamemaker-live)
