@@ -15,4 +15,5 @@
 - ### [Download the .yymps](https://github.com/JujuAdams/Dynamo/releases/) (setup instructions [here](https://jujuadams.github.io/Dynamo/#/latest/setting-up))
 - ### Read the [documentation](http://jujuadams.github.io/Dynamo)
 - ### Talk about Dynamo on the [Discord server](https://discord.gg/8krYCqr)
+- ### You may also like [GMLive](https://yellowafterlife.itch.io/gamemaker-live), [AseSync](https://sahaun.itch.io/asesync), and [ExternalDatafiles](https://github.com/tabularelf/ExternalDatafiles)
 - ### See also: the amazing [GMLive by YellowAfterlife](https://yellowafterlife.itch.io/gamemaker-live)
