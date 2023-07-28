@@ -1,3 +1,4 @@
+// Feather disable all
 function __DynamoParseGML(_string)
 {
     var _buffer = buffer_create(string_byte_length(_string) + 1, buffer_fixed, 1);
