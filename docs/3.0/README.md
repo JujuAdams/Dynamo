@@ -2,7 +2,7 @@
 <h1 align="center">Dynamo 3.0</h1>
 <p align="center">Dynamic data loader for GameMaker 2022 LTS by <a href="https://www.jujuadams.com/" target="_blank">Juju Adams</a></p>
 <p align="center"><a href="https://github.com/JujuAdams/Dynamo/releases/">Download the .yymps</a></p>
-<p align="center">Chat about dynamo on the <a href="https://discord.gg/8krYCqr">Discord server</a></p>
+<p align="center">Chat about dynamo on the <a href="https://discord.gg/Wqr49Kt9NT">Discord server</a></p>
 
 &nbsp;
 
