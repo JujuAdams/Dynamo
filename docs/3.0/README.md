@@ -2,7 +2,6 @@
 <h1 align="center">Dynamo 3.0</h1>
 <p align="center">Dynamic data loader for GameMaker 2022 LTS by <a href="https://www.jujuadams.com/" target="_blank">Juju Adams</a></p>
 <p align="center"><a href="https://github.com/JujuAdams/Dynamo/releases/">Download the .yymps</a></p>
-<p align="center">Chat about dynamo on the <a href="https://discord.gg/Wqr49Kt9NT">Discord server</a></p>
 
 &nbsp;
 
@@ -22,7 +21,7 @@ Additionally, Dynamo allows you to set up simple data definition scripts (typica
 
 ## About & Support
 
-Dynamo allows basic reading of datafiles on all GameMaker export modules, including consoles, mobile, and Opera GX. Dynamo only supports **live reloading** of assets when running the IDE and game on Windows, Mac, or Linux. If you'd like to report a bug or suggest a feature, please use the repo's [Issues page](https://github.com/JujuAdams/Dynamo/issues). Dynamo is constantly being maintained and upgraded; bugs are usually addressed within a few days of being reported.
+Dynamo allows basic reading of datafiles on all GameMaker export modules apart from HTML5. Dynamo only supports **live reloading** of assets when running the IDE and game on Windows, Mac, or Linux. If you'd like to report a bug or suggest a feature, please use the repo's [Issues page](https://github.com/JujuAdams/Dynamo/issues). Dynamo is constantly being maintained and upgraded; bugs are usually addressed within a few days of being reported.
 
 Dynamo is built and maintained by [@jujuadams](https://twitter.com/jujuadams), whose career is marked by a [strange and insatiable appetite for data](https://www.youtube.com/watch?v=Uj7nr6vSRvs). Juju's worked on several [commercial GameMaker games](http://www.jujuadams.com/).
 
