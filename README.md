@@ -7,6 +7,7 @@
 
 &nbsp;
 
+- ### Got questions? [Make a new issue!](https://github.com/JujuAdams/Dynamo/issues/new)
 - ### [Wait, what is this all about?](http://jujuadams.github.io/Dynamo/)
 - ### [Download the .yymps](https://github.com/JujuAdams/Dynamo/releases/) (setup instructions [here](https://jujuadams.github.io/Dynamo/#/latest/setting-up))
 - ### Read the [documentation](http://jujuadams.github.io/Dynamo)
