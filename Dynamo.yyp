@@ -4,7 +4,7 @@
   "name": "Dynamo",
   "resources": [
     {"id":{"name":"TestScript2","path":"scripts/TestScript2/TestScript2.yy",},"order":3,},
-    {"id":{"name":"DynamoForceScan","path":"scripts/DynamoForceScan/DynamoForceScan.yy",},"order":7,},
+    {"id":{"name":"DynamoForceScan","path":"scripts/DynamoForceScan/DynamoForceScan.yy",},"order":9,},
     {"id":{"name":"__DynamoLoadString","path":"scripts/__DynamoLoadString/__DynamoLoadString.yy",},"order":9,},
     {"id":{"name":"__DynamoState","path":"scripts/__DynamoState/__DynamoState.yy",},"order":14,},
     {"id":{"name":"DynamoScriptLoad","path":"scripts/DynamoScriptLoad/DynamoScriptLoad.yy",},"order":5,},
@@ -12,14 +12,16 @@
     {"id":{"name":"DynamoFile","path":"scripts/DynamoFile/DynamoFile.yy",},"order":1,},
     {"id":{"name":"DynamoFileLoad","path":"scripts/DynamoFileLoad/DynamoFileLoad.yy",},"order":2,},
     {"id":{"name":"DynamoScriptChanged","path":"scripts/DynamoScriptChanged/DynamoScriptChanged.yy",},"order":6,},
-    {"id":{"name":"DynamoProjectDirectory","path":"scripts/DynamoProjectDirectory/DynamoProjectDirectory.yy",},"order":9,},
+    {"id":{"name":"DynamoProjectDirectory","path":"scripts/DynamoProjectDirectory/DynamoProjectDirectory.yy",},"order":11,},
     {"id":{"name":"__DynamoSystem","path":"scripts/__DynamoSystem/__DynamoSystem.yy",},"order":0,},
+    {"id":{"name":"DynamoScriptEnvSetVariable","path":"scripts/DynamoScriptEnvSetVariable/DynamoScriptEnvSetVariable.yy",},"order":7,},
     {"id":{"name":"DynamoFileChanged","path":"scripts/DynamoFileChanged/DynamoFileChanged.yy",},"order":3,},
     {"id":{"name":"__DynamoConfig","path":"scripts/__DynamoConfig/__DynamoConfig.yy",},"order":0,},
     {"id":{"name":"TestScript","path":"scripts/TestScript/TestScript.yy",},"order":2,},
     {"id":{"name":"__DynamoClassScript","path":"scripts/__DynamoClassScript/__DynamoClassScript.yy",},"order":1,},
     {"id":{"name":"__DynamoLoadBuffer","path":"scripts/__DynamoLoadBuffer/__DynamoLoadBuffer.yy",},"order":10,},
     {"id":{"name":"__DynamoClassFile","path":"scripts/__DynamoClassFile/__DynamoClassFile.yy",},"order":0,},
+    {"id":{"name":"DynamoScriptEnvSetVariableFunction","path":"scripts/DynamoScriptEnvSetVariableFunction/DynamoScriptEnvSetVariableFunction.yy",},"order":8,},
     {"id":{"name":"__DynamoFileHash","path":"scripts/__DynamoFileHash/__DynamoFileHash.yy",},"order":5,},
     {"id":{"name":"__DynamoParseJSON","path":"scripts/__DynamoParseJSON/__DynamoParseJSON.yy",},"order":11,},
     {"id":{"name":"__DynamoLoadJSON","path":"scripts/__DynamoLoadJSON/__DynamoLoadJSON.yy",},"order":8,},
@@ -29,7 +31,7 @@
     {"id":{"name":"__DynamoAutoScan","path":"scripts/__DynamoAutoScan/__DynamoAutoScan.yy",},"order":7,},
     {"id":{"name":"DynamoScript","path":"scripts/DynamoScript/DynamoScript.yy",},"order":4,},
     {"id":{"name":"__DynamoBufferReadString","path":"scripts/__DynamoBufferReadString/__DynamoBufferReadString.yy",},"order":13,},
-    {"id":{"name":"DynamoLiveUpdateEnabled","path":"scripts/DynamoLiveUpdateEnabled/DynamoLiveUpdateEnabled.yy",},"order":8,},
+    {"id":{"name":"DynamoLiveUpdateEnabled","path":"scripts/DynamoLiveUpdateEnabled/DynamoLiveUpdateEnabled.yy",},"order":10,},
     {"id":{"name":"rmMain","path":"rooms/rmMain/rmMain.yy",},"order":1,},
   ],
   "Options": [
@@ -59,7 +61,7 @@
   ],
   "Folders": [
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Dynamo","folderPath":"folders/Dynamo.yy","order":0,},
-    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"(System)","folderPath":"folders/Dynamo/(System).yy","order":10,},
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"(System)","folderPath":"folders/Dynamo/(System).yy","order":12,},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Classes","folderPath":"folders/Dynamo/(System)/Classes.yy","order":3,},
   ],
   "AudioGroups": [
@@ -75,6 +77,6 @@
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"CSV.csv","CopyToMask":-1,"filePath":"datafiles",},
   ],
   "MetaData": {
-    "IDEVersion": "2022.0.0.19",
+    "IDEVersion": "2022.0.2.51",
   },
 }
