@@ -29,33 +29,3 @@ function __DynamoInitialize()
         time_source_start(time_source_create(time_source_global, 1, time_source_units_frames, __DynamoAutoScan, [], -1));
     }
 }
-
-
-
-function __DynamoTrace()
-{
-    var _string = "";
-    var _i = 0;
-    repeat(argument_count)
-    {
-        _string += string(argument[_i]);
-        ++_i;
-    }
-    
-    show_debug_message("Dynamo: " + _string);
-}
-
-
-
-function __DynamoError()
-{
-    var _string = "";
-    var _i = 0;
-    repeat(argument_count)
-    {
-        _string += string(argument[_i]);
-        ++_i;
-    }
-    
-    show_error("Dynamo:\n\n" + _string + "\n ", true);
-}
