@@ -1,4 +1,5 @@
 // Feather disable all
+
 function __DynamoState()
 {
     __DynamoInitialize();
@@ -11,6 +12,8 @@ function __DynamoState()
         __fileArray:     [],
         __fileStruct:    {},
         __trackingArray: [],
+        
+        __globalVariableStruct: {},
     };
     
     return _struct;
