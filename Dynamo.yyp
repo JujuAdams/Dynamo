@@ -77,6 +77,7 @@
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"Nested.txt","CopyToMask":3035461389054378222,"filePath":"datafiles/Folder",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"JSON.json","CopyToMask":-1,"filePath":"datafiles",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"CSV.csv","CopyToMask":-1,"filePath":"datafiles",},
+    {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"dynamo_license.txt","CopyToMask":-1,"filePath":"datafiles",},
   ],
   "MetaData": {
     "IDEVersion": "2022.0.2.51",
