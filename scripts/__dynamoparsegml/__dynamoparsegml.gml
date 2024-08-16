@@ -168,7 +168,7 @@ function __DynamoBufferReadGML(_buffer, _offset, _size, _scope = {}, _aliasStruc
             
             case __DYNAMO_GML_TOKEN_STATE.__IDENTIFIER: //Identifier (variable/function)
                 if ((_byte == ord("\"")) || (_byte == ord("%")) || (_byte == ord("&")) || (_byte == ord(")"))
-                ||  (_byte == ord( "*")) || (_byte == ord("+")) || (_byte == ord(",")) || (_byte == ord("-")) || (_byte == ord("."))
+                ||  (_byte == ord( "*")) || (_byte == ord("+")) || (_byte == ord(",")) || (_byte == ord("-"))
                 ||  (_byte == ord( "/")) || (_byte == ord(":")) || (_byte == ord(";")) || (_byte == ord("<")) || (_byte == ord("="))
                 ||  (_byte == ord( ">")) || (_byte == ord("?")) || (_byte == ord("[")) || (_byte == ord("]")) || (_byte == ord("^"))
                 ||  (_byte == ord( "_")) || (_byte == ord("{")) || (_byte == ord("|")) || (_byte == ord("}")) || (_byte == ord("~")))
