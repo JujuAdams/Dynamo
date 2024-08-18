@@ -11,7 +11,7 @@ function __DynamoParseGML(_string, _scope = {}, _aliasStruct = {})
 
 function __DynamoBufferReadGML(_buffer, _offset, _size, _scope = {}, _aliasStruct = {}, _allowAllAssets = false)
 {
-    static _globalVariableStruct = __DynamoState().__globalVariableStruct;
+    static _globalTokenStruct = __DynamoState().__globalTokenStruct;
     
     static _symbolPrecedenceStruct = (function()
     {
@@ -935,9 +935,9 @@ function __DynamoBufferReadGML(_buffer, _offset, _size, _scope = {}, _aliasStruc
             var _value = _aliasStruct[$ _tokenValue];
             if (_value == undefined)
             {
-                if (variable_struct_exists(_globalVariableStruct, _tokenValue))
+                if (variable_struct_exists(_globalTokenStruct, _tokenValue))
                 {
-                    _value = _globalVariableStruct[$ _tokenValue]();
+                    _value = _globalTokenStruct[$ _tokenValue]();
                 }
                 else if (not variable_struct_exists(_aliasStruct, _tokenValue))
                 {
@@ -960,9 +960,9 @@ function __DynamoBufferReadGML(_buffer, _offset, _size, _scope = {}, _aliasStruc
                 var _function = _aliasStruct[$ _tokenValue];
                 if (_function == undefined)
                 {
-                    if (variable_struct_exists(_globalVariableStruct, _tokenValue))
+                    if (variable_struct_exists(_globalTokenStruct, _tokenValue))
                     {
-                        _function = _globalVariableStruct[$ _tokenValue]();
+                        _function = _globalTokenStruct[$ _tokenValue]();
                     }
                     else if (not variable_struct_exists(_aliasStruct, _tokenValue))
                     {

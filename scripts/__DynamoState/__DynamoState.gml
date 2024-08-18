@@ -13,7 +13,7 @@ function __DynamoState()
         __fileStruct:    {},
         __trackingArray: [],
         
-        __globalVariableStruct: {},
+        __globalTokenStruct: {},
     };
     
     return _struct;
