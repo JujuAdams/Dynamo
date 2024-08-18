@@ -4,12 +4,12 @@ function __DynamoParseGML(_string, _scope = {}, _aliasStruct = {})
 {
     var _buffer = buffer_create(string_byte_length(_string)+1, buffer_fixed, 1);
     buffer_write(_buffer, buffer_string, _string);
-    var _data = __DynamoBufferReadGML(_buffer, 0, buffer_get_size(_buffer), _scope, _aliasStruct);
+    var _data = __DynamoBufferReadGML(_buffer, 0, buffer_get_size(_buffer), _scope, _aliasStruct, true);
     buffer_delete(_buffer);
     return _data;
 }
 
-function __DynamoBufferReadGML(_buffer, _offset, _size, _scope = {}, _aliasStruct = {})
+function __DynamoBufferReadGML(_buffer, _offset, _size, _scope = {}, _aliasStruct = {}, _allowAllAssets = false)
 {
     static _globalVariableStruct = __DynamoState().__globalVariableStruct;
     
@@ -112,10 +112,6 @@ function __DynamoBufferReadGML(_buffer, _offset, _size, _scope = {}, _aliasStruc
         var _debugEvaluateStack   = _evaluateStack;
     }
     
-    
-    
-    
-    
     //////////////////////
     //                  //
     // Step 1: Tokenize //
@@ -184,8 +180,9 @@ function __DynamoBufferReadGML(_buffer, _offset, _size, _scope = {}, _aliasStruc
                 if ((_state != _nextState) || (_lastByte == ord("("))) //Cheeky hack to find functions
                 {
                     var _isSymbol   = false;
-                    var _isNumber   = false;
+                    var _isLiteral  = false;
                     var _isFunction = (_lastByte == ord("(")); //Cheeky hack to find functions
+                    var _isAsset    = false;
                     
                     //Just a normal keyboard/variable
                     buffer_poke(_buffer, _b, buffer_u8, 0);
@@ -215,19 +212,60 @@ function __DynamoBufferReadGML(_buffer, _offset, _size, _scope = {}, _aliasStruc
                     {
                         array_push(_tokensArray,   __DYNAMO_GML_TOKEN_SYMBOL, _read, undefined);
                     }
-                    else if (_isNumber)
+                    else if (_isLiteral)
                     {
                         array_push(_tokensArray,   __DYNAMO_GML_TOKEN_LITERAL, _read, undefined);
                     }
                     else if (_isFunction)
                     {
                         _read = string_copy(_read, 1, string_length(_read)-1); //Trim off the open bracket
+                        
+                        if (_allowAllAssets)
+                        {
+                            try
+                            {
+                                var _asset = asset_get_index(_read);
+                                if ((real(_asset) >= 0) && (asset_get_type(_read) != asset_unknown))
+                                {
+                                    _isAsset = true;
+                                    _read = _asset;
+                                }
+                            }
+                            catch(_error)
+                            {
+                                
+                            }
+                        }
+                        
                         array_push(_tokensArray,   __DYNAMO_GML_TOKEN_FUNCTION, _read, undefined);
-                        array_push(_tokensArray,   __DYNAMO_GML_TOKEN_SYMBOL, "(", undefined);
+                        array_push(_tokensArray,   __DYNAMO_GML_TOKEN_SYMBOL,   "(",   undefined);
                     }
                     else
                     {
-                        array_push(_tokensArray,   __DYNAMO_GML_TOKEN_VARIABLE, _read, undefined);
+                        if (_allowAllAssets)
+                        {
+                            try
+                            {
+                                var _asset = asset_get_index(_read);
+                                if ((real(_asset) >= 0) && (asset_get_type(_asset) != asset_unknown))
+                                {
+                                    _isAsset = true;
+                                }
+                            }
+                            catch(_error)
+                            {
+                                
+                            }
+                        }
+                        
+                        if (_isAsset)
+                        {
+                            array_push(_tokensArray,   __DYNAMO_GML_TOKEN_VARIABLE, _asset, undefined);
+                        }
+                        else
+                        {
+                            array_push(_tokensArray,   __DYNAMO_GML_TOKEN_VARIABLE, _read, undefined);
+                        }
                     }
                     
                     _new = true;
@@ -913,16 +951,23 @@ function __DynamoBufferReadGML(_buffer, _offset, _size, _scope = {}, _aliasStruc
         {
             var _parameterCount = _reorderArray[_i+2];
             
-            var _function = _aliasStruct[$ _tokenValue];
-            if (_function == undefined)
+            if (is_method(_tokenValue) || (not is_string(_tokenValue) && script_exists(real(_tokenValue))))
             {
-                if (variable_struct_exists(_globalVariableStruct, _tokenValue))
+                var _function = _tokenValue;
+            }
+            else
+            {
+                var _function = _aliasStruct[$ _tokenValue];
+                if (_function == undefined)
                 {
-                    _function = _globalVariableStruct[$ _tokenValue]();
-                }
-                else if (not variable_struct_exists(_aliasStruct, _tokenValue))
-                {
-                    __DynamoError("Function \"", _tokenValue, "\" has no alias");
+                    if (variable_struct_exists(_globalVariableStruct, _tokenValue))
+                    {
+                        _function = _globalVariableStruct[$ _tokenValue]();
+                    }
+                    else if (not variable_struct_exists(_aliasStruct, _tokenValue))
+                    {
+                        __DynamoError("Function \"", _tokenValue, "\" has no alias");
+                    }
                 }
             }
             
