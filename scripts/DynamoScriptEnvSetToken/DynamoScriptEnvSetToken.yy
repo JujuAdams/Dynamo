@@ -1,7 +1,7 @@
 {
   "resourceType": "GMScript",
   "resourceVersion": "1.0",
-  "name": "DynamoScript",
+  "name": "DynamoScriptEnvSetToken",
   "isDnD": false,
   "isCompatibility": false,
   "parent": {

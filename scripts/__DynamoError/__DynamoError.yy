@@ -1,7 +1,7 @@
 {
   "resourceType": "GMScript",
   "resourceVersion": "1.0",
-  "name": "__DynamoParseCSV",
+  "name": "__DynamoError",
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
