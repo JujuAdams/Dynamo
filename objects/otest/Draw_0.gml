@@ -1,5 +1,5 @@
 var _string = "";
-_string += "Dynamo " + __DYNAMO_VERSION + " " + __DYNAMO_DATE + " by @jujuadams\n";
+_string += "Dynamo " + __DYNAMO_VERSION + " " + __DYNAMO_DATE + " by Juju Adams\n";
 _string += "\n";
 _string += "Enabled = " + string(DynamoLiveUpdateEnabled()) + "\n";
 _string += "Project directory = " + string(DynamoProjectDirectory()) + "\n";

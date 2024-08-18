@@ -1,7 +1,7 @@
 // Feather disable all
 
-#macro __DYNAMO_VERSION   "4.0.0"
-#macro __DYNAMO_DATE      "2024-08-16"
+#macro __DYNAMO_VERSION   "4.0.1"
+#macro __DYNAMO_DATE      "2024-08-18"
 #macro __DYNAMO_DEV_MODE  (DYNAMO_ENABLED && (GM_build_type == "run") && ((os_type == os_windows) || (os_type == os_macosx) || (os_type == os_linux)))
 
 enum __DYNAMO_GML_TOKEN_STATE
@@ -35,7 +35,7 @@ function __DynamoInitialize()
     if (_initialized) return;
     _initialized = true;
     
-    __DynamoTrace("Welcome to Dynamo by @jujuadams! This is version ", __DYNAMO_VERSION, ", ", __DYNAMO_DATE);
+    __DynamoTrace("Welcome to Dynamo by Juju Adams! This is version ", __DYNAMO_VERSION, ", ", __DYNAMO_DATE);
     
     var _globalState = __DynamoState();
     
