@@ -1,6 +1,6 @@
 // Feather disable all
 
-#macro __DYNAMO_VERSION   "4.0.1"
+#macro __DYNAMO_VERSION   "4.0.2"
 #macro __DYNAMO_DATE      "2024-08-18"
 #macro __DYNAMO_DEV_MODE  (DYNAMO_ENABLED && (GM_build_type == "run") && ((os_type == os_windows) || (os_type == os_macosx) || (os_type == os_linux)))
 

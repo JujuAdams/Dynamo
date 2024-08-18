@@ -5,7 +5,7 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Dynamo",
-    "path": "folders/Dynamo.yy",
+    "name": "GML Script Reloading",
+    "path": "folders/Dynamo/GML Script Reloading.yy",
   },
 }
