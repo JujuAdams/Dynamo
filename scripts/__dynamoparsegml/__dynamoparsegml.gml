@@ -171,7 +171,7 @@ function __DynamoBufferReadGML(_buffer, _offset, _size, _scope = {}, _aliasStruc
                 ||  (_byte == ord( "*")) || (_byte == ord("+")) || (_byte == ord(",")) || (_byte == ord("-"))
                 ||  (_byte == ord( "/")) || (_byte == ord(":")) || (_byte == ord(";")) || (_byte == ord("<")) || (_byte == ord("="))
                 ||  (_byte == ord( ">")) || (_byte == ord("?")) || (_byte == ord("[")) || (_byte == ord("]")) || (_byte == ord("^"))
-                ||  (_byte == ord( "_")) || (_byte == ord("{")) || (_byte == ord("|")) || (_byte == ord("}")) || (_byte == ord("~")))
+                ||  (_byte == ord( "{")) || (_byte == ord("|")) || (_byte == ord("}")) || (_byte == ord("~")))
                 {
                     _nextState = __DYNAMO_GML_TOKEN_STATE.__SYMBOL;
                 }
