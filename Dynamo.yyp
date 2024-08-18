@@ -8,6 +8,7 @@
     {"id":{"name":"DynamoFile","path":"scripts/DynamoFile/DynamoFile.yy",},"order":3,},
     {"id":{"name":"__DynamoLoadJSON","path":"scripts/__DynamoLoadJSON/__DynamoLoadJSON.yy",},"order":8,},
     {"id":{"name":"__DynamoBufferReadString","path":"scripts/__DynamoBufferReadString/__DynamoBufferReadString.yy",},"order":3,},
+    {"id":{"name":"__DynamoScriptEnvNativeTokens","path":"scripts/__DynamoScriptEnvNativeTokens/__DynamoScriptEnvNativeTokens.yy",},"order":16,},
     {"id":{"name":"__DynamoParseGML","path":"scripts/__DynamoParseGML/__DynamoParseGML.yy",},"order":11,},
     {"id":{"name":"DynamoProjectDirectory","path":"scripts/DynamoProjectDirectory/DynamoProjectDirectory.yy",},"order":8,},
     {"id":{"name":"__DynamoParseJSON","path":"scripts/__DynamoParseJSON/__DynamoParseJSON.yy",},"order":12,},
