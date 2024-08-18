@@ -204,9 +204,10 @@ function __DynamoBufferReadGML(_buffer, _offset, _size, _scope = {}, _aliasStruc
                             case "or" :       _read = "||";      _isSymbol = true; break;
                             case "xor" :      _read = "^^";      _isSymbol = true; break;
                             case "not":       _read = "!";       _isSymbol = true; break;
-                            case "true":      _read = true;      _isNumber = true; break;
-                            case "false":     _read = false;     _isNumber = true; break;
-                            case "undefined": _read = undefined; _isNumber = true; break;
+                            case "true":      _read = true;      _isLiteral = true; break;
+                            case "false":     _read = false;     _isLiteral = true; break;
+                            case "undefined": _read = undefined; _isLiteral = true; break;
+                            case "infinity":  _read = infinity ; _isLiteral = true; break;
                         }
                     }
                     
