@@ -90,10 +90,12 @@ Because data is being stored in a script and *not* instead a function, the code 
 
 There are many limitations to what can be done with Dynamo and scripts. This GML parser is very stripped back and supports a small subset of GML. The parser supports:
 - Setting global variables
+- Reading native GM constants/global variables
 - Creating struct / array literals (JSON)
 - Most GML operators, including ternaries (`condition? valueIfTrue : valueIfFalse`)
 - Executing functions
 - Instantiating constructors (with `new`)
+- Executing native GM functions
 
 The parser does not support:
 - if/else, while, etc. flow control
@@ -101,7 +103,7 @@ The parser does not support:
 - Dot notation for variable access in structs/instances
 - Square bracket notation for array value access
 
-Tokens for macros, GML constants, assets etc. can be added by calling `DynamoScriptEnvSetToken()` and `DynamoScriptEnvSetTokenFunction()`. Please see those functions for more information.
+Custom tokens can be added by calling `DynamoScriptEnvSetToken()` and `DynamoScriptEnvSetTokenFunction()`. Please see those functions for more information.
 
 !> All assets will be available for reference in the GML parser. As this represents a substantial security weakness, be sure to disable Dynamo for production builds by setting the configuration macro `DYNAMO_ENABLED` to `false`.
 
