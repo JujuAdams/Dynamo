@@ -88,7 +88,22 @@ Sets up a script to watch for changes. If `DYNAMO_AUTO_SCAN` is set to `true` th
 
 Because data is being stored in a script and *not* instead a function, the code inside a script is executed on boot by the GameMaker runtime as you'd expect. This means that, unlike file watchers, data represented inside a Dynamo script is immediately available.
 
-There are many limitations to what can be done with Dynamo and scripts. It's best to think about Dynamo scripts as being as complex as JSON but no further. It is possible to reference basic numbers and strings (of course!) as well as being able to nest arrays and structs as you would in JSON. You may also reference asset names and GameMaker constants. You cannot, however, create functions inside Dynamo scripts. You can't use conditional branching or loops or anything that controls programme "flow". Dynamo is also expecting all variables you're defining in the script to be globals.
+There are many limitations to what can be done with Dynamo and scripts. This GML parser is very stripped back and supports a small subset of GML. The parser supports:
+- Setting global variables
+- Creating struct / array literals (JSON)
+- Most GML operators, including ternaries (`condition? valueIfTrue : valueIfFalse`)
+- Executing functions
+- Instantiating constructors (with `new`)
+
+The parser does not support:
+- if/else, while, etc. flow control
+- Function and constructor definition
+- Dot notation for variable access in structs/instances
+- Square bracket notation for array value access
+
+Tokens for macros, GML constants, assets etc. can be added by calling `DynamoScriptEnvSetToken()` and `DynamoScriptEnvSetTokenFunction()`. Please see those functions for more information.
+
+!> All assets will be available for reference in the GML parser. As this represents a substantial security weakness, be sure to disable Dynamo for production builds by setting the configuration macro `DYNAMO_ENABLED` to `false`.
 
 If you call `DynamoScriptLoad()` then the script will be loaded, and its changed applied, whether there have been changes or not, and the callback provided when calling `DynamoScript()` will be executed. The callback will be handed one arguments: the callback data provided when calling `DynamoScript()`.
 
