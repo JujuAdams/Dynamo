@@ -132,6 +132,37 @@ If your game isn't running from the IDE or `DYNAMO_ENABLED` is set to `false` th
 
 &nbsp;
 
+## `DynamoScriptEnvSetToken`
+
+*Returns:* N/A (`undefined`)
+
+|Name       |Datatype|Purpose                   |
+|-----------|--------|--------------------------|
+|`tokenName`|string  |Name of the token to alias|
+|`value`    |any     |Value for the token       |
+
+Adds a token to all future script updates. When evaluated, the token will return the value set by this function. This is useful to carry across constants into the GML parser e.g. the width and height of a tile in your game.
+
+&nbsp;
+
+&nbsp;
+
+## `DynamoScriptEnvSetTokenFunction`
+
+*Returns:* N/A (`undefined`)
+
+|Name        |Datatype|Purpose                                      |
+|------------|--------|---------------------------------------------|
+|`tokenName` |string  |Name of the token to alias                   |
+|`function`  |function|Function to execute when evaluating the token|
+|`[metadata]`|any     |Value for the token                          |
+
+Adds a token to all future script updates. When evaluated, the token will execute the defined function. The return value from that function will be used as the value for the token. This is useful for dynamically updating values (time, mouse position and so on). The `metadata` parameter is passed as the one (and only) parameter for the defined function.
+
+&nbsp;
+
+&nbsp;
+
 ## `DynamoLiveUpdateEnabled`
 
 `DynamoLiveUpdateEnabled()`
