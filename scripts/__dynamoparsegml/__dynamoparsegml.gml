@@ -273,7 +273,7 @@ function __DynamoBufferReadGML(_buffer, _offset, _size, _scope = {}, _aliasStruc
                 }
             break;
             
-            case __DYNAMO_GML_TOKEN_STATE.__STRING: //Quote-delimited String
+            case __DYNAMO_GML_TOKEN_STATE.__STRING:
                 if ((_byte == 0) || ((_byte == 34) && (_lastByte != 92))) //null "
                 {
                     _changeState = false;
@@ -295,11 +295,11 @@ function __DynamoBufferReadGML(_buffer, _offset, _size, _scope = {}, _aliasStruc
                 }
                 else
                 {
-                    _nextState = __DYNAMO_GML_TOKEN_STATE.__STRING; //Quote-delimited String
+                    _nextState = __DYNAMO_GML_TOKEN_STATE.__STRING;
                 }
             break;
             
-            case __DYNAMO_GML_TOKEN_STATE.__NUMBER: //Number
+            case __DYNAMO_GML_TOKEN_STATE.__NUMBER:
                 if (_byte == 46) //.
                 {
                     _nextState = __DYNAMO_GML_TOKEN_STATE.__NUMBER;
@@ -332,7 +332,7 @@ function __DynamoBufferReadGML(_buffer, _offset, _size, _scope = {}, _aliasStruc
                 }
             break;
             
-            case __DYNAMO_GML_TOKEN_STATE.__SYMBOL: //Symbol
+            case __DYNAMO_GML_TOKEN_STATE.__SYMBOL:
                 if (_byte == 61) //=
                 {
                     if ((_lastByte == 33)  // !=
@@ -344,16 +344,16 @@ function __DynamoBufferReadGML(_buffer, _offset, _size, _scope = {}, _aliasStruc
                     ||  (_lastByte == 61)  // ==
                     ||  (_lastByte == 62)) // >=
                     {
-                        _nextState = __DYNAMO_GML_TOKEN_STATE.__SYMBOL; //Symbol
+                        _nextState = __DYNAMO_GML_TOKEN_STATE.__SYMBOL;
                     }
                 }
                 else if ((_byte == 38) && (_lastByte == 38)) //&
                 {
-                    _nextState = __DYNAMO_GML_TOKEN_STATE.__SYMBOL; //Symbol
+                    _nextState = __DYNAMO_GML_TOKEN_STATE.__SYMBOL;
                 }
                 else if ((_byte == 124) && (_lastByte == 124)) //|
                 {
-                    _nextState = __DYNAMO_GML_TOKEN_STATE.__SYMBOL; //Symbol
+                    _nextState = __DYNAMO_GML_TOKEN_STATE.__SYMBOL;
                 }
                 
                 if (_state != _nextState)
@@ -374,23 +374,23 @@ function __DynamoBufferReadGML(_buffer, _offset, _size, _scope = {}, _aliasStruc
         {
             if (_byte == 33) //!
             {
-                _nextState = __DYNAMO_GML_TOKEN_STATE.__SYMBOL; //Symbol
+                _nextState = __DYNAMO_GML_TOKEN_STATE.__SYMBOL;
             }
             else if ((_byte == 34) && (_lastByte != 92)) //"
             {
-                _nextState = __DYNAMO_GML_TOKEN_STATE.__STRING; //Quote-delimited String
+                _nextState = __DYNAMO_GML_TOKEN_STATE.__STRING;
             }
             else if ((_byte == 37) || (_byte == 38)) //% &
             {
-                _nextState = __DYNAMO_GML_TOKEN_STATE.__SYMBOL; //Symbol
+                _nextState = __DYNAMO_GML_TOKEN_STATE.__SYMBOL;
             }
             else if ((_byte == 40) || (_byte == 41)) //( )
             {
-                _nextState = __DYNAMO_GML_TOKEN_STATE.__SYMBOL; //Symbol
+                _nextState = __DYNAMO_GML_TOKEN_STATE.__SYMBOL;
             }
             else if ((_byte >= 42) && (_byte <= 46)) //* + , - .
             {
-                _nextState = __DYNAMO_GML_TOKEN_STATE.__SYMBOL; //Symbol
+                _nextState = __DYNAMO_GML_TOKEN_STATE.__SYMBOL;
             }
             else if (_byte == 47) // /
             {
@@ -410,39 +410,39 @@ function __DynamoBufferReadGML(_buffer, _offset, _size, _scope = {}, _aliasStruc
             }
             else if ((_byte >= 48) && (_byte <= 57)) //0 1 2 3 4 5 6 7 8 9
             {
-                _nextState = __DYNAMO_GML_TOKEN_STATE.__NUMBER; //Number
+                _nextState = __DYNAMO_GML_TOKEN_STATE.__NUMBER;
             }
             else if ((_byte >= 58) && (_byte <= 63))  //: ; < = > ?
             {
-                _nextState = __DYNAMO_GML_TOKEN_STATE.__SYMBOL; //Symbol
+                _nextState = __DYNAMO_GML_TOKEN_STATE.__SYMBOL;
             }
             else if ((_byte >= 65) && (_byte <= 90)) //a b c...x y z
             {
-                _nextState = __DYNAMO_GML_TOKEN_STATE.__IDENTIFIER; //Word/Variable Name
+                _nextState = __DYNAMO_GML_TOKEN_STATE.__IDENTIFIER;
             }
             else if (_byte == 91) //[
             {
-                _nextState = __DYNAMO_GML_TOKEN_STATE.__SYMBOL; //Symbol
+                _nextState = __DYNAMO_GML_TOKEN_STATE.__SYMBOL;
             }
             else if (_byte == 93) //]
             {
-                _nextState = __DYNAMO_GML_TOKEN_STATE.__SYMBOL; //Symbol
+                _nextState = __DYNAMO_GML_TOKEN_STATE.__SYMBOL;
             }
             else if (_byte == 94) //^
             {
-                _nextState = __DYNAMO_GML_TOKEN_STATE.__SYMBOL; //Symbol
+                _nextState = __DYNAMO_GML_TOKEN_STATE.__SYMBOL;
             }
             else if (_byte == 95) //_
             {
-                _nextState = __DYNAMO_GML_TOKEN_STATE.__IDENTIFIER; //Word/Variable Name
+                _nextState = __DYNAMO_GML_TOKEN_STATE.__IDENTIFIER;
             }
             else if ((_byte >= 97) && (_byte <= 122)) //A B C...X Y Z
             {
-                _nextState = __DYNAMO_GML_TOKEN_STATE.__IDENTIFIER; //Word/Variable Name
+                _nextState = __DYNAMO_GML_TOKEN_STATE.__IDENTIFIER;
             }
             else if ((_byte >= 123) && (_byte <= 126)) // { | } ~
             {
-                _nextState = __DYNAMO_GML_TOKEN_STATE.__SYMBOL; //Symbol
+                _nextState = __DYNAMO_GML_TOKEN_STATE.__SYMBOL;
             }
         }
         
