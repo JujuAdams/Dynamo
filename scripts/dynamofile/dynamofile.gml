@@ -55,7 +55,7 @@ function DynamoFile(_path, _dataFormat, _autoLoad, _callback, _callbackData = un
         break;
         
         default:
-            __DynamoError("Illegal data format provided (", _dataFormat, ")\nData format must be \"json\", \"csv\", \"text\", or \"buffer\"");
+            __DynamoError("Illegal data format provided (", _dataFormat, ")\nData format must be \"json\", \"csv\", \"string\", or \"buffer\"");
         break;
     }
     
