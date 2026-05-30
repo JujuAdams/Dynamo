@@ -21,9 +21,9 @@
 
 const config = {
 	name: 'Dynamo',
-	description: 'Dynamic data loader for GameMaker 2022 LTS',
-	latestVersion: '4.0',
-	otherVersions: ['3.0', '2.2', '1.1', '1.0'],
+	description: 'Dynamic data loader for GameMaker',
+	latestVersion: '5.0',
+	otherVersions: ['4.0', '3.0', '2.2', '1.1', '1.0'],
 	favicon: 'assets/favicon.ico',
 	themeColor: '#ffe699',
 };
