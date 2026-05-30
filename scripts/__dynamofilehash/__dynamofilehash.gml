@@ -1,4 +1,5 @@
 // Feather disable all
+
 /// @param path
 
 function __DynamoFileHash(_path)

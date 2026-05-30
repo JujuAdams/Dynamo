@@ -1,4 +1,5 @@
 // Feather disable all
+
 function __DynamoClassFile(_name, _directory, _localPath) constructor
 {
     __name = _name;
