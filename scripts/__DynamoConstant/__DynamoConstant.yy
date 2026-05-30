@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"DynamoLiveUpdateEnabled",
+  "%Name":"__DynamoConstant",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"DynamoLiveUpdateEnabled",
+  "name":"__DynamoConstant",
   "parent":{
     "name":"Dynamo",
     "path":"folders/Dynamo.yy",

@@ -1,13 +1,13 @@
 // Feather disable all
 function __DynamoAutoScan()
 {
-    if (!__DYNAMO_DEV_MODE || !DYNAMO_AUTO_SCAN) return;
+    if (not DYNAMO_RUNNING || !DYNAMO_AUTO_SCAN) return;
     
     static _trackingArray = __DynamoState().__trackingArray;
     static _prevFocus  = true;
     static _checkIndex = 0;
     
-    if (!DYNAMO_AUTO_SCAN_PROGRESSIVE && (os_type == os_windows))
+    if (not DYNAMO_AUTO_SCAN_PROGRESSIVE && (os_type == os_windows))
     {
         //Track whether the window focus has changed
         if (_prevFocus != window_has_focus())

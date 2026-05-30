@@ -5,7 +5,7 @@
 
 function DynamoForceScan()
 {
-    if (!__DYNAMO_DEV_MODE) return undefined;
+    if (not DYNAMO_RUNNING) return undefined;
     
     static _fileArray   = __DynamoState().__fileArray;
     static _scriptArray = __DynamoState().__scriptArray;

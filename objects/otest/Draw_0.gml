@@ -1,7 +1,7 @@
 var _string = "";
-_string += "Dynamo " + __DYNAMO_VERSION + " " + __DYNAMO_DATE + " by Juju Adams\n";
+_string += "Dynamo " + DYNAMO_VERSION + " " + DYNAMO_DATE + " by Juju Adams\n";
 _string += "\n";
-_string += "Enabled = " + string(DynamoLiveUpdateEnabled()) + "\n";
+_string += "`DYNAMO_RUNNING` = " + string(DYNAMO_RUNNING) + "\n";
 _string += "Project directory = " + string(DynamoProjectDirectory()) + "\n";
 _string += "\n";
 _string += "global.testData = " + string(global.testData) + "\n";

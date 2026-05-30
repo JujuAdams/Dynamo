@@ -38,9 +38,9 @@ function DynamoFile(_path, _dataFormat, _autoLoad, _callback, _callbackData = un
     static __globalState = __DynamoState();
     
     var _adjustedPath = string_replace_all(_path, "\\", "/");
-    var _directory = __DYNAMO_DEV_MODE? (__globalState.__projectDirectory + "datafiles/") : "";
+    var _directory = DYNAMO_RUNNING? (__globalState.__projectDirectory + "datafiles/") : "";
     
-    if (!file_exists(_directory + _adjustedPath))
+    if (not file_exists(_directory + _adjustedPath))
     {
         __DynamoError("Warning! File \"", _directory + _path, "\" not found\nCheck that the file system sandbox is disabled");
     }
@@ -61,9 +61,9 @@ function DynamoFile(_path, _dataFormat, _autoLoad, _callback, _callbackData = un
     
     if (is_numeric(_callback))
     {
-        if (!script_exists(_callback)) __DynamoError("Callback script with index ", _callback, " doesn't exist");
+        if (not script_exists(_callback)) __DynamoError("Callback script with index ", _callback, " doesn't exist");
     }
-    else if (!is_method(_callback))
+    else if (not is_method(_callback))
     {
         __DynamoError("Illegal datatype passed for the callback (was ", typeof(_callback), ")");
     }

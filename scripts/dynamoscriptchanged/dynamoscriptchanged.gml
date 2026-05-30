@@ -9,7 +9,7 @@
 
 function DynamoScriptChanged(_path)
 {
-    if (!__DYNAMO_DEV_MODE) return false;
+    if (not DYNAMO_RUNNING) return false;
     
     static _scriptStruct = __DynamoState().__scriptStruct;
     

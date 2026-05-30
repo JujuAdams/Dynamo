@@ -190,7 +190,7 @@ function __DynamoBufferReadGML(_buffer, _offset, _size, _scope = {}, _aliasStruc
                     var _read = buffer_read(_buffer, buffer_string);
                     buffer_poke(_buffer, _b, buffer_u8, _byte);
                     
-                    if (!_isFunction)
+                    if (not _isFunction)
                     {
                         //Convert friendly human-readable operators into symbolic operators
                         switch(_read)

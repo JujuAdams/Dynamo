@@ -38,16 +38,16 @@ function DynamoScript(_script, _autoLoad, _callback = undefined, _callbackData =
 {
     static __globalState = __DynamoState();
     
-    if (__DYNAMO_DEV_MODE)
+    if (DYNAMO_RUNNING)
     {
-        if (!is_numeric(_script)) __DynamoError("Illegal datatype passed for the script index (was ", typeof(_script), ")");
-        if (!script_exists(_script)) __DynamoError("Script with index ", _script, " doesn't exist");
+        if (not is_numeric(_script)) __DynamoError("Illegal datatype passed for the script index (was ", typeof(_script), ")");
+        if (not script_exists(_script)) __DynamoError("Script with index ", _script, " doesn't exist");
         
         if (is_numeric(_callback))
         {
-            if (!script_exists(_callback)) __DynamoError("Callback script with index ", _callback, " doesn't exist");
+            if (not script_exists(_callback)) __DynamoError("Callback script with index ", _callback, " doesn't exist");
         }
-        else if (!is_method(_callback) && (_callback != undefined))
+        else if (not is_method(_callback) && (_callback != undefined))
         {
             __DynamoError("Illegal datatype passed for the callback (was ", typeof(_callback), ")");
         }

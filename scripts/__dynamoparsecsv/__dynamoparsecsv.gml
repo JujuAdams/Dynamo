@@ -64,7 +64,7 @@ function __DynamoParseCSV()
                 }
             }
             
-            if (!_in_string)
+            if (not _in_string)
             {
                 if ((_value == 10) || (_value == 13))
                 {

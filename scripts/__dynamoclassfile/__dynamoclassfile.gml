@@ -9,7 +9,7 @@ function __DynamoClassFile(_name, _directory, _localPath) constructor
     _globalState.__fileStruct[$ __name] = self;
     array_push(_globalState.__trackingArray, self);
     
-    __hash = __DYNAMO_DEV_MODE? __DynamoFileHash(__path) : undefined;
+    __hash = DYNAMO_RUNNING? __DynamoFileHash(__path) : undefined;
     __changed = false;
     
     __dataFormat   = undefined;
@@ -26,14 +26,14 @@ function __DynamoClassFile(_name, _directory, _localPath) constructor
     
     static __TestHashDifferent = function()
     {
-        if (!__DYNAMO_DEV_MODE) return false;
+        if (not DYNAMO_RUNNING) return false;
         
         return (__DynamoFileHash(__path) != __hash);
     }
     
     static __DetectChange = function()
     {
-        if (!__DYNAMO_DEV_MODE) return false;
+        if (not DYNAMO_RUNNING) return false;
         
         var _foundHash = __DynamoFileHash(__path);
         if (_foundHash != __hash)
@@ -48,7 +48,7 @@ function __DynamoClassFile(_name, _directory, _localPath) constructor
     
     static __HasChanged = function()
     {
-        if (__DYNAMO_DEV_MODE && __changed)
+        if (DYNAMO_RUNNING && __changed)
         {
             __changed = false;
             return true;

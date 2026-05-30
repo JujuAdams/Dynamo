@@ -9,7 +9,7 @@
 
 function DynamoFileChanged(_path)
 {
-    if (!__DYNAMO_DEV_MODE) return false;
+    if (not DYNAMO_RUNNING) return false;
     
     static _fileStruct = __DynamoState().__fileStruct;
     

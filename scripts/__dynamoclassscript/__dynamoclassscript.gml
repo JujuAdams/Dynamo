@@ -9,7 +9,7 @@ function __DynamoClassScript(_name, _path) constructor
     _globalState.__scriptStruct[$ __name] = self;
     array_push(_globalState.__trackingArray, self);
     
-    __hash = __DYNAMO_DEV_MODE? __DynamoFileHash(__path) : undefined;
+    __hash = DYNAMO_RUNNING? __DynamoFileHash(__path) : undefined;
     __changed = false;
     
     __autoLoad     = false;
@@ -25,14 +25,14 @@ function __DynamoClassScript(_name, _path) constructor
     
     static __TestHashDifferent = function()
     {
-        if (!__DYNAMO_DEV_MODE) return false;
+        if (not DYNAMO_RUNNING) return false;
         
         return (__DynamoFileHash(__path) != __hash);
     }
     
     static __DetectChange = function()
     {
-        if (!__DYNAMO_DEV_MODE) return;
+        if (not DYNAMO_RUNNING) return;
         
         var _foundHash = __DynamoFileHash(__path);
         if (_foundHash != __hash)
@@ -47,7 +47,7 @@ function __DynamoClassScript(_name, _path) constructor
     
     static __HasChanged = function()
     {
-        if (__DYNAMO_DEV_MODE && __changed)
+        if (DYNAMO_RUNNING && __changed)
         {
             __changed = false;
             return true;
@@ -63,7 +63,7 @@ function __DynamoClassScript(_name, _path) constructor
     
     static __Load = function()
     {
-        if (!__DYNAMO_DEV_MODE) return;
+        if (not DYNAMO_RUNNING) return;
         
         try
         {
@@ -77,7 +77,7 @@ function __DynamoClassScript(_name, _path) constructor
             return;
         }
         
-        if (!is_struct(_data))
+        if (not is_struct(_data))
         {
             __DynamoTrace("Warning! Could not apply content for \"", __path, "\"");
             return;
@@ -113,7 +113,7 @@ function __DynamoClassScript(_name, _path) constructor
         {
             script_execute(__callback, __callbackData);
         }
-        else if (!is_undefined(__callback))
+        else if (not is_undefined(__callback))
         {
             __DynamoError("Illegal callback for script \"", __name, "\"");
         }

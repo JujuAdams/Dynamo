@@ -50,7 +50,7 @@ function __DynamoParseJSONParser(_buffer, _buffer_size, _cache_buffer) construct
     {
         if (cache_value == undefined)
         {
-            if (!cache_started)
+            if (not cache_started)
             {
                 show_error("Trying to read cache but there's nothing there (position " + string(buffer_tell(buffer) - 1) + ")\n ", false);
             }
@@ -59,7 +59,7 @@ function __DynamoParseJSONParser(_buffer, _buffer_size, _cache_buffer) construct
                 buffer_write(cache_buffer, buffer_u8, 0); //Make sure we definitely have a null terminating byte
                 cache_value = buffer_peek(cache_buffer, 0, buffer_string);
                 
-                if (!was_string)
+                if (not was_string)
                 {
                     switch(cache_value)
                     {
@@ -241,7 +241,7 @@ function __DynamoParseJSONParser(_buffer, _buffer_size, _cache_buffer) construct
                     {
                         root = [];
                     }
-                    else if (!in_key)
+                    else if (not in_key)
                     {
                         buffer_seek(buffer, buffer_seek_relative, -1);
                         cache_started = true;
@@ -260,7 +260,7 @@ function __DynamoParseJSONParser(_buffer, _buffer_size, _cache_buffer) construct
                         root_is_struct = true;
                         in_key         = true;
                     }
-                    else if (!in_key)
+                    else if (not in_key)
                     {
                         buffer_seek(buffer, buffer_seek_relative, -1);
                         cache_started = true;
