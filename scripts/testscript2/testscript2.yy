@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "TestScript2",
-  "isDnD": false,
-  "isCompatibility": false,
-  "parent": {
-    "name": "Dynamo",
-    "path": "Dynamo.yyp",
+  "$GMScript":"v1",
+  "%Name":"TestScript2",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"TestScript2",
+  "parent":{
+    "name":"Dynamo",
+    "path":"Dynamo.yyp",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

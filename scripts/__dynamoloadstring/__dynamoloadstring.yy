@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "__DynamoLoadString",
-  "isDnD": false,
-  "isCompatibility": false,
-  "parent": {
-    "name": "(System)",
-    "path": "folders/Dynamo/(System).yy",
+  "$GMScript":"v1",
+  "%Name":"__DynamoLoadString",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"__DynamoLoadString",
+  "parent":{
+    "name":"(System)",
+    "path":"folders/Dynamo/(System).yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

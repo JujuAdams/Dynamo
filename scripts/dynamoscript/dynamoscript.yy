@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "DynamoScript",
-  "isDnD": false,
-  "isCompatibility": false,
-  "parent": {
-    "name": "GML Script Reloading",
-    "path": "folders/Dynamo/GML Script Reloading.yy",
+  "$GMScript":"v1",
+  "%Name":"DynamoScript",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"DynamoScript",
+  "parent":{
+    "name":"GML Script Reloading",
+    "path":"folders/Dynamo/GML Script Reloading.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }
