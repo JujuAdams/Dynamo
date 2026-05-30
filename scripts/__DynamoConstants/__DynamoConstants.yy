@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"__DynamoConstant",
+  "%Name":"__DynamoConstants",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"__DynamoConstant",
+  "name":"__DynamoConstants",
   "parent":{
     "name":"Dynamo",
     "path":"folders/Dynamo.yy",

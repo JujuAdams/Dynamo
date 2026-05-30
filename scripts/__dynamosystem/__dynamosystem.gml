@@ -33,17 +33,17 @@ function __DynamoInitialize()
     
     __DynamoTrace("Welcome to Dynamo by Juju Adams! This is version ", DYNAMO_VERSION, ", ", DYNAMO_DATE);
     
-    var _globalState = __DynamoState();
+    __DynamoState();
     
     //Verify the directory just in case
     if (DYNAMO_RUNNING)
     {
-        if (not directory_exists(_globalState.__projectDirectory))
+        if (not directory_exists(DYNAMO_PROJECT_DIRECTORY))
         {
-            __DynamoError("Could not find project directory \"", _globalState.__projectDirectory, "\"\nYou may need to run the GameMaker IDE in administrator mode");
+            __DynamoError("Could not find project directory \"", DYNAMO_PROJECT_DIRECTORY, "\"\nYou may need to run the GameMaker IDE in administrator mode");
         }
         
-        if (DYNAMO_VERBOSE) __DynamoTrace("Found project path \"", _globalState.__projectDirectory, "\"");
+        if (DYNAMO_VERBOSE) __DynamoTrace("Found project path \"", DYNAMO_PROJECT_DIRECTORY, "\"");
         
         //Attempt to set up a time source for slick automatic input handling
         time_source_start(time_source_create(time_source_global, 1, time_source_units_frames, __DynamoAutoScan, [], -1));

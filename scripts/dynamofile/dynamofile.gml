@@ -39,7 +39,7 @@ function DynamoFile(_path, _dataFormat, _autoLoad, _callback, _callbackData = un
     static __globalState = __DynamoState();
     
     var _adjustedPath = string_replace_all(_path, "\\", "/");
-    var _directory = DYNAMO_RUNNING? (__globalState.__projectDirectory + "datafiles/") : "";
+    var _directory = DYNAMO_DATAFILES_DIRECTORY;
     
     if (not file_exists(_directory + _adjustedPath))
     {
