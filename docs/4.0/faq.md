@@ -8,7 +8,7 @@
 
 &nbsp;
 
-## Does this library support GMRT / "new runtime"?
+### Does this library support GMRT / "new runtime"?
 
 No, GMRT is not supported by this library.
 
