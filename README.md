@@ -1,7 +1,7 @@
 <p align="center"><img src="https://raw.githubusercontent.com/JujuAdams/Dynamo/master/LOGO.png" style="display:block; margin:auto; width:300px"></p>
-<h1 align="center">Dynamo 4.0.2</h1>
+<h1 align="center">Dynamo 5.0.0</h1>
 
-<p align="center">Dynamic data loader for GameMaker 2022 LTS</p>
+<p align="center">Dynamic data loader for GameMaker LTS 2026</p>
 
 &nbsp;
 
